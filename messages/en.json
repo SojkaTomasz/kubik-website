@@ -1,0 +1,174 @@
+{
+	"nav": {
+		"home": "Home",
+		"contact": "Contact",
+		"privacy": "Privacy policy",
+		"skipToContent": "Skip to content",
+		"menu": "Menu",
+		"blog": "Blog",
+		"currentPage": "current page"
+	},
+	"a11y": {
+		"close": "Close",
+		"closeNotification": "Close notification",
+		"loading": "Loading",
+		"opensInNewTab": "opens in a new tab",
+		"more": "More",
+		"pagination": "Pagination",
+		"previousPage": "Go to previous page",
+		"nextPage": "Go to next page",
+		"previous": "Previous",
+		"next": "Next",
+		"morePages": "Skipped page numbers",
+		"previousSlide": "Previous slide",
+		"nextSlide": "Next slide",
+		"scrollToStart": "Scroll to start",
+		"scrollToEnd": "Scroll to end",
+		"toggleSidebar": "Toggle sidebar",
+		"sidebar": "Sidebar",
+		"sidebarDescription": "Sidebar slid in from the edge of the screen",
+		"breadcrumb": "Breadcrumb",
+		"carousel": "Carousel",
+		"slide": "slide"
+	},
+	"home": {
+		"title": "Website starter",
+		"lead": "A complete template: shadcn/ui, SEO, Consent Mode v2, i18n and end-to-end tests.",
+		"cta": "Browse components"
+	},
+	"theme": {
+		"label": "Change theme",
+		"light": "Light",
+		"dark": "Dark",
+		"system": "System",
+		"group": "Site theme"
+	},
+	"language": {
+		"label": "Change language",
+		"pl": "Polish",
+		"en": "English",
+		"group": "Site language"
+	},
+	"notFound": {
+		"title": "Page not found",
+		"description": "The address is outdated or contains a typo.",
+		"cta": "Back to home page",
+		"browseBlog": "Browse the blog",
+		"contact": "Get in touch"
+	},
+	"error": {
+		"title": "Something went wrong",
+		"description": "This page could not be displayed. Try again — if that does not help, go back to the home page.",
+		"retry": "Try again",
+		"home": "Home page",
+		"digest": "Error identifier"
+	},
+	"cookies": {
+		"regionLabel": "Cookie consent",
+		"title": "This site uses cookies",
+		"message": "We use cookies so the site works correctly and so we know what to improve. Details are in our",
+		"privacyLink": "privacy policy",
+		"settings": "Settings",
+		"accept": "Accept",
+		"dialogTitle": "Cookie settings",
+		"dialogDescription": "Decide which categories to enable. You can change this at any time.",
+		"saveChoice": "Save",
+		"reopen": "Cookie settings",
+		"categories": {
+			"necessary": {
+				"label": "Necessary",
+				"description": "Keep your session alive, protect forms and remember this very cookie decision. The site will not work without them, so they cannot be turned off."
+			},
+			"analytics": {
+				"label": "Analytics",
+				"description": "Show us which pages get visited and where visitors get lost. The data is aggregated — it is not used to identify an individual."
+			},
+			"marketing": {
+				"label": "Marketing",
+				"description": "Let us measure how well ads perform and show them to people who visited the site. These are behind the ads that appear to follow you around."
+			},
+			"preferences": {
+				"label": "Preferences",
+				"description": "Remember choices such as language or light/dark theme, so you do not have to set them on every visit."
+			}
+		},
+		"decisionRequired": "To use this site choose “Accept” or open “Settings”.",
+		"lockedSwitch": "This category is required and cannot be turned off."
+	},
+	"privacy": {
+		"title": "Privacy policy",
+		"description": "How we process personal data and why we use cookies.",
+		"placeholderTitle": "Template — complete before going live",
+		"placeholderBody": "This page does not contain the policy text yet. It exists so the link in the consent banner does not lead to a 404 — without a working policy, cookie consent is legally defective. Fill in the sections listed below and remove the noIndex flag from the page metadata.",
+		"checklistTitle": "What the policy must cover",
+		"checklist": [
+			"Who the data controller is — name, address, contact details",
+			"What data we collect and for what purpose",
+			"The legal basis for processing each category of data",
+			"How long we keep the data",
+			"Who the data is shared with — subprocessors, analytics tools",
+			"Whether data leaves the European Economic Area",
+			"User rights: access, rectification, erasure, objection, portability",
+			"The right to lodge a complaint with the supervisory authority",
+			"Cookies: categories, purpose, retention period, how to withdraw consent"
+		],
+		"contact": "Questions about personal data: {email}"
+	},
+	"validation": {
+		"required": "This field is required.",
+		"email": "Enter a valid email address, for example jan@example.com.",
+		"phone": "Enter a phone number — digits, spaces and dashes.",
+		"tooShort": "Enter at least two characters.",
+		"tooLong": "This value is too long.",
+		"messageTooShort": "Write at least ten characters — a shorter message tells us very little.",
+		"consent": "Without consent to process your data we cannot reply."
+	},
+	"contact": {
+		"title": "Contact",
+		"description": "Write to us — we usually reply within one business day.",
+		"lead": "Fill in the form or write directly to the address below.",
+		"directTitle": "Direct contact",
+		"formTitle": "Form",
+		"optional": "(optional)",
+		"submit": "Send message",
+		"submitting": "Sending…",
+		"counter": "{current} of {max} characters",
+		"successTitle": "Message sent",
+		"successBody": "Thank you — we will reply as soon as we can.",
+		"errorTitle": "Could not send",
+		"fields": {
+			"name": "Full name",
+			"email": "Email address",
+			"phone": "Phone",
+			"subject": "Subject",
+			"message": "Message",
+			"consent": "I agree to my data being processed in order to reply to this message."
+		},
+		"errors": {
+			"validation": "Correct the highlighted fields and try again.",
+			"rateLimit": "Several messages have already been sent from this address. Try again in {seconds} seconds.",
+			"notConfigured": "Message sending is not configured yet. Please write directly to the email address below.",
+			"sendFailed": "Something went wrong on our side. Please try again in a moment.",
+			"rejected": "The form could not be verified. Refresh the page and try again."
+		},
+		"errorSummaryTitle": "The form contains errors",
+		"errorSummaryIntro": "Fix the listed fields and submit again."
+	},
+	"footer": {
+		"rights": "All rights reserved.",
+		"madeWith": "Built on the Next.js starter"
+	},
+	"blog": {
+		"title": "Blog",
+		"description": "Posts about how this starter is built and what it is like to work with.",
+		"readingTime": "{minutes} min read",
+		"draft": "Draft",
+		"empty": "No posts yet.",
+		"backToList": "All posts",
+		"published": "Published",
+		"updated": "Updated",
+		"postsLabel": "List of posts",
+		"tagsLabel": "Post tags",
+		"metaLabel": "Post details"
+	}
+}

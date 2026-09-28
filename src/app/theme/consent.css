@@ -1,0 +1,79 @@
+/*
+ * Widoczność banera zgód — rozstrzygana w CSS-ie, nie w Reakcie.
+ *
+ * Baner jest w HTML-u z serwera ZAWSZE, bo element dorysowywany po hydracji
+ * wnosi do LCP całe opóźnienie hydracji. Decydują dwie klasy na `<html>`, obie
+ * ZDEJMOWANE przez skrypty startowe — awaria skryptu ma zostawić pytanie o zgodę
+ * widoczne, nigdy ukryte. Pomiary i uzasadnienie: `docs/consent-layer.md`.
+ */
+
+@layer base {
+	/* 1. Zgoda zapisana — `consentPendingScript` zdejmuje klasę w `<head>`,
+	   czyli przed pierwszym malowaniem. Bez mignięcia. */
+	html:not(.consent-pending) [data-slot='cookie-banner'] {
+		display: none;
+	}
+
+	/* 2. Brak JavaScriptu — nie startuje żaden tag, więc nie ma o co pytać,
+	   a przyciski i tak nie miałyby jak zadziałać. */
+	.no-js [data-slot='cookie-banner'] {
+		display: none;
+	}
+
+	/*
+	 * 3. Decyzja podjęta w TEJ wizycie. Jedyna część sterowana przez Reacta,
+	 * i celowo atrybutem — warunek renderowania dawałby inne drzewo na serwerze
+	 * niż w przeglądarce.
+	 *
+	 * Atrybut NIE pojawia się na czas otwartego okna: warstwy zgód nakładają się
+	 * na baner, a nie podmieniają go. Inaczej razem z banerem znika zasłona i tło
+	 * przeskakuje w połowie ścieżki.
+	 */
+	[data-slot='cookie-banner'][data-hidden] {
+		display: none;
+	}
+
+	/*
+	 * 4. Blokada przewijania. Sam `position: fixed` blokuje tylko kliknięcia —
+	 * kółko myszy przechodzi pod spód.
+	 *
+	 * W CSS-ie, nie w efekcie dopisującym `overflow` do `<body>`: styl założony
+	 * po hydracji to zmiana układu po hydracji. `:not(.no-js)` jest konieczne —
+	 * bez JS-u baner się nie renderuje, a blokada zostałaby na zawsze.
+	 */
+	html.consent-pending:not(.no-js) {
+		overflow: hidden;
+	}
+
+	/*
+	 * 5. Odpowiedź na kliknięcie obok banera i na Escape. Bez niej modal, którego
+	 * nie da się zamknąć, wygląda jak zawieszona strona.
+	 *
+	 * Klasę zakłada i zdejmuje `cookie-banner.tsx` (na `animationend`), bo
+	 * animacja musi dać się odpalić PONOWNIE przy każdym kliknięciu.
+	 */
+	@keyframes consent-pulse {
+		0% {
+			transform: scale(1);
+		}
+
+		45% {
+			transform: scale(1.04);
+		}
+
+		100% {
+			transform: scale(1);
+		}
+	}
+
+	[data-slot='cookie-banner'] .consent-pulse {
+		animation: consent-pulse 420ms ease-in-out;
+	}
+
+	/* WCAG 2.3.3 — rola pulsowania i tak jest drugorzędna, baner przykrywa stronę. */
+	@media (prefers-reduced-motion: reduce) {
+		[data-slot='cookie-banner'] .consent-pulse {
+			animation: none;
+		}
+	}
+}

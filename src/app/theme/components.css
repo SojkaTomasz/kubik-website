@@ -1,0 +1,60 @@
+/*
+ * Pokrętła zmieniające „charakter" strony bez dotykania komponentów.
+ * `--radius` z globals.css jest globalnym mnożnikiem; wartości poniżej
+ * pozwalają odstroić od niego pojedyncze rodziny komponentów.
+ */
+
+:root {
+	/* Kontener — używany przez <Container>. */
+	--container-max-w: 80rem; /* 1280px */
+	--container-px: 1.25rem;
+	--container-px-lg: 2rem;
+
+	/* Wysokość nawigacji. Ustawiana z JS-a przez SiteProvider (mierzy realny
+	   navbar), tutaj tylko wartość awaryjna na pierwszą klatkę renderu. */
+	--navbar-height: 4rem;
+
+	/* Pionowe odstępy sekcji — używane przez <Section>. */
+	--section-py: 4rem;
+	--section-py-lg: 6rem;
+
+	/* Zaokrąglenia per rodzina komponentów. */
+	--button-radius: var(--radius-md);
+	--card-radius: var(--radius-xl);
+	--input-radius: var(--radius-md);
+	--badge-radius: calc(infinity * 1px);
+	--dialog-radius: var(--radius-2xl);
+	--image-radius: var(--radius-lg);
+	--embed-radius: var(--radius-lg);
+
+	/* Ikonografia — lucide domyślnie rysuje stroke 2, co przy małych rozmiarach
+	   bywa zbyt ciężkie. */
+	--icon-stroke-width: 1.75;
+}
+
+/*
+ * Tokeny jako klasy Tailwinda — nazwa wynika z przestrzeni nazw:
+ *   --spacing-navbar → h-navbar, p-navbar…    --container-page → max-w-page
+ */
+@theme inline {
+	--spacing-navbar: var(--navbar-height);
+	--spacing-section: var(--section-py);
+	--spacing-section-lg: var(--section-py-lg);
+	--container-page: var(--container-max-w);
+}
+
+@layer base {
+	html {
+		/* Kotwice (#sekcja) nie chowają się pod przyklejoną nawigacją. */
+		scroll-padding-top: var(--navbar-height);
+	}
+}
+
+/* Wysokość ekranu bez nawigacji. `svh` nie skacze przy chowaniu paska adresu. */
+@utility h-screen-nav {
+	height: calc(100svh - var(--navbar-height));
+}
+
+@utility min-h-screen-nav {
+	min-height: calc(100svh - var(--navbar-height));
+}

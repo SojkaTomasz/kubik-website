@@ -1,0 +1,29 @@
+---
+description: Format wiadomości commitów (Conventional Commits, max 150 znaków)
+alwaysApply: true
+---
+
+# Wiadomości commitów
+
+Każdy commit, także wygenerowany automatycznie, ma format Conventional Commits:
+
+```
+typ(zakres): opis
+```
+
+- `typ` to jeden z: `feat`, `fix`, `chore`, `docs`, `refactor`, `test`, `style`, `perf`, `build`, `ci`.
+- `(zakres)` jest opcjonalny, np. `fix(formularz): ...`.
+- Pierwsza linia ma **maksymalnie 150 znaków**, jedno zdanie, bez kropki na końcu.
+- Opis po polsku, w trybie oznajmującym, mówi co i po co, a nie wylicza plików.
+- Szczegóły, jeśli są potrzebne, idą do treści po pustej linii (linie do 100 znaków).
+
+Przykłady:
+
+```
+feat(kontakt): formularz wysyła zapytanie ofertowe na e-mail
+fix(nawigacja): menu mobilne zamyka się po wyborze linku
+chore: konfiguracja projektu (Next.js, ESLint, Playwright, env, git)
+```
+
+Regułę egzekwuje commitlint w hooku `commit-msg` (`commitlint.config.mjs`) — niezgodny commit
+zostanie odrzucony.

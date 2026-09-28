@@ -1,0 +1,90 @@
+/*
+ * ► JEDYNY plik, który podmieniasz przy brandingu nowego projektu.
+ *
+ * Podmień 11 wartości `--brand-*` — role semantyczne w globals.css są z nich
+ * wyliczone, więc nie trzeba dotykać żadnego komponentu. Skala jak
+ * w Tailwindzie (50 najjaśniejszy), zapis oklch(L C H): trzymaj stały H,
+ * zmieniaj L i C.
+ */
+
+:root {
+	--brand-50: oklch(0.985 0 0);
+	--brand-100: oklch(0.967 0 0);
+	--brand-200: oklch(0.922 0 0);
+	--brand-300: oklch(0.87 0 0);
+	--brand-400: oklch(0.708 0 0);
+	--brand-500: oklch(0.556 0 0);
+	--brand-600: oklch(0.439 0 0);
+	--brand-700: oklch(0.371 0 0);
+	--brand-800: oklch(0.269 0 0);
+	--brand-900: oklch(0.205 0 0);
+	--brand-950: oklch(0.145 0 0);
+
+	/*
+	 * Kolory statusowe. Każdy ma CZWÓRKĘ, nie trójkę:
+	 *   --x                  kolor pełny — tło przycisku, ikona, obramowanie
+	 *   --x-foreground       tekst czytelny na --x
+	 *   --x-soft             delikatne tło — alert, odznaka
+	 *   --x-soft-foreground  tekst czytelny na --x-soft
+	 *
+	 * Czwarty token nie jest nadmiarowy: kolor pełny jako TEKST daje kontrast
+	 * rzędu 2:1. Pary sprawdza `e2e/contrast.spec.ts` — po zmianie uruchom
+	 * `pnpm test:e2e`.
+	 */
+	--success: oklch(0.52 0.13 163);
+	--success-foreground: oklch(0.99 0 0);
+	--success-soft: oklch(0.96 0.03 163);
+	--success-soft-foreground: oklch(0.4 0.1 163);
+
+	--warning: oklch(0.75 0.15 75);
+	--warning-foreground: oklch(0.2 0.02 75);
+	--warning-soft: oklch(0.965 0.045 80);
+	--warning-soft-foreground: oklch(0.42 0.09 60);
+
+	--info: oklch(0.52 0.16 254);
+	--info-foreground: oklch(0.99 0 0);
+	--info-soft: oklch(0.955 0.03 254);
+	--info-soft-foreground: oklch(0.42 0.13 254);
+
+	/* Czerwień z rejestru shadcn daje 4,49:1 na bieli — poniżej progu WCAG AA. */
+	--destructive: oklch(0.505 0.215 27.3);
+	--destructive-foreground: oklch(0.99 0 0);
+	--destructive-soft: oklch(0.955 0.025 27.3);
+	--destructive-soft-foreground: oklch(0.44 0.19 27.3);
+}
+
+.dark {
+	/* Rampa odwrócona, żeby bg-brand-100 dalej znaczyło „ledwo odróżnialne od tła". */
+	--brand-50: oklch(0.145 0 0);
+	--brand-100: oklch(0.205 0 0);
+	--brand-200: oklch(0.269 0 0);
+	--brand-300: oklch(0.371 0 0);
+	--brand-400: oklch(0.439 0 0);
+	--brand-500: oklch(0.556 0 0);
+	--brand-600: oklch(0.708 0 0);
+	--brand-700: oklch(0.87 0 0);
+	--brand-800: oklch(0.922 0 0);
+	--brand-900: oklch(0.967 0 0);
+	--brand-950: oklch(0.985 0 0);
+
+	/* Role się odwracają: kolor pełny jaśniejszy, tło „soft" przygaszone. */
+	--success: oklch(0.75 0.15 163);
+	--success-foreground: oklch(0.16 0.02 163);
+	--success-soft: oklch(0.28 0.05 163);
+	--success-soft-foreground: oklch(0.88 0.11 163);
+
+	--warning: oklch(0.82 0.15 79);
+	--warning-foreground: oklch(0.18 0.02 79);
+	--warning-soft: oklch(0.3 0.055 74);
+	--warning-soft-foreground: oklch(0.9 0.12 85);
+
+	--info: oklch(0.75 0.13 254);
+	--info-foreground: oklch(0.16 0.02 254);
+	--info-soft: oklch(0.28 0.05 254);
+	--info-soft-foreground: oklch(0.87 0.09 254);
+
+	--destructive: oklch(0.72 0.19 25);
+	--destructive-foreground: oklch(0.16 0.02 25);
+	--destructive-soft: oklch(0.28 0.08 27);
+	--destructive-soft-foreground: oklch(0.88 0.13 25);
+}

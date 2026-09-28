@@ -1,0 +1,174 @@
+{
+	"nav": {
+		"home": "Start",
+		"contact": "Kontakt",
+		"privacy": "Polityka prywatności",
+		"skipToContent": "Przejdź do treści",
+		"menu": "Menu",
+		"blog": "Blog",
+		"currentPage": "bieżąca strona"
+	},
+	"a11y": {
+		"close": "Zamknij",
+		"closeNotification": "Zamknij powiadomienie",
+		"loading": "Wczytywanie",
+		"opensInNewTab": "otwiera się w nowej karcie",
+		"more": "Więcej",
+		"pagination": "Podział na strony",
+		"previousPage": "Przejdź do poprzedniej strony",
+		"nextPage": "Przejdź do następnej strony",
+		"previous": "Poprzednia",
+		"next": "Następna",
+		"morePages": "Pominięte numery stron",
+		"previousSlide": "Poprzedni slajd",
+		"nextSlide": "Następny slajd",
+		"scrollToStart": "Przewiń na początek",
+		"scrollToEnd": "Przewiń na koniec",
+		"toggleSidebar": "Pokaż lub ukryj panel boczny",
+		"sidebar": "Panel boczny",
+		"sidebarDescription": "Panel boczny wysunięty z krawędzi ekranu",
+		"breadcrumb": "Ścieżka nawigacyjna",
+		"carousel": "Karuzela",
+		"slide": "slajd"
+	},
+	"home": {
+		"title": "Starter dla stron WWW",
+		"lead": "Kompletny szablon: shadcn/ui, SEO, Consent Mode v2, i18n i testy end-to-end.",
+		"cta": "Zobacz komponenty"
+	},
+	"theme": {
+		"label": "Zmień motyw",
+		"light": "Jasny",
+		"dark": "Ciemny",
+		"system": "Systemowy",
+		"group": "Motyw strony"
+	},
+	"language": {
+		"label": "Zmień język",
+		"pl": "Polski",
+		"en": "Angielski",
+		"group": "Język strony"
+	},
+	"notFound": {
+		"title": "Nie znaleziono strony",
+		"description": "Adres jest nieaktualny albo zawiera literówkę.",
+		"cta": "Wróć na stronę główną",
+		"browseBlog": "Przejrzyj blog",
+		"contact": "Napisz do nas"
+	},
+	"error": {
+		"title": "Coś poszło nie tak",
+		"description": "Nie udało się wyświetlić tej strony. Spróbuj ponownie — jeśli to nie pomoże, wróć na stronę główną.",
+		"retry": "Spróbuj ponownie",
+		"home": "Strona główna",
+		"digest": "Identyfikator błędu"
+	},
+	"cookies": {
+		"regionLabel": "Zgoda na pliki cookie",
+		"title": "Ta strona używa plików cookie",
+		"message": "Używamy plików cookie, żeby strona działała poprawnie, a my wiedzieli, co da się w niej poprawić. Szczegóły opisuje",
+		"privacyLink": "polityka prywatności",
+		"settings": "Ustawienia",
+		"accept": "Akceptuję",
+		"dialogTitle": "Ustawienia plików cookie",
+		"dialogDescription": "Zdecyduj, które kategorie chcesz włączyć. Wybór możesz zmienić w każdej chwili.",
+		"saveChoice": "Zapisz",
+		"reopen": "Ustawienia cookies",
+		"categories": {
+			"necessary": {
+				"label": "Niezbędne",
+				"description": "Utrzymują sesję, zabezpieczają formularze i zapamiętują tę właśnie decyzję o cookies. Bez nich strona nie zadziała, dlatego nie można ich wyłączyć."
+			},
+			"analytics": {
+				"label": "Analityczne",
+				"description": "Pokazują nam, które podstrony są odwiedzane i gdzie użytkownicy się gubią. Dane są zbiorcze — nie służą do identyfikacji pojedynczej osoby."
+			},
+			"marketing": {
+				"label": "Marketingowe",
+				"description": "Pozwalają mierzyć skuteczność reklam i pokazywać je osobom, które odwiedziły stronę. To one odpowiadają za „śledzące\" reklamy w innych serwisach."
+			},
+			"preferences": {
+				"label": "Preferencje",
+				"description": "Zapamiętują wybory takie jak język czy motyw jasny/ciemny, żeby nie trzeba było ustawiać ich przy każdej wizycie."
+			}
+		},
+		"decisionRequired": "Aby korzystać ze strony, wybierz „Akceptuję” albo otwórz „Ustawienia”.",
+		"lockedSwitch": "Ta kategoria jest wymagana i nie można jej wyłączyć."
+	},
+	"privacy": {
+		"title": "Polityka prywatności",
+		"description": "Jak przetwarzamy dane osobowe i po co używamy plików cookie.",
+		"placeholderTitle": "Szkielet do uzupełnienia przed wdrożeniem",
+		"placeholderBody": "Ta strona nie zawiera jeszcze treści polityki. Istnieje, żeby link w banerze zgód nie prowadził do błędu 404 — bez działającej polityki zgoda na cookies jest wadliwa prawnie. Uzupełnij sekcje z listy poniżej i zdejmij flagę noIndex w metadanych strony.",
+		"checklistTitle": "Co musi znaleźć się w polityce",
+		"checklist": [
+			"Kto jest administratorem danych — nazwa, adres, dane kontaktowe",
+			"Jakie dane zbieramy i w jakim celu",
+			"Podstawa prawna przetwarzania każdej kategorii danych",
+			"Jak długo przechowujemy dane",
+			"Komu dane są przekazywane — podwykonawcy, narzędzia analityczne",
+			"Czy dane trafiają poza Europejski Obszar Gospodarczy",
+			"Prawa użytkownika: dostęp, sprostowanie, usunięcie, sprzeciw, przenoszenie",
+			"Prawo skargi do Prezesa Urzędu Ochrony Danych Osobowych",
+			"Pliki cookie: kategorie, cel, okres przechowywania, sposób wycofania zgody"
+		],
+		"contact": "Pytania o dane osobowe: {email}"
+	},
+	"validation": {
+		"required": "To pole jest wymagane.",
+		"email": "Podaj poprawny adres e-mail, na przykład jan@example.com.",
+		"phone": "Podaj numer telefonu — cyfry, spacje i myślniki.",
+		"tooShort": "Wpisz co najmniej dwa znaki.",
+		"tooLong": "Ta wartość jest za długa.",
+		"messageTooShort": "Napisz co najmniej dziesięć znaków — krótsza wiadomość niewiele nam powie.",
+		"consent": "Bez zgody na przetwarzanie danych nie możemy odpowiedzieć."
+	},
+	"contact": {
+		"title": "Kontakt",
+		"description": "Napisz do nas — odpowiadamy zwykle w ciągu jednego dnia roboczego.",
+		"lead": "Wypełnij formularz albo napisz bezpośrednio na podany adres.",
+		"directTitle": "Kontakt bezpośredni",
+		"formTitle": "Formularz",
+		"optional": "(opcjonalnie)",
+		"submit": "Wyślij wiadomość",
+		"submitting": "Wysyłanie…",
+		"counter": "{current} z {max} znaków",
+		"successTitle": "Wiadomość wysłana",
+		"successBody": "Dziękujemy — odpowiemy najszybciej, jak to możliwe.",
+		"errorTitle": "Nie udało się wysłać",
+		"fields": {
+			"name": "Imię i nazwisko",
+			"email": "Adres e-mail",
+			"phone": "Telefon",
+			"subject": "Temat",
+			"message": "Wiadomość",
+			"consent": "Zgadzam się na przetwarzanie moich danych w celu odpowiedzi na wiadomość."
+		},
+		"errors": {
+			"validation": "Popraw zaznaczone pola i spróbuj ponownie.",
+			"rateLimit": "Wysłano już kilka wiadomości z tego adresu. Spróbuj ponownie za {seconds} sekund.",
+			"notConfigured": "Wysyłka wiadomości nie jest jeszcze skonfigurowana. Napisz proszę bezpośrednio na podany adres e-mail.",
+			"sendFailed": "Coś poszło nie tak po naszej stronie. Spróbuj ponownie za chwilę.",
+			"rejected": "Nie udało się zweryfikować formularza. Odśwież stronę i spróbuj ponownie."
+		},
+		"errorSummaryTitle": "Formularz zawiera błędy",
+		"errorSummaryIntro": "Popraw wymienione pola i wyślij ponownie."
+	},
+	"footer": {
+		"rights": "Wszelkie prawa zastrzeżone.",
+		"madeWith": "Zbudowane na starterze Next.js"
+	},
+	"blog": {
+		"title": "Blog",
+		"description": "Wpisy o tym, jak zbudowany jest ten starter i jak się nim pracuje.",
+		"readingTime": "{minutes} min czytania",
+		"draft": "Szkic",
+		"empty": "Nie ma jeszcze żadnych wpisów.",
+		"backToList": "Wszystkie wpisy",
+		"published": "Opublikowano",
+		"updated": "Zaktualizowano",
+		"postsLabel": "Lista wpisów",
+		"tagsLabel": "Tagi wpisu",
+		"metaLabel": "Informacje o wpisie"
+	}
+}

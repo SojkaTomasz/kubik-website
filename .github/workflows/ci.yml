@@ -1,0 +1,133 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Nowy push na tę samą gałąź anuluje poprzedni przebieg — nie ma sensu czekać
+# na wynik dla kodu, którego już nie ma.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Adres musi być ustawiony, bo src/env.ts waliduje go przy budowaniu.
+  NEXT_PUBLIC_SITE_URL: http://localhost:3399
+  NEXT_PUBLIC_CONTACT_EMAIL: kontakt@example.com
+  NEXT_PUBLIC_CONTACT_PHONE: '+48123456789'
+  NEXT_PUBLIC_ENABLE_DEV_PAGES: 'true'
+  NEXT_PUBLIC_ENABLE_VERCEL_ANALYTICS: 'false'
+
+jobs:
+  check:
+    name: Typy, lint, format, testy, build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Instalacja zależności
+        run: pnpm install --frozen-lockfile
+
+      - name: Bramka jakości
+        run: pnpm check
+
+  e2e:
+    name: Testy end-to-end (build produkcyjny)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Instalacja zależności
+        run: pnpm install --frozen-lockfile
+
+      # Pobranie przeglądarki trwa około minuty, więc trzymamy ją w cache.
+      # Klucz zawiera wersję Playwrighta — po aktualizacji cache się odbuduje.
+      - name: Cache przeglądarek Playwrighta
+        id: playwright-cache
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Instalacja przeglądarki
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Testy end-to-end
+        run: pnpm test:e2e
+
+      - name: Raport z nieudanego przebiegu
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+
+  e2e-dev:
+    name: Testy end-to-end (serwer deweloperski)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Instalacja zależności
+        run: pnpm install --frozen-lockfile
+
+      - name: Cache przeglądarek Playwrighta
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Instalacja przeglądarki
+        run: pnpm exec playwright install --with-deps chromium
+
+      # Osobny przebieg na serwerze deweloperskim.
+      #
+      # Część ostrzeżeń Reacta istnieje wyłącznie w trybie deweloperskim — build
+      # produkcyjny je usuwa. Dwa błędy zgłoszone w tym projekcie przez człowieka
+      # (skrypt renderowany w komponencie, brakujący nativeButton) były właśnie
+      # takie: przebieg produkcyjny by ich nie zobaczył, a kontrola konsoli
+      # w trybie deweloperskim zatrzymałaby je od razu.
+      #
+      # Lokalnie ten przebieg wymaga zatrzymania własnego `pnpm dev`: Next.js 16
+      # nie pozwala uruchomić dwóch serwerów deweloperskich w jednym katalogu.
+      - name: Testy end-to-end w trybie deweloperskim
+        run: pnpm test:e2e
+        env:
+          E2E_DEV: '1'
+
+      - name: Raport z nieudanego przebiegu
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-report-dev
+          path: playwright-report/
+          retention-days: 7

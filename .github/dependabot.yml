@@ -1,0 +1,124 @@
+version: 2
+
+# Aktualizacje zależności.
+#
+# Starter ma być podstawą stron pisanych przez lata, a nieaktualizowane
+# zależności to jedyna warstwa, która psuje się SAMA — bez jednej zmiany
+# w kodzie. Po roku milczenia aktualizacja przestaje być rutyną i staje się
+# osobnym projektem, więc lepiej robić ją małymi krokami.
+#
+# Ustawienia są celowo zachowawcze: raz w miesiącu i w paczkach. Dependabot
+# w domyślnej konfiguracji otwiera osobne PR-y co tydzień i przy tej liczbie
+# pakietów zamienia się w szum, który przestaje się czytać — a wtedy nie robi
+# już nic dobrego.
+#
+# UWAGA na dwie rzeczy, które łatwo źle zrozumieć — obie wyszły przy pierwszym
+# uruchomieniu tej konfiguracji:
+#
+#   1. `open-pull-requests-limit` obowiązuje OSOBNO dla każdego ekosystemu.
+#      Ustawiony tylko przy npm, przy `github-actions` zadziałał domyślny (5)
+#      i zamiast trzech PR-ów zrobiło się siedem.
+#   2. Grupa BEZ `update-types` bierze wszystko, łącznie ze zmianą głównej
+#      wersji. Pierwszy PR grupy `narzedzia` podbijał naraz eslint 9→10
+#      i typescript 5→7 — czyli dokładnie taką zmianę, która zasługuje na
+#      własny PR i własne spojrzenie.
+#
+# Każdy PR przechodzi przez `ci.yml`, czyli pełną bramkę jakości i testy e2e
+# w obu trybach. Zielony PR jest więc realnym dowodem, że aktualizacja niczego
+# nie zepsuła — nie samą deklaracją.
+#
+# Nie chcesz tego? Skasuj ten plik, nic więcej nie trzeba.
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 3
+    versioning-strategy: increase
+
+    groups:
+      # Ekosystem Next.js rusza się razem — osobne PR-y na `next`, `react`
+      # i `eslint-config-next` potrafią nie przejść w izolacji, choć razem
+      # przechodzą bez problemu.
+      next:
+        patterns:
+          - next
+          - '@next/*'
+          - react
+          - react-dom
+          - '@types/react'
+          - '@types/react-dom'
+        update-types:
+          - minor
+          - patch
+
+      # To samo dotyczy warstwy komponentów: Base UI i nasze kompozyty
+      # z `components/ui` są ze sobą powiązane.
+      ui:
+        patterns:
+          - '@base-ui/*'
+          - radix-ui
+          - lucide-react
+          - tailwindcss
+          - '@tailwindcss/*'
+          - tailwind-merge
+          - class-variance-authority
+        update-types:
+          - minor
+          - patch
+
+      narzedzia:
+        patterns:
+          - vitest
+          - '@vitest/*'
+          - '@playwright/*'
+          - playwright
+          - eslint
+          - eslint-*
+          - '@typescript-eslint/*'
+          - prettier
+          - prettier-*
+          - typescript
+        update-types:
+          - minor
+          - patch
+
+      # Wszystko pozostałe w jednej paczce, ale WYŁĄCZNIE aktualizacje
+      # zgodne wstecz. Zmiana głównej wersji dowolnego pakietu zasługuje
+      # na własny PR i własne spojrzenie.
+      reszta:
+        patterns:
+          - '*'
+        update-types:
+          - minor
+          - patch
+
+    labels:
+      - zaleznosci
+
+    commit-message:
+      prefix: chore
+      include: scope
+
+  # Akcje w `ci.yml` też się starzeją, a przypięte do starych wersji potrafią
+  # przestać działać bez ostrzeżenia, gdy GitHub wycofa wersję środowiska.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    # Limit jest OSOBNY dla każdego ekosystemu — bez tego wpisu obowiązuje
+    # domyślny (5) i same akcje potrafią zająć cały przegląd.
+    open-pull-requests-limit: 1
+
+    groups:
+      # Akcje w jednym PR-ze. Podbicie głównej wersji akcji jest tu regułą,
+      # a nie wyjątkiem (checkout v4 → v7), więc rozbijanie tego na osobne
+      # PR-y daje pięć zgłoszeń o tej samej treści.
+      akcje:
+        patterns:
+          - '*'
+    labels:
+      - zaleznosci
+    commit-message:
+      prefix: chore
+      include: scope

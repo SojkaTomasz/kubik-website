@@ -1,0 +1,26 @@
+node_modules
+.next
+.next-e2e
+out
+build
+coverage
+test-results
+playwright-report
+.content-collections
+pnpm-lock.yaml
+next-env.d.ts
+public/fonts
+*.min.*
+
+# tsconfig.json jest przepisywany przez `next typegen` (2 spacje, własna kolejność),
+# więc trzymanie go pod Prettierem powodowałoby wieczny konflikt.
+tsconfig.json
+
+# skills-lock.json jest przepisywany przez CLI skilli przy każdej instalacji
+# i aktualizacji — trzymanie go pod Prettierem powodowałoby wieczny konflikt.
+skills-lock.json
+
+# Skille agentów instalowane przez `npx skills add` — cudze pliki.
+# Formatowanie ich rozjechałoby zawartość z sumami kontrolnymi
+# w skills-lock.json i utrudniło aktualizację (`npx skills update`).
+.claude/skills

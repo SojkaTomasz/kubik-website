@@ -1,0 +1,17 @@
+# Skrypty instalacyjne zależności — pnpm 11 wymaga jawnej decyzji dla każdej.
+#
+# Wszystkie poniższe to opcjonalne przyspieszacze natywne; build i testy
+# przechodzą bez nich, więc nie uruchamiamy ich skryptów. Dzięki temu `pnpm
+# install` jest szybszy i nie wymaga kompilatora C++ na maszynie CI.
+#
+# Dopisując nową zależność z postinstallem, podejmij tu decyzję świadomie —
+# bez wpisu `pnpm install` kończy się błędem ERR_PNPM_IGNORED_BUILDS.
+allowBuilds:
+  sharp: false
+  unrs-resolver: false
+  '@parcel/watcher': false
+  '@swc/core': false
+  # Przyszedł z content-collections. Skrypt tylko dowiązuje binarkę, którą
+  # esbuild i tak dostarcza jako zależność opcjonalną per platforma —
+  # sprawdzone: warstwa treści buduje się poprawnie bez niego.
+  esbuild: false

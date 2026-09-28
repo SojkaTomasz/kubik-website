@@ -1,0 +1,26 @@
+/*
+ * Dwa zabezpieczenia, bez których animacje wejścia TRWALE ukrywają treść:
+ * `Reveal` startuje z `opacity: 0` już w HTML-u z serwera. Oba są w CSS-ie,
+ * bo muszą zadziałać wtedy, gdy JavaScript zawiedzie.
+ */
+
+/*
+ * 1. Ograniczony ruch (WCAG 2.3.3). Sam `useReducedMotion` nie wystarcza —
+ * działa dopiero po hydracji, więc do tego czasu element jest przezroczysty.
+ */
+@media (prefers-reduced-motion: reduce) {
+	[data-reveal] {
+		opacity: 1 !important;
+		transform: none !important;
+		transition: none !important;
+		animation: none !important;
+	}
+}
+
+/* 2. Brak JavaScriptu — bez tego treść zostaje przezroczysta NA ZAWSZE. */
+@layer base {
+	.no-js [data-reveal] {
+		opacity: 1 !important;
+		transform: none !important;
+	}
+}

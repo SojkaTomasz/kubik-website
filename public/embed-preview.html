@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pl">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1"
+		/>
+		<meta
+			name="robots"
+			content="noindex, nofollow"
+		/>
+		<title>Podgląd osadzenia</title>
+		<style>
+			body {
+				margin: 0;
+				display: grid;
+				place-items: center;
+				height: 100vh;
+				font:
+					14px system-ui,
+					sans-serif;
+				background: #e8ecf4;
+				color: #475569;
+			}
+			@media (prefers-color-scheme: dark) {
+				body {
+					background: #1e293b;
+					color: #cbd5e1;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+			Zastępnik osadzenia dla próbek komponentu Iframe na stronach /dev.
+
+			Nie odwołuje się do niczego w sieci: prawdziwa mapa albo film uzależniałyby
+			stronę deweloperską od cudzej infrastruktury, a konsola zbierałaby
+			komunikaty, na które nie mamy wpływu — kontrola konsoli w testach e2e
+			słusznie by je zgłosiła.
+
+			Wcześniej stał tu adres `data:text/html`. Musiał ustąpić, bo polityka
+			bezpieczeństwa treści (`next.config.ts`) wymagałaby wtedy `frame-src data:`,
+			a to otwiera ramkę na dowolny wstrzyknięty dokument. Plik na własnym
+			pochodzeniu mieści się w `frame-src 'self'` i nie kosztuje niczego.
+		-->
+		Miejsce na mapę dojazdu
+	</body>
+</html>

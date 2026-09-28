@@ -1,0 +1,46 @@
+---
+title: Starting a new project from this starter
+description: Three files to swap, one command, and the site is ready for content work.
+publishedAt: '2026-08-20'
+tags:
+   - starter
+   - how-it-works
+---
+
+This post is an example of the content layer. Delete it once you start writing your own — but take a
+look at how it is put together first.
+
+## What to swap first
+
+Three files are enough to stop this being a starter:
+
+1. `src/site.config.ts` — name, description, URL, languages
+2. `src/company.config.ts` — company details that feed JSON-LD
+3. `src/app/theme/brand.css` — the brand colour ramp
+
+## Frontmatter is validated
+
+Every file header goes through a zod schema **at build time**. A typo in a field name or a missing
+date fails the build with the file name in the message — instead of producing an empty page in
+production.
+
+> `draft: true` hides a post in production while keeping it visible in development. Handy for
+> writing at your own pace.
+
+## Plain Markdown works too
+
+Tables, code, lists — everything you would expect:
+
+| Element  | Comes from       |
+| -------- | ---------------- |
+| Headings | `typography.tsx` |
+| Spacing  | `--spacing-*`    |
+
+```ts
+import { allPosts } from '@/lib/content/posts'
+
+const latest = allPosts('en').at(0)
+```
+
+Text styling comes from a single place — the `Prose` component. Changing it there applies to every
+post at once.
