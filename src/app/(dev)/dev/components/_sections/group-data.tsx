@@ -469,14 +469,14 @@ export function GroupData() {
 				className='flex-col items-stretch gap-4'
 			>
 				{/* `placeholder='blur'` działa TYLKO przy imporcie statycznym.
-					`eager`, nie `priority` — ten drugi wstawia preload przed arkuszem
-					stylów i zabiera pasmo elementowi LCP. */}
-				<Sample label="ratio='auto' + placeholder='blur' + eager">
+					Bez `eager`: React 19 wstawia dla takiego obrazu `preload`, a próbka
+					leży daleko pod pierwszym ekranem, w sekcji odroczonej przez
+					`content-visibility` — przeglądarka zgłaszała nieużyty preload. */}
+				<Sample label="ratio='auto' + placeholder='blur'">
 					<Image
 						src={SAMPLE_IMAGE}
 						alt='Przykładowa grafika: gradient z rozświetleniem'
 						placeholder='blur'
-						eager
 						sizes='(min-width: 768px) 24rem, 100vw'
 						className='w-96'
 					/>
