@@ -29,7 +29,8 @@
 		"sidebarDescription": "Sidebar slid in from the edge of the screen",
 		"breadcrumb": "Breadcrumb",
 		"carousel": "Carousel",
-		"slide": "slide"
+		"slide": "slide",
+		"rating": "Rated {value} out of {max}"
 	},
 	"home": {
 		"title": "Website starter",

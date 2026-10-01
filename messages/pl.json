@@ -29,7 +29,8 @@
 		"sidebarDescription": "Panel boczny wysunięty z krawędzi ekranu",
 		"breadcrumb": "Ścieżka nawigacyjna",
 		"carousel": "Karuzela",
-		"slide": "slajd"
+		"slide": "slajd",
+		"rating": "Ocena {value} na {max}"
 	},
 	"home": {
 		"title": "Starter dla stron WWW",

@@ -1,12 +1,27 @@
 import { Sample, Showcase, ShowcaseItem } from '@/app/(dev)/dev/_components/showcase'
 import { Iframe } from '@/components/ui/iframe'
-import { Stat, StatGroup, statValueVariants } from '@/components/ui/stat'
+import { Marquee } from '@/components/ui/marquee'
+import { Rating, ratingVariants } from '@/components/ui/rating'
+import { SpecList, SpecListItem } from '@/components/ui/spec-list'
+import { Stat, StatGroup, statGroupVariants, statValueVariants } from '@/components/ui/stat'
+import { Steps } from '@/components/ui/steps'
 import { Typography } from '@/components/ui/typography'
 import { variantKeys } from '@/lib/cva'
 
 /* Listy czytane z komponentu — patrz komentarz w group-actions.tsx. */
 const statTones = variantKeys(statValueVariants, 'tone')
 const statSizes = variantKeys(statValueVariants, 'size')
+const statGroupLayouts = variantKeys(statGroupVariants, 'layout')
+const ratingSizes = variantKeys(ratingVariants, 'size')
+
+const STEPS_SAMPLE = [
+	{ title: 'Rozplanowanie pętli', description: 'Pętle od rozdzielacza do każdego pokoju.' },
+	{ title: 'Frezowanie', description: 'Rowki na grubość rury, bez kurzu w domu.' },
+	{ title: 'Układanie rury', description: 'Rura w jednym kawałku, bez łączeń.' },
+	{ title: 'Zalewanie', description: 'Rowki zalane masą, gotowe pod panele.' },
+]
+
+const MARQUEE_CITIES = ['Kraków', 'Nowy Sącz', 'Tarnów', 'Zakopane']
 
 /**
  * Podgląd osadzenia jako plik z `public/`: obca domena wciągałaby do testów e2e
@@ -89,38 +104,142 @@ export function GroupSpecialized() {
 
 			<ShowcaseItem
 				title='StatGroup'
-				note='siatka zawijająca się sama — widok nie ustawia kolumn'
-				className='flex-col items-stretch'
+				note='linie między pozycjami rysuje grupa — row: pasek dowodu, grid: karta techniczna realizacji'
+				className='flex-col items-stretch gap-6'
 			>
-				<StatGroup className='w-full'>
-					<Stat
-						label='Klienci'
-						value='500+'
-					/>
-					<Stat
-						label='Projekty'
-						value='1 240'
-						hint='od 2019 roku'
-					/>
-					<Stat
-						label='Satysfakcja'
-						value='98%'
-						tone='success'
-					/>
-					<Stat
-						label='Czas odpowiedzi'
-						value='2 h'
-						tone='muted'
-					/>
-				</StatGroup>
+				{statGroupLayouts.map(layout => (
+					<Sample
+						key={layout}
+						label={layout}
+					>
+						<StatGroup layout={layout}>
+							<Stat
+								layout={layout === 'grid' ? 'spec' : 'figure'}
+								size={layout === 'grid' ? 'sm' : 'default'}
+								label='Zleceń'
+								value='1200+'
+							/>
+							<Stat
+								layout={layout === 'grid' ? 'spec' : 'figure'}
+								size={layout === 'grid' ? 'sm' : 'default'}
+								label='tys. m² podłóg'
+								value='15'
+							/>
+							<Stat
+								layout={layout === 'grid' ? 'spec' : 'figure'}
+								size={layout === 'grid' ? 'sm' : 'default'}
+								label='Reklamacji'
+								value='0'
+							/>
+							<Stat
+								layout={layout === 'grid' ? 'spec' : 'figure'}
+								size={layout === 'grid' ? 'sm' : 'default'}
+								label='Dni pracy'
+								value='1'
+							/>
+						</StatGroup>
+					</Sample>
+				))}
 				<Typography
 					variant='caption'
 					tone='muted'
-					className='mt-3'
 				>
-					`tabular-nums` sprawia, że wszystkie cyfry mają tę samą szerokość — licznik
-					odświeżany na żywo nie drga, a kolumna kafelków się równa.
+					`tabular-nums` sprawia, że wszystkie cyfry mają tę samą szerokość — licznik animowany
+					od zera nie drga.
 				</Typography>
+			</ShowcaseItem>
+
+			<ShowcaseItem
+				title='Rating'
+				note='ocena i liczba opinii z jednego źródła; czytnik słyszy zdanie z ukrytego napisu, nie same gwiazdki'
+				className='flex-col items-start gap-6'
+			>
+				{ratingSizes.map(size => (
+					<Sample
+						key={size}
+						label={size}
+					>
+						<Rating
+							size={size}
+							value={5}
+							label={size === 'sm' ? '70+ opinii' : '70+ opinii w Google'}
+						/>
+					</Sample>
+				))}
+			</ShowcaseItem>
+
+			<ShowcaseItem
+				title='Steps'
+				note='lista uporządkowana — numer pozycji ogłasza czytnik, cyfra w kółku jest ozdobą'
+				className='flex-col items-stretch gap-8'
+			>
+				<Sample label='responsive'>
+					<Steps items={STEPS_SAMPLE} />
+				</Sample>
+				<Sample label='vertical'>
+					<Steps
+						orientation='vertical'
+						items={STEPS_SAMPLE}
+					/>
+				</Sample>
+			</ShowcaseItem>
+
+			<ShowcaseItem
+				title='SpecList'
+				note='<dl> — para etykieta i wartość czytana jako całość'
+				className='flex-col items-stretch gap-8'
+			>
+				<Sample label='spec'>
+					<SpecList>
+						<SpecListItem
+							label='Typowa wylewka'
+							value='cementowa, 5–7 cm'
+						/>
+						<SpecListItem
+							label='Czas pracy'
+							value='1 dzień'
+						/>
+					</SpecList>
+				</Sample>
+				<Sample label='feature'>
+					<SpecList appearance='feature'>
+						<SpecListItem
+							label='Pod pompę ciepła'
+							value='niska temp.'
+						/>
+						<SpecListItem
+							label='Mieszkanie w bloku'
+							value='bez podnoszenia'
+						/>
+					</SpecList>
+				</Sample>
+				<Sample label='feature · muted'>
+					<SpecList
+						appearance='feature'
+						tone='muted'
+					>
+						<SpecListItem label='Podłoga drewniana na legarach' />
+					</SpecList>
+				</Sample>
+			</ShowcaseItem>
+
+			<ShowcaseItem
+				title='Marquee'
+				note='Magic UI — kopie treści ukryte przed czytnikiem, przy ograniczonym ruchu pas stoi'
+				className='flex-col items-stretch'
+			>
+				<Marquee className='[--duration:30s] [--gap:2rem]'>
+					{MARQUEE_CITIES.map(city => (
+						<Typography
+							key={city}
+							as='span'
+							variant='displayMd'
+							className='text-border'
+						>
+							{city}
+						</Typography>
+					))}
+				</Marquee>
 			</ShowcaseItem>
 		</Showcase>
 	)
