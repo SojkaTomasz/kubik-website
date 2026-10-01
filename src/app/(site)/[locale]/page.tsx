@@ -1,11 +1,24 @@
-import { ArrowRight } from 'lucide-react'
+import { Phone } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
 
+import heroFloor from '@/assets/photos/hero-floor.jpg'
+import { companyConfig } from '@/company.config'
+import { AboutSection } from '@/components/sections/about-section'
+import { HeroContactCard } from '@/components/sections/hero-contact-card'
+import { HeroFeatures } from '@/components/sections/hero-features'
+import { ProjectsSlider } from '@/components/sections/projects-slider'
+import { ProofBar } from '@/components/sections/proof-bar'
+import { QuoteSection } from '@/components/sections/quote-section'
+import { ReviewsSection } from '@/components/sections/reviews-section'
+import { ServiceTeaser } from '@/components/sections/service-teaser'
 import { Button } from '@/components/ui/button'
-import { Section } from '@/components/ui/section'
-import { Typography } from '@/components/ui/typography'
-import { buildPageMetadata, JsonLd, webPageJsonLd } from '@/lib/seo'
+import { CtaBand } from '@/components/ui/cta-band'
+import { PageHero } from '@/components/ui/page-hero'
+import { projects } from '@/data/projects'
+import { phoneLinks } from '@/lib/phone'
+import { sectionNumber } from '@/lib/section-number'
+import { buildPageMetadata, JsonLd, jsonLdGraph, localBusinessJsonLd, webPageJsonLd } from '@/lib/seo'
 import type { Locale } from '@/site.config'
 
 export async function generateMetadata({ params }: PageProps<'/[locale]'>): Promise<Metadata> {
@@ -14,55 +27,75 @@ export async function generateMetadata({ params }: PageProps<'/[locale]'>): Prom
 
 	return buildPageMetadata({
 		title: t('title'),
-		description: t('lead'),
+		description: t('description'),
 		path: '/',
 		locale: locale as Locale,
 	})
 }
 
+/**
+ * Strona główna (Paper: „Strona główna"). Kolejność z docs/zakres.md: hero,
+ * dowód, kim jesteśmy, realizacje, usługa, opinie, telefon, formularz.
+ */
 export default async function HomePage({ params }: PageProps<'/[locale]'>) {
 	const { locale } = await params
 	const t = await getTranslations('home')
-	const nav = await getTranslations('nav')
+	const sections = await getTranslations('sections')
+	const quote = await getTranslations('quote')
+	const phone = companyConfig.phone ? phoneLinks(companyConfig.phone) : undefined
+
+	/** „01 · Kim jesteśmy" — numer sekcji w kolejności na stronie. */
+	const eyebrow = (number: number, label: string) =>
+		sections('eyebrow', { number: sectionNumber(number), label })
 
 	return (
 		<>
-			<JsonLd data={webPageJsonLd({ path: '/', name: t('title'), locale })} />
+			<JsonLd
+				data={jsonLdGraph(
+					webPageJsonLd({ path: '/', name: t('heading'), locale }),
+					localBusinessJsonLd()
+				)}
+			/>
 
-			<Section spacing='lg'>
-				<div className='flex flex-col items-start gap-6'>
-					<Typography
-						as='h1'
-						variant='displayMd'
-					>
-						{t('title')}
-					</Typography>
-					<Typography
-						variant='lead'
-						tone='muted'
-					>
-						{t('lead')}
-					</Typography>
-					<div className='flex flex-wrap gap-3'>
+			<PageHero
+				image={heroFloor}
+				imagePosition='50% 62%'
+				eyebrow={t('eyebrow')}
+				eyebrowInTitle
+				title={t('heading')}
+				lead={t('lead')}
+				aside={<HeroContactCard />}
+			>
+				<HeroFeatures />
+			</PageHero>
+
+			<ProofBar />
+			<AboutSection eyebrow={eyebrow(1, t('aboutEyebrow'))} />
+			<ProjectsSlider
+				eyebrow={eyebrow(2, sections('projectsEyebrow'))}
+				projects={projects}
+			/>
+			<ServiceTeaser eyebrow={eyebrow(3, t('serviceEyebrow'))} />
+			<ReviewsSection eyebrow={eyebrow(4, sections('reviewsEyebrow'))} />
+
+			{phone && (
+				<CtaBand
+					title={sections('callBandTitle')}
+					action={
 						<Button
-							href='/kontakt'
-							size='lg'
-							icon={<ArrowRight />}
-							iconPosition='right'
-							iconEffect='shiftRight'
+							href={phone.href}
+							variant='dark'
+							size='xl'
+							icon={<Phone className='text-cold-text' />}
+							className='w-full font-heading font-extrabold md:w-auto md:min-w-72'
 						>
-							{nav('contact')}
+							{phone.display}
 						</Button>
-						<Button
-							href='/dev'
-							size='lg'
-							variant='outline'
-						>
-							{t('cta')}
-						</Button>
-					</div>
-				</div>
-			</Section>
+					}
+				/>
+			)}
+
+			<QuoteSection eyebrow={eyebrow(5, quote('eyebrow'))} />
 		</>
 	)
 }
