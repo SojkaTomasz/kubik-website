@@ -9,6 +9,7 @@ import { ServiceArea } from '@/components/sections/service-area'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
+import { Container } from '@/components/ui/container'
 import { Image } from '@/components/ui/image'
 import { Section } from '@/components/ui/section'
 import { Typography } from '@/components/ui/typography'
@@ -22,9 +23,13 @@ import {
 	webPageJsonLd,
 } from '@/lib/seo'
 import { formatTaxId } from '@/lib/tax-id'
+import { cn } from '@/lib/utils'
 import type { Locale } from '@/site.config'
 
 const CONTACT_PATH = '/kontakt'
+
+/** Margines boczny elementu, który na telefonie wypada z kontenera (`contents`). */
+const MOBILE_INSET = 'max-lg:mx-(--container-px) md:max-lg:mx-(--container-px-md)'
 
 export async function generateMetadata({
 	params,
@@ -69,147 +74,183 @@ export default async function ContactPage({ params }: PageProps<'/[locale]/konta
 				)}
 			/>
 
-			<Section aria-labelledby='contact-title'>
-				<div className='grid gap-12 lg:grid-cols-2 lg:gap-20'>
-					<div className='flex flex-col gap-8 lg:gap-10'>
-						<div className='flex flex-col gap-5'>
-							<Typography
-								variant='overline'
-								tone='primary'
-							>
-								{t('eyebrow')}
-							</Typography>
-							<Typography
-								as='h1'
-								id='contact-title'
-								variant='displayXl'
-							>
-								{t('heading')}
-							</Typography>
-						</div>
-
-						{phone && (
-							<div className='flex flex-col gap-3 border-t pt-8'>
-								<Typography
-									variant='overline'
-									tone='muted'
+			{/*
+				Kolejność na telefonie (Paper: „Kontakt — mobile") jest inna niż na
+				desktopie: telefon, bus, obszar działania, formularz, dane firmy.
+				Bez powielania formularza: poniżej `lg` kolumny pierwszej sekcji
+				„rozpływają się" (`contents`), ich elementy stają się dziećmi tego
+				kontenera i układa je `order`. Od `lg` kontener jest blokiem, a
+				`order` nic nie robi — zostaje układ dwukolumnowy.
+			*/}
+			<div className='flex flex-col lg:block'>
+				<Section
+					contained={false}
+					aria-labelledby='contact-title'
+					className='max-lg:contents'
+				>
+					<Container className='max-lg:contents'>
+						<div className='grid gap-12 max-lg:contents lg:grid-cols-2 lg:gap-20'>
+							<div className='flex flex-col gap-8 max-lg:contents lg:gap-10'>
+								<div
+									className={cn(
+										'flex flex-col gap-5 max-lg:order-1 max-lg:pt-section',
+										MOBILE_INSET
+									)}
 								>
-									{t('phoneLabel')}
-								</Typography>
-								<Button
-									href={phone.href}
-									variant='link'
-									size='none'
-									className='self-start font-heading text-[2.5rem] leading-tight font-extrabold tracking-[-0.03em] text-foreground no-underline hover:text-hot-text md:text-[3.5rem]'
-								>
-									{phone.display}
-								</Button>
-								<Typography
-									variant='body'
-									tone='muted'
-									className='max-w-md'
-								>
-									{t('phoneNote')}
-								</Typography>
-							</div>
-						)}
-
-						<div className='grid gap-8 border-t pt-8 sm:grid-cols-[auto_1fr] sm:gap-12'>
-							{companyConfig.email && (
-								<div className='flex flex-col gap-2'>
 									<Typography
 										variant='overline'
-										tone='muted'
+										tone='primary'
 									>
-										{t('emailLabel')}
+										{t('eyebrow')}
 									</Typography>
-									<Button
-										href={`mailto:${companyConfig.email}`}
-										variant='link'
-										size='none'
-										className='self-start text-base font-semibold text-foreground no-underline hover:text-hot-text'
+									<Typography
+										as='h1'
+										id='contact-title'
+										variant='displayXl'
 									>
-										{companyConfig.email}
-									</Button>
+										{t('heading')}
+									</Typography>
 								</div>
-							)}
-							<div className='flex flex-col gap-2'>
-								<Typography
-									variant='overline'
-									tone='muted'
-								>
-									{t('companyLabel')}
-								</Typography>
-								<Typography
-									as='address'
-									variant='bodySm'
-									className='not-italic'
-								>
-									{companyConfig.name}
-									{address && (
-										<>
-											<br />
-											{address.streetAddress}, {address.postalCode}{' '}
-											{address.addressLocality}
-										</>
+
+								{phone && (
+									<div
+										className={cn(
+											'flex flex-col gap-3 border-t pt-8 max-lg:order-1 max-lg:mt-8',
+											MOBILE_INSET
+										)}
+									>
+										<Typography
+											variant='overline'
+											tone='muted'
+										>
+											{t('phoneLabel')}
+										</Typography>
+										<Button
+											href={phone.href}
+											variant='link'
+											size='none'
+											className='self-start font-heading text-[2.5rem] leading-tight font-extrabold tracking-[-0.03em] text-foreground no-underline hover:text-hot-text md:text-[3.5rem]'
+										>
+											{phone.display}
+										</Button>
+										<Typography
+											variant='body'
+											tone='muted'
+											className='max-w-md'
+										>
+											{t('phoneNote')}
+										</Typography>
+									</div>
+								)}
+
+								<div className='grid gap-8 border-t pt-8 max-lg:contents sm:grid-cols-[auto_1fr] sm:gap-12'>
+									{companyConfig.email && (
+										<div
+											className={cn(
+												'flex flex-col gap-2 max-lg:order-1 max-lg:mt-8 max-lg:mb-12 max-lg:border-t max-lg:pt-8',
+												MOBILE_INSET
+											)}
+										>
+											<Typography
+												variant='overline'
+												tone='muted'
+											>
+												{t('emailLabel')}
+											</Typography>
+											<Button
+												href={`mailto:${companyConfig.email}`}
+												variant='link'
+												size='none'
+												className='self-start text-base font-semibold text-foreground no-underline hover:text-hot-text'
+											>
+												{companyConfig.email}
+											</Button>
+										</div>
 									)}
-									{companyConfig.taxId && (
-										<>
-											<br />
-											{t('taxId', { taxId: formatTaxId(companyConfig.taxId) })}
-										</>
-									)}
-								</Typography>
+									<div
+										className={cn(
+											'flex flex-col gap-2 max-lg:order-5 max-lg:mt-12 max-lg:mb-section max-lg:border-t max-lg:pt-8',
+											MOBILE_INSET
+										)}
+									>
+										<Typography
+											variant='overline'
+											tone='muted'
+										>
+											{t('companyLabel')}
+										</Typography>
+										<Typography
+											as='address'
+											variant='bodySm'
+											className='not-italic'
+										>
+											{companyConfig.name}
+											{address && (
+												<>
+													<br />
+													{address.streetAddress}, {address.postalCode}{' '}
+													{address.addressLocality}
+												</>
+											)}
+											{companyConfig.taxId && (
+												<>
+													<br />
+													{t('taxId', { taxId: formatTaxId(companyConfig.taxId) })}
+												</>
+											)}
+										</Typography>
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
 
-					<Card
-						size='lg'
-						className='self-start'
-						aria-labelledby='contact-form-title'
-						role='region'
-					>
-						<CardContent className='flex flex-col gap-8'>
-							<Typography
-								as='h2'
-								id='contact-form-title'
-								variant='h2'
+							<Card
+								size='lg'
+								className={cn('self-start max-lg:order-4 max-lg:mt-section', MOBILE_INSET)}
+								aria-labelledby='contact-form-title'
+								role='region'
 							>
-								{t('formTitle')}
-							</Typography>
-							<QuoteForm layout='stack' />
-							<QuoteNextSteps />
-						</CardContent>
-					</Card>
-				</div>
-			</Section>
+								<CardContent className='flex flex-col gap-8'>
+									<Typography
+										as='h2'
+										id='contact-form-title'
+										variant='h2'
+									>
+										{t('formTitle')}
+									</Typography>
+									<QuoteForm layout='stack' />
+									<QuoteNextSteps />
+								</CardContent>
+							</Card>
+						</div>
+					</Container>
+				</Section>
 
-			<Section
-				deferLayout
-				spacing='none'
-				className='pb-section lg:pb-section-lg'
-			>
-				<div className='relative'>
-					<Image
-						src={bus}
-						alt={t('busAlt')}
-						ratio='video'
-						sizes='(min-width: 1440px) 1280px, 100vw'
-						placeholder='blur'
-						className='aspect-[4/3] md:aspect-[16/7]'
-						style={{ objectPosition: '50% 55%' }}
-					/>
-					<Badge
-						variant='pipe'
-						className='absolute bottom-4 left-4 px-3.5 py-2.5 text-[0.8125rem] md:bottom-6 md:left-6'
-					>
-						{t('busBadge')}
-					</Badge>
-				</div>
-			</Section>
+				<Section
+					deferLayout
+					spacing='none'
+					className='pb-section max-lg:order-2 lg:pb-section-lg'
+				>
+					<div className='relative'>
+						<Image
+							src={bus}
+							alt={t('busAlt')}
+							ratio='video'
+							sizes='(min-width: 1440px) 1280px, 100vw'
+							placeholder='blur'
+							className='aspect-[4/3] md:aspect-[16/7]'
+							style={{ objectPosition: '50% 55%' }}
+						/>
+						<Badge
+							variant='pipe'
+							className='absolute bottom-4 left-4 px-3.5 py-2.5 text-[0.8125rem] md:bottom-6 md:left-6'
+						>
+							{t('busBadge')}
+						</Badge>
+					</div>
+				</Section>
 
-			<ServiceArea />
+				<ServiceArea className='max-lg:order-3' />
+			</div>
 		</>
 	)
 }

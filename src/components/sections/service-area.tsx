@@ -12,7 +12,7 @@ import type { Locale } from '@/site.config'
  * najczęściej, każde prowadzi do swojej strony. To jedyna lista miast poza
  * stopką, więc niesie też linkowanie wewnętrzne do stron miast.
  */
-export function ServiceArea() {
+export function ServiceArea({ className }: { className?: string }) {
 	const t = useTranslations('contactPage')
 	const cities = localizedCities(useLocale() as Locale)
 
@@ -20,6 +20,7 @@ export function ServiceArea() {
 		<Section
 			deferLayout
 			background='card'
+			className={className}
 			aria-labelledby='service-area-title'
 		>
 			<div className='flex flex-col gap-10'>
