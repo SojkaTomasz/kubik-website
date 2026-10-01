@@ -44,11 +44,13 @@
 		"group": "Site language"
 	},
 	"notFound": {
-		"title": "Page not found",
-		"description": "The address is outdated or contains a typo.",
+		"eyebrow": "Error 404",
+		"title": "Page not found — we haven't milled here yet.",
+		"description": "The page you are looking for does not exist or has moved. The warm floor is waiting elsewhere.",
 		"cta": "Back to home page",
-		"browseBlog": "Browse the blog",
-		"contact": "Get in touch"
+		"shortcutsTitle": "Maybe you were looking for",
+		"quote": "Free quote",
+		"browseBlog": "Browse the blog"
 	},
 	"error": {
 		"title": "Something went wrong",

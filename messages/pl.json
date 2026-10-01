@@ -44,11 +44,13 @@
 		"group": "Język strony"
 	},
 	"notFound": {
-		"title": "Nie znaleziono strony",
-		"description": "Adres jest nieaktualny albo zawiera literówkę.",
+		"eyebrow": "Błąd 404",
+		"title": "Tu jeszcze nie frezowaliśmy.",
+		"description": "Strona, której szukasz, nie istnieje albo zmieniła adres. Ciepła podłoga czeka gdzie indziej.",
 		"cta": "Wróć na stronę główną",
-		"browseBlog": "Przejrzyj blog",
-		"contact": "Napisz do nas"
+		"shortcutsTitle": "Może tego szukasz",
+		"quote": "Darmowa wycena",
+		"browseBlog": "Przejrzyj blog"
 	},
 	"error": {
 		"title": "Coś poszło nie tak",
