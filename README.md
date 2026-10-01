@@ -129,5 +129,7 @@ nic poza tym nie wymaga konfiguracji.
 
 CI (`.github/workflows/ci.yml`) uruchamia bramkę jakości i testy end-to-end — także w trybie
 deweloperskim, bo część błędów widać wyłącznie tam.
+
 # kubik-website
+
 # kubik-website
