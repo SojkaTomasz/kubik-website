@@ -4,6 +4,12 @@ import * as React from 'react'
 import { OTPInput, OTPInputContext } from 'input-otp'
 
 import { cn } from '@/lib/utils'
+import { fieldControlVariants } from '@/components/ui/field-control.variants'
+
+/*
+ * ⚠️ PLIK ZMODYFIKOWANY względem rejestru shadcn: każda cyfra wygląda jak pole
+ * ze wspólnego `field-control.variants.ts`. `shadcn add --overwrite` to skasuje.
+ */
 import { MinusIcon } from 'lucide-react'
 
 function InputOTP({
@@ -31,10 +37,7 @@ function InputOTPGroup({ className, ...props }: React.ComponentProps<'div'>) {
 	return (
 		<div
 			data-slot='input-otp-group'
-			className={cn(
-				'flex items-center rounded-lg has-aria-invalid:border-destructive has-aria-invalid:ring-3 has-aria-invalid:ring-destructive/20 dark:has-aria-invalid:ring-destructive/40',
-				className
-			)}
+			className={cn('flex items-center gap-2', className)}
 			{...props}
 		/>
 	)
@@ -55,7 +58,9 @@ function InputOTPSlot({
 			data-slot='input-otp-slot'
 			data-active={isActive}
 			className={cn(
-				'relative flex size-8 items-center justify-center border-y border-r border-input text-sm transition-all outline-none first:rounded-l-lg first:border-l last:rounded-r-lg aria-invalid:border-destructive data-[active=true]:z-10 data-[active=true]:border-ring data-[active=true]:ring-3 data-[active=true]:ring-ring/50 data-[active=true]:aria-invalid:border-destructive data-[active=true]:aria-invalid:ring-destructive/20 dark:bg-input/30 dark:data-[active=true]:aria-invalid:ring-destructive/40',
+				// Każda cyfra to osobne pole z tą samą kreską — aktywne robi się niebieskie.
+				fieldControlVariants({ appearance: 'display' }),
+				'relative flex size-14 items-center justify-center px-0 data-[active=true]:border-cold',
 				className
 			)}
 			{...props}

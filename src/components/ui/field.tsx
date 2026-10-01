@@ -7,6 +7,12 @@ import { cn } from '@/lib/utils'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 
+/*
+ * ⚠️ PLIK ZMODYFIKOWANY względem rejestru shadcn: pole nie barwi się w całości
+ * przy błędzie, tytuł opcji 17 px, komunikat błędu w odcieniu do tekstu.
+ * `shadcn add --overwrite` to skasuje. Pełna lista: AGENTS.md.
+ */
+
 function FieldSet({ className, ...props }: React.ComponentProps<'fieldset'>) {
 	return (
 		<fieldset
@@ -51,7 +57,9 @@ function FieldGroup({ className, ...props }: React.ComponentProps<'div'>) {
 	)
 }
 
-const fieldVariants = cva('group/field flex w-full gap-2 data-[invalid=true]:text-destructive', {
+// Bez przebarwiania całego pola przy błędzie: w projekcie etykieta zostaje
+// szara, a błąd sygnalizują czerwona kreska pola i komunikat pod nim.
+const fieldVariants = cva('group/field flex w-full gap-2', {
 	variants: {
 		orientation: {
 			vertical: 'flex-col *:w-full [&>.sr-only]:w-auto',
@@ -111,7 +119,8 @@ function FieldTitle({ className, ...props }: React.ComponentProps<'div'>) {
 		<div
 			data-slot='field-label'
 			className={cn(
-				'flex w-fit items-center gap-2 text-sm font-medium group-data-[disabled=true]/field:opacity-50',
+				// Nazwa opcji obok przełącznika — „Analityczne" w ustawieniach cookies.
+				'flex w-fit items-center gap-2.5 text-body leading-snug font-bold group-data-[disabled=true]/field:opacity-50',
 				className
 			)}
 			{...props}
@@ -126,7 +135,7 @@ function FieldDescription({ className, ...props }: React.ComponentProps<'p'>) {
 			className={cn(
 				'text-left text-sm leading-normal font-normal text-muted-foreground group-has-data-horizontal/field:text-balance [[data-variant=legend]+&]:-mt-1.5',
 				'last:mt-0 nth-last-2:-mt-1',
-				'[&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary',
+				'[&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-foreground',
 				className
 			)}
 			{...props}
@@ -204,7 +213,8 @@ function FieldError({
 		<div
 			role='alert'
 			data-slot='field-error'
-			className={cn('text-sm font-normal text-destructive', className)}
+			// Odcień do tekstu (#ff6b74), nie kolor pełny — ten daje na tle 4,03:1.
+			className={cn('text-sm font-normal text-destructive-soft-foreground', className)}
 			{...props}
 		>
 			{content}
