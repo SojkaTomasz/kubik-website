@@ -17,8 +17,8 @@ export interface FontPreload {
  * opóźnia pierwsze malowanie, więc dokładaj wyłącznie fonty nad linią zgięcia.
  */
 export const preloadedFonts: FontPreload[] = [
-	{ href: '/fonts/inter-latin.woff2', subset: 'latin' },
-	{ href: '/fonts/inter-latin-ext.woff2', subset: 'latin-ext' },
+	{ href: '/fonts/inter-tight-latin.woff2', subset: 'latin' },
+	{ href: '/fonts/inter-tight-latin-ext.woff2', subset: 'latin-ext' },
 ]
 
 /**
@@ -27,29 +27,22 @@ export const preloadedFonts: FontPreload[] = [
  */
 export const fontFamilies = [
 	{
-		name: 'Inter',
+		name: 'Inter Tight',
 		role: 'Tekst podstawowy',
 		variable: '--font-body',
 		weights: '100–900',
 		className: 'font-sans',
 	},
 	{
-		name: 'Oswald',
+		name: 'Unbounded',
 		role: 'Nagłówki / display',
 		variable: '--font-display',
-		weights: '200–700',
+		weights: '200–900',
 		className: 'font-display',
 	},
 	{
-		name: 'Playfair Display',
-		role: 'Szeryfowy akcent',
-		variable: '--font-serif',
-		weights: '400–900',
-		className: 'font-serif',
-	},
-	{
 		name: 'JetBrains Mono',
-		role: 'Kod i dane techniczne',
+		role: 'Etykiety, kod i dane techniczne',
 		variable: '--font-code',
 		weights: '100–800',
 		className: 'font-mono',

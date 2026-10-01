@@ -1,24 +1,51 @@
 /*
  * ► JEDYNY plik, który podmieniasz przy brandingu nowego projektu.
  *
- * Podmień 11 wartości `--brand-*` — role semantyczne w globals.css są z nich
- * wyliczone, więc nie trzeba dotykać żadnego komponentu. Skala jak
- * w Tailwindzie (50 najjaśniejszy), zapis oklch(L C H): trzymaj stały H,
- * zmieniaj L i C.
+ * Kubik — wartości z projektu w Paperze („Kubik — strona", tokeny --color-*).
+ *
+ * Strona jest WYŁĄCZNIE CIEMNA, więc rampa ma od razu konwencję motywu
+ * ciemnego: 50 to tło, 950 to tekst. Blok `.dark` nie powtarza wartości —
+ * oba motywy wyglądają identycznie, a kontrast sprawdzany jest w obu.
  */
 
 :root {
-	--brand-50: oklch(0.985 0 0);
-	--brand-100: oklch(0.967 0 0);
-	--brand-200: oklch(0.922 0 0);
-	--brand-300: oklch(0.87 0 0);
-	--brand-400: oklch(0.708 0 0);
-	--brand-500: oklch(0.556 0 0);
-	--brand-600: oklch(0.439 0 0);
-	--brand-700: oklch(0.371 0 0);
-	--brand-800: oklch(0.269 0 0);
-	--brand-900: oklch(0.205 0 0);
-	--brand-950: oklch(0.145 0 0);
+	--brand-50: #111418; /* tło strony            Paper: --color-bg */
+	--brand-100: #1a1f25; /* karty, okna            Paper: --color-surface */
+	--brand-200: #2a3038; /* linie, podziały        Paper: --color-line */
+	--brand-300: #3d4550; /* obrys przycisku        Paper: --color-deco */
+	--brand-400: #5e6670; /* placeholder            Paper: --color-placeholder */
+	--brand-500: #7b838c;
+	--brand-600: #9aa1a9; /* tekst wyciszony        Paper: --color-muted */
+	--brand-700: #c3c7cb;
+	--brand-800: #dcdcd8;
+	--brand-900: #eae9e5;
+	--brand-950: #f2f1ee; /* tekst                  Paper: --color-text */
+
+	/*
+	 * Para akcentów marki: ciepło i zimno, czyli rura grzewcza. Czerwień niesie
+	 * akcję główną, niebieski stan „włączone" i akcenty drugoplanowe.
+	 *
+	 * `-text` to wersje do TEKSTU na ciemnym tle. Kolor pełny jako mały napis
+	 * nie trzyma WCAG AA: #e5202e na tle daje 4,03:1, na karcie 3,61:1.
+	 */
+	--hot: #e5202e;
+	--hot-foreground: #ffffff; /* 4,59:1 */
+	--hot-text: #f2545e; /* 5,46:1 na tle, 4,90:1 na karcie */
+	--cold: #2f6bea;
+	--cold-foreground: #ffffff; /* 4,76:1 */
+	--cold-text: #5b8df0; /* 5,73:1 na tle, 5,14:1 na karcie */
+
+	/*
+	 * Gwiazdki oceny. W Paperze są w dwóch kolorach: czerwone w katalogu
+	 * komponentów i w hero, żółte w nagłówku i popupie. Wzięta wersja z katalogu
+	 * — zmiana na żółtą (#f5b301) to podmiana tej jednej wartości.
+	 */
+	--rating-star: var(--hot);
+
+	/* Gradient rury nad oknami — przejście z ciepłego w zimne. */
+	--pipe-hot: oklab(51.1% 0.161 0.085);
+	--pipe-mid: oklab(44.5% 0.109 -0.044);
+	--pipe-cold: oklab(46.4% -0.035 -0.168);
 
 	/*
 	 * Kolory statusowe. Każdy ma CZWÓRKĘ, nie trójkę:
@@ -29,45 +56,8 @@
 	 *
 	 * Czwarty token nie jest nadmiarowy: kolor pełny jako TEKST daje kontrast
 	 * rzędu 2:1. Pary sprawdza `e2e/contrast.spec.ts` — po zmianie uruchom
-	 * `pnpm test:e2e`.
+	 * `pnpm test:e2e`. Wartości z wariantu ciemnego startera.
 	 */
-	--success: oklch(0.52 0.13 163);
-	--success-foreground: oklch(0.99 0 0);
-	--success-soft: oklch(0.96 0.03 163);
-	--success-soft-foreground: oklch(0.4 0.1 163);
-
-	--warning: oklch(0.75 0.15 75);
-	--warning-foreground: oklch(0.2 0.02 75);
-	--warning-soft: oklch(0.965 0.045 80);
-	--warning-soft-foreground: oklch(0.42 0.09 60);
-
-	--info: oklch(0.52 0.16 254);
-	--info-foreground: oklch(0.99 0 0);
-	--info-soft: oklch(0.955 0.03 254);
-	--info-soft-foreground: oklch(0.42 0.13 254);
-
-	/* Czerwień z rejestru shadcn daje 4,49:1 na bieli — poniżej progu WCAG AA. */
-	--destructive: oklch(0.505 0.215 27.3);
-	--destructive-foreground: oklch(0.99 0 0);
-	--destructive-soft: oklch(0.955 0.025 27.3);
-	--destructive-soft-foreground: oklch(0.44 0.19 27.3);
-}
-
-.dark {
-	/* Rampa odwrócona, żeby bg-brand-100 dalej znaczyło „ledwo odróżnialne od tła". */
-	--brand-50: oklch(0.145 0 0);
-	--brand-100: oklch(0.205 0 0);
-	--brand-200: oklch(0.269 0 0);
-	--brand-300: oklch(0.371 0 0);
-	--brand-400: oklch(0.439 0 0);
-	--brand-500: oklch(0.556 0 0);
-	--brand-600: oklch(0.708 0 0);
-	--brand-700: oklch(0.87 0 0);
-	--brand-800: oklch(0.922 0 0);
-	--brand-900: oklch(0.967 0 0);
-	--brand-950: oklch(0.985 0 0);
-
-	/* Role się odwracają: kolor pełny jaśniejszy, tło „soft" przygaszone. */
 	--success: oklch(0.75 0.15 163);
 	--success-foreground: oklch(0.16 0.02 163);
 	--success-soft: oklch(0.28 0.05 163);
@@ -83,8 +73,9 @@
 	--info-soft: oklch(0.28 0.05 254);
 	--info-soft-foreground: oklch(0.87 0.09 254);
 
-	--destructive: oklch(0.72 0.19 25);
-	--destructive-foreground: oklch(0.16 0.02 25);
+	/* Błąd: tekst #ff6b74 z Papera (--color-error-text), 6,69:1 na tle. */
+	--destructive: #e5202e;
+	--destructive-foreground: #ffffff;
 	--destructive-soft: oklch(0.28 0.08 27);
-	--destructive-soft-foreground: oklch(0.88 0.13 25);
+	--destructive-soft-foreground: #ff6b74;
 }

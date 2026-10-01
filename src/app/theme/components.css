@@ -6,9 +6,12 @@
 
 :root {
 	/* Kontener — używany przez <Container>. */
-	--container-max-w: 80rem; /* 1280px */
+	/* Treść 1280 px przy marginesach z Papera: 20 / 40 / 80 px (mobile / tablet / desktop).
+	   Maksimum LICZY SIĘ z marginesem, stąd 1280 + 2 × 80 = 1440. */
+	--container-max-w: 90rem;
 	--container-px: 1.25rem;
-	--container-px-lg: 2rem;
+	--container-px-md: 2.5rem;
+	--container-px-lg: 5rem;
 
 	/* Wysokość nawigacji. Ustawiana z JS-a przez SiteProvider (mierzy realny
 	   navbar), tutaj tylko wartość awaryjna na pierwszą klatkę renderu. */
@@ -16,20 +19,21 @@
 
 	/* Pionowe odstępy sekcji — używane przez <Section>. */
 	--section-py: 4rem;
-	--section-py-lg: 6rem;
+	--section-py-lg: 8rem;
 
-	/* Zaokrąglenia per rodzina komponentów. */
-	--button-radius: var(--radius-md);
-	--card-radius: var(--radius-xl);
-	--input-radius: var(--radius-md);
-	--badge-radius: calc(infinity * 1px);
-	--dialog-radius: var(--radius-2xl);
+	/* Zaokrąglenia per rodzina komponentów. Styleguide: „zaokrąglenie tylko 4 px
+	   (zdjęcia), przyciski i pola są proste, jak cięcie frezarki". Pigułki
+	   nawigacji i pływający nagłówek biorą 4 px przez `radius='lg'`. */
+	--button-radius: 0px;
+	--card-radius: 0px;
+	--input-radius: 0px;
+	--badge-radius: 0px;
+	--dialog-radius: 0px;
 	--image-radius: var(--radius-lg);
 	--embed-radius: var(--radius-lg);
 
-	/* Ikonografia — lucide domyślnie rysuje stroke 2, co przy małych rozmiarach
-	   bywa zbyt ciężkie. */
-	--icon-stroke-width: 1.75;
+	/* Ikonografia — w projekcie ikony mają stroke 2, czyli domyślny lucide. */
+	--icon-stroke-width: 2;
 }
 
 /*

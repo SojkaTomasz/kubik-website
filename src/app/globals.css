@@ -5,7 +5,7 @@
 /*
  * Warstwy tokenów — kolejność ma znaczenie, każda kolejna może nadpisać poprzednią:
  *   fonts.css       deklaracje @font-face (public/fonts)
- *   brand.css       rampa marki i kolory statusowe  ← TO PODMIENIASZ W NOWYM PROJEKCIE
+ *   brand.css       rampa marki, akcenty i kolory statusowe  ← TO PODMIENIASZ W NOWYM PROJEKCIE
  *   typography.css  rodziny fontów i skala nagłówkowa
  *   components.css  pokrętła komponentów (wysokości, zaokrąglenia, kontener)
  *   motion.css      zabezpieczenia animacji wejścia (ograniczony ruch, brak JS)
@@ -22,6 +22,30 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
+ * Gradient rury na powierzchni — pas CTA „Podaj metraż…" (`bg-pipe`) i tagi na
+ * zdjęciach (`bg-pipe-glass`, półprzezroczysty, z rozmyciem tła pod spodem).
+ * Kąt i punkty zatrzymania 1:1 z Papera.
+ */
+@utility bg-pipe {
+	background-image: linear-gradient(
+		in oklab 112.74deg,
+		var(--pipe-hot) 13.93%,
+		var(--pipe-mid) 50.1%,
+		var(--pipe-cold) 86.28%
+	);
+}
+
+@utility bg-pipe-glass {
+	background-image: linear-gradient(
+		in oklab 112.74deg,
+		oklab(50.5% 0.166 0.058 / 78%) 13.93%,
+		oklab(43.1% 0.122 -0.059 / 78%) 50.1%,
+		oklab(46.7% -0.017 -0.182 / 78%) 86.28%
+	);
+	backdrop-filter: blur(6px);
+}
+
+/*
  * Sekcje poza pierwszym ekranem nie są układane, dopóki nie zbliżą się do widoku.
  * Bez tego pierwsze malowanie czeka na ułożenie CAŁEJ strony — zmierzone:
  * Speed Index 3965 → 1137 ms, Style & Layout 1059 → 53 ms.
@@ -32,6 +56,27 @@
 @utility content-skip {
 	content-visibility: auto;
 	contain-intrinsic-size: auto 1400px;
+}
+
+/*
+ * Pasek rury nad oknem — 4 px gradientu z ciepłego w zimne, znak rozpoznawczy
+ * okien w projekcie. Pseudoelement, więc nie zajmuje miejsca w układzie;
+ * element musi mieć `position` inną niż `static` (karta i okno mają).
+ */
+@utility pipe-bar {
+	&::before {
+		content: '';
+		position: absolute;
+		inset: 0 0 auto;
+		height: 4px;
+		background-image: linear-gradient(
+			in oklab 90deg,
+			var(--pipe-hot),
+			var(--pipe-mid),
+			var(--pipe-cold)
+		);
+		pointer-events: none;
+	}
 }
 
 @theme inline {
@@ -70,6 +115,19 @@
 	--color-card-foreground: var(--card-foreground);
 	--color-card: var(--card);
 
+	/* Akcenty marki — bg-hot, text-cold-text, border-cold… */
+	--color-hot: var(--hot);
+	--color-hot-foreground: var(--hot-foreground);
+	--color-hot-text: var(--hot-text);
+	--color-cold: var(--cold);
+	--color-cold-foreground: var(--cold-foreground);
+	--color-cold-text: var(--cold-text);
+	--color-overlay: var(--overlay);
+	--color-rating-star: var(--rating-star);
+	/* Podpowiedź w pustym polu (Paper: --color-placeholder). */
+	--color-placeholder: var(--brand-400);
+	--shadow-modal: var(--shadow-modal-value);
+
 	/* Rampa marki — dostępna jako bg-brand-500, text-brand-700, border-brand-200… */
 	--color-brand-50: var(--brand-50);
 	--color-brand-100: var(--brand-100);
@@ -104,50 +162,29 @@
 	--radius-2xl: calc(var(--radius) * 1.8);
 	--radius-3xl: calc(var(--radius) * 2.2);
 	--radius-4xl: calc(var(--radius) * 2.6);
+
+	/*
+	 * Przewijany pas miast w stopce (`components/ui/marquee.tsx`, Magic UI).
+	 * Tempo i odstęp ustawia komponent zmiennymi `--duration` i `--gap`.
+	 * Ograniczony ruch zatrzymuje pas — reguła w theme/motion.css.
+	 */
+	--animate-marquee: marquee var(--duration) infinite linear;
+
+	@keyframes marquee {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(calc(-100% - var(--gap)));
+		}
+	}
 }
 
 :root {
-	--radius: 0.625rem;
+	/* Projekt jest kanciasty: przyciski, karty i okna mają 0 (theme/components.css).
+	   Ten mnożnik zostaje dla drobnych elementów — pigułek nawigacji, pól wyboru. */
+	--radius: 0.25rem;
 
-	--background: oklch(1 0 0);
-	--foreground: var(--brand-950);
-	--card: oklch(1 0 0);
-	--card-foreground: var(--brand-950);
-	--popover: oklch(1 0 0);
-	--popover-foreground: var(--brand-950);
-
-	/* Role z rampy marki. Rampa jest w ciemnym motywie odwrócona, więc te same
-	   tokeny działają w obu — bez powtarzania ich w bloku .dark. */
-	--primary: var(--brand-900);
-	--primary-foreground: var(--brand-50);
-	--secondary: var(--brand-100);
-	--secondary-foreground: var(--brand-900);
-	--muted: var(--brand-100);
-	/* Nie `--brand-500`: dawałby na `--muted` 4,31:1, tuż poniżej progu WCAG AA. */
-	--muted-foreground: oklch(0.505 0 0);
-	--accent: var(--brand-100);
-	--accent-foreground: var(--brand-900);
-	--border: var(--brand-200);
-	--input: var(--brand-200);
-	--ring: var(--brand-400);
-
-	--chart-1: var(--brand-300);
-	--chart-2: var(--brand-500);
-	--chart-3: var(--brand-600);
-	--chart-4: var(--brand-700);
-	--chart-5: var(--brand-800);
-
-	--sidebar: var(--brand-50);
-	--sidebar-foreground: var(--brand-950);
-	--sidebar-primary: var(--brand-900);
-	--sidebar-primary-foreground: var(--brand-50);
-	--sidebar-accent: var(--brand-100);
-	--sidebar-accent-foreground: var(--brand-900);
-	--sidebar-border: var(--brand-200);
-	--sidebar-ring: var(--brand-400);
-}
-
-.dark {
 	--background: var(--brand-50);
 	--foreground: var(--brand-950);
 	--card: var(--brand-100);
@@ -155,21 +192,54 @@
 	--popover: var(--brand-100);
 	--popover-foreground: var(--brand-950);
 
-	/* Własna wartość: rampa jest odwrócona, więc jasność z motywu jasnego daje tu 3,07:1. */
-	--muted-foreground: oklch(0.75 0 0);
+	/* Akcja główna to czerwień marki — „Darmowa wycena", „Akceptuję". */
+	--primary: var(--hot);
+	--primary-foreground: var(--hot-foreground);
+	--secondary: var(--brand-200);
+	--secondary-foreground: var(--brand-950);
+	--muted: var(--brand-100);
+	--muted-foreground: var(--brand-600);
+	--accent: var(--brand-200);
+	--accent-foreground: var(--brand-950);
+	--border: var(--brand-200);
+	--input: var(--brand-300);
+	/* Pierścień fokusa w zimnym akcencie — czerwony myliłby się z błędem. */
+	--ring: var(--cold);
 
-	/* Obramowania w ciemnym motywie działają lepiej jako przezroczysta biel niż
-	   jako kolor z rampy — nie „gasną" na kartach o innym tle. */
-	--border: oklch(1 0 0 / 10%);
-	--input: oklch(1 0 0 / 15%);
+	--chart-1: var(--hot);
+	--chart-2: var(--cold);
+	--chart-3: var(--brand-600);
+	--chart-4: var(--brand-400);
+	--chart-5: var(--brand-300);
 
 	--sidebar: var(--brand-100);
-	--sidebar-border: oklch(1 0 0 / 10%);
+	--sidebar-foreground: var(--brand-950);
+	--sidebar-primary: var(--hot);
+	--sidebar-primary-foreground: var(--hot-foreground);
+	--sidebar-accent: var(--brand-200);
+	--sidebar-accent-foreground: var(--brand-950);
+	--sidebar-border: var(--brand-200);
+	--sidebar-ring: var(--cold);
+
+	/* Cień okien i banera — z popupu wyceny w Paperze. */
+	--shadow-modal-value: 0 40px 120px rgb(0 0 0 / 60%);
+	/* Zasłona pod oknami — ciemniejsza od tła, żeby karta się od niej odcięła. */
+	--overlay: rgb(8 10 12 / 78%);
 }
+
+/*
+ * Bez bloku `.dark`: strona ma jeden, ciemny wygląd (theme/brand.css), więc
+ * role są te same niezależnie od klasy na `<html>`.
+ */
 
 @layer base {
 	* {
 		@apply border-border outline-ring/50;
+	}
+
+	/* Ciemne paski przewijania i kontrolki formularzy przeglądarki. */
+	html {
+		color-scheme: dark;
 	}
 
 	body {

@@ -17,6 +17,17 @@
 	}
 }
 
+/*
+ * Przewijany pas (`Marquee`) przy ograniczonym ruchu stoi w miejscu.
+ * WCAG 2.2.2: ruch trwający dłużej niż 5 s musi dać się zatrzymać — tu
+ * zatrzymuje go samo ustawienie systemowe, bez przycisku w interfejsie.
+ */
+@media (prefers-reduced-motion: reduce) {
+	[data-slot='marquee'] * {
+		animation-play-state: paused !important;
+	}
+}
+
 /* 2. Brak JavaScriptu — bez tego treść zostaje przezroczysta NA ZAWSZE. */
 @layer base {
 	.no-js [data-reveal] {
