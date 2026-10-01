@@ -9,10 +9,12 @@ import { CityLocal } from '@/components/sections/city-local'
 import { FaqSection } from '@/components/sections/faq-section'
 import { HeroActions } from '@/components/sections/hero-actions'
 import { HowItWorks } from '@/components/sections/how-it-works'
+import { PriceFactors } from '@/components/sections/price-factors'
 import { ProjectsSlider } from '@/components/sections/projects-slider'
 import { ProofBar } from '@/components/sections/proof-bar'
 import { QuoteSection } from '@/components/sections/quote-section'
 import { ReviewsSection } from '@/components/sections/reviews-section'
+import { SuitabilitySection } from '@/components/sections/suitability-section'
 import { Button } from '@/components/ui/button'
 import { CtaBand } from '@/components/ui/cta-band'
 import { PageHero } from '@/components/ui/page-hero'
@@ -54,7 +56,8 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
 }
 
 /**
- * Strona miasta (Paper: „Miasto") — szkielet usługi z treścią pisaną dla
+ * Strona miasta (Paper: „Miasto") — pełny szkielet usługi (także „Kiedy się
+ * nadaje" i „Cena") z treścią pisaną dla
  * miasta osobno: lead, sekcja lokalna, FAQ. Realizacja z tego miasta idzie
  * w sliderze pierwsza, a formularz zna miejscowość i o nią nie pyta.
  */
@@ -127,6 +130,8 @@ export default async function CityPage({ params }: CityPageProps) {
 				title={t('projectsTitle')}
 				projects={sliderProjects}
 			/>
+			<SuitabilitySection eyebrow={eyebrow(4, service('fitEyebrow'))} />
+			<PriceFactors eyebrow={eyebrow(5, service('priceEyebrow'))} />
 
 			<CtaBand
 				title={sections('quoteBandTitle')}
@@ -145,14 +150,14 @@ export default async function CityPage({ params }: CityPageProps) {
 				}
 			/>
 
-			<ReviewsSection eyebrow={eyebrow(4, sections('reviewsEyebrow'))} />
+			<ReviewsSection eyebrow={eyebrow(6, sections('reviewsEyebrow'))} />
 			<FaqSection
-				eyebrow={eyebrow(5, sections('faqEyebrow'))}
+				eyebrow={eyebrow(7, sections('faqEyebrow'))}
 				title={t('faqTitle', { inCity: city.inCity })}
 				items={[...city.faq, ...serviceContent[locale as Locale].faq.slice(0, 3)]}
 			/>
 			<QuoteSection
-				eyebrow={eyebrow(6, quote('eyebrow'))}
+				eyebrow={eyebrow(8, quote('eyebrow'))}
 				city={city.name}
 			/>
 		</>
