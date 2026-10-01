@@ -27,6 +27,8 @@ export interface PageHeroProps extends Omit<React.ComponentProps<'section'>, 'ti
 	 */
 	eyebrowInTitle?: boolean
 	title: React.ReactNode
+	/** Poziom tytułu — `h1` na stronie, `h2` w próbce na `/dev`, gdzie `h1` już jest. */
+	titleAs?: 'h1' | 'h2'
 	lead?: React.ReactNode
 	/** Rząd pod leadem — trójka „Bez skuwania…", przyciski. */
 	children?: React.ReactNode
@@ -53,6 +55,7 @@ export function PageHero({
 	eyebrow,
 	eyebrowInTitle = false,
 	title,
+	titleAs: TitleTag = 'h1',
 	lead,
 	children,
 	aside,
@@ -104,7 +107,7 @@ export function PageHero({
 				<div className='flex max-w-[51.25rem] flex-col gap-5 md:gap-7'>
 					{breadcrumbs}
 					{eyebrowInTitle ? (
-						<h1 className='flex flex-col gap-5 md:gap-7'>
+						<TitleTag className='flex flex-col gap-5 md:gap-7'>
 							{eyebrowRow}
 							<Typography
 								as='span'
@@ -112,12 +115,12 @@ export function PageHero({
 							>
 								{title}
 							</Typography>
-						</h1>
+						</TitleTag>
 					) : (
 						<>
 							{eyebrowRow && <div>{eyebrowRow}</div>}
 							<Typography
-								as='h1'
+								as={TitleTag}
 								variant='displayXl'
 							>
 								{title}

@@ -231,6 +231,7 @@ export function GroupLayout() {
 					image={SAMPLE_IMAGE}
 					eyebrow='Usługa · cała Polska'
 					title='Frezowanie pod ogrzewanie podłogowe.'
+					titleAs='h2'
 					lead='Wyfrezujemy rowki w wylewce, którą już masz.'
 					className='mt-0 min-h-0 pt-10 md:min-h-0 lg:mt-0 lg:min-h-0 lg:pt-10'
 				>
@@ -283,7 +284,7 @@ export function GroupLayout() {
 
 			<ShowcaseItem
 				title='Prose'
-				note='style treści z Markdowna — jedyne miejsce opisujące wygląd wpisów bloga'
+				note='style długiej treści — jedyne miejsce opisujące jej wygląd'
 				className='flex-col items-stretch'
 			>
 				<Prose>

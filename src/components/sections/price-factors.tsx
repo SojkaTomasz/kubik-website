@@ -34,6 +34,9 @@ export function PriceFactors({ eyebrow }: { eyebrow: string }) {
 							<Typography
 								as='span'
 								aria-hidden
+								// Ozdoba jak w Paperze — kolor linii celowo poniżej progu kontrastu,
+								// a treść (nazwa czynnika) stoi obok pełnym kolorem.
+								data-decorative
 								className='min-w-21 font-heading text-[2.125rem] leading-none font-extrabold tracking-[-0.04em] text-input md:text-5xl'
 							>
 								{factor.unit}
