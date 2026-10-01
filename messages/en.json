@@ -11,7 +11,9 @@
 		"quoteShort": "Quote",
 		"call": "Call",
 		"phoneLabel": "Phone · 24/7",
-		"openMenu": "Open menu"
+		"openMenu": "Open menu",
+		"service": "Usługa",
+		"projects": "Realizacje"
 	},
 	"a11y": {
 		"close": "Close",
@@ -38,9 +40,26 @@
 		"rating": "Rated {value} out of {max}"
 	},
 	"home": {
-		"title": "Website starter",
-		"lead": "A complete template: shadcn/ui, SEO, Consent Mode v2, i18n and end-to-end tests.",
-		"cta": "Browse components"
+		"title": "Frezowane ogrzewanie podłogowe bez skuwania",
+		"lead": "Frezujemy wylewkę pod ogrzewanie podłogowe i układamy rury w podłodze, którą już masz. 50 m² kończymy w jeden dzień, a kurz od razu trafia do odkurzacza.",
+		"cta": "Browse components",
+		"description": "Ogrzewanie podłogowe frezowane w wylewce, którą już masz. 50 m² w jeden dzień, bez kurzu. 5,0 w Google, 70+ opinii. Cała Polska.",
+		"eyebrow": "Frezowane ogrzewanie podłogowe",
+		"heading": "Ciepła podłoga bez skuwania posadzki.",
+		"without": "Bez",
+		"features": {
+			"demolition": "skuwania",
+			"dust": "kurzu",
+			"mess": "bałaganu"
+		},
+		"aboutEyebrow": "Kim jesteśmy",
+		"aboutTitle": "Frezujemy tylko pod podłogówkę.",
+		"aboutBody": "Jesteśmy z Małopolski i od 6 lat jeździmy do klientów po całej Polsce. Robimy podłogówkę w starych domach, w mieszkaniach w blokach i na nowych budowach. Frezujemy z odkurzaczem przemysłowym, więc w czasie pracy możesz normalnie mieszkać w domu.",
+		"busBadge": "Rozpoznasz nas po busie",
+		"busAlt": "Niebieski bus firmy Kubik z napisem „Ogrzewanie podłogowe frezowane”",
+		"serviceEyebrow": "Usługa",
+		"serviceTitle": "Jeden dzień dzieli Cię od ciepłej podłogi.",
+		"serviceLink": "Zobacz, jak pracujemy"
 	},
 	"language": {
 		"label": "Change language",
@@ -160,7 +179,8 @@
 		"tooShort": "Enter at least two characters.",
 		"tooLong": "This value is too long.",
 		"messageTooShort": "Write at least ten characters — a shorter message tells us very little.",
-		"consent": "Without consent to process your data we cannot reply."
+		"consent": "Without consent to process your data we cannot reply.",
+		"area": "Podaj metraż w m², na przykład 80."
 	},
 	"contact": {
 		"title": "Contact",
@@ -215,5 +235,157 @@
 	"rating": {
 		"short": "{count}+ reviews",
 		"long": "{count}+ Google reviews"
+	},
+	"quote": {
+		"eyebrow": "Wycena",
+		"title": "Ile to kosztuje u Ciebie?",
+		"lead": "Podaj metraż i numer telefonu. Oddzwonimy z ceną, a Ty do niczego się nie zobowiązujesz.",
+		"dialogEyebrow": "Darmowa wycena",
+		"dialogLead": "Wystarczy metraż i numer. Oddzwonimy z ceną, bez zobowiązań.",
+		"fields": {
+			"area": "Metraż",
+			"phone": "Telefon",
+			"city": "Miejscowość"
+		},
+		"placeholders": {
+			"area": "80",
+			"phone": "np. 600 100 200",
+			"city": "np. Wrocław"
+		},
+		"unit": "m²",
+		"submit": "Chcę darmową wycenę",
+		"submitting": "Wysyłanie…",
+		"privacy": "Numer wykorzystamy tylko do kontaktu w sprawie wyceny.",
+		"privacyLink": "Polityka prywatności",
+		"nextTitle": "Co dalej po wysłaniu",
+		"next": [
+			"Oddzwaniamy i dopytujemy o wylewkę.",
+			"Podajemy cenę. Przy nietypowej podłodze najpierw ją oglądamy.",
+			"Umawiamy dzień i przyjeżdżamy z całym sprzętem."
+		],
+		"successTitle": "Mamy Twój numer",
+		"successBody": "Oddzwonimy z ceną. Jeśli nie odbierzesz, spróbujemy jeszcze raz.",
+		"errorTitle": "Nie udało się wysłać",
+		"errors": {
+			"validation": "Popraw zaznaczone pola i spróbuj ponownie.",
+			"rateLimit": "Wysłano już kilka zapytań z tego adresu. Spróbuj ponownie za {seconds} sekund albo zadzwoń.",
+			"notConfigured": "Wysyłka formularza nie jest jeszcze włączona. Zadzwoń, proszę: {phone}.",
+			"sendFailed": "Coś poszło nie tak po naszej stronie. Spróbuj za chwilę albo zadzwoń: {phone}.",
+			"rejected": "Nie udało się zweryfikować formularza. Odśwież stronę i spróbuj ponownie."
+		},
+		"errorSummaryTitle": "Formularz zawiera błędy",
+		"errorSummaryIntro": "Popraw wymienione pola i wyślij ponownie.",
+		"notNow": "Nie teraz"
+	},
+	"sections": {
+		"eyebrow": "{number} · {label}",
+		"proofProjects": "{count} realizacji",
+		"proofQuoteSource": "Google",
+		"projectsEyebrow": "Ostatnie realizacje",
+		"projectsTitle": "Sprawdź, czy robiliśmy już dom podobny do Twojego.",
+		"projectsAll": "Wszystkie realizacje",
+		"reviewsEyebrow": "Opinie",
+		"reviewsTitle": "Opinie klientów",
+		"reviewsClaim": "Jedna z najwyżej ocenianych firm w branży w Polsce.",
+		"reviewsSource": "Google",
+		"reviewsCounter": "{current} / {total}",
+		"callBandTitle": "Wolisz od razu porozmawiać?",
+		"quoteBandTitle": "Podaj metraż, a oddzwonimy z ceną.",
+		"stepsEyebrow": "Jak to działa",
+		"faqEyebrow": "FAQ",
+		"faqTitle": "Pytania przed wyceną.",
+		"faqLead": "Nie ma tu Twojego pytania? Zadzwoń, odpowiemy od razu."
+	},
+	"service": {
+		"title": "Frezowanie pod ogrzewanie podłogowe: cena, przebieg",
+		"description": "Frezowanie wylewki pod ogrzewanie podłogowe bez skuwania. Sprawdź, od czego zależy cena za m², i zamów darmową wycenę.",
+		"eyebrow": "Usługa · cała Polska",
+		"heading": "Frezowanie pod ogrzewanie podłogowe.",
+		"lead": "Masz już wylewkę i chcesz podłogówkę? Nie musisz jej skuwać. Ogrzewanie podłogowe w istniejącej wylewce: wyfrezujemy w niej rowki, ułożymy rury i zalejemy je, a podłoga nie podniesie się nawet o centymetr.",
+		"howTitle": "Zamiast skuwać podłogę, wycinamy w niej rowki pod rurki.",
+		"howBody": "Frezowanie wylewki robimy maszyną z podłączonym odkurzaczem przemysłowym. Frezarka wycina w posadzce rowki na grubość rury, a pył od razu trafia do worka. Dlatego klienci w opiniach najczęściej piszą o jednym: zero kurzu.",
+		"howBadge": "Frezarka z odkurzaczem przemysłowym",
+		"howPhotoAlt": "Frezarka podłączona do odkurzacza przemysłowego w garderobie w trakcie frezowania",
+		"fitEyebrow": "Twoja wylewka",
+		"fitTitle": "Czy u mnie się da? Najczęściej tak.",
+		"fitYes": "Nadaje się",
+		"fitNo": "Nie nadaje się",
+		"fitNote": "Nie wiesz, jaką masz wylewkę? Wyślij zdjęcie SMS-em na {phone}, ocenimy za darmo.",
+		"priceEyebrow": "Cena",
+		"priceTitle": "Frezowanie pod podłogówkę: cena za m²"
+	},
+	"city": {
+		"title": "Frezowanie pod ogrzewanie podłogowe {name}",
+		"eyebrow": "Usługa · {region}",
+		"heading": "Frezowanie pod ogrzewanie podłogowe {inCity}.",
+		"localEyebrow": "{name} i okolice",
+		"facts": {
+			"travel": "Czas dojazdu",
+			"screed": "Typowa wylewka",
+			"nearby": "Też dojeżdżamy"
+		},
+		"projectsTitle": "Zobacz, jak to wygląda u innych.",
+		"faqTitle": "Pytania {inCity}.",
+		"breadcrumbService": "Usługa"
+	},
+	"projectsPage": {
+		"title": "Realizacje: frezowane ogrzewanie podłogowe",
+		"description": "12 podłóg z metrażem, rodzajem wylewki i czasem pracy. Zdjęcia z prawdziwych budów.",
+		"eyebrow": "Wybrane z 1200+ zleceń",
+		"heading": "Podłogi, które już grzeją.",
+		"lead": "Wszystkie zdjęcia zrobiliśmy sami na budowach. Znajdź dom albo mieszkanie podobne do swojego i zobacz, ile trwała robota. Cenę ustalamy indywidualnie, po krótkiej rozmowie o Twojej podłodze.",
+		"filterLabel": "Rodzaj obiektu",
+		"all": "Wszystkie",
+		"kinds": {
+			"dom": "Dom",
+			"mieszkanie": "Mieszkanie",
+			"poddasze": "Poddasze"
+		},
+		"count": "{count, plural, one {# realizacja} few {# realizacje} other {# realizacji}}"
+	},
+	"project": {
+		"title": "Frezowanie pod podłogówkę, {city}, {area} m²",
+		"description": "Przebieg frezowania wylewki pod ogrzewanie podłogowe: {object}, {area} m², {time}.",
+		"heading": "{title}, {area} m².",
+		"photoCount": "{count} zdjęć z budowy",
+		"specs": {
+			"area": "Metraż",
+			"time": "Czas",
+			"screed": "Wylewka",
+			"kind": "Obiekt"
+		},
+		"days": "{count, plural, one {# dzień} other {# dni}}",
+		"storyTitle": "Przebieg realizacji",
+		"story": [
+			"Punkt wyjścia",
+			"Co zrobiliśmy",
+			"Efekt"
+		],
+		"galleryTitle": "Przebieg robót",
+		"photoAlt": "{title}, {city}: zdjęcie {number} z {count}",
+		"cta": {
+			"dom": "Masz podobny dom?",
+			"mieszkanie": "Masz podobne mieszkanie?",
+			"poddasze": "Masz podobne poddasze?"
+		},
+		"previous": "Poprzednia realizacja: {title}",
+		"next": "Następna realizacja: {title}"
+	},
+	"contactPage": {
+		"title": "Kontakt i darmowa wycena",
+		"description": "Zadzwoń: {phone}, całą dobę. Albo zostaw numer, oddzwonimy z ceną.",
+		"eyebrow": "Kontakt",
+		"heading": "Wycena nic nie kosztuje.",
+		"phoneLabel": "Telefon · całą dobę",
+		"phoneNote": "W ciągu dnia jesteśmy na budowie. Jeśli nie odbierzemy, oddzwonimy, jak tylko wyłączymy frezarkę.",
+		"emailLabel": "E-mail",
+		"companyLabel": "Dane firmy",
+		"taxId": "NIP {taxId}",
+		"formTitle": "Zostaw numer, oddzwonimy.",
+		"busBadge": "Rozpoznasz nas po busie",
+		"areaEyebrow": "Obszar działania",
+		"areaTitle": "Przyjedziemy w każde miejsce w Polsce.",
+		"areaLead": "To miasta, w których pracujemy najczęściej. Nie ma Twojego? Zadzwoń, dojedziemy.",
+		"busAlt": "Niebieski bus firmy Kubik z napisem „Ogrzewanie podłogowe frezowane”"
 	}
 }

@@ -10,6 +10,7 @@ import { SiteFooter } from '@/components/layout/site-footer'
 import { SiteHeader } from '@/components/layout/site-header'
 import { MAIN_CONTENT_ID, SkipLink } from '@/components/layout/skip-link'
 import { Providers } from '@/components/providers/providers'
+import { QuoteLayer } from '@/components/quote/quote-layer'
 import { routing } from '@/i18n/routing'
 import {
 	buildRootMetadata,
@@ -82,6 +83,7 @@ export default async function SiteLayout({ children, params }: LayoutProps<'/[lo
 					</main>
 
 					<SiteFooter />
+					<QuoteLayer />
 					<CookieConsent />
 				</Providers>
 			</NextIntlClientProvider>

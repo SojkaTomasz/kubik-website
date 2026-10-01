@@ -37,7 +37,7 @@ export function SiteFooter() {
 	const phone = companyConfig.phone ? phoneLinks(companyConfig.phone) : undefined
 
 	return (
-		<footer className='mt-auto flex flex-col gap-12 overflow-hidden border-t pt-12 pb-10 lg:gap-16 lg:pt-16 lg:pb-14'>
+		<footer className='mt-auto flex flex-col gap-12 overflow-hidden border-t pt-12 pb-28 md:pb-10 lg:gap-16 lg:pt-16 lg:pb-14'>
 			{/*
 				Przewijany pas miast to ozdoba: te same miasta stoją niżej jako lista.
 				Ukryty przed czytnikiem w całości — inaczej usłyszałby je dwa razy
@@ -78,7 +78,7 @@ export function SiteFooter() {
 							href={phone.href}
 							variant='link'
 							size='none'
-							className='self-start font-heading text-[1.75rem] leading-tight font-bold tracking-[-0.02em] text-foreground no-underline hover:text-hot-text md:text-[2.5rem]'
+							className='self-start font-heading text-[1.75rem] leading-tight tracking-[-0.02em] font-extrabold text-foreground no-underline hover:text-hot-text md:text-[2.5rem]'
 						>
 							{phone.display}
 						</Button>
