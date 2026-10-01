@@ -6,6 +6,11 @@ import { cva, type VariantProps } from '@/lib/cva'
 import { cn } from '@/lib/utils'
 import { Separator } from '@/components/ui/separator'
 
+/*
+ * ⚠️ PLIK ZMODYFIKOWANY względem rejestru shadcn: warianty `line` i `rail`,
+ * rozmiar `flush`. `shadcn add --overwrite` to skasuje. Pełna lista: AGENTS.md.
+ */
+
 function ItemGroup({ className, ...props }: React.ComponentProps<'div'>) {
 	return (
 		<div
@@ -39,9 +44,21 @@ const itemVariants = cva(
 				default: 'border-transparent',
 				outline: 'border-border',
 				muted: 'border-transparent bg-muted/50',
+				/**
+				 * Wiersz listy oddzielony linią — skróty na 404, tabela danych
+				 * w polityce. Ostatni wiersz domyka listę linią od dołu. Z `size='flush'`.
+				 */
+				line: 'rounded-none border-0 border-t border-border last:border-b [&_[data-slot=item-title]]:text-body [&_[data-slot=item-title]]:font-semibold [a]:hover:bg-transparent [a]:hover:text-hot-text',
+				/**
+				 * Pozycja spisu treści — pionowa szyna z lewej, czerwienieje pod
+				 * kursorem. Z `size='sm'`.
+				 */
+				rail: 'rounded-none border-0 border-l-2 border-border text-muted-foreground [a]:hover:border-hot [a]:hover:bg-transparent [a]:hover:text-foreground',
 			},
 			size: {
 				default: 'gap-2.5 px-3 py-2.5',
+				/** Bez odstępów bocznych — wiersz równy z krawędzią treści. */
+				flush: 'gap-x-6 gap-y-1 px-0 py-4',
 				sm: 'gap-2.5 px-3 py-2.5',
 				xs: 'gap-2 px-2.5 py-2 in-data-[slot=dropdown-menu-content]:p-0',
 			},

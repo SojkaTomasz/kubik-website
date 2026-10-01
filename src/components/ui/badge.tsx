@@ -7,12 +7,12 @@ import { cn } from '@/lib/utils'
 /*
  * ⚠️ PLIK ZMODYFIKOWANY względem rejestru shadcn.
  * Dodane: warianty statusowe (success, warning, info, outlineDestructive),
- * warianty licznikowe (counter, index) oraz oś `rounded`.
+ * warianty licznikowe (counter, index), etykieta mono (label) oraz oś `rounded`.
  * Pełna lista zmian rejestru: AGENTS.md.
  */
 
 const badgeVariants = cva(
-	'group/badge inline-flex h-5 w-fit shrink-0 items-center justify-center gap-1 overflow-hidden rounded-4xl border border-transparent px-2 py-0.5 text-xs font-medium whitespace-nowrap transition-all focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none [&>svg]:size-3!',
+	'group/badge inline-flex h-5 w-fit shrink-0 items-center justify-center gap-1 overflow-hidden border border-transparent px-2 py-0.5 text-xs font-medium whitespace-nowrap transition-all focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none [&>svg]:size-3!',
 	{
 		variants: {
 			variant: {
@@ -33,9 +33,19 @@ const badgeVariants = cva(
 					'size-5 min-w-5 justify-center bg-primary p-0 text-primary-foreground tabular-nums',
 				/** Numer porządkowy kroku lub pozycji na liście. */
 				index: 'size-6 justify-center bg-muted p-0 text-muted-foreground tabular-nums',
+				/** Etykieta mono — „Zawsze aktywne" przy kategorii cookies. */
+				label: 'h-auto bg-secondary px-1.5 py-[3px] font-mono text-[0.6875rem] leading-3.5 font-normal tracking-[0.08em] text-muted-foreground uppercase',
+				/**
+				 * Tag z gradientem rury — „Rowki" / „Rury" na porównaniu zdjęć,
+				 * miasto nad zdjęciem. Półprzezroczysty, z rozmyciem tła.
+				 */
+				pipe: 'h-auto border-border bg-pipe-glass px-2.5 py-1.5 font-mono text-[0.6875rem] leading-3.5 font-semibold tracking-[0.1em] text-foreground uppercase',
+				/** Tag na zdjęciu w karuzeli realizacji — miasto na ciemnym tle. */
+				photo: 'h-auto bg-background/80 px-2.5 py-1.5 font-mono text-[0.6875rem] leading-3.5 font-semibold tracking-[0.1em] text-foreground uppercase',
 			},
 			rounded: {
-				default: 'rounded-4xl',
+				/* Z tokenu `--badge-radius` (theme/components.css) — w projekcie 0. */
+				default: 'rounded-(--badge-radius)',
 				none: 'rounded-none',
 				md: 'rounded-md',
 				full: 'rounded-full',

@@ -4,11 +4,12 @@ import { useRender } from '@base-ui/react/use-render'
 import { useTranslations } from 'next-intl'
 
 import { cn } from '@/lib/utils'
-import { ChevronRightIcon, MoreHorizontalIcon } from 'lucide-react'
+import { MoreHorizontalIcon } from 'lucide-react'
 
 /*
  * ⚠️ PLIK ZMODYFIKOWANY względem rejestru shadcn: nazwa punktu orientacyjnego i napis
  * dla czytnika ekranu idą przez `messages/*.json`, a nie wpisane po angielsku.
+ * Wygląd Kubika: mono wersalikami, ukośnik w kolorze linii zamiast strzałki.
  * `shadcn add --overwrite` to skasuje. Pełna lista: AGENTS.md.
  */
 
@@ -30,7 +31,8 @@ function BreadcrumbList({ className, ...props }: React.ComponentProps<'ol'>) {
 		<ol
 			data-slot='breadcrumb-list'
 			className={cn(
-				'flex flex-wrap items-center gap-1.5 text-sm wrap-break-word text-muted-foreground',
+				// Ścieżka w kroju mono wersalikami — „REALIZACJE / RZESZÓW".
+				'flex flex-wrap items-center gap-2 font-mono text-xs leading-4 tracking-[0.08em] wrap-break-word text-muted-foreground uppercase',
 				className
 			)}
 			{...props}
@@ -83,10 +85,10 @@ function BreadcrumbSeparator({ children, className, ...props }: React.ComponentP
 			data-slot='breadcrumb-separator'
 			role='presentation'
 			aria-hidden='true'
-			className={cn('[&>svg]:size-3.5', className)}
+			className={cn('text-border [&>svg]:size-3.5', className)}
 			{...props}
 		>
-			{children ?? <ChevronRightIcon />}
+			{children ?? '/'}
 		</li>
 	)
 }

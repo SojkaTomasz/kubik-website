@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl'
 
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
-import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
+import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
 
 /*
  * ⚠️ PLIK ZMODYFIKOWANY względem rejestru shadcn: nazwy przycisków przewijania idą
@@ -188,7 +188,7 @@ function CarouselItem({ className, ...props }: React.ComponentProps<'div'>) {
 function CarouselPrevious({
 	className,
 	variant = 'outline',
-	size = 'icon-sm',
+	size = 'icon-lg',
 	...props
 }: React.ComponentProps<typeof Button>) {
 	const { orientation, scrollPrev, canScrollPrev } = useCarousel()
@@ -200,7 +200,7 @@ function CarouselPrevious({
 			variant={variant}
 			size={size}
 			className={cn(
-				'absolute touch-manipulation rounded-full',
+				'absolute touch-manipulation',
 				orientation === 'horizontal'
 					? 'inset-y-0 -left-12 my-auto'
 					: '-top-12 left-1/2 -translate-x-1/2 rotate-90',
@@ -210,7 +210,7 @@ function CarouselPrevious({
 			onClick={scrollPrev}
 			{...props}
 		>
-			<ChevronLeftIcon />
+			<ArrowLeftIcon />
 			<span className='sr-only'>{t('previousSlide')}</span>
 		</Button>
 	)
@@ -219,7 +219,7 @@ function CarouselPrevious({
 function CarouselNext({
 	className,
 	variant = 'outline',
-	size = 'icon-sm',
+	size = 'icon-lg',
 	...props
 }: React.ComponentProps<typeof Button>) {
 	const { orientation, scrollNext, canScrollNext } = useCarousel()
@@ -231,7 +231,7 @@ function CarouselNext({
 			variant={variant}
 			size={size}
 			className={cn(
-				'absolute touch-manipulation rounded-full',
+				'absolute touch-manipulation',
 				orientation === 'horizontal'
 					? 'inset-y-0 -right-12 my-auto'
 					: '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
@@ -241,7 +241,7 @@ function CarouselNext({
 			onClick={scrollNext}
 			{...props}
 		>
-			<ChevronRightIcon />
+			<ArrowRightIcon />
 			<span className='sr-only'>{t('nextSlide')}</span>
 		</Button>
 	)

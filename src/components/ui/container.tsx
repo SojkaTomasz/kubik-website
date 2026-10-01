@@ -22,8 +22,8 @@ const containerVariants = cva('mx-auto w-full', {
 		},
 		padding: {
 			none: 'px-0',
-			/** Sterowane tokenami `--container-px` / `--container-px-lg`. */
-			default: 'px-(--container-px) lg:px-(--container-px-lg)',
+			/** Sterowane tokenami `--container-px` / `-md` / `-lg` — marginesy z projektu. */
+			default: 'px-(--container-px) md:px-(--container-px-md) lg:px-(--container-px-lg)',
 			tight: 'px-4',
 			wide: 'px-6 lg:px-12',
 		},

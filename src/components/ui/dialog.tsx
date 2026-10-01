@@ -10,7 +10,8 @@ import { XIcon } from 'lucide-react'
 
 /*
  * ⚠️ PLIK ZMODYFIKOWANY względem rejestru shadcn: napisy dla czytnika ekranu idą
- * przez `messages/*.json`, a nie wpisane po angielsku w kod.
+ * przez `messages/*.json`, a nie wpisane po angielsku w kod. Wygląd Kubika:
+ * arkusz od dołu na telefonie, pasek rury, stopka bez tła.
  * `shadcn add --overwrite` to skasuje. Pełna lista: AGENTS.md.
  */
 
@@ -55,7 +56,7 @@ function DialogOverlay({ className, ...props }: DialogPrimitive.Backdrop.Props) 
 		<DialogPrimitive.Backdrop
 			data-slot='dialog-overlay'
 			className={cn(
-				'fixed inset-0 isolate z-50 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0',
+				'fixed inset-0 isolate z-50 bg-overlay duration-100 supports-backdrop-filter:backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0',
 				className
 			)}
 			{...props}
@@ -78,8 +79,13 @@ function DialogContent({
 			<DialogOverlay />
 			<DialogPrimitive.Popup
 				data-slot='dialog-content'
+				/*
+				 * Na telefonie arkusz od dołu na całą szerokość, od `sm` okno na
+				 * środku — jak popup wyceny w Paperze. Pasek rury u góry i cień
+				 * z tokenów; odstępy 20 / 40 / 48 px jak karta `size='lg'`.
+				 */
 				className={cn(
-					'fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-4 rounded-xl bg-popover p-4 text-sm text-popover-foreground ring-1 ring-foreground/10 duration-100 outline-none sm:max-w-sm data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
+					'pipe-bar fixed right-0 bottom-0 left-0 z-50 grid max-h-[92dvh] w-full gap-6 overflow-hidden rounded-(--dialog-radius) bg-popover px-5 pt-8 pb-7 text-sm text-popover-foreground shadow-modal duration-150 outline-none sm:top-1/2 sm:right-auto sm:bottom-auto sm:left-1/2 sm:max-w-lg sm:-translate-x-1/2 sm:-translate-y-1/2 sm:p-10 lg:px-12 lg:pt-11 lg:pb-10 data-open:animate-in data-open:fade-in-0 max-sm:data-open:slide-in-from-bottom-8 sm:data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 sm:data-closed:zoom-out-95',
 					className
 				)}
 				{...props}
@@ -91,8 +97,8 @@ function DialogContent({
 						render={
 							<Button
 								variant='ghost'
-								className='absolute top-2 right-2'
-								size='icon-sm'
+								className='absolute top-4 right-3 text-foreground sm:top-6 sm:right-6'
+								size='icon-lg'
 							/>
 						}
 					>
@@ -109,7 +115,7 @@ function DialogHeader({ className, ...props }: React.ComponentProps<'div'>) {
 	return (
 		<div
 			data-slot='dialog-header'
-			className={cn('flex flex-col gap-2', className)}
+			className={cn('flex flex-col gap-3', className)}
 			{...props}
 		/>
 	)
@@ -128,10 +134,9 @@ function DialogFooter({
 	return (
 		<div
 			data-slot='dialog-footer'
-			className={cn(
-				'-mx-4 -mb-4 flex flex-col-reverse gap-2 rounded-b-xl border-t bg-muted/50 p-4 sm:flex-row sm:justify-end',
-				className
-			)}
+			// Przyciski równej szerokości na całą szerokość okna — w projekcie nie
+			// ma stopki „przyklejonej" do prawej krawędzi.
+			className={cn('grid gap-2.5 sm:auto-cols-fr sm:grid-flow-col', className)}
 			{...props}
 		>
 			{children}
@@ -148,7 +153,8 @@ function DialogTitle({ className, ...props }: DialogPrimitive.Title.Props) {
 	return (
 		<DialogPrimitive.Title
 			data-slot='dialog-title'
-			className={cn('font-heading text-base leading-none font-medium', className)}
+			// `pr-12` — tytuł nie wjeżdża pod krzyżyk w prawym górnym rogu.
+			className={cn('pr-12 font-heading text-display-sm font-extrabold text-balance', className)}
 			{...props}
 		/>
 	)
@@ -159,7 +165,7 @@ function DialogDescription({ className, ...props }: DialogPrimitive.Description.
 		<DialogPrimitive.Description
 			data-slot='dialog-description'
 			className={cn(
-				'text-sm text-muted-foreground *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground',
+				'text-body text-muted-foreground *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground',
 				className
 			)}
 			{...props}
