@@ -56,9 +56,9 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-	name: 'Starter',
+	name: 'Kubik',
 	description:
-		'Kompletny szablon strony WWW: Next.js, shadcn/ui, SEO, Consent Mode v2 i testy end-to-end.',
+		'Frezowane ogrzewanie podłogowe w wylewce, którą już masz. Bez skuwania, bez pyłu, w jeden dzień — w całej Polsce.',
 	url: env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, ''),
 	locales,
 	defaultLocale,

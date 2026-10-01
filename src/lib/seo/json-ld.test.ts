@@ -1,6 +1,21 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import { companyConfig } from '@/company.config'
+
+/*
+ * Konfiguracja firmy podmieniona na makietę z dziurami: prawdziwe dane Kubika są
+ * kompletne, więc mechanizm pomijania pustych pól nie miałby czego pominąć
+ * i testy niżej niczego by nie sprawdzały.
+ */
+vi.mock('@/company.config', () => ({
+	companyConfig: {
+		name: 'Firma testowa',
+		legalName: '',
+		areaServed: ['Polska'],
+		socialProfiles: [],
+		address: { addressCountry: 'PL' },
+	},
+}))
 import {
 	articleJsonLd,
 	breadcrumbJsonLd,
@@ -55,7 +70,7 @@ describe('stabilność identyfikatorów @id', () => {
 
 describe('pomijanie pustych wartości', () => {
 	it('nie emituje kluczy o wartości pustego stringa', () => {
-		// companyConfig.legalName jest w starterze pustym stringiem.
+		// W makiecie konfiguracji `legalName` jest pustym stringiem.
 		expect(companyConfig.legalName).toBe('')
 		expect(asRecord(organizationJsonLd())).not.toHaveProperty('legalName')
 	})
