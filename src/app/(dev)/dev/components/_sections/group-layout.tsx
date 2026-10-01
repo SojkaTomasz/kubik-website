@@ -1,10 +1,15 @@
 import { FileText, Home, MoreHorizontal, Plus, Settings } from 'lucide-react'
 
 import { Sample, Showcase, ShowcaseItem } from '@/app/(dev)/dev/_components/showcase'
+import SAMPLE_IMAGE from '@/assets/samples/landscape.png'
+import { Button } from '@/components/ui/button'
 import { Container, containerVariants } from '@/components/ui/container'
+import { CtaBand } from '@/components/ui/cta-band'
 import { DirectionProvider } from '@/components/ui/direction'
+import { PageHero } from '@/components/ui/page-hero'
 import { Prose } from '@/components/ui/prose'
 import { Section, sectionVariants } from '@/components/ui/section'
+import { SectionHeading, sectionHeadingVariants } from '@/components/ui/section-heading'
 import {
 	Sidebar,
 	SidebarContent,
@@ -32,6 +37,8 @@ import {
 } from '@/components/ui/sidebar'
 import { Typography } from '@/components/ui/typography'
 import { variantKeys } from '@/lib/cva'
+
+const sectionHeadingLayouts = variantKeys(sectionHeadingVariants, 'layout')
 
 /* Listy czytane z komponentów — patrz komentarz w group-actions.tsx. */
 const containerSizes = variantKeys(containerVariants, 'size')
@@ -184,6 +191,68 @@ export function GroupLayout() {
 					`vh`, bo na telefonie pasek adresu chowa się przy przewijaniu i `100vh` daje sekcję
 					wyższą niż widoczny ekran.
 				</Typography>
+			</ShowcaseItem>
+
+			<ShowcaseItem
+				title='SectionHeading'
+				note='etykieta z numerem, tytuł i lead — „as" ustala poziom nagłówka, wygląd zostaje ten sam'
+				className='flex-col items-stretch gap-8'
+			>
+				{sectionHeadingLayouts.map(layout => (
+					<Sample
+						key={layout}
+						label={layout}
+					>
+						<SectionHeading
+							layout={layout}
+							eyebrow='01 · Jak to działa'
+							title='Zamiast skuwać podłogę, wycinamy w niej rowki.'
+							lead='Frezarka z odkurzaczem wycina rowki na grubość rury.'
+						/>
+					</Sample>
+				))}
+				<Sample label='eyebrowTone="cold" z akcją'>
+					<SectionHeading
+						layout='split'
+						eyebrow='02 · Ostatnie realizacje'
+						eyebrowTone='cold'
+						title='Sprawdź, czy robiliśmy już dom podobny do Twojego.'
+						action={<Button variant='outline'>Wszystkie realizacje</Button>}
+					/>
+				</Sample>
+			</ShowcaseItem>
+
+			<ShowcaseItem
+				title='PageHero'
+				note='zdjęcie wchodzi pod pływający nagłówek — na stronie stoi na samej górze'
+				className='flex-col items-stretch'
+			>
+				<PageHero
+					image={SAMPLE_IMAGE}
+					eyebrow='Usługa · cała Polska'
+					title='Frezowanie pod ogrzewanie podłogowe.'
+					lead='Wyfrezujemy rowki w wylewce, którą już masz.'
+					className='mt-0 min-h-0 pt-10 md:min-h-0 lg:mt-0 lg:min-h-0 lg:pt-10'
+				>
+					<Button size='xl'>Darmowa wycena</Button>
+				</PageHero>
+			</ShowcaseItem>
+
+			<ShowcaseItem
+				title='CtaBand'
+				className='flex-col items-stretch'
+			>
+				<CtaBand
+					title='Podaj metraż, a oddzwonimy z ceną.'
+					action={
+						<Button
+							variant='dark'
+							size='xl'
+						>
+							Darmowa wycena
+						</Button>
+					}
+				/>
 			</ShowcaseItem>
 
 			<ShowcaseItem

@@ -64,7 +64,10 @@ export async function NotFoundView({
 
 			<div className='relative flex flex-col gap-6 md:gap-8'>
 				<div className='flex items-center gap-3'>
-					<Separator className='bg-pipe data-horizontal:h-0.5 data-horizontal:w-7 md:data-horizontal:w-10' />
+					<Separator
+						variant='pipe'
+						className='data-horizontal:w-7 md:data-horizontal:w-10'
+					/>
 					<Typography
 						variant='overline'
 						tone='primary'

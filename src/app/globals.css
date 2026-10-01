@@ -51,6 +51,16 @@
 	backdrop-filter: blur(6px);
 }
 
+/* Grubość po rodzicu — przycisk `size="none"` wpleciony w tekst. */
+@utility font-inherit {
+	font-weight: inherit;
+}
+
+/* Rura w poziomie, bez kąta — kreska `Separator variant="pipe"`. */
+@utility bg-pipe-line {
+	background-image: linear-gradient(in oklab 90deg, var(--pipe-hot), var(--pipe-mid), var(--pipe-cold));
+}
+
 /*
  * Sekcje poza pierwszym ekranem nie są układane, dopóki nie zbliżą się do widoku.
  * Bez tego pierwsze malowanie czeka na ułożenie CAŁEJ strony — zmierzone:
@@ -128,6 +138,7 @@
 	--color-cold: var(--cold);
 	--color-cold-foreground: var(--cold-foreground);
 	--color-cold-text: var(--cold-text);
+	--color-pipe-mid-text: var(--pipe-mid-text);
 	--color-overlay: var(--overlay);
 	--color-rating-star: var(--rating-star);
 	/* Podpowiedź w pustym polu (Paper: --color-placeholder). */

@@ -20,6 +20,8 @@ const imageVariants = cva('relative overflow-hidden bg-muted', {
 			video: 'aspect-video',
 			portrait: 'aspect-[3/4]',
 			wide: 'aspect-[21/9]',
+			/** Bez proporcji — ramka wypełnia pozycjonowanego rodzica. Zdjęcie w tle hero. */
+			fill: 'absolute inset-0',
 		},
 		/** Domyślne zaokrąglenie bierze token `--image-radius` z components.css. */
 		rounded: {

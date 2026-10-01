@@ -1,3 +1,4 @@
+import padStart from 'lodash/padStart'
 import type * as React from 'react'
 
 import { Typography } from '@/components/ui/typography'
@@ -18,9 +19,19 @@ const stepsVariants = cva('relative', {
 			responsive:
 				'flex flex-col gap-8 md:grid md:grid-cols-[repeat(var(--steps-count),minmax(0,1fr))] md:gap-6',
 		},
+		appearance: {
+			/** Kółka z numerem połączone rurą — „Jak to działa". */
+			pipe: '',
+			/**
+			 * Kolumny z kreską w kolorze kroku u góry i numerem w etykiecie —
+			 * przebieg realizacji („01 · Punkt wyjścia").
+			 */
+			rule: '',
+		},
 	},
 	defaultVariants: {
 		orientation: 'responsive',
+		appearance: 'pipe',
 	},
 })
 
@@ -41,10 +52,12 @@ export interface StepsProps
  * zmieszane w oklab — tak jak gradient `--pipe-*`. W Paperze ręcznie dobrane
  * odcienie (#e5202e → #b00c2e → #6a2f70 → #2d56c8) leżą właśnie na tej prostej.
  */
-function stepColor(index: number, count: number): string {
+function stepColor(index: number, count: number, role: 'fill' | 'text' = 'fill'): string {
 	const share = count > 1 ? Math.round((index / (count - 1)) * 100) : 0
+	// Napis bierze jaśniejsze odcienie — kolor pełny jako mały tekst nie trzyma WCAG AA.
+	const [from, to] = role === 'text' ? ['--hot-text', '--cold-text'] : ['--hot', '--cold']
 
-	return `color-mix(in oklab, var(--hot), var(--cold) ${share}%)`
+	return `color-mix(in oklab, var(${from}), var(${to}) ${share}%)`
 }
 
 /**
@@ -58,6 +71,7 @@ export function Steps({
 	className,
 	items,
 	orientation = 'responsive',
+	appearance = 'pipe',
 	headingAs = 'h3',
 	style,
 	...props
@@ -68,12 +82,38 @@ export function Steps({
 		<ol
 			data-slot='steps'
 			data-orientation={orientation}
-			className={cn(stepsVariants({ orientation }), className)}
+			data-appearance={appearance}
+			className={cn(stepsVariants({ orientation, appearance }), className)}
 			style={{ '--steps-count': items.length, ...style } as React.CSSProperties}
 			{...props}
 		>
 			{items.map((item, index) => {
 				const isLast = index === items.length - 1
+
+				if (appearance === 'rule') {
+					return (
+						<li
+							key={item.title}
+							data-slot='steps-item'
+							className='flex flex-col gap-3 border-t-2 border-(--step-color) pt-5'
+							style={
+								{
+									'--step-color': stepColor(index, items.length),
+									'--step-text': stepColor(index, items.length, 'text'),
+								} as React.CSSProperties
+							}
+						>
+							<Typography
+								as={headingAs}
+								variant='overline'
+								className='font-semibold text-(--step-text)'
+							>
+								{padStart(String(index + 1), 2, '0')} <span aria-hidden>·</span> {item.title}
+							</Typography>
+							<Typography variant='body'>{item.description}</Typography>
+						</li>
+					)
+				}
 
 				return (
 					<li

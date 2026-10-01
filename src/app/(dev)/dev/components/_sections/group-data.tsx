@@ -34,6 +34,7 @@ import {
 	CarouselPrevious,
 } from '@/components/ui/carousel'
 import { CarouselDots } from '@/components/ui/carousel-dots'
+import { CarouselProgress } from '@/components/ui/carousel-progress'
 import {
 	type ChartConfig,
 	ChartContainer,
@@ -58,6 +59,7 @@ import {
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
+import { separatorVariants } from '@/components/ui/separator.variants'
 import {
 	Table,
 	TableBody,
@@ -70,6 +72,8 @@ import {
 } from '@/components/ui/table'
 import { Typography } from '@/components/ui/typography'
 import { variantKeys } from '@/lib/cva'
+
+const separatorVariantNames = variantKeys(separatorVariants, 'variant')
 
 /* Listy czytane z komponentów — patrz komentarz w group-actions.tsx. */
 const cardVariantList = variantKeys(cardVariants, 'variant')
@@ -375,9 +379,18 @@ export function GroupData() {
 				title='Separator'
 				className='flex-col items-stretch gap-3'
 			>
-				<Typography variant='bodySm'>Treść nad separatorem</Typography>
-				<Separator />
-				<Typography variant='bodySm'>Treść pod separatorem</Typography>
+				{separatorVariantNames.map(variant => (
+					<Sample
+						key={variant}
+						label={variant}
+					>
+						<div className='flex flex-col gap-3'>
+							<Typography variant='bodySm'>Treść nad separatorem</Typography>
+							<Separator variant={variant} />
+							<Typography variant='bodySm'>Treść pod separatorem</Typography>
+						</div>
+					</Sample>
+				))}
 			</ShowcaseItem>
 
 			<ShowcaseItem
@@ -544,6 +557,11 @@ export function GroupData() {
 					{/* `CarouselDots` czyta liczbę PRZYSTANKÓW z kontekstu: pięć kart
 						po dwie naraz daje mniej kropek niż slajdów. */}
 					<CarouselDots className='pt-4' />
+					{/* Licznik z paskiem — wersja Kubika: czyta pozycję z tego samego kontekstu. */}
+					<CarouselProgress
+						total={5}
+						className='pt-4'
+					/>
 				</Carousel>
 			</ShowcaseItem>
 

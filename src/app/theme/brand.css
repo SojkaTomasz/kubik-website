@@ -46,6 +46,8 @@
 	--pipe-hot: oklab(51.1% 0.161 0.085);
 	--pipe-mid: oklab(44.5% 0.109 -0.044);
 	--pipe-cold: oklab(46.4% -0.035 -0.168);
+	/* Środek rury jako TEKST (numer drugiego kroku) — jaśniejszy fiolet, 7,6:1 na tle. */
+	--pipe-mid-text: #c584d0;
 
 	/*
 	 * Kolory statusowe. Każdy ma CZWÓRKĘ, nie trójkę:

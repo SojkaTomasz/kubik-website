@@ -47,6 +47,10 @@ describe('cn', () => {
 		)
 	})
 
+	it('grubość podana w widoku wygrywa z dziedziczoną z przycisku size=none', () => {
+		expect(cn('font-inherit', 'font-extrabold')).toBe('font-extrabold')
+	})
+
 	it('nie miesza klas z różnych grup', () => {
 		expect(cn('px-2', 'py-4')).toBe('px-2 py-4')
 	})

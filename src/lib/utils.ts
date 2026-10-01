@@ -9,11 +9,16 @@ import { extendTailwindMerge } from 'tailwind-merge'
  * `text-primary-foreground` z wariantu, a audyt kontrastu łapał 4,06:1.
  *
  * Każdy nowy token `--text-*` dopisz tutaj.
+ *
+ * `font-inherit` (globals.css) to grubość dziedziczona po rodzicu — rozmiar `none`
+ * przycisku. Jako znana grubość ustępuje `font-bold` podanemu w widoku; zapisana
+ * jako `[font-weight:inherit]` wygrywała z nim kolejnością w arkuszu.
  */
 const twMerge = extendTailwindMerge({
 	extend: {
 		classGroups: {
 			'font-size': [{ text: ['body', 'display-xl', 'display-lg', 'display-md', 'display-sm'] }],
+			'font-weight': ['font-inherit'],
 		},
 	},
 })

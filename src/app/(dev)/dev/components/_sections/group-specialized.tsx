@@ -182,6 +182,12 @@ export function GroupSpecialized() {
 						items={STEPS_SAMPLE}
 					/>
 				</Sample>
+				<Sample label='appearance="rule" — przebieg realizacji'>
+					<Steps
+						appearance='rule'
+						items={STEPS_SAMPLE.slice(0, 3)}
+					/>
+				</Sample>
 			</ShowcaseItem>
 
 			<ShowcaseItem
