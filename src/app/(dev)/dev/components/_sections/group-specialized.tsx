@@ -234,7 +234,7 @@ export function GroupSpecialized() {
 							key={city}
 							as='span'
 							variant='displayMd'
-							className='text-border'
+							tone='muted'
 						>
 							{city}
 						</Typography>

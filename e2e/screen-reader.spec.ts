@@ -94,23 +94,6 @@ test.describe('nazwy dostępne', () => {
 		await expect(date).not.toHaveText(/^\s*\d{4}-\d{2}-\d{2}\s*$/)
 	})
 
-	test('przełącznik motywu ogłasza, co jest ustawione', async ({ page }) => {
-		await page.goto('/')
-
-		await page.getByRole('button', { name: 'Zmień motyw' }).click()
-
-		// `menuitemradio` niesie stan zaznaczenia. Zwykłe `menuitem` wygląda tak
-		// samo i działa tak samo, ale nie mówi, który motyw jest wybrany.
-		await expect(page.getByRole('menuitemradio', { name: 'Systemowy' })).toHaveAttribute(
-			'aria-checked',
-			'true'
-		)
-		await expect(page.getByRole('menuitemradio', { name: 'Ciemny' })).toHaveAttribute(
-			'aria-checked',
-			'false'
-		)
-	})
-
 	test('przełącznik języka ogłasza język bieżący', async ({ page }) => {
 		await page.goto('/')
 

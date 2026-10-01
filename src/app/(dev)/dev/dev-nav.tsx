@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 import { devPages } from '@/app/(dev)/dev/dev-pages'
-import { ThemeToggle } from '@/components/theme-toggle'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Container } from '@/components/ui/container'
@@ -45,7 +44,6 @@ export function DevNav() {
 					))}
 				</nav>
 
-				<ThemeToggle />
 				<Button
 					href='/'
 					variant='ghost'

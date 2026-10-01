@@ -37,13 +37,6 @@
 		"lead": "A complete template: shadcn/ui, SEO, Consent Mode v2, i18n and end-to-end tests.",
 		"cta": "Browse components"
 	},
-	"theme": {
-		"label": "Change theme",
-		"light": "Light",
-		"dark": "Dark",
-		"system": "System",
-		"group": "Site theme"
-	},
 	"language": {
 		"label": "Change language",
 		"pl": "Polish",

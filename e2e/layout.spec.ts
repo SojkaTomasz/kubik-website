@@ -19,14 +19,12 @@ test.describe('szkielet na każdej podstronie', () => {
 		})
 	}
 
-	test('przełączniki motywu i języka są na podstronie, nie tylko na stronie głównej', async ({
-		page,
-	}) => {
-		// Wcześniej stały wklejone w stronę główną, więc użytkownik, który wszedł
-		// wprost na /kontakt, nie mógł zmienić ani języka, ani motywu.
+	test('przełącznik języka jest na podstronie, nie tylko na stronie głównej', async ({ page }) => {
+		// Wcześniej stał wklejony w stronę główną, więc użytkownik, który wszedł
+		// wprost na /kontakt, nie mógł zmienić języka. Przełącznika motywu nie ma:
+		// strona jest wyłącznie ciemna.
 		await page.goto('/kontakt')
 
-		await expect(page.getByRole('button', { name: 'Zmień motyw' })).toBeVisible()
 		await expect(page.getByRole('button', { name: 'Zmień język' })).toBeVisible()
 	})
 

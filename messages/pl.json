@@ -37,13 +37,6 @@
 		"lead": "Kompletny szablon: shadcn/ui, SEO, Consent Mode v2, i18n i testy end-to-end.",
 		"cta": "Zobacz komponenty"
 	},
-	"theme": {
-		"label": "Zmień motyw",
-		"light": "Jasny",
-		"dark": "Ciemny",
-		"system": "Systemowy",
-		"group": "Motyw strony"
-	},
 	"language": {
 		"label": "Zmień język",
 		"pl": "Polski",

@@ -68,7 +68,7 @@ const statusColors = [
 	{
 		label: 'Błąd',
 		solid: 'bg-destructive',
-		solidText: 'text-white',
+		solidText: 'text-destructive-foreground',
 		soft: 'bg-destructive/10',
 		softText: 'text-destructive',
 	},

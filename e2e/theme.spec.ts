@@ -61,57 +61,6 @@ test.describe('skrypt startowy', () => {
 	})
 })
 
-test.describe('przełącznik', () => {
-	test('zmienia motyw', async ({ page }) => {
-		await page.goto('/')
-
-		await page.getByRole('button', { name: 'Zmień motyw' }).click()
-		await page.getByRole('menuitemradio', { name: 'Ciemny' }).click()
-
-		await expect(page.locator('html')).toHaveClass(/dark/)
-	})
-
-	test('wraca do jasnego', async ({ page }) => {
-		await page.goto('/')
-
-		await page.getByRole('button', { name: 'Zmień motyw' }).click()
-		await page.getByRole('menuitemradio', { name: 'Ciemny' }).click()
-
-		// Czekamy, aż menu faktycznie się zamknie. Wybór motywu przerysowuje grupę
-		// (dochodzi znacznik zaznaczenia), więc drugie otwarcie w trakcie animacji
-		// zamykania trafiało w element odczepiany właśnie od drzewa.
-		await expect(page.getByRole('menu')).toBeHidden()
-
-		await page.getByRole('button', { name: 'Zmień motyw' }).click()
-		await page.getByRole('menuitemradio', { name: 'Jasny' }).click()
-
-		await expect(page.locator('html')).not.toHaveClass(/dark/)
-	})
-
-	test('wybór przeżywa przeładowanie', async ({ page }) => {
-		await page.goto('/')
-
-		await page.getByRole('button', { name: 'Zmień motyw' }).click()
-		await page.getByRole('menuitemradio', { name: 'Ciemny' }).click()
-		await page.reload()
-
-		await expect(page.locator('html')).toHaveClass(/dark/)
-	})
-
-	test('faktycznie zmienia wygląd strony, nie samą klasę', async ({ page }) => {
-		await page.goto('/')
-		const jasne = await page.evaluate(() => getComputedStyle(document.body).backgroundColor)
-
-		await page.getByRole('button', { name: 'Zmień motyw' }).click()
-		await page.getByRole('menuitemradio', { name: 'Ciemny' }).click()
-		const ciemne = await page.evaluate(() => getComputedStyle(document.body).backgroundColor)
-
-		// Klasa bez efektu wizualnego oznaczałaby, że tokeny nie są spięte
-		// z wariantem `dark` — a to widać dopiero okiem albo tutaj.
-		expect(jasne).not.toBe(ciemne)
-	})
-})
-
 test.describe('preferencja systemu', () => {
 	test('domyślnie idzie za ustawieniem systemu', async ({ page }) => {
 		await page.emulateMedia({ colorScheme: 'dark' })

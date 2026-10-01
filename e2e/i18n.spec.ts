@@ -146,19 +146,9 @@ test.describe('linki świadome języka', () => {
  * nagłówek i lead są przetłumaczone — polskie zostają przełącznik i baner.
  */
 test.describe('interfejs poza treścią jest przetłumaczony', () => {
-	test('menu motywu mówi po angielsku', async ({ page }) => {
-		await page.goto('/en')
-
-		await page.getByRole('button', { name: 'Change theme' }).click()
-
-		for (const label of ['Light', 'Dark', 'System']) {
-			await expect(page.getByRole('menuitemradio', { name: label })).toBeVisible()
-		}
-	})
-
 	/*
 	 * Baner jest modalem blokującym, więc fixtures domyślnie zaziarnia zapisaną
-	 * zgodę — inaczej test przełącznika motywu wyżej nie doklikałby się do menu.
+	 * zgodę — inaczej modal przykryłby stronę i testy niżej niczego by nie kliknęły.
 	 * Tutaj zaziarnienie wyłączamy, bo to właśnie baner oglądamy.
 	 */
 	test.describe('warstwa zgód', () => {

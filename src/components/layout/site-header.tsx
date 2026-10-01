@@ -2,7 +2,6 @@ import { useTranslations } from 'next-intl'
 
 import { LanguageSwitcher } from '@/components/language-switcher'
 import { NavLink } from '@/components/layout/nav-link'
-import { ThemeToggle } from '@/components/theme-toggle'
 import { Container } from '@/components/ui/container'
 import { Link } from '@/i18n/navigation'
 import { siteConfig } from '@/site.config'
@@ -63,7 +62,6 @@ export function SiteHeader() {
 							</ul>
 						</nav>
 
-						<ThemeToggle />
 						<LanguageSwitcher />
 					</div>
 				</div>

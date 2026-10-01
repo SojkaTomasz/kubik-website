@@ -42,7 +42,7 @@ const buttonVariants = cva(
 				 */
 				ghost: 'text-muted-foreground hover:bg-foreground/8 hover:text-foreground aria-expanded:bg-foreground/8 aria-expanded:text-foreground aria-[current]:bg-foreground/8 aria-[current]:text-foreground',
 				destructive:
-					'bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40',
+					'bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40',
 				/* Podkreślony tekst — „Polityka prywatności" w treści, „Nie teraz". */
 				link: 'text-muted-foreground underline decoration-1 underline-offset-4 hover:text-foreground',
 			},

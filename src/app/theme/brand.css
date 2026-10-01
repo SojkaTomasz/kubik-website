@@ -73,9 +73,13 @@
 	--info-soft: oklch(0.28 0.05 254);
 	--info-soft-foreground: oklch(0.87 0.09 254);
 
-	/* Błąd: tekst #ff6b74 z Papera (--color-error-text), 6,69:1 na tle. */
-	--destructive: #e5202e;
-	--destructive-foreground: #ffffff;
+	/*
+	 * Błąd: #ff6b74 z Papera (--color-error-text), 6,69:1 na tle. Kolor pełny
+	 * jest JASNY, nie czerwień marki: komponenty rejestru (Alert, Button
+	 * i Badge w wariancie destructive) piszą nim tekst na ciemnym podkładzie.
+	 */
+	--destructive: #ff6b74;
+	--destructive-foreground: #111418;
 	--destructive-soft: oklch(0.28 0.08 27);
 	--destructive-soft-foreground: #ff6b74;
 }

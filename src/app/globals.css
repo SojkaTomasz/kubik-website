@@ -19,7 +19,13 @@
 @import './theme/motion.css';
 @import './theme/consent.css';
 
-@custom-variant dark (&:is(.dark *));
+/*
+ * Strona jest WYŁĄCZNIE ciemna (theme/brand.css), więc wariant `dark:` działa
+ * zawsze, niezależnie od klasy na `<html>`. Komponenty rejestru niosą osobne
+ * style `dark:` — bez tego przy jasnym ustawieniu systemu dostawałyby jasne tła
+ * pod jasnym tekstem (zmierzone: dymek `tinted` #ffd1c9 pod tekstem #f2f1ee).
+ */
+@custom-variant dark (&);
 
 /*
  * Gradient rury na powierzchni — pas CTA „Podaj metraż…" (`bg-pipe`) i tagi na
