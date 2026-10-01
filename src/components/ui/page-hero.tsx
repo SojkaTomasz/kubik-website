@@ -104,7 +104,7 @@ export function PageHero({
 			/>
 
 			<Container className='flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between lg:gap-16'>
-				<div className='flex max-w-[51.25rem] flex-col gap-5 md:gap-7'>
+				<div className='flex max-w-[57.25rem] flex-col gap-5 md:gap-7'>
 					{breadcrumbs}
 					{eyebrowInTitle ? (
 						<TitleTag className='flex flex-col gap-5 md:gap-7'>

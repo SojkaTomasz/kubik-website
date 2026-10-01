@@ -31,6 +31,7 @@ export function FaqSection({ eyebrow, title, items }: FaqSectionProps) {
 		<Section
 			deferLayout
 			aria-labelledby='faq-title'
+			background='card'
 		>
 			<JsonLd data={faqJsonLd(items)} />
 
