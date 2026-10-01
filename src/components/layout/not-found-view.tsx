@@ -8,6 +8,7 @@ import { Section } from '@/components/ui/section'
 import { Separator } from '@/components/ui/separator'
 import { Typography } from '@/components/ui/typography'
 import { Link } from '@/i18n/navigation'
+import { phoneLinks } from '@/lib/phone'
 import type { Locale } from '@/site.config'
 
 /**
@@ -31,14 +32,6 @@ const SHORTCUTS = [
 	{ href: '/blog', key: 'browseBlog' },
 ] as const
 
-/** „+48 507 125 794" → do wyświetlenia bez kierunkowego, do `tel:` bez spacji. */
-function phoneNumbers(phone: string) {
-	return {
-		display: phone.replace(/^\+48\s*/, ''),
-		href: `tel:${phone.replace(/\s/g, '')}`,
-	}
-}
-
 export async function NotFoundView({
 	/**
 	 * Język komunikatów. Podawany jawnie tylko przez `global-not-found.tsx`,
@@ -51,7 +44,7 @@ export async function NotFoundView({
 	const t = locale
 		? await getTranslations({ locale, namespace: 'notFound' })
 		: await getTranslations('notFound')
-	const phone = companyConfig.phone ? phoneNumbers(companyConfig.phone) : undefined
+	const phone = companyConfig.phone ? phoneLinks(companyConfig.phone) : undefined
 
 	return (
 		<Section

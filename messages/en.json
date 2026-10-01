@@ -6,7 +6,12 @@
 		"skipToContent": "Skip to content",
 		"menu": "Menu",
 		"blog": "Blog",
-		"currentPage": "current page"
+		"currentPage": "current page",
+		"quote": "Free quote",
+		"quoteShort": "Quote",
+		"call": "Call",
+		"phoneLabel": "Phone · 24/7",
+		"openMenu": "Open menu"
 	},
 	"a11y": {
 		"close": "Close",
@@ -189,8 +194,10 @@
 		"errorSummaryIntro": "Fix the listed fields and submit again."
 	},
 	"footer": {
-		"rights": "All rights reserved.",
-		"madeWith": "Built on the Next.js starter"
+		"tagline": "Lesser Poland · we work all over Poland",
+		"pagesTitle": "Site",
+		"citiesTitle": "Cities",
+		"homeLabel": "{name} — home page"
 	},
 	"blog": {
 		"title": "Blog",
@@ -204,5 +211,9 @@
 		"postsLabel": "List of posts",
 		"tagsLabel": "Post tags",
 		"metaLabel": "Post details"
+	},
+	"rating": {
+		"short": "{count}+ reviews",
+		"long": "{count}+ Google reviews"
 	}
 }

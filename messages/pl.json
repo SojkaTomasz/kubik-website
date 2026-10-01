@@ -6,7 +6,12 @@
 		"skipToContent": "Przejdź do treści",
 		"menu": "Menu",
 		"blog": "Blog",
-		"currentPage": "bieżąca strona"
+		"currentPage": "bieżąca strona",
+		"quote": "Darmowa wycena",
+		"quoteShort": "Wycena",
+		"call": "Zadzwoń",
+		"phoneLabel": "Telefon · całą dobę",
+		"openMenu": "Otwórz menu"
 	},
 	"a11y": {
 		"close": "Zamknij",
@@ -189,8 +194,10 @@
 		"errorSummaryIntro": "Popraw wymienione pola i wyślij ponownie."
 	},
 	"footer": {
-		"rights": "Wszelkie prawa zastrzeżone.",
-		"madeWith": "Zbudowane na starterze Next.js"
+		"tagline": "Małopolska · pracujemy w całej Polsce",
+		"pagesTitle": "Strona",
+		"citiesTitle": "Miasta",
+		"homeLabel": "{name} — strona główna"
 	},
 	"blog": {
 		"title": "Blog",
@@ -204,5 +211,9 @@
 		"postsLabel": "Lista wpisów",
 		"tagsLabel": "Tagi wpisu",
 		"metaLabel": "Informacje o wpisie"
+	},
+	"rating": {
+		"short": "{count}+ opinii",
+		"long": "{count}+ opinii w Google"
 	}
 }

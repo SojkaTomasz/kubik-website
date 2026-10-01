@@ -37,6 +37,13 @@ export interface CompanyConfig {
 	socialProfiles?: string[]
 	/** Godziny otwarcia w formacie schema.org, np. 'Mo-Fr 09:00-17:00'. */
 	openingHours?: string[]
+	/**
+	 * Ocena z JEDNEGO źródła (wizytówka Google) — nagłówek, hero i opinie czytają
+	 * stąd, więc liczba opinii nie rozjedzie się między podstronami.
+	 */
+	rating?: { value: number; count: number }
+	/** Miasta pokazywane w stopce i w przewijanym pasie — najczęstsze kierunki. */
+	serviceCities?: string[]
 }
 
 /**
@@ -68,4 +75,20 @@ export const companyConfig: CompanyConfig = {
 	],
 	// Czynne całą dobę — tak podaje wizytówka Google.
 	openingHours: ['Mo-Su 00:00-23:59'],
+	// Stan wizytówki Google z 28.09.2026: 5,0 z 70 opinii.
+	rating: { value: 5, count: 70 },
+	serviceCities: [
+		'Warszawa',
+		'Kraków',
+		'Wrocław',
+		'Łódź',
+		'Katowice',
+		'Gdańsk',
+		'Rzeszów',
+		'Kielce',
+		'Lublin',
+		'Opole',
+		'Toruń',
+		'Kalisz',
+	],
 }

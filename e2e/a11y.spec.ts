@@ -37,6 +37,17 @@ const KNOWN_LIMITATIONS = [
 	},
 ] as const
 
+/**
+ * Tekst CZYSTO DEKORACYJNY — wyjęty z audytu kontrastu. WCAG 1.4.3 zwalnia go
+ * z wymogu wprost („pure decoration"), ale axe tego nie rozpozna: sprawdza
+ * kontrast także pod `aria-hidden`.
+ *
+ * Tylko przewijany pas miast w stopce, i tylko w wersji ukrytej przed
+ * czytnikiem — te same miasta stoją pod nim jako czytelna lista. Pas bez
+ * `aria-hidden` wróciłby do audytu, i słusznie.
+ */
+const DECORATIVE = '[data-slot="marquee"][aria-hidden="true"]'
+
 /** Odsiewa naruszenia objęte listą znanych ograniczeń. */
 function withoutKnownLimitations<T extends { id: string; nodes: { html: string }[] }>(
 	violations: T[]
@@ -66,7 +77,10 @@ for (const [path, label] of PAGES) {
 	test(`${label} nie ma poważnych barier dostępności`, async ({ page }) => {
 		await page.goto(path)
 
-		const result = await new AxeBuilder({ page }).withTags(STANDARDS).analyze()
+		const result = await new AxeBuilder({ page })
+			.exclude(DECORATIVE)
+			.withTags(STANDARDS)
+			.analyze()
 
 		const blocking = withoutKnownLimitations(
 			result.violations.filter(v => v.impact === 'critical' || v.impact === 'serious')
@@ -105,7 +119,10 @@ test.describe('baner zgody', () => {
 		await page.goto('/')
 		await expect(page.getByRole('dialog', { name: 'Zgoda na pliki cookie' })).toBeFocused()
 
-		const result = await new AxeBuilder({ page }).withTags(STANDARDS).analyze()
+		const result = await new AxeBuilder({ page })
+			.exclude(DECORATIVE)
+			.withTags(STANDARDS)
+			.analyze()
 
 		const blocking = withoutKnownLimitations(
 			result.violations.filter(v => v.impact === 'critical' || v.impact === 'serious')
