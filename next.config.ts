@@ -1,4 +1,3 @@
-import { withContentCollections } from '@content-collections/next'
 import createNextIntlPlugin from 'next-intl/plugin'
 import type { NextConfig } from 'next'
 
@@ -40,7 +39,7 @@ const isDevelopment = process.env.NODE_ENV === 'development'
  * przypisania bez polityki opakowującej każdą z nich. Włączenie tego wywraca
  * stronę całkowicie, a nie po cichu.
  */
-function contentSecurityPolicy(): string {
+function contentSecurityPolicy(frameAncestors = "'none'"): string {
 	const directives: Record<string, string[]> = {
 		'default-src': ["'self'"],
 
@@ -94,7 +93,7 @@ function contentSecurityPolicy(): string {
 		// Nikt nie osadzi tej strony w ramce — ochrona przed clickjackingiem.
 		// Nowocześniejszy odpowiednik `X-Frame-Options`, który zostaje obok
 		// wyłącznie dla starszych przeglądarek.
-		'frame-ancestors': ["'none'"],
+		'frame-ancestors': [frameAncestors],
 	}
 
 	if (isDevelopment) {
@@ -194,7 +193,23 @@ const nextConfig: NextConfig = {
 	 * największe znaczenie właśnie przy plikach serwowanych bezpośrednio.
 	 */
 	async headers() {
-		return [{ source: '/:path*', headers: securityHeaders }]
+		return [
+			{ source: '/:path*', headers: securityHeaders },
+			/*
+			 * Wyjątek: podgląd osadzenia z `/dev` MA być osadzany — przez własną
+			 * domenę i nikogo więcej. Przy dopasowaniu kilku wpisów wygrywa
+			 * ostatni, więc te dwa klucze nadpisują `DENY` / `'none'` z wpisu wyżej.
+			 * Bez tego ramka na `/dev/components` zostawała pusta, a przeglądarka
+			 * mówiła o tym wyłącznie w konsoli.
+			 */
+			{
+				source: '/embed-preview.html',
+				headers: [
+					{ key: 'Content-Security-Policy', value: contentSecurityPolicy("'self'") },
+					{ key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+				],
+			},
+		]
 	},
 
 	images: {
@@ -238,10 +253,4 @@ const nextConfig: NextConfig = {
 	 */
 }
 
-/*
- * Kolejność ma znaczenie: content-collections buduje warstwę treści ZANIM
- * Next zacznie kompilować, bo strony bloga importują wygenerowany moduł.
- * Wtyczka nie dotyka konfiguracji bundlera — tylko uruchamia builder i oddaje
- * `nextConfig` bez zmian, więc działa tak samo pod Turbopackiem.
- */
-export default withContentCollections(withNextIntl(nextConfig))
+export default withNextIntl(nextConfig)
