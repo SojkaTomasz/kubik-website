@@ -8,7 +8,7 @@
 	/* Kontener — używany przez <Container>. */
 	/* Treść 1280 px przy marginesach z Papera: 20 / 40 / 80 px (mobile / tablet / desktop).
 	   Maksimum LICZY SIĘ z marginesem, stąd 1280 + 2 × 80 = 1440. */
-	--container-max-w: 90rem;
+	--container-max-w: 96rem;
 	--container-px: 1.25rem;
 	--container-px-md: 2.5rem;
 	--container-px-lg: 5rem;

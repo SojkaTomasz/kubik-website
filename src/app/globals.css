@@ -151,6 +151,7 @@
 	--shadow-modal: var(--shadow-modal-value);
 
 	/* Rampa marki — dostępna jako bg-brand-500, text-brand-700, border-brand-200… */
+	--color-brand-30: var(--brand-30);
 	--color-brand-50: var(--brand-50);
 	--color-brand-100: var(--brand-100);
 	--color-brand-200: var(--brand-200);

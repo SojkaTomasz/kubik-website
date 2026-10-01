@@ -9,6 +9,7 @@
  */
 
 :root {
+	--brand-30: #0c0e11;
 	--brand-50: #111418; /* tło strony            Paper: --color-bg */
 	--brand-100: #1a1f25; /* karty, okna            Paper: --color-surface */
 	--brand-200: #2a3038; /* linie, podziały        Paper: --color-line */
