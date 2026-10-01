@@ -130,6 +130,27 @@ test.describe('przełącznik języka', () => {
 		await expect(page.locator('html')).toHaveAttribute('lang', 'en')
 	})
 
+	test('po zmianie języka strona dalej reaguje na kliknięcia', async ({ page }) => {
+		/*
+		 * Zmiana języka montuje `<html>` od nowa z klasami z serwera, a skrypty
+		 * startowe drugi raz się nie wykonują. Bez `DocumentStateSync` wracało
+		 * `consent-pending`, baner zakładał `inert` na całą stronę i żaden
+		 * przycisk nie działał do odświeżenia. Objaw widać wyłącznie po
+		 * nawigacji klienckiej — wejście wprost na /en jest w porządku.
+		 */
+		await page.goto('/')
+
+		await page.getByRole('button', { name: /Zmień język/i }).click()
+		await page.getByRole('menuitemradio', { name: 'Angielski' }).click()
+		await expect(page.locator('html')).toHaveAttribute('lang', 'en')
+
+		await expect(page.locator('html')).not.toHaveClass(/consent-pending|no-js/)
+		await expect(page.locator('body > main')).not.toHaveAttribute('inert')
+
+		await page.getByRole('button', { name: /Change language/i }).click()
+		await expect(page.getByRole('menuitemradio', { name: 'Polish' })).toBeVisible()
+	})
+
 	test('działa też w drugą stronę', async ({ page }) => {
 		await page.goto('/en')
 

@@ -745,6 +745,15 @@ Trzy pierwsze zdejmują albo zakładają klasę na `<html>`, a nie odwrotnie —
 serwera OD RAZU i znika dopiero, gdy skrypt się wykona. Kierunek jest za każdym razem taki, żeby
 AWARIA skryptu zostawiała stan bezpieczny: treść widoczną, pytanie o zgodę zadane.
 
+**Skrypty wykonują się raz — a `<html>` potrafi zamontować się drugi raz.** Zmiana języka zmienia
+parametr root layoutu, więc React montuje dokument od nowa z klasami prosto z serwera: `no-js` i
+`consent-pending` wracają, a skrypty już nie ruszą. Baner zgód uznawał wtedy decyzję za niepodjętą i
+zakładał `inert` na całą stronę — żaden przycisk nie działał do odświeżenia.
+`components/layout/document-state-sync.tsx` powtarza te same funkcje (`applyThemeOnLoad`,
+`clearConsentPending`) w `useLayoutEffect` przy każdym zamontowaniu dokumentu. Nowy skrypt startowy,
+który zmienia stan `<html>`, dopisz TAM TEŻ. Pilnuje tego test „po zmianie języka strona dalej
+reaguje na kliknięcia" w `e2e/i18n.spec.ts`.
+
 Ani zwykły `<script>`, ani `next/script` ze strategią `beforeInteractive` się tu nie nadają: oba
 trafiają do drzewa Reacta, a React ostrzega przy każdym renderze klienta („Encountered a script tag
 while rendering React component"). `InlineScript` oddaje skrypt jako `text/javascript` na serwerze i

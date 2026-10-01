@@ -17,10 +17,13 @@ export const CONSENT_PENDING_CLASS = 'consent-pending'
  * Zdejmuje `consent-pending`, gdy zapisana zgoda jest ważna. Musi wykonać się
  * synchronicznie w `<head>`, inaczej baner mignie powracającemu użytkownikowi.
  *
+ * Ta sama funkcja wykonuje się ponownie z `DocumentStateSync`, gdy React
+ * zamontuje `<html>` od nowa (zmiana języka) — wtedy skrypt już nie ruszy.
+ *
  * Warunki ważności są POWTÓRZONE z `readStoredConsent` — skrypt nie ma jak
  * zaimportować modułu. Rozjazd łamie się cicho, pilnuje go `consent.test.ts`.
  */
-function clearConsentPending(storageKey: string, version: number, className: string) {
+export function clearConsentPending(storageKey: string, version: number, className: string) {
 	try {
 		const raw = window.localStorage.getItem(storageKey)
 		if (!raw) return

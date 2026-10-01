@@ -1,6 +1,7 @@
 import type * as React from 'react'
 
 import { preloadedFonts } from '@/app/fonts'
+import { DocumentStateSync } from '@/components/layout/document-state-sync'
 import { InlineScript } from '@/components/layout/inline-script'
 import { CONSENT_PENDING_CLASS, consentPendingScript } from '@/lib/analytics/consent'
 import { GoogleTagManager, GoogleTagManagerNoScript } from '@/lib/analytics/gtm'
@@ -61,6 +62,8 @@ export function DocumentShell({
 			</head>
 			<body className='flex min-h-full flex-col'>
 				<GoogleTagManagerNoScript />
+				{/* Przed `children` — jego efekt musi wyprzedzić efekt banera zgód. */}
+				<DocumentStateSync />
 				{children}
 			</body>
 		</html>

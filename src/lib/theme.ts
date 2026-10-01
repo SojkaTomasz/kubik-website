@@ -17,7 +17,7 @@ export const DEFAULT_THEME: Theme = 'system'
  * błysk białego tła. Zapisany jako funkcja dla typów, do HTML-a idzie
  * przez `.toString()`.
  */
-function applyThemeOnLoad(storageKey: string, defaultTheme: string) {
+export function applyThemeOnLoad(storageKey: string, defaultTheme: string) {
 	try {
 		const stored = window.localStorage.getItem(storageKey) ?? defaultTheme
 		const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
