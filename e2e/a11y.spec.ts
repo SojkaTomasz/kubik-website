@@ -11,7 +11,12 @@ import { expect, test } from './fixtures'
 /** Strony, które muszą przejść audyt. */
 const PAGES = [
 	['/', 'strona główna'],
-	['/en', 'strona główna po angielsku'],
+	['/frezowanie-pod-ogrzewanie-podlogowe', 'usługa'],
+	['/frezowanie-pod-ogrzewanie-podlogowe/krakow', 'strona miasta'],
+	['/realizacje', 'lista realizacji'],
+	['/realizacje/wroclaw-50m2', 'realizacja'],
+	['/kontakt', 'kontakt'],
+	['/polityka-prywatnosci', 'polityka prywatności'],
 	['/dev/styleguide', 'styleguide'],
 	['/dev/components', 'strona komponentów'],
 ] as const
@@ -42,11 +47,15 @@ const KNOWN_LIMITATIONS = [
  * z wymogu wprost („pure decoration"), ale axe tego nie rozpozna: sprawdza
  * kontrast także pod `aria-hidden`.
  *
- * Tylko przewijany pas miast w stopce, i tylko w wersji ukrytej przed
- * czytnikiem — te same miasta stoją pod nim jako czytelna lista. Pas bez
- * `aria-hidden` wróciłby do audytu, i słusznie.
+ * Dwa przypadki, oba wyłącznie w wersji ukrytej przed czytnikiem:
+ * - przewijany pas miast w stopce — te same miasta stoją pod nim jako czytelna lista,
+ * - symbole „m² / cm / km" przy czynnikach ceny — nazwa czynnika stoi obok.
+ * Element bez `aria-hidden` wróciłby do audytu, i słusznie.
  */
-const DECORATIVE = '[data-slot="marquee"][aria-hidden="true"]'
+const DECORATIVE = [
+	'[data-slot="marquee"][aria-hidden="true"]',
+	'[data-decorative][aria-hidden="true"]',
+].join(', ')
 
 /** Odsiewa naruszenia objęte listą znanych ograniczeń. */
 function withoutKnownLimitations<T extends { id: string; nodes: { html: string }[] }>(

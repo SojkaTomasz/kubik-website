@@ -42,6 +42,13 @@ interface Fixtures {
 	 * `test.use({ consentSeeded: false })`.
 	 */
 	consentSeeded: boolean
+
+	/**
+	 * Oznacza okienko wyceny jako już pokazane w tej wizycie. Domyślnie WŁĄCZONE:
+	 * okienko otwiera się samo po przewinięciu 2/3 strony, więc każdy test
+	 * przewijający stronę trafiałby na modal. Testy okienka wyłączają to u siebie.
+	 */
+	quotePopupSeen: boolean
 }
 
 /** Kształt wpisu czytanego przez `readStoredConsent` i skrypt startowy. */
@@ -116,7 +123,9 @@ export const test = base.extend<Fixtures>({
 
 	consentSeeded: [true, { option: true }],
 
-	page: async ({ page, consentSeeded }, use) => {
+	quotePopupSeen: [true, { option: true }],
+
+	page: async ({ page, consentSeeded, quotePopupSeen }, use) => {
 		// Pusta odpowiedź zamiast kontenera GTM. `fulfill`, nie `abort` —
 		// przerwane żądanie zostawia w konsoli błąd, który kontrola wyżej zgłosi.
 		await page.route(/googletagmanager\.com/, route =>
@@ -133,6 +142,11 @@ export const test = base.extend<Fixtures>({
 					JSON.stringify({ ...consent, timestamp: new Date().toISOString() })
 				)
 			}, STORED_CONSENT)
+		}
+
+		// Ten sam klucz co w `components/quote/quote-layer.tsx`.
+		if (quotePopupSeen) {
+			await page.addInitScript(() => window.sessionStorage.setItem('quote-popup-shown', '1'))
 		}
 
 		await use(page)

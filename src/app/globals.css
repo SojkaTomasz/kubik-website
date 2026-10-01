@@ -58,7 +58,12 @@
 
 /* Rura w poziomie, bez kąta — kreska `Separator variant="pipe"`. */
 @utility bg-pipe-line {
-	background-image: linear-gradient(in oklab 90deg, var(--pipe-hot), var(--pipe-mid), var(--pipe-cold));
+	background-image: linear-gradient(
+		in oklab 90deg,
+		var(--pipe-hot),
+		var(--pipe-mid),
+		var(--pipe-cold)
+	);
 }
 
 /*

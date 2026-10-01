@@ -17,8 +17,8 @@ import { usePathname } from '@/i18n/navigation'
 export interface NavLinkProps extends Omit<ButtonProps, 'href'> {
 	href: string
 	/**
-	 * `true` oznacza pozycję prowadzącą do sekcji: `/blog` zostaje oznaczone także
-	 * na `/blog/jakis-wpis`. Domyślnie liczy się wyłącznie dokładny adres, bo
+	 * `true` oznacza pozycję prowadzącą do sekcji: `/realizacje` zostaje oznaczone
+	 * także na `/realizacje/krakow-90m2`. Domyślnie liczy się wyłącznie dokładny adres, bo
 	 * `aria-current='page'` na stronie, której się nie czyta, wprowadza w błąd.
 	 */
 	matchNested?: boolean
@@ -44,8 +44,8 @@ function currentFor(
 
 export function NavLink({ href, matchNested = false, children, ...props }: NavLinkProps) {
 	// `usePathname` z `@/i18n/navigation`, nie z `next/navigation`: ten pierwszy
-	// zwraca adres BEZ prefiksu języka, więc porównanie z `href='/blog'` działa
-	// tak samo na `/blog` i na `/en/blog`.
+	// zwraca adres BEZ prefiksu języka, więc porównanie z `href='/realizacje'` działa
+	// tak samo z prefiksem języka i bez niego.
 	const pathname = usePathname()
 
 	return (

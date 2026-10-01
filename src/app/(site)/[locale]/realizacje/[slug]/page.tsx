@@ -67,10 +67,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 	const index = projects.indexOf(project)
 	const previous = projects.at(index - 1)
 	const next = projects[(index + 1) % projects.length]
-	const breadcrumbs = [
-		{ name: nav('projects'), path: PROJECTS_PATH },
-		{ name: project.cityName },
-	]
+	const breadcrumbs = [{ name: nav('projects'), path: PROJECTS_PATH }, { name: project.cityName }]
 	const storyLabels = t.raw('story') as string[]
 	const [cover] = project.photos
 

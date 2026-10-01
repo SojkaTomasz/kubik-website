@@ -23,13 +23,11 @@ import type { Locale } from '@/site.config'
  * szkieletu aplikacji.
  */
 
-/**
- * Skróty z 404 — wyłącznie do tras, które istnieją. Usługa i Realizacje
- * z projektu dojdą tu razem ze swoimi stronami.
- */
+/** Skróty z 404 — te same trzy wyjścia co w menu (Paper: „404"). */
 const SHORTCUTS = [
+	{ href: '/frezowanie-pod-ogrzewanie-podlogowe', key: 'service' },
+	{ href: '/realizacje', key: 'projects' },
 	{ href: '/kontakt', key: 'quote' },
-	{ href: '/blog', key: 'browseBlog' },
 ] as const
 
 export async function NotFoundView({

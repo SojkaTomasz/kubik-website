@@ -77,13 +77,15 @@ describe('strona jednojęzyczna', () => {
 	it('sitemap ma jeden wpis na trasę, nie po jednym na język', async () => {
 		const { default: sitemap } = await import('@/app/sitemap')
 		const { staticRoutes } = await import('@/lib/routes')
-		const { publishedPostPaths } = await import('@/lib/content/posts')
+		const { cities } = await import('@/data/cities')
+		const { projects } = await import('@/data/projects')
 
-		// Trasy statyczne PLUS opublikowane wpisy bloga. Przy dwóch językach
-		// jedno i drugie zdublowałoby się na język.
+		// Trasy statyczne PLUS miasta i realizacje. Przy dwóch językach
+		// wszystko zdublowałoby się na język.
 		const expected =
 			staticRoutes.filter(route => route.inSitemap !== false).length +
-			publishedPostPaths('pl').length
+			cities.length +
+			projects.length
 
 		expect(sitemap()).toHaveLength(expected)
 	})

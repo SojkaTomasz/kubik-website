@@ -55,7 +55,10 @@ export const reviews: Review[] = [
 		author: 'Piotr J.',
 		text: 'Frezowanie wykonane zgodnie z planem, w umówionym terminie, żadnych problemów.',
 	},
-	{ author: 'K. Pająk', text: 'Kontakt bardzo dobry, usługa wykonana profesjonalnie i terminowo.' },
+	{
+		author: 'K. Pająk',
+		text: 'Kontakt bardzo dobry, usługa wykonana profesjonalnie i terminowo.',
+	},
 	{
 		author: 'Lucjan S.',
 		text: 'Sprawna i profesjonalna ekipa. Jestem bardzo zadowolony z realizacji.',

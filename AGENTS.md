@@ -34,8 +34,8 @@ połowy rdzeni. To nie jest ostrożność, tylko wymóg: `next dev` kompiluje tr
 dziesięć równoległych przeglądarek zasypuje go żądaniami do tras jeszcze niezbudowanych. Serwer
 odpowiada wtedy 500 albo przekracza limit czasu, a wywrotki wyglądają na losowe i wędrują między
 testami — zwykle trafiając te, które sięgają po trasy kompilowane osobno (`/apple-icon`,
-`/sitemap.xml`, `/blog`). Zmierzone: przy domyślnej liczbie workerów 2 z 4 przebiegów padały, przy
-dwóch — 3 z 3 czysto. Objaw jest łatwy do pomylenia z usterką aplikacji.
+`/sitemap.xml`, strony miast). Zmierzone: przy domyślnej liczbie workerów 2 z 4 przebiegów padały,
+przy dwóch — 3 z 3 czysto. Objaw jest łatwy do pomylenia z usterką aplikacji.
 
 ## Commity
 
@@ -510,7 +510,8 @@ Trzy miejsca, w których podświetlenie było JEDYNĄ informacją o stanie:
 
 1. **Bieżąca podstrona** — `aria-current` dokłada `components/layout/nav-link.tsx`. Wartości są dwie
    i różnią się znaczeniem: `page` to ta strona, `true` to pozycja, w której obrębie jesteśmy
-   (`/blog` na stronie wpisu). Oznaczanie wszystkiego jest gorsze niż nieoznaczanie niczego.
+   (`/realizacje` na stronie jednej realizacji). Oznaczanie wszystkiego jest gorsze niż
+   nieoznaczanie niczego.
 2. **Wybrany motyw i język** — `DropdownMenuRadioGroup`, nie zwykłe pozycje menu. Bieżący język NIE
    jest już `disabled`: czytnik mówił wtedy „niedostępny", co brzmi jak usterka, a nie jak „to jest
    ustawione teraz". **Pozycje radiowe Base UI domyślnie NIE zamykają menu** (`closeOnClick` ma
@@ -521,7 +522,7 @@ Trzy miejsca, w których podświetlenie było JEDYNĄ informacją o stanie:
 
 ### Formularze: trzy mechanizmy, każdy na inną sytuację
 
-`components/forms/contact-form.tsx` jest wzorcem do kopiowania.
+`components/forms/quote-form.tsx` jest wzorcem do kopiowania.
 
 1. **`aria-describedby` z pola na komunikat.** `aria-invalid` mówi tylko „coś nie tak"; powód leży w
    osobnym elemencie, którego czytnik przy polu nie czyta. Sklejaj listę helperem `describedBy` —
@@ -611,53 +612,31 @@ odczyt preferencji w bibliotece animacji jest zapamiętywany przy pierwszym wywo
 przez całe życie modułu. W jednym pliku z pozostałymi testami byłby już zapamiętany jako „brak
 ograniczenia", a test przechodziłby, nie sprawdzając niczego.
 
-## Warstwa treści
+## Warstwa danych
 
-Wpisy bloga to pliki MDX w `content/blog/<język>/<slug>.mdx`. Katalog decyduje o języku, nazwa pliku
-o adresie — dzięki temu wersje językowe mają **własne slugi** (`/blog/jak-zaczac` obok
-`/blog/getting-started`), co jest normą w SEO.
+Treść stron Kubika siedzi w `src/data/` jako zwykłe moduły TypeScriptu — bez CMS-a i bez MDX:
 
-Frontmatter przechodzi przez schemat zod w `content-collections.ts` **przy budowaniu**. Brakująca
-data albo literówka w nazwie pola wywracają build z nazwą pliku w komunikacie.
+| Plik          | Zawartość                                                            |
+| ------------- | -------------------------------------------------------------------- |
+| `cities.ts`   | 12 miast z treścią pisaną dla każdego osobno, FAQ, faktami lokalnymi |
+| `projects.ts` | 12 realizacji: metraż, wylewka, czas, przebieg, zdjęcia              |
+| `service.ts`  | kroki, „nadaje się / nie nadaje się", czynniki ceny, FAQ usługi      |
+| `reviews.ts`  | opinie z wizytówki Google                                            |
 
-- `draft: true` chowa wpis w produkcji, zostawiając go widocznym w `next dev`. Sitemap i
-  `generateStaticParams` pomijają szkice ZAWSZE — inaczej lokalny build zgłaszałby Google adres
-  zwracający na produkcji 404.
-- widoki sięgają po treść wyłącznie przez `lib/content/posts.ts`; filtrowanie po swojemu w widoku
-  prędzej czy później opublikuje szkic
-- wpisy bloga w sitemapie celowo **nie mają** `alternates` — slugi różnią się między językami, więc
-  podmiana samego prefiksu dawałaby hreflang prowadzący do 404
-- `remark-gfm` jest wymagany, nie opcjonalny: bez niego tabela zapisana kreskami renderuje się jako
-  akapit. Sprawdzone na przykładowym wpisie.
+Trzy rzeczy wynikają z tego, że to ta SAMA lista karmi wiele miejsc:
 
-Wygląd treści opisuje **jedno** miejsce — `components/ui/prose.tsx`. Świadomie bez
+- **Strony miast i realizacji mają `dynamicParams = false`.** Adres spoza listy to 404 z
+  `not-found.tsx`, a nie render na żądanie z danymi `undefined`.
+- **Sitemap czyta te same listy co `generateStaticParams`**, więc nie zgłosi adresu bez strony.
+- **Ścieżki składają wyłącznie `cityPath` i `projectPath`.** Slider, stopka, obszar działania i
+  okruszki linkują przez nie — zmiana adresu to jedna linia.
+
+Zdjęcia leżą w `src/assets/photos` i są importowane statycznie (patrz „Obrazy"); typ zdjęcia w
+danych to `ImageSource` z `components/ui/image`, bo import `next/image` poza `components/ui` blokuje
+ESLint.
+
+Wygląd długiej treści opisuje **jedno** miejsce — `components/ui/prose.tsx`. Świadomie bez
 `@tailwindcss/typography`, bo ta wtyczka przynosi własną skalę rozjeżdżającą się z `typography.tsx`.
-
-### Kanał RSS i obraz Open Graph wpisu
-
-Obie rzeczy są niewidoczne z poziomu strony i obie mają swoje testy, bo błąd w nich widzi dopiero
-ktoś z zewnątrz — subskrybent albo osoba, która wkleiła link na LinkedIna.
-
-**Kanał ma dwa adresy i mieszka w dwóch miejscach drzewa tras.** To konsekwencja matchera w
-`proxy.ts`, który wyklucza ścieżki z kropką w nazwie: `/feed.xml` nie dostaje prefiksu języka, więc
-trasa wyłącznie w `[locale]` dawałaby 404 pod adresem kanonicznym.
-
-| Adres          | Plik                                          |
-| -------------- | --------------------------------------------- |
-| `/feed.xml`    | `app/feed.xml/route.ts` — język domyślny      |
-| `/en/feed.xml` | `app/(site)/[locale]/feed.xml/route.ts`       |
-| `/pl/feed.xml` | 404 — `dynamicParams = false` pomija domyślny |
-
-Osobny kanał na język jest konieczny, bo wersje językowe wpisów mają własne slugi; jeden wspólny
-mieszałby dwa języki w jednej liście. Odnośnik `<link rel="alternate">` siedzi **wprost w `<head>`**
-layoutu, a nie w `alternates.types` — podstrony nadpisują `alternates` w całości (canonical i
-hreflang), więc kanał zniknąłby z niemal całej witryny.
-
-**Obraz Open Graph wpisu** ma własny plik w `blog/[slug]/opengraph-image.tsx`. Bez niego metadane
-plikowe dziedziczą się w dół i każdy wpis dostaje ogólny obraz strony — dziesięć linków wygląda w
-kanale jak dziesięć kopii tego samego. Układ obu obrazów opisuje wspólny `lib/seo/og-template.tsx`;
-jego nagłówek tłumaczy, czemu ta jedna warstwa nie idzie przez `components/ui` (Satori nie jest
-przeglądarką i nie zna Tailwinda).
 
 ### `/apple-icon` — jedyny plik metadanych bez kropki w adresie
 
@@ -669,7 +648,7 @@ ląduje zrzut strony. Segment jest dlatego wymieniony z nazwy w `UNLOCALIZED_SEG
 
 ## Strona jednojęzyczna
 
-Zostaw jedną pozycję w `locales` w `src/site.config.ts` — to cała zmiana:
+**Kubik jest dziś jednojęzyczny** — `locales` w `src/site.config.ts` ma jedną pozycję:
 
 ```ts
 export const locales: readonly Locale[] = ['pl']
@@ -681,7 +660,7 @@ Gdyby `Locale` wynikało z listy włączonych, zawężenie jej do `['pl']` zawę
 **wywaliło build** na `localeTags` oraz testach odwołujących się do drugiego języka — tak było w
 pierwszym podejściu, złapane przy budowaniu.
 
-Reszta dostosuje się sama, bo wszystko wynika z tej listy przez `isMultilingual`:
+Reszta dostosowuje się sama, bo wszystko wynika z tej listy przez `isMultilingual`:
 
 | Element               | Przy jednym języku                                |
 | --------------------- | ------------------------------------------------- |
@@ -693,19 +672,17 @@ Reszta dostosuje się sama, bo wszystko wynika z tej listy przez `isMultilingual
 **Nie kasuj** segmentu `[locale]`, `proxy.ts` ani next-intl. Koszt ich zostawienia to kilkanaście
 kilobajtów, a dołożenie drugiego języka wraca wtedy do jednej zmiany w tym samym miejscu, zamiast
 przepisywania widoków. Teksty przez `t()` zostają zaletą także przy jednym języku: cała treść siedzi
-w `messages/*.json`, a nie rozsypana po komponentach.
+w `messages/pl.json`, a nie rozsypana po komponentach.
 
-Wariant jednojęzyczny pokrywają `lib/seo/metadata.single-locale.test.ts`,
-`components/language-switcher.test.tsx` i `site.config.test.ts` — pakiet end-to-end sprawdza wariant
-z dwoma językami, bo taki jest starter wysyłany. Po przełączeniu na jeden język uruchom
-`pnpm check`; testy e2e zakładają dwa i część z nich wtedy nie przejdzie — to oczekiwane, dostosuj
-je do swojej strony.
+Wariant jednojęzyczny pokrywają `lib/seo/metadata.single-locale.test.ts`, `site.config.test.ts` i
+`e2e/i18n.spec.ts`. Dokładając język: dopisz go do `locales`, dodaj `messages/<język>.json` do
+`CATALOGS` w `i18n/messages.test.ts` i przywróć w e2e przypadki z dwoma językami.
 
 ## Linki wewnętrzne a język
 
 `Button` z `href` sam wybiera element: link zewnętrzny, kotwicę albo link routera. Dla ścieżek
-wewnętrznych używa `Link` z `@/i18n/navigation`, więc `href='/kontakt'` prowadzi do `/en/kontakt`,
-gdy użytkownik ogląda wersję angielską. **Nigdy nie sklejaj `/${locale}/…` ręcznie.**
+wewnętrznych używa `Link` z `@/i18n/navigation`, więc przy drugim języku `href='/kontakt'` sam
+dostanie jego prefiks. **Nigdy nie sklejaj `/${locale}/…` ręcznie.**
 
 Trasy spoza routingu językowego (`/dev`, `/api`) są wymienione w `UNLOCALIZED_SEGMENTS` w
 `lib/routes.ts` — te dostają zwykły `next/link`. Lista jest powtórzona w matcherze `proxy.ts`, bo
@@ -718,7 +695,7 @@ Cztery pliki, bo Next.js obsługuje cztery różne sytuacje i żaden z nich nie 
 | Plik                            | Kiedy się renderuje                                                  |
 | ------------------------------- | -------------------------------------------------------------------- |
 | `app/global-not-found.tsx`      | adres nie pasuje do ŻADNEJ trasy (`/nie-ma`, `/dev/nie-ma`, `/xx`)   |
-| `(site)/[locale]/not-found.tsx` | `notFound()` z widoku — np. wpis bloga o nieistniejącym slugu        |
+| `(site)/[locale]/not-found.tsx` | `notFound()` z widoku, adres miasta lub realizacji spoza listy       |
 | `(site)/[locale]/error.tsx`     | wyjątek w stronie lub zagnieżdżonym layoucie części publicznej       |
 | `app/global-error.tsx`          | wyjątek w SAMYM root layoucie — wtedy nie ma już nagłówka ani stopki |
 

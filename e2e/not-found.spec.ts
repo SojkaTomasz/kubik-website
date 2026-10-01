@@ -13,7 +13,14 @@ const allow404 = {
 }
 
 test.describe('adres bez pasującej trasy', () => {
-	for (const path of ['/nie-ma-takiej-strony', '/en/no-such-page', '/dev/nie-ma-takiej-strony']) {
+	// Miasto i realizacja spoza listy też tu trafiają: przy `dynamicParams = false`
+	// router traktuje taki adres jak brak trasy, a nie jak `notFound()` z widoku.
+	for (const path of [
+		'/nie-ma-takiej-strony',
+		'/dev/nie-ma-takiej-strony',
+		'/frezowanie-pod-ogrzewanie-podlogowe/nie-ma-takiego-miasta',
+		'/realizacje/nie-ma-takiej-realizacji',
+	]) {
 		test(`${path} zwraca 404 z naszą stroną, nie wbudowaną`, allow404, async ({ page }) => {
 			const response = await page.goto(path)
 
@@ -47,25 +54,5 @@ test.describe('adres bez pasującej trasy', () => {
 			.evaluate(element => getComputedStyle(element).backgroundColor)
 
 		expect(background).not.toBe('rgba(0, 0, 0, 0)')
-	})
-})
-
-test.describe('notFound() z widoku', () => {
-	test('nieistniejący wpis bloga pokazuje 404 w szacie strony', allow404, async ({ page }) => {
-		const response = await page.goto('/blog/nie-ma-takiego-wpisu')
-
-		expect(response?.status()).toBe(404)
-
-		// Ta granica 404 renderuje się WEWNĄTRZ root layoutu, więc — inaczej niż
-		// `global-not-found` — ma nagłówek i stopkę strony.
-		await expect(page.locator('header')).toBeVisible()
-		await expect(page.locator('footer')).toBeVisible()
-	})
-
-	test('404 wpisu bloga mówi w języku adresu', allow404, async ({ page }) => {
-		await page.goto('/en/blog/no-such-post')
-
-		await expect(page.locator('html')).toHaveAttribute('lang', 'en')
-		await expect(page.getByRole('heading', { level: 1 })).toHaveText(/not found/i)
 	})
 })

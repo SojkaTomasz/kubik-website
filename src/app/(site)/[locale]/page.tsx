@@ -18,7 +18,13 @@ import { PageHero } from '@/components/ui/page-hero'
 import { projects } from '@/data/projects'
 import { phoneLinks } from '@/lib/phone'
 import { sectionNumber } from '@/lib/section-number'
-import { buildPageMetadata, JsonLd, jsonLdGraph, localBusinessJsonLd, webPageJsonLd } from '@/lib/seo'
+import {
+	buildPageMetadata,
+	JsonLd,
+	jsonLdGraph,
+	localBusinessJsonLd,
+	webPageJsonLd,
+} from '@/lib/seo'
 import type { Locale } from '@/site.config'
 
 export async function generateMetadata({ params }: PageProps<'/[locale]'>): Promise<Metadata> {

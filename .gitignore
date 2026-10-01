@@ -22,9 +22,6 @@
 /build
 next-env.d.ts
 
-# content layer
-/.content-collections
-
 # production
 *.tsbuildinfo
 
@@ -48,6 +45,4 @@ yarn-error.log*
 # deployment
 .vercel
 
-# Warstwa treści generowana przez content-collections
-.content-collections
 .tmp-shots/

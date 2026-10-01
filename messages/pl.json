@@ -5,7 +5,6 @@
 		"privacy": "Polityka prywatności",
 		"skipToContent": "Przejdź do treści",
 		"menu": "Menu",
-		"blog": "Blog",
 		"currentPage": "bieżąca strona",
 		"quote": "Darmowa wycena",
 		"quoteShort": "Wycena",
@@ -74,7 +73,8 @@
 		"cta": "Wróć na stronę główną",
 		"shortcutsTitle": "Może tego szukasz",
 		"quote": "Darmowa wycena",
-		"browseBlog": "Przejrzyj blog"
+		"service": "Usługa",
+		"projects": "Realizacje"
 	},
 	"error": {
 		"title": "Coś poszło nie tak",
@@ -174,63 +174,15 @@
 	},
 	"validation": {
 		"required": "To pole jest wymagane.",
-		"email": "Podaj poprawny adres e-mail, na przykład jan@example.com.",
 		"phone": "Podaj numer telefonu — cyfry, spacje i myślniki.",
-		"tooShort": "Wpisz co najmniej dwa znaki.",
 		"tooLong": "Ta wartość jest za długa.",
-		"messageTooShort": "Napisz co najmniej dziesięć znaków — krótsza wiadomość niewiele nam powie.",
-		"consent": "Bez zgody na przetwarzanie danych nie możemy odpowiedzieć.",
 		"area": "Podaj metraż w m², na przykład 80."
-	},
-	"contact": {
-		"title": "Kontakt",
-		"description": "Napisz do nas — odpowiadamy zwykle w ciągu jednego dnia roboczego.",
-		"lead": "Wypełnij formularz albo napisz bezpośrednio na podany adres.",
-		"directTitle": "Kontakt bezpośredni",
-		"formTitle": "Formularz",
-		"optional": "(opcjonalnie)",
-		"submit": "Wyślij wiadomość",
-		"submitting": "Wysyłanie…",
-		"counter": "{current} z {max} znaków",
-		"successTitle": "Wiadomość wysłana",
-		"successBody": "Dziękujemy — odpowiemy najszybciej, jak to możliwe.",
-		"errorTitle": "Nie udało się wysłać",
-		"fields": {
-			"name": "Imię i nazwisko",
-			"email": "Adres e-mail",
-			"phone": "Telefon",
-			"subject": "Temat",
-			"message": "Wiadomość",
-			"consent": "Zgadzam się na przetwarzanie moich danych w celu odpowiedzi na wiadomość."
-		},
-		"errors": {
-			"validation": "Popraw zaznaczone pola i spróbuj ponownie.",
-			"rateLimit": "Wysłano już kilka wiadomości z tego adresu. Spróbuj ponownie za {seconds} sekund.",
-			"notConfigured": "Wysyłka wiadomości nie jest jeszcze skonfigurowana. Napisz proszę bezpośrednio na podany adres e-mail.",
-			"sendFailed": "Coś poszło nie tak po naszej stronie. Spróbuj ponownie za chwilę.",
-			"rejected": "Nie udało się zweryfikować formularza. Odśwież stronę i spróbuj ponownie."
-		},
-		"errorSummaryTitle": "Formularz zawiera błędy",
-		"errorSummaryIntro": "Popraw wymienione pola i wyślij ponownie."
 	},
 	"footer": {
 		"tagline": "Małopolska · pracujemy w całej Polsce",
 		"pagesTitle": "Strona",
 		"citiesTitle": "Miasta",
 		"homeLabel": "{name} — strona główna"
-	},
-	"blog": {
-		"title": "Blog",
-		"description": "Wpisy o tym, jak zbudowany jest ten starter i jak się nim pracuje.",
-		"readingTime": "{minutes} min czytania",
-		"draft": "Szkic",
-		"empty": "Nie ma jeszcze żadnych wpisów.",
-		"backToList": "Wszystkie wpisy",
-		"published": "Opublikowano",
-		"updated": "Zaktualizowano",
-		"postsLabel": "Lista wpisów",
-		"tagsLabel": "Tagi wpisu",
-		"metaLabel": "Informacje o wpisie"
 	},
 	"rating": {
 		"short": "{count}+ opinii",
@@ -356,11 +308,7 @@
 		},
 		"days": "{count, plural, one {# dzień} other {# dni}}",
 		"storyTitle": "Przebieg realizacji",
-		"story": [
-			"Punkt wyjścia",
-			"Co zrobiliśmy",
-			"Efekt"
-		],
+		"story": ["Punkt wyjścia", "Co zrobiliśmy", "Efekt"],
 		"galleryTitle": "Przebieg robót",
 		"photoAlt": "{title}, {city}: zdjęcie {number} z {count}",
 		"cta": {

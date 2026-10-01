@@ -1,6 +1,6 @@
 /**
- * Rejestr tras statycznych — jedno źródło dla sitemapy i nawigacji. Wpisy
- * dynamiczne (blog) dokłada `sitemap.ts`.
+ * Rejestr tras statycznych — jedno źródło dla sitemapy i nawigacji. Strony
+ * miast i realizacji dokłada `sitemap.ts` z danych.
  */
 
 /**
@@ -33,8 +33,9 @@ export interface StaticRoute {
 /** ► Dopisuj wpis DOPIERO wtedy, gdy strona istnieje — 404 w sitemapie obniża zaufanie do całej. */
 export const staticRoutes: StaticRoute[] = [
 	{ path: '/', priority: 1, changeFrequency: 'weekly' },
+	{ path: '/frezowanie-pod-ogrzewanie-podlogowe', priority: 0.9, changeFrequency: 'monthly' },
+	{ path: '/realizacje', priority: 0.8, changeFrequency: 'monthly' },
 	{ path: '/kontakt', priority: 0.8, changeFrequency: 'monthly' },
-	{ path: '/blog', priority: 0.7, changeFrequency: 'weekly' },
 	// `inSitemap: false`, dopóki polityka jest szkieletem z noIndex — zgłaszanie
 	// Google adresu oznaczonego jako nieindeksowany to sprzeczny sygnał.
 	{ path: '/polityka-prywatnosci', priority: 0.3, changeFrequency: 'yearly', inSitemap: false },

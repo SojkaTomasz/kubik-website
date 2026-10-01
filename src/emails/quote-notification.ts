@@ -1,6 +1,6 @@
 import { escapeHtml } from '@/lib/html'
-import type { QuoteData } from '@/lib/validation/quote'
 import { siteConfig } from '@/site.config'
+import type { QuoteData } from '@/lib/validation/quote'
 
 /**
  * Powiadomienie o zapytaniu o wycenę — trafia do właściciela, który oddzwania.

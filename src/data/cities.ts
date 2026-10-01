@@ -54,11 +54,13 @@ export const cities: City[] = [
 		faq: [
 			{
 				question: 'Czy da się zrobić podłogówkę w mieszkaniu od dewelopera?',
-				answer: 'Tak, to jeden z najczęstszych przypadków. Frezujemy w wylewce dewelopera, więc poziom podłogi przy drzwiach się nie zmienia. Warto zrobić to przed układaniem paneli i płytek.',
+				answer:
+					'Tak, to jeden z najczęstszych przypadków. Frezujemy w wylewce dewelopera, więc poziom podłogi przy drzwiach się nie zmienia. Warto zrobić to przed układaniem paneli i płytek.',
 			},
 			{
 				question: 'Czy wspólnota musi się zgodzić?',
-				answer: 'Zwykle nie, bo nie ruszamy instalacji wspólnych ani konstrukcji stropu. Frezujemy tylko wierzchnią warstwę wylewki w Twoim lokalu. Przy podłączeniu do ogrzewania miejskiego zapytaj administratora o zasady.',
+				answer:
+					'Zwykle nie, bo nie ruszamy instalacji wspólnych ani konstrukcji stropu. Frezujemy tylko wierzchnią warstwę wylewki w Twoim lokalu. Przy podłączeniu do ogrzewania miejskiego zapytaj administratora o zasady.',
 			},
 		],
 	},
@@ -79,11 +81,13 @@ export const cities: City[] = [
 		faq: [
 			{
 				question: 'Czy podłogówka zmieści się w kamienicy?',
-				answer: 'Tak, jeśli w kamienicy jest wylewka grubości co najmniej 4 cm z izolacją pod spodem. Frezujemy w niej rowki na rury, więc nie dokładamy żadnej warstwy i nie podnosimy podłogi.',
+				answer:
+					'Tak, jeśli w kamienicy jest wylewka grubości co najmniej 4 cm z izolacją pod spodem. Frezujemy w niej rowki na rury, więc nie dokładamy żadnej warstwy i nie podnosimy podłogi.',
 			},
 			{
 				question: 'Czy frezowanie w bloku przeszkadza sąsiadom?',
-				answer: 'Frezarka pracuje głośno, ale krótko: 50 m² zamykamy w jeden dzień. Pył od razu trafia do odkurzacza, więc nie ma go na klatce schodowej.',
+				answer:
+					'Frezarka pracuje głośno, ale krótko: 50 m² zamykamy w jeden dzień. Pył od razu trafia do odkurzacza, więc nie ma go na klatce schodowej.',
 			},
 		],
 	},
@@ -104,11 +108,13 @@ export const cities: City[] = [
 		faq: [
 			{
 				question: 'Czy na poddaszu da się zrobić podłogówkę bez nowej wylewki?',
-				answer: 'Tak, jeśli istniejąca wylewka ma co najmniej 4 cm i izolację pod spodem. Frezujemy w niej rowki, więc strop nie dostaje dodatkowego ciężaru nowej warstwy.',
+				answer:
+					'Tak, jeśli istniejąca wylewka ma co najmniej 4 cm i izolację pod spodem. Frezujemy w niej rowki, więc strop nie dostaje dodatkowego ciężaru nowej warstwy.',
 			},
 			{
 				question: 'Ile trwa podłogówka na poddaszu?',
-				answer: 'Około 50 m² robimy w jeden dzień. Większe poddasza, z wieloma pomieszczeniami, zwykle w dwa dni. Po wyschnięciu masy można kłaść podłogi.',
+				answer:
+					'Około 50 m² robimy w jeden dzień. Większe poddasza, z wieloma pomieszczeniami, zwykle w dwa dni. Po wyschnięciu masy można kłaść podłogi.',
 			},
 		],
 	},
@@ -129,11 +135,13 @@ export const cities: City[] = [
 		faq: [
 			{
 				question: 'Czy mogę zamienić grzejniki na podłogówkę w starym domu?',
-				answer: 'Tak, jeśli wylewka ma co najmniej 4 cm i leży na izolacji. Frezujemy w niej rowki, układamy rury i podłączamy je do rozdzielacza. Grzejniki można potem zdemontować.',
+				answer:
+					'Tak, jeśli wylewka ma co najmniej 4 cm i leży na izolacji. Frezujemy w niej rowki, układamy rury i podłączamy je do rozdzielacza. Grzejniki można potem zdemontować.',
 			},
 			{
 				question: 'Co z drzwiami i progami po frezowaniu?',
-				answer: 'Nic się nie zmienia. Frezowanie nie dokłada warstwy, więc poziom podłogi zostaje ten sam, a drzwi nie trzeba podcinać.',
+				answer:
+					'Nic się nie zmienia. Frezowanie nie dokłada warstwy, więc poziom podłogi zostaje ten sam, a drzwi nie trzeba podcinać.',
 			},
 		],
 	},
@@ -154,11 +162,13 @@ export const cities: City[] = [
 		faq: [
 			{
 				question: 'Czy podłogówka pasuje do pompy ciepła po wymianie kotła?',
-				answer: 'Tak, to dobre połączenie. Podłogówka grzeje dużą powierzchnią, więc wystarcza jej niska temperatura wody, a na niskiej temperaturze pompa ciepła pracuje najtaniej.',
+				answer:
+					'Tak, to dobre połączenie. Podłogówka grzeje dużą powierzchnią, więc wystarcza jej niska temperatura wody, a na niskiej temperaturze pompa ciepła pracuje najtaniej.',
 			},
 			{
 				question: 'Czy da się frezować w starej, twardej wylewce?',
-				answer: 'Tak. Twarda i gruba wylewka wydłuża frezowanie, ale nie jest przeszkodą. Ma to wpływ na cenę, dlatego pytamy o nią przy wycenie.',
+				answer:
+					'Tak. Twarda i gruba wylewka wydłuża frezowanie, ale nie jest przeszkodą. Ma to wpływ na cenę, dlatego pytamy o nią przy wycenie.',
 			},
 		],
 	},
@@ -179,11 +189,13 @@ export const cities: City[] = [
 		faq: [
 			{
 				question: 'Kiedy najlepiej frezować w nowym mieszkaniu?',
-				answer: 'Po wylaniu i wyschnięciu wylewki, a przed układaniem paneli i płytek. Wtedy nic nie trzeba zrywać ani zabezpieczać.',
+				answer:
+					'Po wylaniu i wyschnięciu wylewki, a przed układaniem paneli i płytek. Wtedy nic nie trzeba zrywać ani zabezpieczać.',
 			},
 			{
 				question: 'Czy po frezowaniu trzeba długo czekać na podłogi?',
-				answer: 'Czeka się tylko na wyschnięcie masy w rowkach, a nie całej wylewki. To znacznie krócej niż przy wylewaniu nowej posadzki.',
+				answer:
+					'Czeka się tylko na wyschnięcie masy w rowkach, a nie całej wylewki. To znacznie krócej niż przy wylewaniu nowej posadzki.',
 			},
 		],
 	},
@@ -204,11 +216,13 @@ export const cities: City[] = [
 		faq: [
 			{
 				question: 'Czy mogę zdecydować się na podłogówkę po wylaniu posadzki?',
-				answer: 'Tak, właśnie po to jest frezowanie. Wycinamy rowki w gotowej wylewce, więc nie trzeba jej zrywać ani wylewać od nowa.',
+				answer:
+					'Tak, właśnie po to jest frezowanie. Wycinamy rowki w gotowej wylewce, więc nie trzeba jej zrywać ani wylewać od nowa.',
 			},
 			{
 				question: 'Gdzie powinien stać rozdzielacz?',
-				answer: 'Najlepiej w miejscu, z którego pętle rozejdą się do wszystkich pokoi bez długich przejść, zwykle w korytarzu. Pomagamy to zaplanować przed frezowaniem.',
+				answer:
+					'Najlepiej w miejscu, z którego pętle rozejdą się do wszystkich pokoi bez długich przejść, zwykle w korytarzu. Pomagamy to zaplanować przed frezowaniem.',
 			},
 		],
 	},
@@ -229,11 +243,13 @@ export const cities: City[] = [
 		faq: [
 			{
 				question: 'Czy da się frezować wylewkę anhydrytową?',
-				answer: 'Tak, frezujemy zarówno wylewki cementowe, jak i anhydrytowe. Ważne, żeby miała co najmniej 4 cm i izolację pod spodem.',
+				answer:
+					'Tak, frezujemy zarówno wylewki cementowe, jak i anhydrytowe. Ważne, żeby miała co najmniej 4 cm i izolację pod spodem.',
 			},
 			{
 				question: 'Czy przy dużych oknach podłogówka wystarczy?',
-				answer: 'Tak. Przy przeszkleniach układamy pętle gęściej, żeby oddać więcej ciepła tam, gdzie dom traci go najwięcej.',
+				answer:
+					'Tak. Przy przeszkleniach układamy pętle gęściej, żeby oddać więcej ciepła tam, gdzie dom traci go najwięcej.',
 			},
 		],
 	},
@@ -254,11 +270,13 @@ export const cities: City[] = [
 		faq: [
 			{
 				question: 'Czy w bloku z wielkiej płyty da się zrobić podłogówkę?',
-				answer: 'Najczęściej tak, jeśli wylewka ma co najmniej 4 cm i izolację pod spodem. Sprawdzimy to przy wycenie, a w razie wątpliwości oglądamy podłogę na miejscu.',
+				answer:
+					'Najczęściej tak, jeśli wylewka ma co najmniej 4 cm i izolację pod spodem. Sprawdzimy to przy wycenie, a w razie wątpliwości oglądamy podłogę na miejscu.',
 			},
 			{
 				question: 'Co z kurzem na klatce schodowej?',
-				answer: 'Frezarka jest podłączona do odkurzacza przemysłowego, więc pył nie rozchodzi się po mieszkaniu ani klatce. Nie wynosimy też gruzu, bo go nie ma.',
+				answer:
+					'Frezarka jest podłączona do odkurzacza przemysłowego, więc pył nie rozchodzi się po mieszkaniu ani klatce. Nie wynosimy też gruzu, bo go nie ma.',
 			},
 		],
 	},
@@ -279,11 +297,13 @@ export const cities: City[] = [
 		faq: [
 			{
 				question: 'Czy przy drzwiach balkonowych nie będzie zimno?',
-				answer: 'Przy przeszkleniach układamy pętle gęściej. Dzięki temu podłoga oddaje tam więcej ciepła i przy drzwiach jest tak samo ciepło jak w środku pokoju.',
+				answer:
+					'Przy przeszkleniach układamy pętle gęściej. Dzięki temu podłoga oddaje tam więcej ciepła i przy drzwiach jest tak samo ciepło jak w środku pokoju.',
 			},
 			{
 				question: 'Czy mogę grzać podłogówką tylko część domu?',
-				answer: 'Tak. Możesz zrobić podłogówkę tylko w wybranych pomieszczeniach, a w pozostałych zostawić grzejniki. Ustalamy to przy planowaniu pętli.',
+				answer:
+					'Tak. Możesz zrobić podłogówkę tylko w wybranych pomieszczeniach, a w pozostałych zostawić grzejniki. Ustalamy to przy planowaniu pętli.',
 			},
 		],
 	},
@@ -304,11 +324,13 @@ export const cities: City[] = [
 		faq: [
 			{
 				question: 'Czy przyjedziecie z Małopolski do Trójmiasta?',
-				answer: 'Tak, pracujemy w całej Polsce. Dojazd liczymy w cenie, dlatego przy dalszych miastach łączymy kilka zleceń w jednym wyjeździe.',
+				answer:
+					'Tak, pracujemy w całej Polsce. Dojazd liczymy w cenie, dlatego przy dalszych miastach łączymy kilka zleceń w jednym wyjeździe.',
 			},
 			{
 				question: 'Na jakim etapie remontu frezować?',
-				answer: 'Po zdjęciu starych podłóg, a przed układaniem nowych. Ściany mogą być już wykończone, bo frezowanie nie brudzi ich pyłem.',
+				answer:
+					'Po zdjęciu starych podłóg, a przed układaniem nowych. Ściany mogą być już wykończone, bo frezowanie nie brudzi ich pyłem.',
 			},
 		],
 	},
@@ -329,11 +351,13 @@ export const cities: City[] = [
 		faq: [
 			{
 				question: 'Czy frezowanie zniszczy wykończone ściany?',
-				answer: 'Nie. Frezarka pracuje z odkurzaczem, więc pył nie osiada na ścianach, a masa w rowkach nie zawilgaca pomieszczeń tak jak nowa wylewka.',
+				answer:
+					'Nie. Frezarka pracuje z odkurzaczem, więc pył nie osiada na ścianach, a masa w rowkach nie zawilgaca pomieszczeń tak jak nowa wylewka.',
 			},
 			{
 				question: 'Ile trwa frezowanie na poddaszu?',
-				answer: 'Poddasze do 50 m² robimy zwykle w jeden dzień. Po wyschnięciu masy w rowkach można kłaść podłogi.',
+				answer:
+					'Poddasze do 50 m² robimy zwykle w jeden dzień. Po wyschnięciu masy w rowkach można kłaść podłogi.',
 			},
 		],
 	},

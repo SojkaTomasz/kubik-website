@@ -38,7 +38,10 @@ export function ProjectGallery({ project }: { project: Project }) {
 						return (
 							<li
 								key={photo.src}
-								className={cn('relative', isLead ? 'col-span-2 md:col-span-3' : 'md:col-span-2')}
+								className={cn(
+									'relative',
+									isLead ? 'col-span-2 md:col-span-3' : 'md:col-span-2'
+								)}
 							>
 								<Image
 									src={photo}

@@ -1,5 +1,3 @@
-import type { StaticImageData } from 'next/image'
-
 import p20240814_111442 from '@/assets/photos/20240814_111442.jpg'
 import p20240814_111452 from '@/assets/photos/20240814_111452.jpg'
 import p20240814_140722 from '@/assets/photos/20240814_140722.jpg'
@@ -54,6 +52,7 @@ import p20260907_143113 from '@/assets/photos/20260907_143113.jpg'
 import p20260908_104613 from '@/assets/photos/20260908_104613.jpg'
 import p20260908_110123 from '@/assets/photos/20260908_110123.jpg'
 import p20260908_110134 from '@/assets/photos/20260908_110134.jpg'
+import type { ImageSource } from '@/components/ui/image'
 
 /**
  * Realizacje — 12 podłóg, po jednej na miasto (docs/zakres.md, „Realizacje:
@@ -93,7 +92,7 @@ export interface Project {
 	intro: string
 	/** Opis w trzech krokach: punkt wyjścia, co zrobiliśmy, efekt. */
 	story: [string, string, string]
-	photos: StaticImageData[]
+	photos: ImageSource[]
 }
 
 export const projects: Project[] = [

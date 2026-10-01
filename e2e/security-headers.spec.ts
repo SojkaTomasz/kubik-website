@@ -105,10 +105,10 @@ test.describe('polityka bezpieczeństwa treści', () => {
 		expect(policy['font-src']).toEqual(["'self'"])
 	})
 
-	test('obowiązuje tak samo w drugim języku', async ({ request }) => {
+	test('obowiązuje tak samo na podstronie generowanej z danych', async ({ request }) => {
 		// Trasy językowe przechodzą przez `proxy.ts`. Przepisanie adresu jest
 		// miejscem, w którym nagłówki potrafią zniknąć.
-		const policy = await policyFor(request, '/en')
+		const policy = await policyFor(request, '/frezowanie-pod-ogrzewanie-podlogowe/krakow')
 
 		expect(policy['frame-ancestors']).toEqual(["'none'"])
 	})

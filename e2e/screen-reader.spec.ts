@@ -37,17 +37,17 @@ test.describe('orientacja na stronie', () => {
 
 		// Oznaczenie wszystkiego jest gorsze niż nieoznaczenie niczego: czytnik
 		// ogłasza wtedy każdą pozycję jako bieżącą i traci się punkt odniesienia.
-		await expect(page.getByRole('link', { name: 'Blog' }).first()).not.toHaveAttribute(
+		await expect(page.getByRole('link', { name: 'Realizacje' }).first()).not.toHaveAttribute(
 			'aria-current'
 		)
 	})
 
-	test('wpis bloga oznacza pozycję sekcji, nie stronę', async ({ page }) => {
-		await page.goto('/blog/pierwszy-wpis')
+	test('realizacja oznacza pozycję sekcji, nie stronę', async ({ page }) => {
+		await page.goto('/realizacje/wroclaw-50m2')
 
-		// `true`, a nie `page`: czytamy wpis, nie listę wpisów. `page` na liście
+		// `true`, a nie `page`: oglądamy jedną realizację, nie listę. `page`
 		// mówiłoby, że jesteśmy na stronie, której nie ma na ekranie.
-		await expect(page.getByRole('link', { name: 'Blog' }).first()).toHaveAttribute(
+		await expect(page.getByRole('link', { name: 'Realizacje' }).first()).toHaveAttribute(
 			'aria-current',
 			'true'
 		)
@@ -69,43 +69,24 @@ test.describe('orientacja na stronie', () => {
 })
 
 test.describe('nazwy dostępne', () => {
-	test('nazwą linku do wpisu jest sam tytuł', async ({ page }) => {
-		await page.goto('/blog')
+	test('nazwą karty realizacji jest sam tytuł', async ({ page }) => {
+		await page.goto('/realizacje')
 
-		const links = page.getByRole('link', {
-			name: 'Jak zacząć nowy projekt na tym starterze',
-		})
+		const links = page.getByRole('link', { name: 'Ocieplone poddasze', exact: true })
 
-		// Bez `aria-labelledby` nazwa powstaje z CAŁEJ treści karty: data, czas
-		// czytania, tytuł, opis i tagi zlewają się w jeden ciąg, a lista linków
+		// Bez `aria-labelledby` nazwa powstaje z CAŁEJ treści karty: miasto,
+		// tytuł, metraż i wylewka zlewają się w jeden ciąg, a lista linków
 		// (popularny sposób przeglądania strony czytnikiem) staje się bezużyteczna.
 		await expect(links).toHaveCount(1)
-		await expect(links).toHaveAttribute('href', '/blog/pierwszy-wpis')
+		await expect(links).toHaveAttribute('href', '/realizacje/wroclaw-50m2')
 	})
 
-	test('data wpisu jest zapisana słowami, a nie ciągiem cyfr', async ({ page }) => {
-		await page.goto('/blog')
+	test('strzałki realizacji mówią, dokąd prowadzą', async ({ page }) => {
+		await page.goto('/realizacje/wroclaw-50m2')
 
-		// Surowe `2026-09-01` synteza mowy czyta jako działanie arytmetyczne.
-		// Wersja maszynowa zostaje w atrybucie `dateTime` — dla robotów.
-		const date = page.locator('time').first()
-
-		await expect(date).toHaveAttribute('dateTime', /^\d{4}-\d{2}-\d{2}$/)
-		await expect(date).not.toHaveText(/^\s*\d{4}-\d{2}-\d{2}\s*$/)
-	})
-
-	test('przełącznik języka ogłasza język bieżący', async ({ page }) => {
-		await page.goto('/')
-
-		await page.getByRole('button', { name: 'Zmień język' }).click()
-
-		// Wcześniej bieżący język był `disabled`, czyli czytnik mówił
-		// „niedostępny" — brzmi jak usterka, nie jak „to jest ustawione teraz".
-		await expect(page.getByRole('menuitemradio', { name: 'Polski' })).toHaveAttribute(
-			'aria-checked',
-			'true'
-		)
-		await expect(page.getByRole('menuitemradio', { name: 'Polski' })).toBeEnabled()
+		// Sama ikona strzałki nie ma nazwy — czytnik powiedziałby „link".
+		await expect(page.getByRole('link', { name: /^Następna realizacja: / })).toHaveCount(1)
+		await expect(page.getByRole('link', { name: /^Poprzednia realizacja: / })).toHaveCount(1)
 	})
 })
 
@@ -144,25 +125,26 @@ test.describe('napisy, które czyta wyłącznie czytnik ekranu', () => {
 	})
 })
 
-test.describe('formularz kontaktowy', () => {
+test.describe('formularz wyceny', () => {
 	test('komunikat błędu jest powiązany z polem', async ({ page }) => {
 		await page.goto('/kontakt')
+		await expect(page.locator('input[name="renderedAt"]')).not.toHaveValue('')
 
-		const email = page.getByLabel('Adres e-mail', { exact: true })
-		await email.fill('to-nie-jest-adres')
-		await page.getByLabel('Temat', { exact: true }).click()
+		await page.getByRole('button', { name: 'Chcę darmową wycenę' }).click()
 
 		// `aria-invalid` mówi tylko „coś nie tak". Bez `aria-describedby`
 		// wskazującego komunikat czytnik nie podaje POWODU, a leży on w osobnym
 		// elemencie, którego przy polu nie czyta.
-		await expect(email).toHaveAttribute('aria-invalid', 'true')
-		await expect(email).toHaveAccessibleDescription(/Podaj poprawny adres e-mail/)
+		const area = page.getByLabel('Metraż', { exact: true })
+		await expect(area).toHaveAttribute('aria-invalid', 'true')
+		await expect(area).toHaveAccessibleDescription(/Podaj metraż w m²/)
 	})
 
 	test('nieudana wysyłka daje podsumowanie z fokusem i odnośnikami do pól', async ({ page }) => {
 		await page.goto('/kontakt')
+		await expect(page.locator('input[name="renderedAt"]')).not.toHaveValue('')
 
-		await page.getByRole('button', { name: 'Wyślij wiadomość' }).click()
+		await page.getByRole('button', { name: 'Chcę darmową wycenę' }).click()
 
 		const summary = page.getByRole('alert').filter({ hasText: 'Formularz zawiera błędy' })
 
@@ -178,15 +160,7 @@ test.describe('formularz kontaktowy', () => {
 		await expect(firstLink).toHaveAttribute('href', /#/)
 
 		await firstLink.click()
-		await expect(page.getByLabel('Imię i nazwisko', { exact: true })).toBeFocused()
-	})
-
-	test('opis licznika znaków dociera do pola wiadomości', async ({ page }) => {
-		await page.goto('/kontakt')
-
-		await expect(page.getByLabel('Wiadomość', { exact: true })).toHaveAccessibleDescription(
-			/znaków/
-		)
+		await expect(page.getByLabel('Metraż', { exact: true })).toBeFocused()
 	})
 })
 
@@ -238,13 +212,15 @@ test.describe('baner zgody', () => {
 
 		// Pulsowanie karty widzi wyłącznie oko. Bez komunikatu osoba niewidoma
 		// naciska Escape, nic się nie dzieje i ma prawo sądzić, że strona zawisła.
-		await expect(page.getByRole('status')).toContainText(/Akceptuję|Ustawienia/)
+		await expect(page.locator('[data-slot="cookie-banner"]').getByRole('status')).toContainText(
+			/Akceptuję|Ustawienia/
+		)
 	})
 
 	test('KAŻDA próba ominięcia jest ogłaszana, nie tylko pierwsza', async ({ page }) => {
 		await page.goto('/')
 		await expect(page.getByRole('dialog', { name: 'Zgoda na pliki cookie' })).toBeFocused()
-		await expect(page.getByRole('status')).toBeAttached()
+		await expect(page.locator('[data-slot="cookie-banner"]').getByRole('status')).toBeAttached()
 
 		// Obszar `aria-live` ogłasza ZMIANĘ treści. Ustawienie tego samego zdania
 		// po raz drugi nie rusza DOM-u, więc druga próba przeszłaby bez słowa —
@@ -263,11 +239,15 @@ test.describe('baner zgody', () => {
 		})
 
 		await page.keyboard.press('Escape')
-		await expect(page.getByRole('status')).toContainText(/Akceptuję|Ustawienia/)
+		await expect(page.locator('[data-slot="cookie-banner"]').getByRole('status')).toContainText(
+			/Akceptuję|Ustawienia/
+		)
 		const afterFirst = await page.evaluate(() => window.__liveChanges.value)
 
 		await page.keyboard.press('Escape')
-		await expect(page.getByRole('status')).toContainText(/Akceptuję|Ustawienia/)
+		await expect(page.locator('[data-slot="cookie-banner"]').getByRole('status')).toContainText(
+			/Akceptuję|Ustawienia/
+		)
 
 		await expect
 			.poll(() => page.evaluate(() => window.__liveChanges.value), {

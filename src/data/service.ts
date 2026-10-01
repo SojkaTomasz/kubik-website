@@ -72,31 +72,38 @@ export const priceFactors = [
 export const serviceFaq = [
 	{
 		question: 'Ogrzewanie podłogowe w starym domu: czy warto?',
-		answer: 'Tak, to najczęstszy przypadek. Nie podnosisz poziomu podłogi, nie wymieniasz drzwi i nie czekasz miesiąca na nową wylewkę. Warunek: wylewka ma co najmniej 4 cm i leży na izolacji.',
+		answer:
+			'Tak, to najczęstszy przypadek. Nie podnosisz poziomu podłogi, nie wymieniasz drzwi i nie czekasz miesiąca na nową wylewkę. Warunek: wylewka ma co najmniej 4 cm i leży na izolacji.',
 	},
 	{
 		question: 'Podłogówka czy grzejniki?',
-		answer: 'Podłogówka grzeje całą powierzchnią, więc ciepło rozkłada się równo i wystarcza jej niższa temperatura wody. Grzejniki szybciej reagują na zmianę temperatury, ale zabierają miejsce pod oknami i grzeją głównie powietrze przy ścianie.',
+		answer:
+			'Podłogówka grzeje całą powierzchnią, więc ciepło rozkłada się równo i wystarcza jej niższa temperatura wody. Grzejniki szybciej reagują na zmianę temperatury, ale zabierają miejsce pod oknami i grzeją głównie powietrze przy ścianie.',
 	},
 	{
 		question: 'Czy ogrzewanie podłogowe da się zrobić w bloku?',
-		answer: 'Tak. W bloku nie ma miejsca na grubszą wylewkę, a frezowanie nie podnosi podłogi ani o centymetr. Pył od razu trafia do odkurzacza, więc nie ma go na klatce schodowej.',
+		answer:
+			'Tak. W bloku nie ma miejsca na grubszą wylewkę, a frezowanie nie podnosi podłogi ani o centymetr. Pył od razu trafia do odkurzacza, więc nie ma go na klatce schodowej.',
 	},
 	{
 		question: 'Ogrzewanie podłogowe: wady i zalety?',
-		answer: 'Zalety: równe ciepło w całym pomieszczeniu, wolne ściany, niska temperatura zasilania, która obniża rachunki. Wady: wolniej reaguje na zmianę ustawień niż grzejnik, a pod dywanami i grubymi meblami grzeje słabiej.',
+		answer:
+			'Zalety: równe ciepło w całym pomieszczeniu, wolne ściany, niska temperatura zasilania, która obniża rachunki. Wady: wolniej reaguje na zmianę ustawień niż grzejnik, a pod dywanami i grubymi meblami grzeje słabiej.',
 	},
 	{
 		question: 'Czy można zrobić podłogówkę z grzejnika?',
-		answer: 'Można podłączyć podłogówkę do instalacji, na której dziś pracują grzejniki, ale potrzebny jest rozdzielacz z mieszaniem, który obniży temperaturę wody. O podłączeniu najlepiej porozmawiać z instalatorem, a my przygotujemy podłogę.',
+		answer:
+			'Można podłączyć podłogówkę do instalacji, na której dziś pracują grzejniki, ale potrzebny jest rozdzielacz z mieszaniem, który obniży temperaturę wody. O podłączeniu najlepiej porozmawiać z instalatorem, a my przygotujemy podłogę.',
 	},
 	{
 		question: 'Pompa ciepła i ogrzewanie podłogowe: czy to pasuje?',
-		answer: 'Tak, to najlepsze połączenie. Podłogówka grzeje dużą powierzchnią, więc wystarcza jej niska temperatura wody, a na niskiej temperaturze pompa ciepła pracuje najtaniej.',
+		answer:
+			'Tak, to najlepsze połączenie. Podłogówka grzeje dużą powierzchnią, więc wystarcza jej niska temperatura wody, a na niskiej temperaturze pompa ciepła pracuje najtaniej.',
 	},
 	{
 		question: 'Ile trwa, zanim położę panele?',
-		answer: 'Czekasz tylko na wyschnięcie masy, którą zalewamy rowki, a nie na schnięcie całej nowej wylewki. Dokładny czas zależy od masy i warunków w domu, podajemy go przy wycenie.',
+		answer:
+			'Czekasz tylko na wyschnięcie masy, którą zalewamy rowki, a nie na schnięcie całej nowej wylewki. Dokładny czas zależy od masy i warunków w domu, podajemy go przy wycenie.',
 	},
 ]
 

@@ -65,10 +65,11 @@ const eslintConfig = defineConfig([
 		'coverage/**',
 		'test-results/**',
 		'playwright-report/**',
-		'.content-collections/**',
 		'next-env.d.ts',
 		// Skille agentów z `npx skills add` — cudzy kod, nie nasza konwencja.
 		'.claude/skills/**',
+		// Robocze zrzuty ekranu — katalog jest też w .gitignore.
+		'.tmp-shots/**',
 	]),
 
 	...nextVitals,

@@ -17,7 +17,8 @@ import { quoteSchema } from '@/lib/validation/quote'
  * czeka na operatora SMS i zarejestrowane pole nadawcy. Dziś idzie sam e-mail.
  */
 
-export type QuoteErrorCode = 'validation' | 'rateLimit' | 'notConfigured' | 'sendFailed' | 'rejected'
+export type QuoteErrorCode =
+	'validation' | 'rateLimit' | 'notConfigured' | 'sendFailed' | 'rejected'
 
 export type QuoteResult =
 	| { status: 'ok' }

@@ -6,7 +6,15 @@ import { expect, test } from './fixtures'
  * cookies, bez którego nie da się wycofać zgody.
  */
 
-const PAGES = ['/', '/kontakt', '/polityka-prywatnosci']
+const PAGES = [
+	'/',
+	'/frezowanie-pod-ogrzewanie-podlogowe',
+	'/frezowanie-pod-ogrzewanie-podlogowe/krakow',
+	'/realizacje',
+	'/realizacje/wroclaw-50m2',
+	'/kontakt',
+	'/polityka-prywatnosci',
+]
 
 test.describe('szkielet na każdej podstronie', () => {
 	for (const path of PAGES) {
@@ -18,15 +26,6 @@ test.describe('szkielet na każdej podstronie', () => {
 			await expect(page.getByRole('contentinfo')).toBeVisible()
 		})
 	}
-
-	test('przełącznik języka jest na podstronie, nie tylko na stronie głównej', async ({ page }) => {
-		// Wcześniej stał wklejony w stronę główną, więc użytkownik, który wszedł
-		// wprost na /kontakt, nie mógł zmienić języka. Przełącznika motywu nie ma:
-		// strona jest wyłącznie ciemna.
-		await page.goto('/kontakt')
-
-		await expect(page.getByRole('button', { name: 'Zmień język' })).toBeVisible()
-	})
 
 	test('nazwa strony w nagłówku prowadzi na stronę główną', async ({ page }) => {
 		await page.goto('/kontakt')
@@ -113,14 +112,5 @@ test.describe('wycofanie zgody na cookies', () => {
 			analytics_storage: 'denied',
 			ad_storage: 'denied',
 		})
-	})
-
-	test('działa też w wersji angielskiej', async ({ page }) => {
-		await page.goto('/en')
-		await page.getByRole('button', { name: 'Accept' }).click()
-
-		await page.getByRole('button', { name: 'Cookie settings' }).click()
-
-		await expect(page.getByText('Cookie settings', { exact: true }).last()).toBeVisible()
 	})
 })

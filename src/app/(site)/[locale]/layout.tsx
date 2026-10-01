@@ -19,8 +19,6 @@ import {
 	organizationJsonLd,
 	websiteJsonLd,
 } from '@/lib/seo'
-import { feedPath } from '@/lib/seo/feed'
-import { siteConfig } from '@/site.config'
 
 export const metadata: Metadata = buildRootMetadata()
 
@@ -42,20 +40,7 @@ export default async function SiteLayout({ children, params }: LayoutProps<'/[lo
 	return (
 		<DocumentShell
 			lang={locale}
-			head={
-				<>
-					<JsonLd data={jsonLdGraph(organizationJsonLd(), websiteJsonLd())} />
-
-					{/* Wprost w `<head>`, nie przez `alternates.types`: podstrony nadpisują
-						`alternates` w całości, więc kanał zniknąłby z niemal całej witryny. */}
-					<link
-						rel='alternate'
-						type='application/rss+xml'
-						title={`${siteConfig.name} — blog`}
-						href={feedPath(locale)}
-					/>
-				</>
-			}
+			head={<JsonLd data={jsonLdGraph(organizationJsonLd(), websiteJsonLd())} />}
 		>
 			<NextIntlClientProvider>
 				<Providers>

@@ -1,13 +1,12 @@
 /**
- * Pozycje nawigacji — wspólne dla nagłówka, menu na telefonie i stopki.
+ * Pozycje nawigacji — wspólne dla nagłówka, menu na telefonie i stopki
+ * (docs/zakres.md: Usługa, Realizacje, Kontakt).
  *
- * Wyłącznie trasy, które istnieją. Usługa i Realizacje z projektu w Paperze
- * dojdą tutaj razem ze swoimi stronami — wpisane wcześniej prowadziłyby do 404.
- *
- * `matchNested` dla bloga: wpis leży pod `/blog/<slug>`, więc pozycja menu ma
- * zostać oznaczona jako bieżąca także tam. Pozostałe trasy są liśćmi.
+ * `matchNested`: strony miast leżą pod adresem usługi, a realizacje pod listą,
+ * więc pozycja menu zostaje oznaczona jako bieżąca także tam. Kontakt jest liściem.
  */
 export const SITE_NAV_LINKS = [
-	{ href: '/blog', key: 'blog', matchNested: true },
+	{ href: '/frezowanie-pod-ogrzewanie-podlogowe', key: 'service', matchNested: true },
+	{ href: '/realizacje', key: 'projects', matchNested: true },
 	{ href: '/kontakt', key: 'contact', matchNested: false },
 ] as const

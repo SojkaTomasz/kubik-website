@@ -21,7 +21,7 @@ export type Locale = (typeof supportedLocales)[number]
  * ► TO JEST LISTA, KTÓRĄ EDYTUJESZ. Strona jednojęzyczna: `['pl']` — reszta
  * dostosuje się sama. Nie kasuj przy tym segmentu `[locale]` ani `proxy.ts`.
  */
-export const locales: readonly Locale[] = ['pl', 'en']
+export const locales: readonly Locale[] = ['pl']
 
 export const defaultLocale: Locale = 'pl'
 

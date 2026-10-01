@@ -28,9 +28,6 @@
     "paths": {
       "@/*": [
         "./src/*"
-      ],
-      "content-collections": [
-        "./.content-collections/generated"
       ]
     }
   },
@@ -44,7 +41,6 @@
   ],
   "exclude": [
     "node_modules",
-    ".next",
-    ".content-collections"
+    ".next"
   ]
 }

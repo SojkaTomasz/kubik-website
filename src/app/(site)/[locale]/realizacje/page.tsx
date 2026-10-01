@@ -14,7 +14,9 @@ import { phoneLinks } from '@/lib/phone'
 import { breadcrumbJsonLd, buildPageMetadata, JsonLd, jsonLdGraph, webPageJsonLd } from '@/lib/seo'
 import type { Locale } from '@/site.config'
 
-export async function generateMetadata({ params }: PageProps<'/[locale]/realizacje'>): Promise<Metadata> {
+export async function generateMetadata({
+	params,
+}: PageProps<'/[locale]/realizacje'>): Promise<Metadata> {
 	const { locale } = await params
 	const t = await getTranslations({ locale, namespace: 'projectsPage' })
 

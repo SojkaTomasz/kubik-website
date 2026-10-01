@@ -100,7 +100,7 @@ export default async function ContactPage({ params }: PageProps<'/[locale]/konta
 									href={phone.href}
 									variant='link'
 									size='none'
-									className='self-start font-heading text-[2.5rem] leading-tight tracking-[-0.03em] font-extrabold text-foreground no-underline hover:text-hot-text md:text-[3.5rem]'
+									className='self-start font-heading text-[2.5rem] leading-tight font-extrabold tracking-[-0.03em] text-foreground no-underline hover:text-hot-text md:text-[3.5rem]'
 								>
 									{phone.display}
 								</Button>

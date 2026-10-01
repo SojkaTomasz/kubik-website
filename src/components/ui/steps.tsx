@@ -108,7 +108,8 @@ export function Steps({
 								variant='overline'
 								className='font-semibold text-(--step-text)'
 							>
-								{padStart(String(index + 1), 2, '0')} <span aria-hidden>·</span> {item.title}
+								{padStart(String(index + 1), 2, '0')} <span aria-hidden>·</span>{' '}
+								{item.title}
 							</Typography>
 							<Typography variant='body'>{item.description}</Typography>
 						</li>

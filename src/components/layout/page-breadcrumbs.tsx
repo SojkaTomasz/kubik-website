@@ -30,7 +30,9 @@ export function PageBreadcrumbs({ items }: { items: BreadcrumbEntry[] }) {
 						{index > 0 && <BreadcrumbSeparator />}
 						<BreadcrumbItem>
 							{item.path ? (
-								<BreadcrumbLink render={<Link href={item.path} />}>{item.name}</BreadcrumbLink>
+								<BreadcrumbLink render={<Link href={item.path} />}>
+									{item.name}
+								</BreadcrumbLink>
 							) : (
 								<BreadcrumbPage>{item.name}</BreadcrumbPage>
 							)}

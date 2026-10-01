@@ -93,4 +93,10 @@ function Image({
 	)
 }
 
+/**
+ * Typ zaimportowanego statycznie zdjęcia — dane (`data/projects.ts`) opisują nim
+ * galerie, a import `next/image` poza `components/ui` blokuje ESLint.
+ */
+export type { StaticImageData as ImageSource } from 'next/image'
+
 export { Image, imageVariants }

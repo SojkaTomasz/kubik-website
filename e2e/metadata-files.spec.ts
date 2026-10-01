@@ -44,14 +44,15 @@ test.describe('ikony', () => {
 		await expect(link).toHaveAttribute('sizes', '180x180')
 	})
 
-	test('ikona iOS jest osiągalna także z wersji angielskiej', async ({ page, request }) => {
+	test('ikona iOS jest osiągalna z podstrony', async ({ page, request }) => {
 		// Odnośnik jest w root layoucie, więc jego adres nie może zależeć od
-		// języka. Gdyby dostał prefiks, na `/en` prowadziłby do 404.
-		await page.goto('/en')
+		// podstrony ani języka — z prefiksem prowadziłby do 404.
+		await page.goto('/realizacje')
 
 		const href = await page.locator('link[rel="apple-touch-icon"]').getAttribute('href')
 
-		expect(href).not.toContain('/en/')
+		// Next dokleja parametr wersji (`?17e6…`) — liczy się sama ścieżka.
+		expect(href).toMatch(/^\/apple-icon(\?|$)/)
 		await expectAsset(request, href ?? '', 'image/png')
 	})
 

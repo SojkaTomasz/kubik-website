@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Container } from '@/components/ui/container'
 import { Marquee } from '@/components/ui/marquee'
 import { Typography } from '@/components/ui/typography'
+import { cities, cityPath } from '@/data/cities'
 import { phoneLinks } from '@/lib/phone'
 import { siteConfig } from '@/site.config'
 
@@ -33,7 +34,6 @@ const LEGAL_LINK =
 export function SiteFooter() {
 	const t = useTranslations('footer')
 	const nav = useTranslations('nav')
-	const cities = companyConfig.serviceCities ?? []
 	const phone = companyConfig.phone ? phoneLinks(companyConfig.phone) : undefined
 
 	return (
@@ -50,13 +50,13 @@ export function SiteFooter() {
 					className='[--duration:60s] [--gap:2rem]'
 				>
 					{cities.map((city, index) => (
-						<Fragment key={city}>
+						<Fragment key={city.slug}>
 							<Typography
 								as='span'
 								variant='displayLg'
 								className='whitespace-nowrap text-border'
 							>
-								{city}
+								{city.name}
 							</Typography>
 							{/* Kropki na zmianę ciepła i zimna — jak rura w projekcie. */}
 							<Typography
@@ -78,7 +78,7 @@ export function SiteFooter() {
 							href={phone.href}
 							variant='link'
 							size='none'
-							className='self-start font-heading text-[1.75rem] leading-tight tracking-[-0.02em] font-extrabold text-foreground no-underline hover:text-hot-text md:text-[2.5rem]'
+							className='self-start font-heading text-[1.75rem] leading-tight font-extrabold tracking-[-0.02em] text-foreground no-underline hover:text-hot-text md:text-[2.5rem]'
 						>
 							{phone.display}
 						</Button>
@@ -134,14 +134,15 @@ export function SiteFooter() {
 							</Typography>
 							<ul className='grid grid-cols-3 gap-x-6 gap-y-3'>
 								{cities.map(city => (
-									<li key={city}>
-										<Typography
-											as='span'
-											variant='body'
-											tone='muted'
+									<li key={city.slug}>
+										<Button
+											href={cityPath(city)}
+											variant='link'
+											size='none'
+											className='no-underline'
 										>
-											{city}
-										</Typography>
+											{city.name}
+										</Button>
 									</li>
 								))}
 							</ul>
