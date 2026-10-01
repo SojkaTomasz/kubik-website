@@ -22,7 +22,7 @@ import { quoteDefaults, type QuoteInput, quoteSchema } from '@/lib/validation/qu
 
 /**
  * Formularz wyceny — metraż, telefon, miejscowość. Wzorzec warstwy dla czytnika
- * ekranu jak w `contact-form.tsx`: podsumowanie błędów z fokusem, opis błędu
+ * ekranu z AGENTS.md („Formularze: trzy mechanizmy"): podsumowanie błędów z fokusem, opis błędu
  * wskazany z pola, obszar `status` obecny zawsze.
  *
  * Układy z projektu:
@@ -76,9 +76,16 @@ export function QuoteForm({ layout = 'wide', city, onSuccess, className }: Quote
 	} = useForm<QuoteInput>({
 		resolver: zodResolver(quoteSchema),
 		defaultValues: { ...quoteDefaults, city: city ?? '' },
-		mode: 'onBlur',
+		/*
+		 * Walidacja dopiero przy wysyłce, potem na bieżąco. Przy `onBlur` samo
+		 * opuszczenie pustego pola dorysowywało błąd — w okienku wyceny (fokus
+		 * startuje w metrażu) przesuwało to „Nie teraz” spod kursora w połowie
+		 * kliknięcia i okno się nie zamykało.
+		 */
+		mode: 'onSubmit',
+		reValidateMode: 'onChange',
 		// Fokus idzie do podsumowania błędów, nie do pierwszego pola — powód
-		// opisany w `contact-form.tsx`.
+		// opisany w AGENTS.md („Formularze: trzy mechanizmy").
 		shouldFocusError: false,
 	})
 
@@ -300,7 +307,9 @@ export function QuoteForm({ layout = 'wide', city, onSuccess, className }: Quote
 							aria-describedby={describedBy(errors.city && errorId('city'))}
 							{...register('city')}
 						/>
-						<FieldError id={errorId('city')}>{translateError(errors.city?.message)}</FieldError>
+						<FieldError id={errorId('city')}>
+							{translateError(errors.city?.message)}
+						</FieldError>
 					</Field>
 				)}
 			</FieldGroup>

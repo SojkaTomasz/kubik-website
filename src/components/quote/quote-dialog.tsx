@@ -7,7 +7,6 @@ import { QuoteForm } from '@/components/forms/quote-form'
 import { Button } from '@/components/ui/button'
 import {
 	Dialog,
-	DialogClose,
 	DialogContent,
 	DialogDescription,
 	DialogHeader,
@@ -62,17 +61,15 @@ export function QuoteDialog({ open, onOpenChange }: QuoteDialogProps) {
 							label={rating('long', { count: companyConfig.rating.count })}
 						/>
 					)}
-					<DialogClose
-						render={
-							<Button
-								variant='link'
-								size='none'
-								className='ml-auto'
-							/>
-						}
+					{/* Ta sama droga co Escape i kliknięcie w tło — `onOpenChange`. */}
+					<Button
+						variant='link'
+						size='none'
+						className='ml-auto'
+						onClick={() => onOpenChange(false)}
 					>
 						{t('notNow')}
-					</DialogClose>
+					</Button>
 				</div>
 			</DialogContent>
 		</Dialog>
