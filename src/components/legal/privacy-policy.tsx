@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Item } from '@/components/ui/item'
 import { SpecList, SpecListItem } from '@/components/ui/spec-list'
 import { Typography } from '@/components/ui/typography'
+import { formatTaxId } from '@/lib/tax-id'
 import { cn } from '@/lib/utils'
 
 /*
@@ -40,13 +41,6 @@ const sectionAnchor = (key: SectionKey) => `privacy-${key}`
 
 /** „01", „02"… — numer sekcji w nagłówku i w spisie treści. */
 const sectionNumber = (index: number) => padStart(String(index + 1), 2, '0')
-
-/** NIP zapisany do JSON-LD jako „PL7352431636" — na stronie w zwyczajowych grupach. */
-function formatTaxId(taxId: string): string {
-	const digits = taxId.replace(/\D/g, '')
-
-	return digits.replace(/^(\d{3})(\d{3})(\d{2})(\d{2})$/, '$1 $2 $3 $4')
-}
 
 export interface PrivacyPolicyHeaderProps {
 	/** `h1` na stronie, `h2` w oknie — strona pod spodem ma już własny `h1`. */
