@@ -287,17 +287,21 @@ test.describe('polityka prywatności z banera', () => {
 	test('pokazuje tę samą treść co strona', async ({ page }) => {
 		// Rozjazd okna ze stroną jest usterką prawną, nie kosmetyczną: użytkownik
 		// godzi się na to, co przeczytał w oknie, a reklamacja odwoła się do strony.
+		// Cały tekst sekcji, nie listy `li`: strona dokłada spis treści, którego
+		// okno nie ma, a treść polityki nie jest już listą.
+		const sections = '[data-slot="privacy-policy-sections"]'
+
 		await page.goto('/polityka-prywatnosci')
-		const onPage = await page.locator('main li').allInnerTexts()
+		const onPage = await page.locator(sections).innerText()
 
 		await page.goto('/')
 		await banner(page).getByRole('button', { name: 'polityka prywatności' }).click()
 
 		// Okno ładuje się leniwie, więc po kliknięciu leci żądanie o jego chunk.
-		// `allInnerTexts` nie czeka na nic i odczytałoby pustą listę.
-		await expect(policyDialog(page).locator('li').first()).toBeVisible()
+		// `innerText` nie czeka na nic i odczytałoby pusty tekst.
+		await expect(policyDialog(page).locator(sections)).toBeVisible()
 
-		const inDialog = await policyDialog(page).locator('li').allInnerTexts()
+		const inDialog = await policyDialog(page).locator(sections).innerText()
 
 		expect(inDialog.length).toBeGreaterThan(0)
 		expect(inDialog).toEqual(onPage)

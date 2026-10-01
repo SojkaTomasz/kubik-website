@@ -1,7 +1,11 @@
 import { getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
 
-import { PrivacyPolicy } from '@/components/legal/privacy-policy'
+import {
+	PrivacyPolicyHeader,
+	PrivacyPolicySections,
+	PrivacyPolicyToc,
+} from '@/components/legal/privacy-policy'
 import { Section } from '@/components/ui/section'
 import { breadcrumbJsonLd, webPageJsonLd } from '@/lib/seo/json-ld'
 import { jsonLdGraph } from '@/lib/seo/json-ld'
@@ -27,8 +31,8 @@ export async function generateMetadata({
 		description: t('description'),
 		path: '/polityka-prywatnosci',
 		locale: locale as Locale,
-		// Szkielet nie ma czego oferować wyszukiwarce. Zdejmij tę flagę,
-		// gdy uzupełnisz treść.
+		// Treść jest robocza i czeka na weryfikację prawnika (nagłówek
+		// `privacy-policy.tsx`). Zdejmij tę flagę po jej zatwierdzeniu.
 		noIndex: true,
 	})
 }
@@ -52,10 +56,28 @@ export default async function PrivacyPolicyPage({
 				)}
 			/>
 
-			<Section containerSize='prose'>
-				{/* `h1` tylko tutaj — w oknie modalnym tytuł schodzi do `h2`, bo
-				    strona pod spodem ma już własny nagłówek pierwszego poziomu. */}
-				<PrivacyPolicy titleAs='h1' />
+			{/* `h1` tylko tutaj — w oknie modalnym tytuł schodzi do `h2`, bo
+			    strona pod spodem ma już własny nagłówek pierwszego poziomu. */}
+			<Section
+				spacing='lg'
+				className='border-b'
+			>
+				<PrivacyPolicyHeader
+					titleAs='h1'
+					size='page'
+				/>
+			</Section>
+
+			{/*
+				Spis treści przyklejony z lewej od desktopu; na telefonie i tablecie
+				go nie ma — sekcje i tak są jedna pod drugą, a lista siedmiu
+				odnośników przed treścią tylko by ją odsuwała.
+			*/}
+			<Section>
+				<div className='grid gap-20 lg:grid-cols-[17.5rem_minmax(0,47.5rem)]'>
+					<PrivacyPolicyToc className='sticky top-28 hidden self-start lg:flex' />
+					<PrivacyPolicySections headingAs='h2' />
+				</div>
 			</Section>
 		</>
 	)

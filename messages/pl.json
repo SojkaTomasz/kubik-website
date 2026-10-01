@@ -99,23 +99,59 @@
 		"alwaysActive": "Zawsze aktywne"
 	},
 	"privacy": {
+		"eyebrow": "Dokumenty",
 		"title": "Polityka prywatności",
-		"description": "Jak przetwarzamy dane osobowe i po co używamy plików cookie.",
-		"placeholderTitle": "Szkielet do uzupełnienia przed wdrożeniem",
-		"placeholderBody": "Ta strona nie zawiera jeszcze treści polityki. Istnieje, żeby link w banerze zgód nie prowadził do błędu 404 — bez działającej polityki zgoda na cookies jest wadliwa prawnie. Uzupełnij sekcje z listy poniżej i zdejmij flagę noIndex w metadanych strony.",
-		"checklistTitle": "Co musi znaleźć się w polityce",
-		"checklist": [
-			"Kto jest administratorem danych — nazwa, adres, dane kontaktowe",
-			"Jakie dane zbieramy i w jakim celu",
-			"Podstawa prawna przetwarzania każdej kategorii danych",
-			"Jak długo przechowujemy dane",
-			"Komu dane są przekazywane — podwykonawcy, narzędzia analityczne",
-			"Czy dane trafiają poza Europejski Obszar Gospodarczy",
-			"Prawa użytkownika: dostęp, sprostowanie, usunięcie, sprzeciw, przenoszenie",
-			"Prawo skargi do Prezesa Urzędu Ochrony Danych Osobowych",
-			"Pliki cookie: kategorie, cel, okres przechowywania, sposób wycofania zgody"
-		],
-		"contact": "Pytania o dane osobowe: {email}"
+		"description": "Bez prawniczego żargonu tam, gdzie się da. Piszemy, jakie dane zbieramy, po co i jak możesz je od nas odebrać.",
+		"effective": "Obowiązuje od 1.10.2026",
+		"tocTitle": "Na tej stronie",
+		"sections": {
+			"administrator": {
+				"title": "Kto przetwarza Twoje dane",
+				"body": "Administratorem danych jest firma, która przyjeżdża do Ciebie z frezarką. Jeśli masz pytanie o dane — piszesz albo dzwonisz do nas, nie do żadnego działu prawnego.",
+				"companyLabel": "Administrator",
+				"contactLabel": "Kontakt w sprawie danych",
+				"taxId": "NIP {taxId}"
+			},
+			"data": {
+				"title": "Jakie dane zbieramy",
+				"body": "Tylko to, co wpiszesz w formularz wyceny, i to, co zbierają pliki cookie, na które się zgodzisz.",
+				"items": {
+					"phone": {
+						"label": "Numer telefonu",
+						"purpose": "Żeby oddzwonić z wyceną."
+					},
+					"area": {
+						"label": "Metraż i miejscowość",
+						"purpose": "Żeby policzyć cenę i zaplanować dojazd."
+					},
+					"technical": {
+						"label": "Dane techniczne",
+						"purpose": "Adres IP, przeglądarka, odwiedzone podstrony — tylko po zgodzie na cookie analityczne."
+					}
+				}
+			},
+			"purposes": {
+				"title": "Po co i na jakiej podstawie",
+				"body": "Przygotowanie wyceny i umówienie terminu to działania na Twoją prośbę przed zawarciem umowy (art. 6 ust. 1 lit. b RODO). Faktury i rozliczenia prowadzimy, bo wymaga tego prawo podatkowe (lit. c). Statystyki strony i reklamy uruchamiamy wyłącznie za Twoją zgodą (lit. a), którą możesz wycofać w każdej chwili."
+			},
+			"retention": {
+				"title": "Jak długo",
+				"body": "Zapytania, z których nic nie wyszło, kasujemy po 12 miesiącach. Dokumenty księgowe trzymamy 5 lat od końca roku podatkowego. Dane z cookie — do czasu wycofania zgody, nie dłużej niż 13 miesięcy."
+			},
+			"recipients": {
+				"title": "Komu je przekazujemy",
+				"body": "Nie sprzedajemy danych. Dostęp mają tylko firmy, które pomagają nam prowadzić stronę i biuro: hosting (Vercel), poczta (Google), biuro rachunkowe oraz — po Twojej zgodzie — dostawcy analityki i reklam (Google, Meta)."
+			},
+			"cookies": {
+				"title": "Pliki cookie",
+				"body": "Dzielimy je na cztery kategorie. Niezbędne działają zawsze, pozostałe dopiero wtedy, gdy je włączysz. Decyzję zmienisz w każdej chwili.",
+				"cta": "Zmień ustawienia cookies"
+			},
+			"rights": {
+				"title": "Twoje prawa",
+				"body": "Możesz poprosić o wgląd w swoje dane, ich poprawienie, usunięcie, ograniczenie albo przeniesienie, a także sprzeciwić się ich przetwarzaniu. Wystarczy mail na {email} — odpowiadamy w ciągu 30 dni. Jeśli uznasz, że łamiemy przepisy, możesz złożyć skargę do Prezesa UODO (ul. Stawki 2, 00-193 Warszawa)."
+			}
+		}
 	},
 	"validation": {
 		"required": "To pole jest wymagane.",

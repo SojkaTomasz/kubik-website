@@ -22,6 +22,13 @@ const specListVariants = cva('flex flex-col', {
 			 */
 			feature:
 				'[&_[data-slot=spec-list-term]]:text-body [&_[data-slot=spec-list-term]]:leading-snug [&_[data-slot=spec-list-value]]:font-mono [&_[data-slot=spec-list-value]]:text-[0.8125rem] [&_[data-slot=spec-list-value]]:leading-4 [&_[data-slot=spec-list-value]]:text-muted-foreground',
+			/**
+			 * Słowniczek — termin pogrubiony, wyjaśnienie zwykłym tekstem obok niego
+			 * (od tabletu w kolumnie 200 px, na telefonie pod spodem). Tabela danych
+			 * w polityce prywatności: „Numer telefonu — Żeby oddzwonić z wyceną".
+			 */
+			definition:
+				'[&_[data-slot=spec-list-item]]:flex-col [&_[data-slot=spec-list-item]]:items-start [&_[data-slot=spec-list-item]]:gap-1 sm:[&_[data-slot=spec-list-item]]:flex-row sm:[&_[data-slot=spec-list-item]]:gap-6 [&_[data-slot=spec-list-term]]:text-base [&_[data-slot=spec-list-term]]:leading-6 [&_[data-slot=spec-list-term]]:font-semibold sm:[&_[data-slot=spec-list-term]]:w-50 sm:[&_[data-slot=spec-list-term]]:shrink-0 [&_[data-slot=spec-list-value]]:shrink [&_[data-slot=spec-list-value]]:text-left [&_[data-slot=spec-list-value]]:text-base [&_[data-slot=spec-list-value]]:leading-6 [&_[data-slot=spec-list-value]]:text-muted-foreground',
 		},
 		tone: {
 			default: '',

@@ -99,23 +99,59 @@
 		"alwaysActive": "Always active"
 	},
 	"privacy": {
+		"eyebrow": "Documents",
 		"title": "Privacy policy",
-		"description": "How we process personal data and why we use cookies.",
-		"placeholderTitle": "Template — complete before going live",
-		"placeholderBody": "This page does not contain the policy text yet. It exists so the link in the consent banner does not lead to a 404 — without a working policy, cookie consent is legally defective. Fill in the sections listed below and remove the noIndex flag from the page metadata.",
-		"checklistTitle": "What the policy must cover",
-		"checklist": [
-			"Who the data controller is — name, address, contact details",
-			"What data we collect and for what purpose",
-			"The legal basis for processing each category of data",
-			"How long we keep the data",
-			"Who the data is shared with — subprocessors, analytics tools",
-			"Whether data leaves the European Economic Area",
-			"User rights: access, rectification, erasure, objection, portability",
-			"The right to lodge a complaint with the supervisory authority",
-			"Cookies: categories, purpose, retention period, how to withdraw consent"
-		],
-		"contact": "Questions about personal data: {email}"
+		"description": "Plain language wherever possible. What data we collect, why, and how you can take it back.",
+		"effective": "Effective from 1 October 2026",
+		"tocTitle": "On this page",
+		"sections": {
+			"administrator": {
+				"title": "Who processes your data",
+				"body": "The data controller is the company that comes to you with the milling machine. If you have a question about your data, you write or call us — not a legal department.",
+				"companyLabel": "Controller",
+				"contactLabel": "Data enquiries",
+				"taxId": "Tax ID {taxId}"
+			},
+			"data": {
+				"title": "What data we collect",
+				"body": "Only what you enter in the quote form and what the cookies you accept collect.",
+				"items": {
+					"phone": {
+						"label": "Phone number",
+						"purpose": "To call you back with a quote."
+					},
+					"area": {
+						"label": "Floor area and town",
+						"purpose": "To work out the price and plan the trip."
+					},
+					"technical": {
+						"label": "Technical data",
+						"purpose": "IP address, browser, pages visited — only after you accept analytics cookies."
+					}
+				}
+			},
+			"purposes": {
+				"title": "Why and on what legal basis",
+				"body": "Preparing a quote and booking a date are steps taken at your request before entering into a contract (Art. 6(1)(b) GDPR). We keep invoices and accounts because tax law requires it (point c). Site statistics and advertising run only with your consent (point a), which you can withdraw at any time."
+			},
+			"retention": {
+				"title": "How long",
+				"body": "Enquiries that led nowhere are deleted after 12 months. Accounting records are kept for 5 years from the end of the tax year. Cookie data — until you withdraw consent, no longer than 13 months."
+			},
+			"recipients": {
+				"title": "Who we share it with",
+				"body": "We do not sell data. Access is limited to companies that help us run the site and the office: hosting (Vercel), email (Google), our accounting office and — with your consent — analytics and advertising providers (Google, Meta)."
+			},
+			"cookies": {
+				"title": "Cookies",
+				"body": "We group them into four categories. Necessary cookies always work; the others only once you switch them on. You can change your decision at any time.",
+				"cta": "Change cookie settings"
+			},
+			"rights": {
+				"title": "Your rights",
+				"body": "You can ask to access, correct, delete, restrict or port your data, and object to its processing. Just email {email} — we reply within 30 days. If you believe we break the law, you can complain to the Polish Data Protection Authority (UODO, ul. Stawki 2, 00-193 Warsaw)."
+			}
+		}
 	},
 	"validation": {
 		"required": "This field is required.",
