@@ -66,6 +66,7 @@
 	},
 	"cookies": {
 		"regionLabel": "Zgoda na pliki cookie",
+		"eyebrow": "Pliki cookie",
 		"title": "Ta strona używa plików cookie",
 		"message": "Używamy plików cookie, żeby strona działała poprawnie, a my wiedzieli, co da się w niej poprawić. Szczegóły opisuje",
 		"privacyLink": "polityka prywatności",
@@ -94,7 +95,8 @@
 			}
 		},
 		"decisionRequired": "Aby korzystać ze strony, wybierz „Akceptuję” albo otwórz „Ustawienia”.",
-		"lockedSwitch": "Ta kategoria jest wymagana i nie można jej wyłączyć."
+		"lockedSwitch": "Ta kategoria jest wymagana i nie można jej wyłączyć.",
+		"alwaysActive": "Zawsze aktywne"
 	},
 	"privacy": {
 		"title": "Polityka prywatności",

@@ -66,6 +66,7 @@
 	},
 	"cookies": {
 		"regionLabel": "Cookie consent",
+		"eyebrow": "Cookies",
 		"title": "This site uses cookies",
 		"message": "We use cookies so the site works correctly and so we know what to improve. Details are in our",
 		"privacyLink": "privacy policy",
@@ -94,7 +95,8 @@
 			}
 		},
 		"decisionRequired": "To use this site choose “Accept” or open “Settings”.",
-		"lockedSwitch": "This category is required and cannot be turned off."
+		"lockedSwitch": "This category is required and cannot be turned off.",
+		"alwaysActive": "Always active"
 	},
 	"privacy": {
 		"title": "Privacy policy",

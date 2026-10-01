@@ -1,10 +1,11 @@
 'use client'
 
+import { CheckIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useEffect, useId, useRef, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
+import { Card, CardFooter, CardHeader } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 import { CONSENT_PENDING_CLASS } from '@/lib/analytics/consent'
 
@@ -197,8 +198,8 @@ export function CookieBanner({
 			className='fixed inset-0 z-50 overflow-y-auto'
 		>
 			{/*
-				Zasłona. Kolor wpisany na sztywno, nie z tokenu: rampa marki jest
-				w motywie ciemnym odwrócona, więc token dałby tam JASNĄ zasłonę.
+				Zasłona z tokenu `--overlay` — tej samej, co pod oknami z `dialog.tsx`,
+				więc ustawienia otwarte na banerze nie zmieniają tła.
 
 				To ona niesie kliknięcie obok karty — jest pozycjonowana, więc leży
 				nad niepozycjonowaną ramką centrującą, a pod kartą.
@@ -206,11 +207,15 @@ export function CookieBanner({
 			<div
 				aria-hidden='true'
 				onClick={pulse}
-				className='fixed inset-0 bg-black/60 supports-backdrop-filter:backdrop-blur-xs'
+				className='fixed inset-0 bg-overlay supports-backdrop-filter:backdrop-blur-xs'
 			/>
 
-			{/* `min-h-full` daje ramce pełną wysokość okna, więc `items-center` ma co centrować. */}
-			<div className='flex min-h-full items-center justify-center p-4 sm:p-6'>
+			{/*
+				`min-h-full` daje ramce pełną wysokość okna, więc jest co wyrównywać:
+				do dołu na telefonie i tablecie (arkusz jak w projekcie), do środka od
+				desktopu.
+			*/}
+			<div className='flex min-h-full items-end justify-center lg:items-center lg:p-6'>
 				<Card
 					ref={dialogRef}
 					role='dialog'
@@ -227,23 +232,28 @@ export function CookieBanner({
 					onKeyDown={trapFocus}
 					// Zdjęcie klasy dopiero po animacji — zostawiona blokuje kolejny przebieg.
 					onAnimationEnd={() => dialogRef.current?.classList.remove(PULSE_CLASS)}
-					className='relative w-full max-w-lg shadow-2xl outline-none'
+					variant='modal'
+					size='lg'
+					className='w-full gap-7 outline-none lg:max-w-[35rem]'
 				>
 					{/* `Typography as='h2'`, nie `CardTitle` — ten renderuje `div`, więc tytuł
 					    nie trafiłby do listy nagłówków czytnika ekranu. */}
-					<CardHeader>
+					<CardHeader className='gap-3.5'>
+						<Typography
+							variant='overline'
+							tone='primary'
+						>
+							{t('eyebrow')}
+						</Typography>
 						<Typography
 							as='h2'
-							variant='h5'
+							variant='displaySm'
 						>
 							{t('title')}
 						</Typography>
-					</CardHeader>
-
-					<CardContent>
 						<Typography
 							id={messageId}
-							variant='bodySm'
+							variant='body'
 							tone='muted'
 						>
 							{t('message')}{' '}
@@ -251,14 +261,13 @@ export function CookieBanner({
 							<Button
 								variant='link'
 								size='none'
-								className='underline underline-offset-4'
 								onClick={onOpenPrivacy}
 							>
 								{t('privacyLink')}
 							</Button>
 							.
 						</Typography>
-					</CardContent>
+					</CardHeader>
 
 					{/*
 						Kolumna zostawia zgodę NA DOLE — tam sięga kciuk na telefonie —
@@ -266,18 +275,20 @@ export function CookieBanner({
 						ścieżki wzroku. Zgoda jest szersza od ustawień, ale ustawienia
 						zostają pełnowymiarowym przyciskiem: to jedyna droga do odmowy.
 					*/}
-					<CardFooter className='flex flex-col gap-2 sm:flex-row sm:justify-end'>
+					<CardFooter className='flex-col gap-2.5 sm:flex-row'>
 						<Button
 							variant='outline'
-							size='lg'
-							className='w-full sm:flex-1'
+							size='xl'
+							className='w-full sm:w-auto sm:min-w-38 sm:flex-1'
 							onClick={onOpenSettings}
 						>
 							{t('settings')}
 						</Button>
 						<Button
-							size='lg'
-							className='w-full sm:flex-3'
+							size='xl'
+							icon={<CheckIcon />}
+							iconPosition='right'
+							className='w-full sm:w-auto sm:flex-3'
 							onClick={onAcceptAll}
 						>
 							{t('accept')}

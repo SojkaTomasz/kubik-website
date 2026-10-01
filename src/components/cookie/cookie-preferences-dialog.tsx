@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 import { useId, useState } from 'react'
 
 import { cookieCategories } from '@/components/cookie/cookie-categories'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
 	Dialog,
@@ -13,8 +14,13 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from '@/components/ui/dialog'
-import { Label } from '@/components/ui/label'
-import { Separator } from '@/components/ui/separator'
+import {
+	Field,
+	FieldContent,
+	FieldDescription,
+	FieldGroup,
+	FieldTitle,
+} from '@/components/ui/field'
 import { Switch } from '@/components/ui/switch'
 import { Typography } from '@/components/ui/typography'
 import type { ConsentCategories } from '@/lib/analytics/consent'
@@ -52,52 +58,63 @@ function CookiePreferencesForm({
 
 	return (
 		<>
-			<div className='flex flex-col gap-1'>
-				{cookieCategories.map((category, index) => (
-					<div key={category.key}>
-						{index > 0 && <Separator className='my-3' />}
-						<div className='flex items-start justify-between gap-4'>
-							<div className='flex flex-col gap-1'>
-								<Label htmlFor={`cookie-${category.key}`}>
-									{t(`categories.${category.key}.label`)}
-								</Label>
-								<Typography
-									id={descriptionId(category.key)}
-									variant='caption'
-									tone='muted'
-								>
-									{t(`categories.${category.key}.description`)}
-								</Typography>
-							</div>
-							<Switch
-								id={`cookie-${category.key}`}
-								checked={category.required ? true : draft[category.key]}
-								disabled={category.required}
-								aria-label={t(`categories.${category.key}.label`)}
-								/*
-								 * Opis kategorii jako opis przełącznika, a dla kategorii
-								 * zablokowanej dodatkowo zdanie o tym, DLACZEGO nie da się
-								 * jej wyłączyć.
-								 *
-								 * Czytnik ogłasza przy `disabled` samo „niedostępny", co
-								 * brzmi jak usterka strony, a nie jak wymóg techniczny.
-								 * Osoba widząca ma obok akapit z wyjaśnieniem i wiąże
-								 * jedno z drugim wzrokiem — bez tego atrybutu ta sama
-								 * informacja nie dociera nigdzie.
-								 */
-								aria-describedby={
-									category.required
-										? `${descriptionId(category.key)} ${lockedHintId}`
-										: descriptionId(category.key)
-								}
-								onCheckedChange={checked =>
-									setDraft(current => ({ ...current, [category.key]: checked }))
-								}
-							/>
-						</div>
-					</div>
+			{/*
+				Wiersze oddzielone liniami, jak w projekcie. `FieldTitle`, nie
+				`Label`: etykieta pola ma w projekcie krój mono wersalikami, a nazwa
+				kategorii jest tytułem opcji. Nazwę dostępną przełącznik i tak bierze
+				z `aria-label` — Base UI nie łączy go z `<label htmlFor>`.
+			*/}
+			<FieldGroup className='gap-0'>
+				{cookieCategories.map(category => (
+					<Field
+						key={category.key}
+						orientation='horizontal'
+						className='items-start gap-6 border-t py-5 last:border-b'
+					>
+						<FieldContent className='gap-1.5'>
+							<FieldTitle>
+								{t(`categories.${category.key}.label`)}
+								{category.required && (
+									<Badge
+										variant='label'
+										aria-hidden
+									>
+										{t('alwaysActive')}
+									</Badge>
+								)}
+							</FieldTitle>
+							<FieldDescription id={descriptionId(category.key)}>
+								{t(`categories.${category.key}.description`)}
+							</FieldDescription>
+						</FieldContent>
+						<Switch
+							id={`cookie-${category.key}`}
+							checked={category.required ? true : draft[category.key]}
+							disabled={category.required}
+							aria-label={t(`categories.${category.key}.label`)}
+							/*
+							 * Opis kategorii jako opis przełącznika, a dla kategorii
+							 * zablokowanej dodatkowo zdanie o tym, DLACZEGO nie da się
+							 * jej wyłączyć.
+							 *
+							 * Czytnik ogłasza przy `disabled` samo „niedostępny", co
+							 * brzmi jak usterka strony, a nie jak wymóg techniczny.
+							 * Osoba widząca ma obok akapit z wyjaśnieniem i wiąże
+							 * jedno z drugim wzrokiem — bez tego atrybutu ta sama
+							 * informacja nie dociera nigdzie.
+							 */
+							aria-describedby={
+								category.required
+									? `${descriptionId(category.key)} ${lockedHintId}`
+									: descriptionId(category.key)
+							}
+							onCheckedChange={checked =>
+								setDraft(current => ({ ...current, [category.key]: checked }))
+							}
+						/>
+					</Field>
 				))}
-			</div>
+			</FieldGroup>
 
 			{/*
 				Wyjaśnienie wskazywane przez `aria-describedby` zablokowanych
@@ -121,7 +138,12 @@ function CookiePreferencesForm({
 				i zapisuje.
 			*/}
 			<DialogFooter>
-				<Button onClick={() => onCommit(draft)}>{t('saveChoice')}</Button>
+				<Button
+					size='xl'
+					onClick={() => onCommit(draft)}
+				>
+					{t('saveChoice')}
+				</Button>
 			</DialogFooter>
 		</>
 	)
@@ -154,8 +176,14 @@ export function CookiePreferencesDialog({
 			open={open}
 			onOpenChange={onOpenChange}
 		>
-			<DialogContent className='sm:max-w-lg'>
+			<DialogContent className='sm:max-w-[37.5rem]'>
 				<DialogHeader>
+					<Typography
+						variant='overline'
+						tone='primary'
+					>
+						{t('eyebrow')}
+					</Typography>
 					<DialogTitle>{t('dialogTitle')}</DialogTitle>
 					<DialogDescription>{t('dialogDescription')}</DialogDescription>
 				</DialogHeader>

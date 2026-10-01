@@ -62,8 +62,8 @@ const buttonVariants = cva(
 				'icon-lg': "size-11 [&_svg:not([class*='size-'])]:size-[1.125rem]",
 				/** Strzałki karuzeli realizacji — 56 / 60 px, w parze z `xl`. */
 				'icon-xl': "size-14 md:size-15 [&_svg:not([class*='size-'])]:size-[1.125rem]",
-				/** Bez własnych wymiarów — przycisk zachowuje się jak zwykły tekst. */
-				none: 'h-auto gap-1.5 p-0',
+				/** Bez własnych wymiarów — przycisk zachowuje się jak zwykły tekst: krój, wielkość i grubość po akapicie, w którym stoi. */
+				none: 'h-auto gap-1.5 p-0 [font-size:inherit] [line-height:inherit] [font-weight:inherit] whitespace-normal',
 			},
 			/**
 			 * Zaokrąglenie. Domyślne `theme` bierze wartość z tokenu `--button-radius`
