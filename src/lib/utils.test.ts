@@ -36,6 +36,17 @@ describe('cn', () => {
 		expect(cn('text-sm text-muted-foreground', 'text-lg')).toBe('text-muted-foreground text-lg')
 	})
 
+	it('zna rozmiary tekstu spoza skali Tailwinda', () => {
+		// Bez rozszerzenia `text-body` uchodziło za kolor i wyrzucało prawdziwy
+		// kolor tekstu — biały napis na czerwonym przycisku stawał się szary.
+		expect(cn('text-sm text-primary-foreground', 'text-body')).toBe(
+			'text-primary-foreground text-body'
+		)
+		expect(cn('text-muted-foreground', 'text-display-sm')).toBe(
+			'text-muted-foreground text-display-sm'
+		)
+	})
+
 	it('nie miesza klas z różnych grup', () => {
 		expect(cn('px-2', 'py-4')).toBe('px-2 py-4')
 	})

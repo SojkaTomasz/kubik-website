@@ -1,5 +1,22 @@
 import { type ClassValue, clsx } from 'clsx'
-import { twMerge } from 'tailwind-merge'
+import { extendTailwindMerge } from 'tailwind-merge'
+
+/**
+ * tailwind-merge zna wyłącznie skalę domyślną Tailwinda. Rozmiar spoza niej
+ * (`text-body`, `text-display-*` z theme/typography.css) bierze za KOLOR — i przy
+ * zderzeniu z prawdziwym kolorem po cichu wyrzuca jedno z dwóch. Tak zginął
+ * biały tekst przycisku „Akceptuję": `text-body` z rozmiaru `xl` zjadało
+ * `text-primary-foreground` z wariantu, a audyt kontrastu łapał 4,06:1.
+ *
+ * Każdy nowy token `--text-*` dopisz tutaj.
+ */
+const twMerge = extendTailwindMerge({
+	extend: {
+		classGroups: {
+			'font-size': [{ text: ['body', 'display-xl', 'display-lg', 'display-md', 'display-sm'] }],
+		},
+	},
+})
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
