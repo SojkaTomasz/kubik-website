@@ -2,25 +2,25 @@ import { describe, expect, it } from 'vitest'
 
 import { locales } from '@/site.config'
 
+import en from '../../messages/en.json'
 import pl from '../../messages/pl.json'
 
 /**
  * Spójność plików tłumaczeń.
  *
- * Brakujący key nie wywraca strony — next-intl wyświetla wtedy surowy
- * identyfikator, na przykład „contact.fields.name". Wygląda to jak literówka
+ * Brakujący klucz nie wywraca strony — next-intl wyświetla wtedy surowy
+ * identyfikator, na przykład „quote.fields.area". Wygląda to jak literówka
  * w treści i potrafi przeżyć wdrożenie, bo nikt nie klika po całym serwisie
  * w drugim języku.
  *
- * Strona jest dziś jednojęzyczna, więc test pilnuje jednego katalogu: każdy
- * kod błędu i klucz walidacji używany w kodzie ma swój komunikat. Dokładając
- * język, dopisz jego plik do `CATALOGS` — test na komplet katalogów zgłosi
- * brak sam.
+ * Ten test porównuje strukturę obu plików i pilnuje, żeby ta sama zmienna
+ * w komunikacie występowała w obu wersjach — bo brakujące `{seconds}` daje
+ * zdanie urwane w połowie.
  */
 
 type Node = Record<string, unknown>
 
-/** Spłaszcza zagnieżdżony object do listy ścieżek: `contact.fields.name`. */
+/** Spłaszcza zagnieżdżony obiekt do listy ścieżek: `quote.fields.area`. */
 function paths(object: Node, prefix = ''): string[] {
 	return Object.entries(object).flatMap(([key, value]) =>
 		typeof value === 'object' && value !== null
@@ -37,13 +37,32 @@ function value(object: Node, path: string): unknown {
 	}, object)
 }
 
-const CATALOGS = { pl } as const satisfies Record<string, Node>
+/** Wyciąga nazwy zmiennych z komunikatu: `{seconds}`, `{current}`. */
+function placeholders(text: string): string[] {
+	return [...text.matchAll(/\{(\w+)[^}]*\}/g)].map(match => match[1] as string).sort()
+}
+
+const CATALOGS = { pl, en } as const satisfies Record<string, Node>
 
 describe('katalogi tłumaczeń', () => {
-	it('istnieje catalog dla każdego zadeklarowanego języka', () => {
+	it('istnieje katalog dla każdego zadeklarowanego języka', () => {
 		for (const locale of locales) {
 			expect(CATALOGS, `brak pliku messages/${locale}.json`).toHaveProperty(locale)
 		}
+	})
+
+	it('mają identyczny zestaw kluczy', () => {
+		const inPl = paths(pl).sort()
+		const inEn = paths(en).sort()
+
+		expect(
+			inPl.filter(key => !inEn.includes(key)),
+			'brakuje w en.json'
+		).toEqual([])
+		expect(
+			inEn.filter(key => !inPl.includes(key)),
+			'brakuje w pl.json'
+		).toEqual([])
 	})
 
 	it('żaden komunikat nie jest pusty', () => {
@@ -55,12 +74,25 @@ describe('katalogi tłumaczeń', () => {
 
 		expect(empty).toEqual([])
 	})
+
+	it('te same zmienne występują w obu wersjach komunikatu', () => {
+		const mismatches = paths(pl)
+			.map(path => ({
+				path,
+				pl: placeholders(String(value(pl, path) ?? '')),
+				en: placeholders(String(value(en, path) ?? '')),
+			}))
+			.filter(({ pl: inPl, en: inEn }) => inPl.join() !== inEn.join())
+			.map(({ path, pl: inPl, en: inEn }) => `${path}: pl=[${inPl}] en=[${inEn}]`)
+
+		expect(mismatches, 'rozjazd zmiennych w komunikatach').toEqual([])
+	})
 })
 
-describe('klucze wymagane przez code', () => {
-	it('każdy code błędu wysyłki wyceny ma swój komunikat', () => {
+describe('klucze wymagane przez kod', () => {
+	it('każdy kod błędu wysyłki wyceny ma swój komunikat', () => {
 		// Lista odpowiada typowi QuoteErrorCode. Rozjazd oznaczałby, że przy
-		// jakimś rodzaju awarii użytkownik zobaczy surowy key.
+		// jakimś rodzaju awarii użytkownik zobaczy surowy klucz.
 		for (const code of ['validation', 'rateLimit', 'notConfigured', 'sendFailed', 'rejected']) {
 			for (const [locale, catalog] of Object.entries(CATALOGS)) {
 				expect(
@@ -71,7 +103,7 @@ describe('klucze wymagane przez code', () => {
 		}
 	})
 
-	it('każdy key walidacji użyty w schematach ma swój komunikat', () => {
+	it('każdy klucz walidacji użyty w schematach ma swój komunikat', () => {
 		// Klucze pochodzą z lib/validation/quote.ts.
 		for (const key of ['required', 'phone', 'tooLong', 'area']) {
 			for (const [locale, catalog] of Object.entries(CATALOGS)) {

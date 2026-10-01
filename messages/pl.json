@@ -241,6 +241,8 @@
 		"reviewsClaim": "Jedna z najwyżej ocenianych firm w branży w Polsce.",
 		"reviewsSource": "Google",
 		"reviewsCounter": "{current} / {total}",
+		"reviewQuote": "„{text}”",
+		"reviewsTranslated": "Opinie przetłumaczone z polskiego.",
 		"callBandTitle": "Wolisz od razu porozmawiać?",
 		"quoteBandTitle": "Podaj metraż, a oddzwonimy z ceną.",
 		"stepsEyebrow": "Jak to działa",
@@ -264,7 +266,8 @@
 		"fitNo": "Nie nadaje się",
 		"fitNote": "Nie wiesz, jaką masz wylewkę? Wyślij zdjęcie SMS-em na {phone}, ocenimy za darmo.",
 		"priceEyebrow": "Cena",
-		"priceTitle": "Frezowanie pod podłogówkę: cena za m²"
+		"priceTitle": "Frezowanie pod podłogówkę: cena za m²",
+		"schemaType": "Frezowanie wylewki pod ogrzewanie podłogowe"
 	},
 	"city": {
 		"title": "Frezowanie pod ogrzewanie podłogowe {name}",

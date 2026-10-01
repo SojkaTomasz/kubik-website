@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 import { companyConfig } from '@/company.config'
 import {
@@ -12,7 +12,8 @@ import { CarouselProgress } from '@/components/ui/carousel-progress'
 import { Rating } from '@/components/ui/rating'
 import { Section } from '@/components/ui/section'
 import { Typography } from '@/components/ui/typography'
-import { reviews } from '@/data/reviews'
+import { reviewsByLocale } from '@/data/reviews'
+import type { Locale } from '@/site.config'
 
 /**
  * Opinie (Paper: „ReviewsCarousel") — duża ocena z jednego źródła i karuzela
@@ -24,6 +25,8 @@ import { reviews } from '@/data/reviews'
 export function ReviewsSection({ eyebrow }: { eyebrow: string }) {
 	const t = useTranslations('sections')
 	const rating = useTranslations('rating')
+	const locale = useLocale() as Locale
+	const reviews = reviewsByLocale[locale]
 
 	return (
 		<Section
@@ -61,6 +64,8 @@ export function ReviewsSection({ eyebrow }: { eyebrow: string }) {
 					>
 						{t('reviewsClaim')}
 					</Typography>
+					{/* Poza polskim opinie są tłumaczeniem — mówimy to wprost. */}
+					{locale !== 'pl' && <Typography variant='meta'>{t('reviewsTranslated')}</Typography>}
 				</div>
 
 				<Carousel
@@ -72,7 +77,9 @@ export function ReviewsSection({ eyebrow }: { eyebrow: string }) {
 							<CarouselItem key={review.author}>
 								<figure className='flex flex-col gap-6'>
 									<blockquote>
-										<Typography variant='quote'>„{review.text}”</Typography>
+										<Typography variant='quote'>
+											{t('reviewQuote', { text: review.text })}
+										</Typography>
 									</blockquote>
 									<Typography
 										as='figcaption'

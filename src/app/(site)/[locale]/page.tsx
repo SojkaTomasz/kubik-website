@@ -15,7 +15,7 @@ import { ServiceTeaser } from '@/components/sections/service-teaser'
 import { Button } from '@/components/ui/button'
 import { CtaBand } from '@/components/ui/cta-band'
 import { PageHero } from '@/components/ui/page-hero'
-import { projects } from '@/data/projects'
+import { localizedProjects } from '@/data/projects'
 import { phoneLinks } from '@/lib/phone'
 import { sectionNumber } from '@/lib/section-number'
 import {
@@ -79,7 +79,7 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
 			<AboutSection eyebrow={eyebrow(1, t('aboutEyebrow'))} />
 			<ProjectsSlider
 				eyebrow={eyebrow(2, sections('projectsEyebrow'))}
-				projects={projects}
+				projects={localizedProjects(locale as Locale)}
 			/>
 			<ServiceTeaser eyebrow={eyebrow(3, t('serviceEyebrow'))} />
 			<ReviewsSection eyebrow={eyebrow(4, sections('reviewsEyebrow'))} />

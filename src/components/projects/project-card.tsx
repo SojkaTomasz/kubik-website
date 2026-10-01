@@ -1,5 +1,6 @@
 import startsWith from 'lodash/startsWith'
 import toLower from 'lodash/toLower'
+import { useTranslations } from 'next-intl'
 import { useId } from 'react'
 
 import { Badge } from '@/components/ui/badge'
@@ -9,11 +10,13 @@ import { type Project, projectPath } from '@/data/projects'
 import { Link } from '@/i18n/navigation'
 import { cn } from '@/lib/utils'
 
-/** „60 m² · cement · 1 dzień" — dane techniczne pod tytułem karty. */
-export function projectMeta(project: Pick<Project, 'area' | 'screed' | 'days'>): string {
+/**
+ * „60 m² · cement · 1 dzień" — dane techniczne pod tytułem karty. Czas
+ * przychodzi gotowy z tłumaczeń (`project.days`), bo odmiana zależy od języka.
+ */
+export function projectMeta(project: Pick<Project, 'area' | 'screed'>, days: string): string {
 	const screedName = toLower(project.screed)
 	const screed = startsWith(screedName, 'cement') ? 'cement' : screedName
-	const days = project.days === 1 ? '1 dzień' : `${project.days} dni`
 
 	return `${project.area} m² · ${screed} · ${days}`
 }
@@ -49,6 +52,7 @@ export function ProjectCard({
 	sizes = '(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 80vw',
 	className,
 }: ProjectCardProps) {
+	const t = useTranslations('project')
 	const titleId = useId()
 	const cover = project.photos[0]
 
@@ -101,7 +105,9 @@ export function ProjectCard({
 				>
 					{project.title}
 				</Typography>
-				<Typography variant='meta'>{projectMeta(project)}</Typography>
+				<Typography variant='meta'>
+					{projectMeta(project, t('days', { count: project.days }))}
+				</Typography>
 			</div>
 		</Link>
 	)

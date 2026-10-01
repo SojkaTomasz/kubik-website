@@ -631,6 +631,8 @@ Trzy rzeczy wynikają z tego, że to ta SAMA lista karmi wiele miejsc:
 - **Ścieżki składają wyłącznie `cityPath` i `projectPath`.** Slider, stopka, obszar działania i
   okruszki linkują przez nie — zmiana adresu to jedna linia.
 
+Angielskie wersje leżą w `src/data/en/` — patrz „Języki".
+
 Zdjęcia leżą w `src/assets/photos` i są importowane statycznie (patrz „Obrazy"); typ zdjęcia w
 danych to `ImageSource` z `components/ui/image`, bo import `next/image` poza `components/ui` blokuje
 ESLint.
@@ -646,37 +648,39 @@ i next-intl przepisywał ją na `/pl/apple-icon`. Objaw: build wypisuje trasę j
 ląduje zrzut strony. Segment jest dlatego wymieniony z nazwy w `UNLOCALIZED_SEGMENTS`. Pilnuje tego
 `e2e/metadata-files.spec.ts`.
 
-## Strona jednojęzyczna
+## Języki
 
-**Kubik jest dziś jednojęzyczny** — `locales` w `src/site.config.ts` ma jedną pozycję:
+Kubik ma dwie wersje: polską (domyślna, bez prefiksu) i angielską (`/en/…`). Listy siedzą w
+`src/site.config.ts` i nie wolno ich mylić: `supportedLocales` to języki, które zna kod — z niej
+wynika typ `Locale` i mapa `localeTags`; `locales` to języki faktycznie włączone i tylko ją
+edytujesz. Gdyby `Locale` wynikało z listy włączonych, zawężenie jej do `['pl']` zawęziłoby też sam
+typ i **wywaliło build** — tak było w pierwszym podejściu.
 
-```ts
-export const locales: readonly Locale[] = ['pl']
-```
+Tekst strony ma DWA źródła i każde tłumaczy się inaczej:
 
-Są tam DWIE listy i nie wolno ich mylić. `supportedLocales` to języki, które zna kod — z niej wynika
-typ `Locale` i mapa `localeTags`. `locales` to języki faktycznie włączone i tylko ją edytujesz.
-Gdyby `Locale` wynikało z listy włączonych, zawężenie jej do `['pl']` zawęziłoby też sam typ i
-**wywaliło build** na `localeTags` oraz testach odwołujących się do drugiego języka — tak było w
-pierwszym podejściu, złapane przy budowaniu.
+| Źródło                  | Tłumaczenie                                                                      |
+| ----------------------- | -------------------------------------------------------------------------------- |
+| `messages/<język>.json` | interfejs i nagłówki; komplet kluczy i zmiennych pilnuje `i18n/messages.test.ts` |
+| `src/data/*.ts`         | treść miast, realizacji, usługi i opinie; wersja angielska w `src/data/en/`      |
 
-Reszta dostosowuje się sama, bo wszystko wynika z tej listy przez `isMultilingual`:
+Treść z `src/data` widok bierze **zawsze z językiem strony** — `localizedCities(locale)`,
+`findProject(slug, locale)`, `serviceContent[locale]`, `reviewsByLocale[locale]` — a nie z gołej
+listy. Gołe `cities` / `projects` służą wyłącznie do slugów (`generateStaticParams`, sitemap). Brak
+tłumaczenia nie wywraca strony, tylko pokazuje polski tekst pod angielskim menu; komplet slugów
+pilnuje `data/localized.test.ts`.
 
-| Element               | Przy jednym języku                                |
-| --------------------- | ------------------------------------------------- |
-| Adresy                | bez prefiksu — `/kontakt`, nie `/pl/kontakt`      |
-| Przełącznik języka    | nie renderuje niczego, można go zostawić w widoku |
-| `hreflang`            | nie generuje się wcale                            |
-| `alternates` sitemapy | znika, jeden wpis na trasę                        |
+Trzy decyzje, które warto znać:
 
-**Nie kasuj** segmentu `[locale]`, `proxy.ts` ani next-intl. Koszt ich zostawienia to kilkanaście
-kilobajtów, a dołożenie drugiego języka wraca wtedy do jednej zmiany w tym samym miejscu, zamiast
-przepisywania widoków. Teksty przez `t()` zostają zaletą także przy jednym języku: cała treść siedzi
-w `messages/pl.json`, a nie rozsypana po komponentach.
+- **Adresy są wspólne dla języków** — `/en/frezowanie-pod-ogrzewanie-podlogowe/krakow`. Dzięki temu
+  `hreflang` i sitemap wynikają same z prefiksu. Angielskie slugi wymagałyby `pathnames` w next-intl
+  i osobnych slugów w danych.
+- **Opinie po angielsku to tłumaczenie oryginałów** i sekcja opinii mówi to wprost
+  (`sections.reviewsTranslated`) — klienci pisali po polsku.
+- **Mail do właściciela zostaje po polsku** niezależnie od języka formularza — czyta go firma.
 
-Wariant jednojęzyczny pokrywają `lib/seo/metadata.single-locale.test.ts`, `site.config.test.ts` i
-`e2e/i18n.spec.ts`. Dokładając język: dopisz go do `locales`, dodaj `messages/<język>.json` do
-`CATALOGS` w `i18n/messages.test.ts` i przywróć w e2e przypadki z dwoma językami.
+Wyłączenie drugiego języka to jedna pozycja w `locales` — adresy tracą prefiks, przełącznik i
+`hreflang` znikają same (przez `isMultilingual`). **Nie kasuj** przy tym segmentu `[locale]`,
+`proxy.ts` ani next-intl. Wariant jednojęzyczny pokrywa `lib/seo/metadata.single-locale.test.ts`.
 
 ## Linki wewnętrzne a język
 

@@ -90,6 +90,22 @@ test.describe('nazwy dostępne', () => {
 	})
 })
 
+test.describe('przełącznik języka', () => {
+	test('ogłasza język bieżący', async ({ page }) => {
+		await page.goto('/')
+
+		await page.getByRole('button', { name: 'Zmień język' }).click()
+
+		// Wcześniej bieżący język był `disabled`, czyli czytnik mówił
+		// „niedostępny" — brzmi jak usterka, nie jak „to jest ustawione teraz".
+		await expect(page.getByRole('menuitemradio', { name: 'Polski' })).toHaveAttribute(
+			'aria-checked',
+			'true'
+		)
+		await expect(page.getByRole('menuitemradio', { name: 'Polski' })).toBeEnabled()
+	})
+})
+
 test.describe('napisy, które czyta wyłącznie czytnik ekranu', () => {
 	test('są po polsku na polskiej wersji', async ({ page }) => {
 		await page.goto('/dev/components')

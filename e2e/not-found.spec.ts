@@ -17,6 +17,7 @@ test.describe('adres bez pasującej trasy', () => {
 	// router traktuje taki adres jak brak trasy, a nie jak `notFound()` z widoku.
 	for (const path of [
 		'/nie-ma-takiej-strony',
+		'/en/no-such-page',
 		'/dev/nie-ma-takiej-strony',
 		'/frezowanie-pod-ogrzewanie-podlogowe/nie-ma-takiego-miasta',
 		'/realizacje/nie-ma-takiej-realizacji',

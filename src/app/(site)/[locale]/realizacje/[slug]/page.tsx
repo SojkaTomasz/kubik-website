@@ -15,7 +15,13 @@ import { Section } from '@/components/ui/section'
 import { Stat, StatGroup } from '@/components/ui/stat'
 import { Steps } from '@/components/ui/steps'
 import { Typography } from '@/components/ui/typography'
-import { findProject, projectPath, projects, PROJECTS_PATH } from '@/data/projects'
+import {
+	findProject,
+	localizedProjects,
+	projectPath,
+	projects,
+	PROJECTS_PATH,
+} from '@/data/projects'
 import { breadcrumbJsonLd, buildPageMetadata, JsonLd, jsonLdGraph, webPageJsonLd } from '@/lib/seo'
 import type { Locale } from '@/site.config'
 
@@ -30,7 +36,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
 	const { locale, slug } = await params
-	const project = findProject(slug)
+	const project = findProject(slug, locale as Locale)
 	if (!project) return {}
 	const t = await getTranslations({ locale, namespace: 'project' })
 	const kinds = await getTranslations({ locale, namespace: 'projectsPage.kinds' })
@@ -54,7 +60,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
  */
 export default async function ProjectPage({ params }: ProjectPageProps) {
 	const { locale, slug } = await params
-	const project = findProject(slug)
+	const project = findProject(slug, locale as Locale)
 	if (!project) notFound()
 
 	const t = await getTranslations('project')
@@ -64,9 +70,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
 	const path = projectPath(project)
 	const heading = t('heading', { title: project.title, area: project.area })
-	const index = projects.indexOf(project)
-	const previous = projects.at(index - 1)
-	const next = projects[(index + 1) % projects.length]
+	const siblings = localizedProjects(locale as Locale)
+	const index = siblings.findIndex(candidate => candidate.slug === project.slug)
+	const previous = siblings.at(index - 1)
+	const next = siblings[(index + 1) % siblings.length]
 	const breadcrumbs = [{ name: nav('projects'), path: PROJECTS_PATH }, { name: project.cityName }]
 	const storyLabels = t.raw('story') as string[]
 	const [cover] = project.photos

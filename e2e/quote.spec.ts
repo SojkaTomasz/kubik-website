@@ -205,3 +205,20 @@ test.describe('okienko wyceny', () => {
 		await expect(page.getByRole('dialog')).toHaveCount(0)
 	})
 })
+
+test.describe('wersja angielska', () => {
+	test('formularz i komunikaty walidacji są przetłumaczone', async ({ page }) => {
+		await page.goto('/en/kontakt')
+		await waitForHydration(page)
+
+		await expect(page.getByLabel('Floor area', { exact: true })).toBeVisible()
+
+		await page.getByRole('button', { name: 'Get my free quote' }).click()
+
+		// Schemat walidacji zwraca klucze, nie zdania — dzięki temu ten sam
+		// schemat obsługuje obie wersje językowe bez duplikowania.
+		await expect(
+			page.getByText('Enter the floor area in m², for example 80.').first()
+		).toBeVisible()
+	})
+})

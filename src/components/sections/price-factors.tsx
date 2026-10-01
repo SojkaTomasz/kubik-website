@@ -1,9 +1,10 @@
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { Typography } from '@/components/ui/typography'
-import { priceFactors } from '@/data/service'
+import { serviceContent } from '@/data/service'
+import type { Locale } from '@/site.config'
 
 /**
  * „Od czego zależy cena" (Paper: „PriceFactors") — bez stawek, tylko trzy
@@ -12,6 +13,8 @@ import { priceFactors } from '@/data/service'
  */
 export function PriceFactors({ eyebrow }: { eyebrow: string }) {
 	const t = useTranslations('service')
+	const locale = useLocale() as Locale
+	const { priceFactors } = serviceContent[locale]
 
 	return (
 		<Section

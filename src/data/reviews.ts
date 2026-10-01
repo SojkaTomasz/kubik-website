@@ -2,14 +2,19 @@
  * Opinie z wizytówki Google (docs/dane-firmy.md, stan z 28.09.2026), wszystkie
  * 5/5. Pisownia poprawiona tylko tam, gdzie to literówka; podpis imieniem
  * i inicjałem nazwiska, jak ustalono z klientem.
+ *
+ * Tłumaczenie: `data/en/reviews.ts` — widoki biorą opinie przez `reviewsByLocale`.
  */
+
+import { reviewsEn } from '@/data/en/reviews'
+import type { Locale } from '@/site.config'
 
 export interface Review {
 	author: string
 	text: string
 }
 
-export const reviews: Review[] = [
+const reviewsPl: Review[] = [
 	{
 		author: 'Mariusz N.',
 		text: 'Robią to niezwykle profesjonalnie. Zero kurzu. Frezowali poddasze i mimo otwartej klatki schodowej na parterze można było normalnie funkcjonować: gotować, prać, przyjmować gości.',
@@ -68,3 +73,9 @@ export const reviews: Review[] = [
 		text: 'Jestem zadowolona z efektu ich pracy. Wszystko zgodnie z deklaracją.',
 	},
 ]
+
+/** Opinie w języku strony; poza polskim to tłumaczenie oryginałów. */
+export const reviewsByLocale: Record<Locale, Review[]> = {
+	pl: reviewsPl,
+	en: reviewsEn,
+}

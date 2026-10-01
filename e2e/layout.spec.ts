@@ -27,6 +27,14 @@ test.describe('szkielet na każdej podstronie', () => {
 		})
 	}
 
+	test('przełącznik języka jest na podstronie, nie tylko na stronie głównej', async ({ page }) => {
+		// Wcześniej stał wklejony w stronę główną, więc użytkownik, który wszedł
+		// wprost na /kontakt, nie mógł zmienić języka.
+		await page.goto('/kontakt')
+
+		await expect(page.getByRole('button', { name: 'Zmień język' })).toBeVisible()
+	})
+
 	test('nazwa strony w nagłówku prowadzi na stronę główną', async ({ page }) => {
 		await page.goto('/kontakt')
 

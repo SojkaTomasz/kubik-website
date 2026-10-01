@@ -1,13 +1,13 @@
 import padStart from 'lodash/padStart'
 import { ArrowRight } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 import { Button } from '@/components/ui/button'
 import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { Typography } from '@/components/ui/typography'
-import { SERVICE_PATH } from '@/data/service'
-import { serviceSteps } from '@/data/service'
+import { SERVICE_PATH, serviceContent } from '@/data/service'
+import type { Locale } from '@/site.config'
 
 /**
  * Zapowiedź usługi na stronie głównej (Paper: „Usługa teaser") — tytuł
@@ -16,6 +16,8 @@ import { serviceSteps } from '@/data/service'
  */
 export function ServiceTeaser({ eyebrow }: { eyebrow: string }) {
 	const t = useTranslations('home')
+	const locale = useLocale() as Locale
+	const { steps } = serviceContent[locale]
 	const colors = ['text-hot-text', 'text-hot-text', 'text-pipe-mid-text', 'text-cold-text']
 
 	return (
@@ -45,7 +47,7 @@ export function ServiceTeaser({ eyebrow }: { eyebrow: string }) {
 				</div>
 
 				<ol className='flex flex-col'>
-					{serviceSteps.map((step, index) => (
+					{steps.map((step, index) => (
 						<li
 							key={step.title}
 							className='flex items-baseline gap-6 border-t py-5 last:border-b'

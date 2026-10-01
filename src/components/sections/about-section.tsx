@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 import bus from '@/assets/photos/bus.jpg'
 import { Badge } from '@/components/ui/badge'
@@ -7,7 +7,8 @@ import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { Stat, StatGroup } from '@/components/ui/stat'
 import { Typography } from '@/components/ui/typography'
-import { companyStats } from '@/data/service'
+import { serviceContent } from '@/data/service'
+import type { Locale } from '@/site.config'
 
 /**
  * „Kim jesteśmy" na stronie głównej — tekst, liczby od klienta i zdjęcie busa,
@@ -15,6 +16,8 @@ import { companyStats } from '@/data/service'
  */
 export function AboutSection({ eyebrow }: { eyebrow: string }) {
 	const t = useTranslations('home')
+	const locale = useLocale() as Locale
+	const { stats } = serviceContent[locale]
 
 	return (
 		<Section
@@ -35,7 +38,7 @@ export function AboutSection({ eyebrow }: { eyebrow: string }) {
 						{t('aboutBody')}
 					</Typography>
 					<StatGroup className='border-t pt-8'>
-						{companyStats.map(stat => (
+						{stats.map(stat => (
 							<Stat
 								key={stat.label}
 								label={stat.label}

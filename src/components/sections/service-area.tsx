@@ -1,10 +1,11 @@
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 import { Button } from '@/components/ui/button'
 import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { Separator } from '@/components/ui/separator'
-import { cities, cityPath } from '@/data/cities'
+import { cityPath, localizedCities } from '@/data/cities'
+import type { Locale } from '@/site.config'
 
 /**
  * „Obszar działania" (Paper: Kontakt) — miasta, w których pracujemy
@@ -13,6 +14,7 @@ import { cities, cityPath } from '@/data/cities'
  */
 export function ServiceArea() {
 	const t = useTranslations('contactPage')
+	const cities = localizedCities(useLocale() as Locale)
 
 	return (
 		<Section

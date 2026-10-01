@@ -15,8 +15,8 @@ import { SuitabilitySection } from '@/components/sections/suitability-section'
 import { Button } from '@/components/ui/button'
 import { CtaBand } from '@/components/ui/cta-band'
 import { PageHero } from '@/components/ui/page-hero'
-import { projects } from '@/data/projects'
-import { SERVICE_PATH, serviceFaq } from '@/data/service'
+import { localizedProjects } from '@/data/projects'
+import { SERVICE_PATH, serviceContent } from '@/data/service'
 import { sectionNumber } from '@/lib/section-number'
 import {
 	breadcrumbJsonLd,
@@ -68,7 +68,7 @@ export default async function ServicePage({
 						name: t('heading').replace(/\.$/, ''),
 						description: t('description'),
 						path: SERVICE_PATH,
-						serviceType: 'Frezowanie wylewki pod ogrzewanie podłogowe',
+						serviceType: t('schemaType'),
 					}),
 					breadcrumbJsonLd([
 						{ name: nav('home'), path: '/' },
@@ -91,7 +91,7 @@ export default async function ServicePage({
 			<HowItWorks eyebrow={eyebrow(1, sections('stepsEyebrow'))} />
 			<ProjectsSlider
 				eyebrow={eyebrow(2, sections('projectsEyebrow'))}
-				projects={projects}
+				projects={localizedProjects(locale as Locale)}
 			/>
 			<SuitabilitySection eyebrow={eyebrow(3, t('fitEyebrow'))} />
 			<PriceFactors eyebrow={eyebrow(4, t('priceEyebrow'))} />
@@ -116,7 +116,7 @@ export default async function ServicePage({
 			<ReviewsSection eyebrow={eyebrow(5, sections('reviewsEyebrow'))} />
 			<FaqSection
 				eyebrow={eyebrow(6, sections('faqEyebrow'))}
-				items={serviceFaq}
+				items={serviceContent[locale as Locale].faq}
 			/>
 			<QuoteSection eyebrow={eyebrow(7, quote('eyebrow'))} />
 		</>

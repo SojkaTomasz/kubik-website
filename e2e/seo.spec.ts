@@ -22,12 +22,22 @@ test.describe('metadane strony głównej', () => {
 		await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', String(baseURL))
 	})
 
-	test('przy jednym języku nie deklaruje hreflang', async ({ page }) => {
+	test('deklaruje wszystkie wersje językowe wraz z x-default', async ({ page, baseURL }) => {
 		await page.goto('/')
 
-		// `hreflang` wskazujący wyłącznie samą stronę to dla Google szum,
-		// a `x-default` bez drugiej wersji — sygnał błędu.
-		await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(0)
+		const alternates = page.locator('link[rel="alternate"][hreflang]')
+		const langs = await alternates.evaluateAll(links =>
+			links.map(link => link.getAttribute('hreflang'))
+		)
+
+		// Brak x-default zostawia Google swobodę wyboru wersji dla użytkownika,
+		// którego języka nie obsługujemy.
+		expect(langs).toEqual(expect.arrayContaining(['pl', 'en', 'x-default']))
+
+		await expect(page.locator('link[rel="alternate"][hreflang="en"]')).toHaveAttribute(
+			'href',
+			`${baseURL}/en`
+		)
 	})
 
 	test('pozwala Google pokazać dużą miniaturę i pełny opis', async ({ page }) => {
@@ -110,12 +120,12 @@ test.describe('dane strukturalne', () => {
 		await page.goto('/')
 		const onHomePage = await readOrganizationId()
 
-		await page.goto('/kontakt')
-		const onContactPage = await readOrganizationId()
+		await page.goto('/en')
+		const onEnglishPage = await readOrganizationId()
 
 		// Rozjazd oznaczałby dla Google dwie różne firmy zamiast jednej,
 		// a więc rozproszenie sygnałów zamiast ich sumowania.
-		expect(onHomePage).toBe(onContactPage)
+		expect(onHomePage).toBe(onEnglishPage)
 		expect(onHomePage).toBeTruthy()
 	})
 })
@@ -150,13 +160,13 @@ test.describe('sitemap i robots', () => {
 		expect(martwe, 'adresy z sitemapy zwracające błąd').toEqual([])
 	})
 
-	test('sitemap ma strony miast i realizacji, bez wersji językowych', async ({ request }) => {
+	test('sitemap ma strony miast i realizacji w obu językach', async ({ request }) => {
 		const xml = await (await request.get('/sitemap.xml')).text()
 
 		expect(xml).toContain('/frezowanie-pod-ogrzewanie-podlogowe/krakow</loc>')
-		expect(xml).toContain('/realizacje/wroclaw-50m2</loc>')
-		// Pusty albo samoodnoszący się `xhtml:link` Google traktuje jako błąd.
-		expect(xml).not.toContain('hreflang=')
+		expect(xml).toContain('/en/realizacje/wroclaw-50m2</loc>')
+		// Bez x-default Google wybiera wersję na własną rękę.
+		expect(xml).toContain('hreflang="x-default"')
 	})
 
 	test('robots.txt wskazuje sitemapę i chroni strony deweloperskie', async ({ request }) => {

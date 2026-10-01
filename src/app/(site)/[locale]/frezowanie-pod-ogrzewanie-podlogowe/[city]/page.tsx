@@ -17,8 +17,8 @@ import { Button } from '@/components/ui/button'
 import { CtaBand } from '@/components/ui/cta-band'
 import { PageHero } from '@/components/ui/page-hero'
 import { cities, cityPath, findCity } from '@/data/cities'
-import { projects } from '@/data/projects'
-import { SERVICE_PATH, serviceFaq } from '@/data/service'
+import { localizedProjects } from '@/data/projects'
+import { SERVICE_PATH, serviceContent } from '@/data/service'
 import { sectionNumber } from '@/lib/section-number'
 import {
 	breadcrumbJsonLd,
@@ -41,7 +41,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: CityPageProps): Promise<Metadata> {
 	const { locale, city: slug } = await params
-	const city = findCity(slug)
+	const city = findCity(slug, locale as Locale)
 	if (!city) return {}
 	const t = await getTranslations({ locale, namespace: 'city' })
 
@@ -60,10 +60,12 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
  */
 export default async function CityPage({ params }: CityPageProps) {
 	const { locale, city: slug } = await params
-	const city = findCity(slug)
+	const city = findCity(slug, locale as Locale)
 	if (!city) notFound()
 
 	const t = await getTranslations('city')
+	const service = await getTranslations('service')
+	const projects = localizedProjects(locale as Locale)
 	const sections = await getTranslations('sections')
 	const nav = await getTranslations('nav')
 	const quote = await getTranslations('quote')
@@ -93,7 +95,7 @@ export default async function CityPage({ params }: CityPageProps) {
 						name: heading.replace(/\.$/, ''),
 						description: city.description,
 						path,
-						serviceType: 'Frezowanie wylewki pod ogrzewanie podłogowe',
+						serviceType: service('schemaType'),
 						areaServed: [city.name],
 					}),
 					breadcrumbJsonLd(
@@ -147,7 +149,7 @@ export default async function CityPage({ params }: CityPageProps) {
 			<FaqSection
 				eyebrow={eyebrow(5, sections('faqEyebrow'))}
 				title={t('faqTitle', { inCity: city.inCity })}
-				items={[...city.faq, ...serviceFaq.slice(0, 3)]}
+				items={[...city.faq, ...serviceContent[locale as Locale].faq.slice(0, 3)]}
 			/>
 			<QuoteSection
 				eyebrow={eyebrow(6, quote('eyebrow'))}

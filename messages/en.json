@@ -1,0 +1,342 @@
+{
+	"nav": {
+		"home": "Home",
+		"contact": "Contact",
+		"privacy": "Privacy policy",
+		"skipToContent": "Skip to content",
+		"menu": "Menu",
+		"currentPage": "current page",
+		"quote": "Free quote",
+		"quoteShort": "Quote",
+		"call": "Call",
+		"phoneLabel": "Phone · 24/7",
+		"openMenu": "Open menu",
+		"service": "Service",
+		"projects": "Projects"
+	},
+	"a11y": {
+		"close": "Close",
+		"closeNotification": "Close notification",
+		"loading": "Loading",
+		"opensInNewTab": "opens in a new tab",
+		"more": "More",
+		"pagination": "Pagination",
+		"previousPage": "Go to previous page",
+		"nextPage": "Go to next page",
+		"previous": "Previous",
+		"next": "Next",
+		"morePages": "More pages",
+		"previousSlide": "Previous slide",
+		"nextSlide": "Next slide",
+		"scrollToStart": "Scroll to start",
+		"scrollToEnd": "Scroll to end",
+		"toggleSidebar": "Toggle sidebar",
+		"sidebar": "Sidebar",
+		"sidebarDescription": "Sidebar sliding in from the edge of the screen",
+		"breadcrumb": "Breadcrumb",
+		"carousel": "Carousel",
+		"slide": "slide",
+		"rating": "Rated {value} out of {max}"
+	},
+	"home": {
+		"title": "Retrofit underfloor heating without breaking up the floor",
+		"lead": "We mill channels in your existing screed and lay the heating pipes in the floor you already have. 50 m² takes one day, and the dust goes straight into an industrial vacuum.",
+		"cta": "See the components",
+		"description": "Underfloor heating milled into the screed you already have. 50 m² in one day, no dust. Rated 5.0 on Google, 70+ reviews. All of Poland.",
+		"eyebrow": "Milled underfloor heating",
+		"heading": "A warm floor without breaking up the old one.",
+		"without": "No",
+		"features": {
+			"demolition": "demolition",
+			"dust": "dust",
+			"mess": "mess"
+		},
+		"aboutEyebrow": "Who we are",
+		"aboutTitle": "Underfloor heating milling is all we do.",
+		"aboutBody": "We are based in Lesser Poland and for 6 years we have been travelling to clients all over the country. We fit underfloor heating in old houses, in apartment blocks and on new builds. We mill with an industrial vacuum attached, so you can carry on living at home while we work.",
+		"busBadge": "Look out for our van",
+		"busAlt": "Kubik's blue van with the lettering “Milled underfloor heating”",
+		"serviceEyebrow": "Service",
+		"serviceTitle": "One day between you and a warm floor.",
+		"serviceLink": "See how we work"
+	},
+	"language": {
+		"label": "Change language",
+		"pl": "Polish",
+		"en": "English",
+		"group": "Site language"
+	},
+	"notFound": {
+		"eyebrow": "Error 404",
+		"title": "We haven't milled here yet.",
+		"description": "The page you are looking for doesn't exist or has moved. Your warm floor is waiting somewhere else.",
+		"cta": "Back to the home page",
+		"shortcutsTitle": "Maybe you were looking for",
+		"quote": "Free quote",
+		"service": "Service",
+		"projects": "Projects"
+	},
+	"error": {
+		"title": "Something went wrong",
+		"description": "We couldn't display this page. Please try again — if that doesn't help, go back to the home page.",
+		"retry": "Try again",
+		"home": "Home page",
+		"digest": "Error ID"
+	},
+	"cookies": {
+		"regionLabel": "Cookie consent",
+		"eyebrow": "Cookies",
+		"title": "This site uses cookies",
+		"message": "We use cookies so the site works properly and so we know what could be improved. Details are in our",
+		"privacyLink": "privacy policy",
+		"settings": "Settings",
+		"accept": "Accept",
+		"dialogTitle": "Cookie settings",
+		"dialogDescription": "Choose which categories you want to enable. You can change your choice at any time.",
+		"saveChoice": "Save",
+		"reopen": "Cookie settings",
+		"categories": {
+			"necessary": {
+				"label": "Necessary",
+				"description": "They keep your session, protect forms and remember this very cookie decision. The site doesn't work without them, so they can't be switched off."
+			},
+			"analytics": {
+				"label": "Analytics",
+				"description": "They show us which pages get visited and where people get lost. The data is aggregated — it isn't used to identify individuals."
+			},
+			"marketing": {
+				"label": "Marketing",
+				"description": "They let us measure how well ads work and show ads to people who have visited the site. They are behind the “following” ads on other websites."
+			},
+			"preferences": {
+				"label": "Preferences",
+				"description": "They remember choices such as language or light/dark theme, so you don't have to set them on every visit."
+			}
+		},
+		"decisionRequired": "To use the site, choose “Accept” or open “Settings”.",
+		"lockedSwitch": "This category is required and can't be switched off.",
+		"alwaysActive": "Always active"
+	},
+	"privacy": {
+		"eyebrow": "Documents",
+		"title": "Privacy policy",
+		"description": "Plain language wherever possible. What data we collect, why, and how you can get it back from us.",
+		"effective": "Effective from 1 October 2026",
+		"tocTitle": "On this page",
+		"sections": {
+			"administrator": {
+				"title": "Who processes your data",
+				"body": "The data controller is the company that comes to you with the milling machine. If you have a question about your data, you write to or call us — not a legal department.",
+				"companyLabel": "Data controller",
+				"contactLabel": "Data protection contact",
+				"taxId": "Tax ID (NIP) {taxId}"
+			},
+			"data": {
+				"title": "What data we collect",
+				"body": "Only what you enter in the quote form, and what is collected by the cookies you agree to.",
+				"items": {
+					"phone": {
+						"label": "Phone number",
+						"purpose": "To call you back with a quote."
+					},
+					"area": {
+						"label": "Floor area and town",
+						"purpose": "To work out the price and plan the journey."
+					},
+					"technical": {
+						"label": "Technical data",
+						"purpose": "IP address, browser, pages visited — only if you consent to analytics cookies."
+					}
+				}
+			},
+			"purposes": {
+				"title": "Why, and on what legal basis",
+				"body": "Preparing a quote and booking a date are steps taken at your request before entering into a contract (Art. 6(1)(b) GDPR). We keep invoices and accounts because tax law requires it (point c). Site statistics and advertising run only with your consent (point a), which you can withdraw at any time."
+			},
+			"retention": {
+				"title": "How long",
+				"body": "Enquiries that don't lead to a job are deleted after 12 months. Accounting documents are kept for 5 years from the end of the tax year. Cookie data is kept until you withdraw consent, and no longer than 13 months."
+			},
+			"recipients": {
+				"title": "Who we share it with",
+				"body": "We don't sell data. Access is limited to companies that help us run the website and the office: hosting (Vercel), email (Google), our accounting firm and — with your consent — analytics and advertising providers (Google, Meta)."
+			},
+			"cookies": {
+				"title": "Cookies",
+				"body": "We divide them into four categories. Necessary cookies always work; the others only once you switch them on. You can change your decision at any time.",
+				"cta": "Change cookie settings"
+			},
+			"rights": {
+				"title": "Your rights",
+				"body": "You can ask to access, correct, delete, restrict or transfer your data, and you can object to its processing. Just email {email} — we reply within 30 days. If you believe we are breaking the law, you can lodge a complaint with the President of the Personal Data Protection Office (UODO, ul. Stawki 2, 00-193 Warsaw)."
+			}
+		}
+	},
+	"validation": {
+		"required": "This field is required.",
+		"phone": "Enter a phone number — digits, spaces and hyphens.",
+		"tooLong": "This value is too long.",
+		"area": "Enter the floor area in m², for example 80."
+	},
+	"footer": {
+		"tagline": "Lesser Poland · we work all over Poland",
+		"pagesTitle": "Site",
+		"citiesTitle": "Cities",
+		"homeLabel": "{name} — home page"
+	},
+	"rating": {
+		"short": "{count}+ reviews",
+		"long": "{count}+ Google reviews"
+	},
+	"quote": {
+		"eyebrow": "Quote",
+		"title": "How much will it cost you?",
+		"lead": "Give us the floor area and your phone number. We'll call back with a price, with no obligation.",
+		"dialogEyebrow": "Free quote",
+		"dialogLead": "Floor area and a phone number are all we need. We'll call back with a price, no obligation.",
+		"fields": {
+			"area": "Floor area",
+			"phone": "Phone",
+			"city": "Town"
+		},
+		"placeholders": {
+			"area": "80",
+			"phone": "e.g. 600 100 200",
+			"city": "e.g. Wrocław"
+		},
+		"unit": "m²",
+		"submit": "Get my free quote",
+		"submitting": "Sending…",
+		"privacy": "We'll only use your number to contact you about the quote.",
+		"privacyLink": "Privacy policy",
+		"nextTitle": "What happens next",
+		"next": [
+			"We call you back and ask about your screed.",
+			"We give you a price. For an unusual floor, we take a look first.",
+			"We agree on a date and arrive with all the equipment."
+		],
+		"successTitle": "We've got your number",
+		"successBody": "We'll call you back with a price. If you miss the call, we'll try again.",
+		"errorTitle": "Couldn't send",
+		"errors": {
+			"validation": "Correct the highlighted fields and try again.",
+			"rateLimit": "Several requests have already been sent from this address. Try again in {seconds} seconds or give us a call.",
+			"notConfigured": "Form sending isn't switched on yet. Please call us: {phone}.",
+			"sendFailed": "Something went wrong on our side. Try again in a moment or call us: {phone}.",
+			"rejected": "We couldn't verify the form. Refresh the page and try again."
+		},
+		"errorSummaryTitle": "The form contains errors",
+		"errorSummaryIntro": "Correct the fields listed below and send again.",
+		"notNow": "Not now"
+	},
+	"sections": {
+		"eyebrow": "{number} · {label}",
+		"proofProjects": "{count} projects",
+		"proofQuoteSource": "Google",
+		"projectsEyebrow": "Recent projects",
+		"projectsTitle": "See whether we've already done a home like yours.",
+		"projectsAll": "All projects",
+		"reviewsEyebrow": "Reviews",
+		"reviewsTitle": "Customer reviews",
+		"reviewsClaim": "One of the highest-rated companies in the industry in Poland.",
+		"reviewsSource": "Google",
+		"reviewsCounter": "{current} / {total}",
+		"reviewQuote": "“{text}”",
+		"reviewsTranslated": "Reviews translated from Polish.",
+		"callBandTitle": "Rather talk right away?",
+		"quoteBandTitle": "Tell us the floor area and we'll call back with a price.",
+		"stepsEyebrow": "How it works",
+		"faqEyebrow": "FAQ",
+		"faqTitle": "Questions before the quote.",
+		"faqLead": "Your question isn't here? Call us and we'll answer straight away."
+	},
+	"service": {
+		"title": "Floor milling for underfloor heating: price and process",
+		"description": "Screed milling for retrofit underfloor heating, without breaking up the floor. See what the price per m² depends on and get a free quote.",
+		"eyebrow": "Service · all of Poland",
+		"heading": "Floor milling for underfloor heating.",
+		"lead": "Already have a screed and want underfloor heating? No need to break it up. Underfloor heating in your existing screed: we mill channels into it, lay the pipes and fill them in, and the floor doesn't rise by even a centimetre.",
+		"howTitle": "Instead of breaking up the floor, we cut channels for the pipes.",
+		"howBody": "We mill the screed with a machine connected to an industrial vacuum. The milling machine cuts channels as deep as the pipe, and the dust goes straight into the bag. That's why reviews mostly mention one thing: zero dust.",
+		"howBadge": "Milling machine with an industrial vacuum",
+		"howPhotoAlt": "Milling machine connected to an industrial vacuum in a walk-in wardrobe during milling",
+		"fitEyebrow": "Your screed",
+		"fitTitle": "Will it work in my home? Usually, yes.",
+		"fitYes": "Suitable",
+		"fitNo": "Not suitable",
+		"fitNote": "Not sure what screed you have? Text a photo to {phone} and we'll assess it for free.",
+		"priceEyebrow": "Price",
+		"priceTitle": "Underfloor heating milling: price per m²",
+		"schemaType": "Screed milling for underfloor heating"
+	},
+	"city": {
+		"title": "Underfloor heating milling {name}",
+		"eyebrow": "Service · {region}",
+		"heading": "Floor milling for underfloor heating {inCity}.",
+		"localEyebrow": "{name} and the surrounding area",
+		"facts": {
+			"travel": "Travel time",
+			"screed": "Typical screed",
+			"nearby": "We also cover"
+		},
+		"projectsTitle": "See how it looks in other homes.",
+		"faqTitle": "Questions {inCity}.",
+		"breadcrumbService": "Service"
+	},
+	"projectsPage": {
+		"title": "Projects: milled underfloor heating",
+		"description": "12 floors with area, screed type and working time. Photos from real building sites.",
+		"eyebrow": "Selected from 1,200+ jobs",
+		"heading": "Floors that are already warm.",
+		"lead": "We took every photo ourselves on site. Find a house or apartment like yours and see how long the job took. We set the price individually, after a short chat about your floor.",
+		"filterLabel": "Property type",
+		"all": "All",
+		"kinds": {
+			"dom": "House",
+			"mieszkanie": "Apartment",
+			"poddasze": "Attic"
+		},
+		"count": "{count, plural, one {# project} other {# projects}}"
+	},
+	"project": {
+		"title": "Underfloor heating milling, {city}, {area} m²",
+		"description": "How we milled a screed for underfloor heating: {object}, {area} m², {time}.",
+		"heading": "{title}, {area} m².",
+		"photoCount": "{count} photos from the site",
+		"specs": {
+			"area": "Area",
+			"time": "Time",
+			"screed": "Screed",
+			"kind": "Property"
+		},
+		"days": "{count, plural, one {# day} other {# days}}",
+		"storyTitle": "How the job went",
+		"story": ["Starting point", "What we did", "Result"],
+		"galleryTitle": "The work, step by step",
+		"photoAlt": "{title}, {city}: photo {number} of {count}",
+		"cta": {
+			"dom": "Have a similar house?",
+			"mieszkanie": "Have a similar apartment?",
+			"poddasze": "Have a similar attic?"
+		},
+		"previous": "Previous project: {title}",
+		"next": "Next project: {title}"
+	},
+	"contactPage": {
+		"title": "Contact and free quote",
+		"description": "Call {phone}, 24/7. Or leave your number and we'll call back with a price.",
+		"eyebrow": "Contact",
+		"heading": "A quote costs nothing.",
+		"phoneLabel": "Phone · 24/7",
+		"phoneNote": "During the day we are on site. If we don't pick up, we'll call back as soon as the milling machine is off.",
+		"emailLabel": "Email",
+		"companyLabel": "Company details",
+		"taxId": "Tax ID (NIP) {taxId}",
+		"formTitle": "Leave your number, we'll call back.",
+		"busBadge": "Look out for our van",
+		"areaEyebrow": "Where we work",
+		"areaTitle": "We'll come anywhere in Poland.",
+		"areaLead": "These are the cities where we work most often. Yours isn't listed? Call us — we'll get there.",
+		"busAlt": "Kubik's blue van with the lettering “Milled underfloor heating”"
+	}
+}

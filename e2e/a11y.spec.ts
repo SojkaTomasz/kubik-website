@@ -11,6 +11,7 @@ import { expect, test } from './fixtures'
 /** Strony, które muszą przejść audyt. */
 const PAGES = [
 	['/', 'strona główna'],
+	['/en', 'strona główna po angielsku'],
 	['/frezowanie-pod-ogrzewanie-podlogowe', 'usługa'],
 	['/frezowanie-pod-ogrzewanie-podlogowe/krakow', 'strona miasta'],
 	['/realizacje', 'lista realizacji'],

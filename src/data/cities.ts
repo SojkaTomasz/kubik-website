@@ -9,9 +9,14 @@
  * dojazdu (szacunki od bazy w Małopolsce), typowe wylewki i miejscowości
  * w okolicy. O bazie mówimy „Małopolska" — klient nie promuje swojej
  * miejscowości.
+ *
+ * Wersja angielska: `data/en/cities.ts`, kluczowana slugiem. Widoki biorą
+ * miasta przez `localizedCities` / `findCity` z językiem strony.
  */
 
+import { citiesEn } from '@/data/en/cities'
 import { SERVICE_PATH } from '@/data/service'
+import type { Locale } from '@/site.config'
 
 export interface CityFaq {
 	question: string
@@ -35,6 +40,9 @@ export interface City {
 	nearby: string[]
 	faq: CityFaq[]
 }
+
+/** Pola tłumaczone — slug i okoliczne miejscowości są wspólne dla języków. */
+export type CityText = Omit<City, 'slug' | 'nearby'>
 
 export const cities: City[] = [
 	{
@@ -363,9 +371,23 @@ export const cities: City[] = [
 	},
 ]
 
+/** Miasto w języku strony. Brak tłumaczenia zostawia wersję polską — pilnuje tego test. */
+function localizeCity(city: City, locale: Locale): City {
+	const text = locale === 'en' ? citiesEn[city.slug] : undefined
+
+	return text ? { ...city, ...text } : city
+}
+
+/** Wszystkie miasta w języku strony. */
+export function localizedCities(locale: Locale): City[] {
+	return cities.map(city => localizeCity(city, locale))
+}
+
 /** Miasto po adresie — `undefined` dla nieznanego daje 404. */
-export function findCity(slug: string): City | undefined {
-	return cities.find(city => city.slug === slug)
+export function findCity(slug: string, locale: Locale): City | undefined {
+	const city = cities.find(candidate => candidate.slug === slug)
+
+	return city && localizeCity(city, locale)
 }
 
 /** Ścieżka strony miasta — zagnieżdżona pod usługą (docs/zakres.md, „Mapa strony"). */

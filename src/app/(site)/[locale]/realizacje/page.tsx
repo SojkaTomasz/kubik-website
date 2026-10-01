@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 import { CtaBand } from '@/components/ui/cta-band'
 import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
-import { projects, PROJECTS_PATH } from '@/data/projects'
+import { localizedProjects, PROJECTS_PATH } from '@/data/projects'
 import { phoneLinks } from '@/lib/phone'
 import { breadcrumbJsonLd, buildPageMetadata, JsonLd, jsonLdGraph, webPageJsonLd } from '@/lib/seo'
 import type { Locale } from '@/site.config'
@@ -62,7 +62,7 @@ export default async function ProjectsPage({ params }: PageProps<'/[locale]/real
 						titleId='projects-title'
 						lead={t('lead')}
 					/>
-					<ProjectsGrid projects={projects} />
+					<ProjectsGrid projects={localizedProjects(locale as Locale)} />
 				</div>
 			</Section>
 

@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 import machine from '@/assets/photos/20240212_125915.jpg'
 import { Badge } from '@/components/ui/badge'
@@ -6,7 +6,8 @@ import { Image } from '@/components/ui/image'
 import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { Steps } from '@/components/ui/steps'
-import { serviceSteps } from '@/data/service'
+import { serviceContent } from '@/data/service'
+import type { Locale } from '@/site.config'
 
 /**
  * „Jak to działa" (Paper: usługa, sekcja 01) — tytuł z leadem obok, cztery
@@ -14,6 +15,8 @@ import { serviceSteps } from '@/data/service'
  */
 export function HowItWorks({ eyebrow }: { eyebrow: string }) {
 	const t = useTranslations('service')
+	const locale = useLocale() as Locale
+	const { steps } = serviceContent[locale]
 
 	return (
 		<Section aria-labelledby='how-it-works-title'>
@@ -26,7 +29,7 @@ export function HowItWorks({ eyebrow }: { eyebrow: string }) {
 					lead={t('howBody')}
 				/>
 
-				<Steps items={serviceSteps} />
+				<Steps items={steps} />
 
 				<div className='relative'>
 					<Image

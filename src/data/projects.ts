@@ -52,7 +52,9 @@ import p20260907_143113 from '@/assets/photos/20260907_143113.jpg'
 import p20260908_104613 from '@/assets/photos/20260908_104613.jpg'
 import p20260908_110123 from '@/assets/photos/20260908_110123.jpg'
 import p20260908_110134 from '@/assets/photos/20260908_110134.jpg'
+import { projectsEn } from '@/data/en/projects'
 import type { ImageSource } from '@/components/ui/image'
+import type { Locale } from '@/site.config'
 
 /**
  * Realizacje — 12 podłóg, po jednej na miasto (docs/zakres.md, „Realizacje:
@@ -65,6 +67,9 @@ import type { ImageSource } from '@/components/ui/image'
  *
  * Zdjęcia: wersje webowe z `../image/` (1400 px, JPEG 74) w `assets/photos`.
  * Pierwsze zdjęcie listy jest okładką.
+ *
+ * Wersja angielska opisów: `data/en/projects.ts`, kluczowana slugiem. Widoki
+ * biorą realizacje przez `localizedProjects` / `findProject` z językiem strony.
  */
 
 /** Rodzaj obiektu — filtr na liście realizacji. */
@@ -94,6 +99,9 @@ export interface Project {
 	story: [string, string, string]
 	photos: ImageSource[]
 }
+
+/** Pola tłumaczone — dane techniczne i zdjęcia są wspólne dla języków. */
+export type ProjectText = Pick<Project, 'cityName' | 'title' | 'screed' | 'intro' | 'story'>
 
 export const projects: Project[] = [
 	{
@@ -343,14 +351,23 @@ export const projects: Project[] = [
 	},
 ]
 
-/** Realizacja po adresie — `undefined` dla nieznanego daje 404. */
-export function findProject(slug: string): Project | undefined {
-	return projects.find(project => project.slug === slug)
+/** Realizacja w języku strony. Brak tłumaczenia zostawia wersję polską — pilnuje tego test. */
+function localizeProject(project: Project, locale: Locale): Project {
+	const text = locale === 'en' ? projectsEn[project.slug] : undefined
+
+	return text ? { ...project, ...text } : project
 }
 
-/** Realizacja przypisana do miasta — strona miasta pokazuje ją jako lokalny dowód. */
-export function projectForCity(city: string): Project | undefined {
-	return projects.find(project => project.city === city)
+/** Wszystkie realizacje w języku strony. */
+export function localizedProjects(locale: Locale): Project[] {
+	return projects.map(project => localizeProject(project, locale))
+}
+
+/** Realizacja po adresie — `undefined` dla nieznanego daje 404. */
+export function findProject(slug: string, locale: Locale): Project | undefined {
+	const project = projects.find(candidate => candidate.slug === slug)
+
+	return project && localizeProject(project, locale)
 }
 
 /** Adres listy realizacji (docs/zakres.md, „Mapa strony"). */

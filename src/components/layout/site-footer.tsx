@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { Fragment } from 'react'
 
 import { companyConfig } from '@/company.config'
@@ -9,9 +9,9 @@ import { Button } from '@/components/ui/button'
 import { Container } from '@/components/ui/container'
 import { Marquee } from '@/components/ui/marquee'
 import { Typography } from '@/components/ui/typography'
-import { cities, cityPath } from '@/data/cities'
+import { cityPath, localizedCities } from '@/data/cities'
 import { phoneLinks } from '@/lib/phone'
-import { siteConfig } from '@/site.config'
+import { type Locale, siteConfig } from '@/site.config'
 
 /** Odnośniki z dolnego paska — mono wersalikami, bez podkreślenia, jak w projekcie. */
 const LEGAL_LINK =
@@ -34,6 +34,7 @@ const LEGAL_LINK =
 export function SiteFooter() {
 	const t = useTranslations('footer')
 	const nav = useTranslations('nav')
+	const cities = localizedCities(useLocale() as Locale)
 	const phone = companyConfig.phone ? phoneLinks(companyConfig.phone) : undefined
 
 	return (

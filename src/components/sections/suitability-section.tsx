@@ -1,12 +1,13 @@
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 import { companyConfig } from '@/company.config'
 import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { SpecList, SpecListItem } from '@/components/ui/spec-list'
 import { Typography } from '@/components/ui/typography'
-import { notSuitableFor, suitableFor } from '@/data/service'
+import { serviceContent } from '@/data/service'
 import { phoneLinks } from '@/lib/phone'
+import type { Locale } from '@/site.config'
 
 /**
  * „Czy u mnie się da?" (Paper: „SuitabilityList") — dwie listy: co się nadaje
@@ -15,6 +16,8 @@ import { phoneLinks } from '@/lib/phone'
  */
 export function SuitabilitySection({ eyebrow }: { eyebrow: string }) {
 	const t = useTranslations('service')
+	const locale = useLocale() as Locale
+	const { suitableFor, notSuitableFor } = serviceContent[locale]
 	const phone = companyConfig.phone ? phoneLinks(companyConfig.phone).display : ''
 
 	return (

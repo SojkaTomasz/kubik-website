@@ -1,5 +1,5 @@
 import { ArrowRight } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 import { companyConfig } from '@/company.config'
 import { Button } from '@/components/ui/button'
@@ -8,8 +8,9 @@ import { Image } from '@/components/ui/image'
 import { Rating } from '@/components/ui/rating'
 import { Separator } from '@/components/ui/separator'
 import { Typography } from '@/components/ui/typography'
-import { projects } from '@/data/projects'
-import { reviews } from '@/data/reviews'
+import { localizedProjects } from '@/data/projects'
+import { reviewsByLocale } from '@/data/reviews'
+import type { Locale } from '@/site.config'
 
 /**
  * Pasek dowodu pod hero (Paper: „Pasek dowodu") — ocena, jedna krótka opinia
@@ -21,6 +22,9 @@ import { reviews } from '@/data/reviews'
 export function ProofBar() {
 	const t = useTranslations('sections')
 	const rating = useTranslations('rating')
+	const locale = useLocale() as Locale
+	const projects = localizedProjects(locale)
+	const reviews = reviewsByLocale[locale]
 	// Najkrótsza opinia — pasek ma się mieścić w jednej, dwóch liniach.
 	const review = reviews[1]
 	const thumbnails = projects.slice(0, 3)
@@ -51,7 +55,7 @@ export function ProofBar() {
 								variant='body'
 								className='font-medium md:text-lg'
 							>
-								„{review.text}”
+								{t('reviewQuote', { text: review.text })}
 							</Typography>
 						</blockquote>
 						<Typography
