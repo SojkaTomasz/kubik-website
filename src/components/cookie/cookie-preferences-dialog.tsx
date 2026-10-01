@@ -73,7 +73,9 @@ function CookiePreferencesForm({
 					>
 						<FieldContent className='gap-1.5'>
 							<FieldTitle>
-								{t(`categories.${category.key}.label`)}
+								{/* Osobny element: odznaka obok nie skleja się z nazwą
+								    w jeden napis, którego nie da się znaleźć po samej nazwie. */}
+								<span>{t(`categories.${category.key}.label`)}</span>
 								{category.required && (
 									<Badge
 										variant='label'
