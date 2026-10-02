@@ -186,6 +186,15 @@ const nextConfig: NextConfig = {
 	poweredByHeader: false,
 
 	/**
+	 * Telefon w sieci lokalnej (`pnpm dev:mobile`). Next 16 blokuje zasoby serwera
+	 * deweloperskiego (HMR, chunki) dla źródeł spoza tej listy — strona się
+	 * wyświetla, ale React się nie hydratuje i nic nie reaguje, bez błędu w konsoli.
+	 * Dotyczy wyłącznie `next dev`; build produkcyjny tego nie czyta.
+	 */
+	// Sieci lokalne (Wi-Fi, kabel) i Tailscale (100.x) — telefon w VPN-ie też ma działać.
+	allowedDevOrigins: ['192.168.*.*', '10.*.*.*', '172.*.*.*', '100.*.*.*'],
+
+	/**
 	 * Nagłówki bezpieczeństwa na KAŻDĄ trasę.
 	 *
 	 * Wzorzec `/:path*` obejmuje też zasoby z `public/` i trasy API. Zawężanie

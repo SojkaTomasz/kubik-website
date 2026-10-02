@@ -5,12 +5,14 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import type { Metadata } from 'next'
 
 import { CookieConsent } from '@/components/cookie/cookie-consent'
+import { MirrorSyncClient } from '@/components/dev/mirror-sync-client'
 import { DocumentShell } from '@/components/layout/document-shell'
 import { SiteFooter } from '@/components/layout/site-footer'
 import { SiteHeader } from '@/components/layout/site-header'
 import { MAIN_CONTENT_ID, SkipLink } from '@/components/layout/skip-link'
 import { Providers } from '@/components/providers/providers'
 import { QuoteLayer } from '@/components/quote/quote-layer'
+import { env } from '@/env'
 import { routing } from '@/i18n/routing'
 import {
 	buildRootMetadata,
@@ -69,6 +71,10 @@ export default async function SiteLayout({ children, params }: LayoutProps<'/[lo
 
 					<SiteFooter />
 					<QuoteLayer />
+					{/* Tylko przy `pnpm dev:mobile` — zmienną ustawia scripts/dev-mobile.mjs. */}
+					{env.NODE_ENV === 'development' && env.NEXT_PUBLIC_DEV_MIRROR_PORT && (
+						<MirrorSyncClient port={env.NEXT_PUBLIC_DEV_MIRROR_PORT} />
+					)}
 					<CookieConsent />
 				</Providers>
 			</NextIntlClientProvider>

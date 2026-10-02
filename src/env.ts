@@ -42,6 +42,12 @@ export const env = createEnv({
 		NEXT_PUBLIC_ENABLE_DEV_PAGES: booleanFlag,
 		NEXT_PUBLIC_CONTACT_EMAIL: z.string().email(),
 		NEXT_PUBLIC_CONTACT_PHONE: z.string().min(1),
+		/**
+		 * Port przekaźnika lustra przewijania i kliknięć. Ustawia go wyłącznie
+		 * `pnpm dev:mobile` (scripts/dev-mobile.mjs) — bez niego klient lustra
+		 * się nie renderuje. Nie ustawiaj ręcznie w .env.
+		 */
+		NEXT_PUBLIC_DEV_MIRROR_PORT: z.coerce.number().int().positive().optional(),
 	},
 
 	/**
@@ -58,6 +64,7 @@ export const env = createEnv({
 		NEXT_PUBLIC_GTM_ID: process.env.NEXT_PUBLIC_GTM_ID,
 		NEXT_PUBLIC_ENABLE_VERCEL_ANALYTICS: process.env.NEXT_PUBLIC_ENABLE_VERCEL_ANALYTICS,
 		NEXT_PUBLIC_ENABLE_DEV_PAGES: process.env.NEXT_PUBLIC_ENABLE_DEV_PAGES,
+		NEXT_PUBLIC_DEV_MIRROR_PORT: process.env.NEXT_PUBLIC_DEV_MIRROR_PORT,
 		NEXT_PUBLIC_CONTACT_EMAIL: process.env.NEXT_PUBLIC_CONTACT_EMAIL,
 		NEXT_PUBLIC_CONTACT_PHONE: process.env.NEXT_PUBLIC_CONTACT_PHONE,
 	},
