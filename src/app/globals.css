@@ -318,4 +318,32 @@
 	summary {
 		cursor: pointer;
 	}
+
+	* {
+		scrollbar-color: var(--primary) var(--scrollbar-track);
+		scrollbar-width: thin;
+	}
+
+	::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: var(--scrollbar-track);
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: var(--primary);
+		border-radius: 9999px;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background: var(--primary-deep);
+	}
+
+	/* Strzałki na końcach paska — dziś już nikt ich nie klika, a psują proporcje. */
+	::-webkit-scrollbar-button {
+		display: none;
+	}
 }
