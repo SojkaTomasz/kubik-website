@@ -83,9 +83,14 @@ function DialogContent({
 				 * Na telefonie arkusz od dołu na całą szerokość, od `sm` okno na
 				 * środku — jak popup wyceny w Paperze. Pasek rury u góry i cień
 				 * z tokenów; odstępy 20 / 40 / 48 px jak karta `size='lg'`.
+				 *
+				 * Treść wyższa niż ekran PRZEWIJA SIĘ w oknie (`overflow-y-auto`). Wcześniej
+				 * `overflow-hidden` ucinał dół bez możliwości przewinięcia — na niskim
+				 * telefonie przyciski okna leżały poza ekranem. `overscroll-contain`
+				 * nie przekazuje przewijania stronie pod spodem.
 				 */
 				className={cn(
-					'pipe-bar fixed right-0 bottom-0 left-0 z-50 grid max-h-[92dvh] w-full gap-6 overflow-hidden rounded-(--dialog-radius) bg-popover px-5 pt-8 pb-7 text-sm text-popover-foreground shadow-modal duration-150 outline-none sm:top-1/2 sm:right-auto sm:bottom-auto sm:left-1/2 sm:max-w-lg sm:-translate-x-1/2 sm:-translate-y-1/2 sm:p-10 lg:px-12 lg:pt-11 lg:pb-10 data-open:animate-in data-open:fade-in-0 max-sm:data-open:slide-in-from-bottom-8 sm:data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 sm:data-closed:zoom-out-95',
+					'pipe-bar fixed right-0 bottom-0 left-0 z-50 grid max-h-[92dvh] w-full gap-6 overflow-x-hidden overflow-y-auto overscroll-contain rounded-(--dialog-radius) bg-popover px-5 pt-8 pb-7 text-sm text-popover-foreground shadow-modal duration-150 outline-none sm:top-1/2 sm:right-auto sm:bottom-auto sm:left-1/2 sm:max-w-lg sm:-translate-x-1/2 sm:-translate-y-1/2 sm:p-10 lg:px-12 lg:pt-11 lg:pb-10 data-open:animate-in data-open:fade-in-0 max-sm:data-open:slide-in-from-bottom-8 sm:data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 sm:data-closed:zoom-out-95',
 					className
 				)}
 				{...props}

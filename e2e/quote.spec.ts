@@ -171,6 +171,30 @@ test.describe('przyklejony pasek na telefonie', () => {
 	})
 })
 
+test.describe('okno wyższe niż ekran', () => {
+	// Niski telefon (np. z otwartą klawiaturą): okienko wyceny nie mieści się w 560 px.
+	test.use({ viewport: { width: 390, height: 560 } })
+
+	test('treść da się przewinąć do ostatniego przycisku', async ({ page }) => {
+		await page.goto('/')
+		await page
+			.locator('[data-slot="sticky-call-bar"]')
+			.getByRole('button', { name: 'Darmowa wycena' })
+			.click()
+
+		const dialog = page.getByRole('dialog', { name: DIALOG_NAME })
+		await expect(dialog).toBeVisible()
+
+		// Przy `overflow: hidden` dół okna był ucięty bez możliwości przewinięcia —
+		// „Nie teraz" leżał poza ekranem i nie dało się go kliknąć.
+		expect(await dialog.evaluate(element => getComputedStyle(element).overflowY)).toMatch(
+			/auto|scroll/
+		)
+		await dialog.getByRole('button', { name: 'Nie teraz' }).click({ timeout: 5000 })
+		await expect(dialog).toBeHidden()
+	})
+})
+
 test.describe('okienko wyceny', () => {
 	test.use({ quotePopupSeen: false })
 
