@@ -21,6 +21,7 @@ pytania problemowe w FAQ. Frazy muszą brzmieć naturalnie, bez upychania.
 | ogrzewanie podłogowe w starym domu            | 500      | H2 i akapit „Kim jesteśmy” na głównej, FAQ                                                               |
 | ogrzewanie podłogowe w bloku                  | 500      | H2 i akapit „Kim jesteśmy” na głównej, FAQ                                                               |
 | modernizacja ogrzewania w starym domu         | 50       | FAQ usługi                                                                                               |
+| frezowanie … cena za m2                       | 500      | H2 ceny, description usługi, FAQ („Ile kosztuje … za m²?”)                                               |
 | podłogówka czy grzejniki                      | 500      | FAQ                                                                                                      |
 | podłogówka / ogrzewanie podłogowe z grzejnika | 500      | FAQ                                                                                                      |
 | pompa ciepła ogrzewanie podłogowe             | 500      | FAQ, lead strony miasta                                                                                  |
@@ -58,6 +59,40 @@ każdym miastem).
 **Nadal do zrobienia:** sekcja „Jak to działa” i trzy pytania FAQ dociągane ze strony usługi są na
 wszystkich miastach identyczne. Trzeba im dać lokalny wariant, inaczej strony miast zostają w części
 duplikatami.
+
+## FAQ: pytania pisane tak, jak ludzie pytają
+
+Sama analiza fraz nie wystarcza. Planer podaje hasła („ogrzewanie podłogowe w starym domu”), a nie
+pytania, więc 3.10.2026 przejrzałem to, co w tej branży pada w sieci: `forum.info-ogrzewanie.pl`,
+poradniki o kosztach frezowania i porównania „czy warto”. Trzy rzeczy wyszły w KAŻDYM źródle i
+żadnej z nich nie było wcześniej na stronie:
+
+| Pytanie                               | Dlaczego jest ważne                                                                                             |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Czy frezowanie nie osłabi wylewki?    | Najmocniejsza obiekcja. Na forum pada wprost: „obecna wylewka na 90% nie wytrzyma frezowania”                   |
+| Ile kosztuje za m²?                   | Grupa o największej intencji zakupowej. Konkurencja publikuje widełki 30–100 zł, my odpowiadamy czynnikami ceny |
+| Czy wystarczy jako jedyne ogrzewanie? | Pytanie wraca przy każdej dyskusji o pompie ciepła i o mieszkaniu narożnym                                      |
+
+Dalej doszły: jakie podłogi można położyć (panele winylowe z atestem), czy da się mieszkać w domu w
+czasie pracy. Pytania są sformułowane jak w wyszukiwarce („Czy warto robić…”, „Ile kosztuje…”, „Co
+lepsze: …”), bo w tej formie trafiają do bloku „Podobne pytania” w Google.
+
+**Pierwsze trzy pozycje FAQ usługi dociąga każda strona miasta** (`faq.slice(0, 3)`), dlatego stoją
+tam pytania uniwersalne: stary dom, osłabienie wylewki, cena. Pytanie o blok jest dalej, żeby nie
+dublowało lokalnego FAQ Krakowa, Warszawy i Torunia.
+
+### Pytania bez odpowiedzi — do potwierdzenia z klientem
+
+Te wracają w sieci równie często, ale odpowiedź wymaga wiedzy o tym, jak firma pracuje. Nie
+wymyślamy jej:
+
+- Czy przed frezowaniem skanujecie posadzkę, żeby nie przeciąć rury albo kabla? (w poradnikach to
+  „błąd numer jeden”)
+- Kto robi próbę ciśnieniową przed zalaniem rowków? Klient potwierdził 29.09.2026, że nie robi jej
+  sam, więc trzeba napisać, czyja to rola
+- Czy frezujecie w łazience i co z hydroizolacją oraz spadkami do odpływu?
+- Jaki rozstaw rur stosujecie standardowo i jaka jest maksymalna długość pętli?
+- Czy na robotę jest gwarancja i na jak długo?
 
 ## Dane strukturalne
 
