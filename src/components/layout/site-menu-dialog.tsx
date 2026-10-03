@@ -4,7 +4,7 @@ import padStart from 'lodash/padStart'
 import { ArrowRight, Phone } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-import logo from '@/assets/logo-kubik.png'
+import logo from '@/assets/logo-kubik.svg'
 import { companyConfig } from '@/company.config'
 import { NavLink } from '@/components/layout/nav-link'
 import { SITE_NAV_LINKS } from '@/components/layout/site-nav'
@@ -60,9 +60,9 @@ export function SiteMenuDialog({ open, onOpenChange }: SiteMenuDialogProps) {
 					<Image
 						src={logo}
 						alt=''
-						sizes='66px'
+						sizes='72px'
 						rounded='none'
-						className='aspect-[400/271] h-11'
+						className='aspect-[1685/1038] h-11 bg-transparent'
 					/>
 				</Link>
 

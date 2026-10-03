@@ -73,7 +73,9 @@ export function ProjectCard({
 						ratio='portrait'
 						sizes={sizes}
 						placeholder='blur'
-						className='transition-[filter] duration-300 group-hover:brightness-110'
+						// Najazd: zdjęcie dojeżdża o 4% w ramce, wolniej niż rozjaśnienie —
+						// długie wyhamowanie zamiast skoku. Bez ruchu przy ograniczonym ruchu.
+						className='transition-[filter] duration-300 group-hover:brightness-110 [&_img]:transition-transform [&_img]:duration-700 [&_img]:ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:group-hover:[&_img]:scale-[1.04]'
 					/>
 				)}
 				{variant === 'slide' && (

@@ -36,6 +36,8 @@
 		"breadcrumb": "Ścieżka nawigacyjna",
 		"carousel": "Karuzela",
 		"slide": "slajd",
+		"pauseAutoplay": "Wstrzymaj automatyczne przewijanie",
+		"playAutoplay": "Wznów automatyczne przewijanie",
 		"rating": "Ocena {value} na {max}"
 	},
 	"home": {

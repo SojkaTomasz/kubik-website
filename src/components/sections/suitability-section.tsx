@@ -6,6 +6,7 @@ import { SectionHeading } from '@/components/ui/section-heading'
 import { SpecList, SpecListItem } from '@/components/ui/spec-list'
 import { Typography } from '@/components/ui/typography'
 import { serviceContent } from '@/data/service'
+import { anim } from '@/lib/animations/attributes'
 import { phoneLinks } from '@/lib/phone'
 import type { Locale } from '@/site.config'
 
@@ -40,10 +41,14 @@ export function SuitabilitySection({ eyebrow }: { eyebrow: string }) {
 							as='h3'
 							variant='overline'
 							tone='primary'
+							{...anim('eyebrow')}
 						>
 							{t('fitYes')}
 						</Typography>
-						<SpecList appearance='feature'>
+						<SpecList
+							appearance='feature'
+							{...anim('stagger')}
+						>
 							{suitableFor.map(item => (
 								<SpecListItem
 									key={item.label}
@@ -59,12 +64,14 @@ export function SuitabilitySection({ eyebrow }: { eyebrow: string }) {
 							as='h3'
 							variant='overline'
 							tone='cold'
+							{...anim('eyebrow')}
 						>
 							{t('fitNo')}
 						</Typography>
 						<SpecList
 							appearance='feature'
 							tone='muted'
+							{...anim('stagger')}
 						>
 							{notSuitableFor.map(item => (
 								<SpecListItem

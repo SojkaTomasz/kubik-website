@@ -2,17 +2,17 @@ import { useLocale, useTranslations } from 'next-intl'
 
 import { companyConfig } from '@/company.config'
 import {
-	Carousel,
 	CarouselContent,
 	CarouselItem,
 	CarouselNext,
 	CarouselPrevious,
 } from '@/components/ui/carousel'
-import { CarouselProgress } from '@/components/ui/carousel-progress'
+import { AutoplayCarousel, CarouselAutoplayProgress } from '@/components/ui/carousel-autoplay'
 import { Rating } from '@/components/ui/rating'
 import { Section } from '@/components/ui/section'
 import { Typography } from '@/components/ui/typography'
 import { reviewsByLocale } from '@/data/reviews'
+import { anim } from '@/lib/animations/attributes'
 import type { Locale } from '@/site.config'
 
 /**
@@ -39,6 +39,7 @@ export function ReviewsSection({ eyebrow }: { eyebrow: string }) {
 						as='p'
 						variant='overline'
 						tone='cold'
+						{...anim('eyebrow')}
 					>
 						{eyebrow}
 					</Typography>
@@ -61,6 +62,7 @@ export function ReviewsSection({ eyebrow }: { eyebrow: string }) {
 						variant='body'
 						tone='muted'
 						className='max-w-sm'
+						{...anim('text')}
 					>
 						{t('reviewsClaim')}
 					</Typography>
@@ -68,9 +70,12 @@ export function ReviewsSection({ eyebrow }: { eyebrow: string }) {
 					{locale !== 'pl' && <Typography variant='meta'>{t('reviewsTranslated')}</Typography>}
 				</div>
 
-				<Carousel
+				{/* Opinie przewijają się same co 4 s — pasek pokazuje, kiedy przyjdzie następna. */}
+				<AutoplayCarousel
+					delay={4000}
 					opts={{ loop: true }}
 					className='flex flex-col gap-8 border-t pt-8 lg:border-t-0 lg:pt-0'
+					{...anim('rise', { delay: 0.1 })}
 				>
 					<CarouselContent>
 						{reviews.map(review => (
@@ -93,13 +98,13 @@ export function ReviewsSection({ eyebrow }: { eyebrow: string }) {
 					</CarouselContent>
 
 					<div className='flex items-center justify-between gap-6'>
-						<CarouselProgress total={reviews.length} />
+						<CarouselAutoplayProgress total={reviews.length} />
 						<div className='flex gap-2'>
 							<CarouselPrevious className='static my-0' />
 							<CarouselNext className='static my-0' />
 						</div>
 					</div>
-				</Carousel>
+				</AutoplayCarousel>
 			</div>
 		</Section>
 	)

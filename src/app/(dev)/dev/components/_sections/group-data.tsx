@@ -33,6 +33,7 @@ import {
 	CarouselNext,
 	CarouselPrevious,
 } from '@/components/ui/carousel'
+import { AutoplayCarousel, CarouselAutoplayProgress } from '@/components/ui/carousel-autoplay'
 import { CarouselDots } from '@/components/ui/carousel-dots'
 import { CarouselProgress } from '@/components/ui/carousel-progress'
 import {
@@ -563,6 +564,29 @@ export function GroupData() {
 						className='pt-4'
 					/>
 				</Carousel>
+			</ShowcaseItem>
+
+			<ShowcaseItem
+				title='AutoplayCarousel'
+				note='przewija się sama (embla-carousel-autoplay); pasek pokazuje czas do następnego slajdu, przycisk pauzy wymaga WCAG 2.2.2, a mysz i fokus wstrzymują odliczanie'
+				className='flex-col items-stretch'
+			>
+				<AutoplayCarousel
+					delay={4000}
+					opts={{ loop: true }}
+					className='flex flex-col gap-4'
+				>
+					<CarouselContent>
+						{Array.from({ length: 4 }, (_unused, index) => (
+							<CarouselItem key={index}>
+								<div className='flex h-28 items-center justify-center rounded-lg bg-muted font-mono text-xs text-muted-foreground'>
+									Opinia {index + 1}
+								</div>
+							</CarouselItem>
+						))}
+					</CarouselContent>
+					<CarouselAutoplayProgress total={4} />
+				</AutoplayCarousel>
 			</ShowcaseItem>
 
 			<ShowcaseItem

@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/accordion'
 import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
+import { anim } from '@/lib/animations/attributes'
 import { faqJsonLd, JsonLd } from '@/lib/seo'
 
 export interface FaqSectionProps {
@@ -50,7 +51,10 @@ export function FaqSection({ eyebrow, title, items }: FaqSectionProps) {
 					className='lg:sticky lg:top-28 lg:self-start'
 				/>
 
-				<Accordion defaultValue={[items[0]?.question]}>
+				<Accordion
+					defaultValue={[items[0]?.question]}
+					{...anim('stagger', { items: '[data-slot="accordion-item"]' })}
+				>
 					{items.map(item => (
 						<AccordionItem
 							key={item.question}

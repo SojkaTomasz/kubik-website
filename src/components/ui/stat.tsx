@@ -1,5 +1,6 @@
 import type * as React from 'react'
 
+import { CountUp } from '@/components/motion/count-up'
 import { cva, type VariantProps } from '@/lib/cva'
 import { cn } from '@/lib/utils'
 
@@ -88,11 +89,20 @@ export function Stat({ className, label, value, hint, tone, size, layout, ...pro
 			>
 				{label}
 			</span>
+			{/* Licznik od zera przy wejściu w kadr — tylko w liczbach „dowodowych". W karcie
+			    technicznej (`spec`) odliczanie „0 dni → 2 dni" nic by nie mówiło. */}
 			<span
 				data-slot='stat-value'
 				className={cn(statValueVariants({ tone, size }))}
 			>
-				{value}
+				{layout !== 'spec' && typeof value === 'string' ? (
+					<CountUp
+						key={value}
+						value={value}
+					/>
+				) : (
+					value
+				)}
 			</span>
 			{hint && (
 				<span

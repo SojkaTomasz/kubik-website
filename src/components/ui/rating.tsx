@@ -2,6 +2,7 @@ import { StarIcon } from 'lucide-react'
 import { useFormatter, useTranslations } from 'next-intl'
 import type * as React from 'react'
 
+import { CountUp } from '@/components/motion/count-up'
 import { cva, type VariantProps } from '@/lib/cva'
 import { cn } from '@/lib/utils'
 
@@ -62,6 +63,7 @@ export function Rating({ className, value, max = 5, label, size, ...props }: Rat
 	const format = useFormatter()
 	const formatted = format.number(value, { minimumFractionDigits: 1, maximumFractionDigits: 1 })
 	const stars = size === 'sm' ? 1 : max
+	const isCounting = size !== 'sm'
 
 	return (
 		<div
@@ -78,12 +80,22 @@ export function Rating({ className, value, max = 5, label, size, ...props }: Rat
 				/>
 			)}
 
+			{/* Średnia i liczba opinii odliczają od zera (`CountUp`) — poza wersją `sm`
+			    z nagłówka, który stoi na każdej podstronie i liczyłby przy każdym wejściu. */}
 			<span
 				aria-hidden
 				data-slot='rating-value'
 				className={ratingValueVariants({ size })}
 			>
-				{formatted}
+				{isCounting ? (
+					<CountUp
+						key={formatted}
+						value={formatted}
+						duration={1.8}
+					/>
+				) : (
+					formatted
+				)}
 			</span>
 
 			{size === 'sm' ? (
@@ -111,7 +123,16 @@ export function Rating({ className, value, max = 5, label, size, ...props }: Rat
 							size === 'lg' ? 'text-[0.9375rem] leading-snug' : 'text-sm'
 						)}
 					>
-						{label}
+						{/* Licznik zmienia napis w trakcie odliczania, więc czytnik dostaje
+						    stałą wersję obok, a odliczana jest przed nim schowana. */}
+						<span aria-hidden>
+							<CountUp
+								key={label}
+								value={label}
+								duration={2.2}
+							/>
+						</span>
+						<span className='sr-only'>{label}</span>
 					</span>
 				</span>
 			)}

@@ -1,7 +1,7 @@
 import { ArrowRight, Phone } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-import logo from '@/assets/logo-kubik.png'
+import logo from '@/assets/logo-kubik.svg'
 import { companyConfig } from '@/company.config'
 import { LanguageSwitcher } from '@/components/language-switcher'
 import { HeaderDock } from '@/components/layout/header-dock'
@@ -102,12 +102,12 @@ export function SiteHeader() {
 							<Image
 								src={logo}
 								alt=''
-								sizes='86px'
+								sizes='94px'
 								eager
 								rounded='none'
-								// Szerokość z proporcji pliku (800 × 542) — przy samej wysokości
-								// obraz o `size-full` wziąłby szerokość naturalną, 800 px.
-								className='aspect-[400/271] h-11 lg:h-[3.625rem]'
+								// Szerokość z proporcji pliku (1685 × 1038) — przy samej wysokości
+								// obraz o `size-full` wziąłby szerokość naturalną, 1685 px.
+								className='aspect-[1685/1038] h-11 bg-transparent lg:h-[3.625rem]'
 							/>
 						</Link>
 

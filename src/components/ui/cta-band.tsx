@@ -2,6 +2,7 @@ import type * as React from 'react'
 
 import { Container } from '@/components/ui/container'
 import { Typography } from '@/components/ui/typography'
+import { anim, animationKey } from '@/lib/animations/attributes'
 import { cn } from '@/lib/utils'
 
 /*
@@ -33,13 +34,20 @@ export function CtaBand({ className, title, as = 'h2', action, ...props }: CtaBa
 		>
 			<Container className='flex flex-col gap-6 md:flex-row md:items-center md:justify-between md:gap-12'>
 				<Typography
+					key={animationKey(title)}
 					as={as}
+					{...anim('heading')}
 					variant='displaySm'
 					className='max-w-[18ch] text-white md:text-4xl lg:text-[2.5rem] lg:leading-tight'
 				>
 					{title}
 				</Typography>
-				<div className='md:shrink-0'>{action}</div>
+				<div
+					className='md:shrink-0'
+					{...anim('action')}
+				>
+					{action}
+				</div>
 			</Container>
 		</section>
 	)

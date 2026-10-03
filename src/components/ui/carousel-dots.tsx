@@ -57,9 +57,15 @@ export function CarouselDots({
 	return (
 		<div
 			data-slot='carousel-dots'
-			className={cn('flex items-center justify-center gap-2', className)}
+			className={cn('flex items-center justify-center', className)}
 			{...props}
 		>
+			{/*
+				Kropka 8 px, ale cel dotyku 24 px (WCAG 2.5.8) — przycisk jest polem wokół
+				kropki. Przy 8 px i odstępie 8 px axe zgłaszał `target-size`, i to nie za
+				każdym razem: wynik zależał od zaokrągleń układu, więc test bywał czerwony
+				albo zielony bez żadnej zmiany w kodzie.
+			*/}
 			{Array.from({ length: snapCount }, (_unused, index) => (
 				<button
 					key={index}
@@ -68,11 +74,18 @@ export function CarouselDots({
 					aria-label={slideLabel(index + 1)}
 					aria-current={index === selected ? 'true' : undefined}
 					onClick={() => api?.scrollTo(index)}
-					className={cn(
-						'size-2 cursor-pointer rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none',
-						index === selected ? 'bg-primary' : 'bg-primary/25'
-					)}
-				/>
+					className='group/dot flex size-6 cursor-pointer items-center justify-center rounded-full focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none'
+				>
+					<span
+						aria-hidden
+						className={cn(
+							'size-2 rounded-full transition-colors',
+							index === selected
+								? 'bg-primary'
+								: 'bg-primary/25 group-hover/dot:bg-primary/50'
+						)}
+					/>
+				</button>
 			))}
 		</div>
 	)

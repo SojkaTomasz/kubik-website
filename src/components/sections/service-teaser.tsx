@@ -7,6 +7,7 @@ import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { Typography } from '@/components/ui/typography'
 import { SERVICE_PATH, serviceContent } from '@/data/service'
+import { anim } from '@/lib/animations/attributes'
 import type { Locale } from '@/site.config'
 
 /**
@@ -46,7 +47,10 @@ export function ServiceTeaser({ eyebrow }: { eyebrow: string }) {
 					</Button>
 				</div>
 
-				<ol className='flex flex-col'>
+				<ol
+					className='flex flex-col'
+					{...anim('stagger')}
+				>
 					{steps.map((step, index) => (
 						<li
 							key={step.title}

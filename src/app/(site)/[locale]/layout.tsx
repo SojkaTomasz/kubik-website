@@ -11,6 +11,8 @@ import { HashScroll } from '@/components/layout/hash-scroll'
 import { SiteFooter } from '@/components/layout/site-footer'
 import { SiteHeader } from '@/components/layout/site-header'
 import { MAIN_CONTENT_ID, SkipLink } from '@/components/layout/skip-link'
+import { ScrollMotion } from '@/components/motion/scroll-motion'
+import { ScrollProgress } from '@/components/motion/scroll-progress'
 import { Providers } from '@/components/providers/providers'
 import { QuoteLayer } from '@/components/quote/quote-layer'
 import { env } from '@/env'
@@ -48,6 +50,7 @@ export default async function SiteLayout({ children, params }: LayoutProps<'/[lo
 			<NextIntlClientProvider>
 				<Providers>
 					<SkipLink />
+					<ScrollProgress />
 					<SiteHeader />
 
 					{/*
@@ -72,6 +75,7 @@ export default async function SiteLayout({ children, params }: LayoutProps<'/[lo
 
 					<SiteFooter />
 					<HashScroll />
+					<ScrollMotion />
 					<QuoteLayer />
 					{/* Tylko przy `pnpm dev:mobile` — zmienną ustawia scripts/dev-mobile.mjs. */}
 					{env.NODE_ENV === 'development' && env.NEXT_PUBLIC_DEV_MIRROR_PORT && (

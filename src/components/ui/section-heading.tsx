@@ -1,6 +1,8 @@
 import type * as React from 'react'
+import { cloneElement, isValidElement } from 'react'
 
 import { Typography } from '@/components/ui/typography'
+import { anim, animationKey } from '@/lib/animations/attributes'
 import { cva, type VariantProps } from '@/lib/cva'
 import { cn } from '@/lib/utils'
 
@@ -65,18 +67,24 @@ export function SectionHeading({
 			<div className='flex flex-col gap-4 md:gap-5'>
 				{eyebrow && (
 					<Typography
+						key={animationKey(eyebrow)}
 						as='p'
 						variant='overline'
 						tone={eyebrowTone}
+						{...anim('eyebrow')}
 					>
 						{eyebrow}
 					</Typography>
 				)}
+				{/* Animacja wejścia: linie spod maski (`lib/animations/engine.ts`). `key`
+				    z treści — powód w `animationKey`. */}
 				<Typography
+					key={animationKey(title)}
 					as={as}
 					id={titleId}
 					variant='displayMd'
 					className='max-w-[20ch]'
+					{...anim('heading')}
 				>
 					{title}
 				</Typography>
@@ -93,13 +101,19 @@ export function SectionHeading({
 				>
 					{lead && (
 						<Typography
+							key={animationKey(lead)}
 							variant='lead'
 							tone='muted'
+							{...anim('text')}
 						>
 							{lead}
 						</Typography>
 					)}
-					{action}
+					{/* Rola dopisana wprost do elementu akcji, bez opakowania: strzałki karuzeli
+					    bywają `hidden` na telefonie, a puste opakowanie dokładałoby odstęp. */}
+					{isValidElement<Record<string, unknown>>(action)
+						? cloneElement(action, anim('action'))
+						: action}
 				</div>
 			)}
 		</div>

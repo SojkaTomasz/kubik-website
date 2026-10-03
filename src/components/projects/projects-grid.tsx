@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { ProjectCard } from '@/components/projects/project-card'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { type Project, type ProjectKind, projectKinds } from '@/data/projects'
+import { anim } from '@/lib/animations/attributes'
 
 type Filter = ProjectKind | 'all'
 
@@ -52,7 +53,10 @@ export function ProjectsGrid({ projects }: { projects: Project[] }) {
 				{t('count', { count: visible.length })}
 			</p>
 
-			<ul className='grid gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-y-14'>
+			<ul
+				className='grid gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-y-14'
+				{...anim('stagger')}
+			>
 				{visible.map((project, index) => (
 					<li key={project.slug}>
 						<ProjectCard

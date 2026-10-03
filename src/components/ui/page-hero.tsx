@@ -1,9 +1,11 @@
 import type { StaticImageData } from 'next/image'
 import type * as React from 'react'
+import { Fragment } from 'react'
 
 import { Container } from '@/components/ui/container'
 import { Image } from '@/components/ui/image'
 import { Typography } from '@/components/ui/typography'
+import { anim } from '@/lib/animations/attributes'
 import { cn } from '@/lib/utils'
 
 /*
@@ -37,6 +39,30 @@ export interface PageHeroProps extends Omit<React.ComponentProps<'section'>, 'ti
 }
 
 /**
+ * Tytuł pocięty na słowa pod animację wejścia (`data-hero-word` w `app/theme/motion.css`).
+ * Cięcie dzieje się na serwerze, więc animacja rusza z pierwszym malowaniem, bez
+ * czekania na JavaScript. Spacje zostają zwykłym tekstem między słowami — łamanie
+ * wierszy i `text-balance` działają jak bez podziału.
+ */
+function heroWords(title: React.ReactNode): React.ReactNode {
+	if (typeof title !== 'string') return title
+
+	// Spacja POZA słowem: na początku elementu `inline-block` zostałaby zwinięta
+	// i słowa skleiłyby się w jedno.
+	return title.split(' ').map((word, index) => (
+		<Fragment key={`${word}-${index}`}>
+			{index > 0 && ' '}
+			<span
+				data-hero-word=''
+				style={{ '--word': index } as React.CSSProperties}
+			>
+				{word}
+			</span>
+		</Fragment>
+	))
+}
+
+/**
  * Hero podstrony (Paper: „PageHero") — zdjęcie z budowy na całą szerokość,
  * wchodzące POD pływający nagłówek, z tekstem na dole kadru.
  *
@@ -66,6 +92,7 @@ export function PageHero({
 			{/* `span`, nie `Separator`: ten renderuje `div`, a etykieta bywa w środku `<h1>`. */}
 			<span
 				aria-hidden
+				data-hero='pipe'
 				className='block h-0.5 w-6 shrink-0 bg-pipe md:w-10'
 			/>
 			<Typography
@@ -96,6 +123,7 @@ export function PageHero({
 				sizes='100vw'
 				style={{ objectPosition: imagePosition }}
 				className='-z-20'
+				{...anim('parallax')}
 			/>
 			{/* Przyciemnienie: mocniej u dołu, gdzie stoi tekst, i z lewej od desktopu. */}
 			<div
@@ -113,7 +141,7 @@ export function PageHero({
 								as='span'
 								variant='displayXl'
 							>
-								{title}
+								{heroWords(title)}
 							</Typography>
 						</TitleTag>
 					) : (
@@ -123,22 +151,40 @@ export function PageHero({
 								as={TitleTag}
 								variant='displayXl'
 							>
-								{title}
+								{heroWords(title)}
 							</Typography>
 						</>
 					)}
 					{lead && (
 						<Typography
 							variant='lead'
+							data-hero='item'
 							className='max-w-[45rem] text-foreground/85'
 						>
 							{lead}
 						</Typography>
 					)}
-					{children}
+					{/* Opakowania `contents` nie zmieniają układu — animuje się ich dziecko. */}
+					{children && (
+						<div
+							data-hero='group'
+							className='contents'
+							style={{ '--hero-index': 1 } as React.CSSProperties}
+						>
+							{children}
+						</div>
+					)}
 				</div>
 
-				{aside}
+				{aside && (
+					<div
+						data-hero='group'
+						className='contents'
+						style={{ '--hero-index': 2 } as React.CSSProperties}
+					>
+						{aside}
+					</div>
+				)}
 			</Container>
 		</section>
 	)

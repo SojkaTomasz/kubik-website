@@ -6,7 +6,14 @@ import { expect, test } from './fixtures'
  * Audyt dostępności. Narzędzia automatyczne łapią około jednej trzeciej realnych
  * barier — nie ocenią sensu tekstu alternatywnego ani kolejności czytania.
  * Poziom `serious` i `critical` traktujemy jako błąd.
+ *
+ * Audyt ocenia STAN KOŃCOWY strony, więc biegnie przy ograniczonym ruchu. Bez tego axe
+ * łapie wejście hero w połowie (przyciski przy `opacity: 0.4`) i zgłasza kontrast,
+ * którego żaden użytkownik nie zobaczy po sekundzie — wynik zależał od tego, ile
+ * milisekund minęło od załadowania. Same animacje szanują to ustawienie
+ * (`app/theme/motion.css`, `ScrollMotion`), więc strona jest wtedy od razu gotowa.
  */
+test.use({ contextOptions: { reducedMotion: 'reduce' } })
 
 /** Strony, które muszą przejść audyt. */
 const PAGES = [

@@ -4,6 +4,7 @@ import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { SpecList, SpecListItem } from '@/components/ui/spec-list'
 import { Typography } from '@/components/ui/typography'
+import { anim, animationKey } from '@/lib/animations/attributes'
 import type { City } from '@/data/cities'
 
 /**
@@ -23,15 +24,22 @@ export function CityLocal({ eyebrow, city }: { eyebrow: string; city: City }) {
 						title={city.localTitle}
 						titleId='city-local-title'
 					/>
+					{/* `key` z treści — przejście między miastami zmienia tekst bez przemontowania
+					    strony, a SplitText cofa podział przez `innerHTML` (`animationKey`). */}
 					<Typography
+						key={animationKey(city.localBody)}
 						variant='lead'
 						tone='muted'
+						{...anim('text')}
 					>
 						{city.localBody}
 					</Typography>
 				</div>
 
-				<SpecList className='self-end'>
+				<SpecList
+					className='self-end'
+					{...anim('stagger')}
+				>
 					<SpecListItem
 						label={t('travel')}
 						value={city.travel}

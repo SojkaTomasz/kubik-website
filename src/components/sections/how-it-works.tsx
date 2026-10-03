@@ -7,6 +7,7 @@ import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { Steps } from '@/components/ui/steps'
 import { serviceContent } from '@/data/service'
+import { anim } from '@/lib/animations/attributes'
 import type { Locale } from '@/site.config'
 
 /**
@@ -39,11 +40,13 @@ export function HowItWorks({ eyebrow }: { eyebrow: string }) {
 						sizes='(min-width: 1440px) 1280px, 100vw'
 						placeholder='blur'
 						className='aspect-[4/3] md:aspect-[21/9]'
-						style={{ objectPosition: '50% 40%' }}
+						{...anim('image')}
+						style={{ objectPosition: '50% 60%' }}
 					/>
 					<Badge
 						variant='pipe'
 						className='absolute bottom-4 left-4 px-3.5 py-2.5 text-[0.8125rem] md:bottom-6 md:left-6'
+						{...anim('badge')}
 					>
 						{t('howBadge')}
 					</Badge>

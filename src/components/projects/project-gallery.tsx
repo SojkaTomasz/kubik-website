@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge'
 import { Image } from '@/components/ui/image'
 import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
+import { anim } from '@/lib/animations/attributes'
 import { cn } from '@/lib/utils'
 import type { Project } from '@/data/projects'
 
@@ -61,7 +62,10 @@ export function ProjectGallery({ project }: { project: Project }) {
 					photos={project.photos}
 					alts={alts}
 				>
-					<ul className='grid grid-cols-2 gap-3 md:grid-cols-6 md:gap-4'>
+					<ul
+						className='grid grid-cols-2 gap-3 md:grid-cols-6 md:gap-4'
+						{...anim('stagger')}
+					>
 						{project.photos.map((photo, index) => {
 							const isLead = index < leads
 							const isSolo = count === 1

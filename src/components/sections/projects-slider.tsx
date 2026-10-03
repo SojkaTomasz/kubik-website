@@ -13,6 +13,7 @@ import {
 import { CarouselProgress } from '@/components/ui/carousel-progress'
 import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
+import { anim } from '@/lib/animations/attributes'
 import type { Project } from '@/data/projects'
 
 export interface ProjectsSliderProps {
@@ -55,7 +56,10 @@ export function ProjectsSlider({ eyebrow, title, projects }: ProjectsSliderProps
 					}
 				/>
 
-				<CarouselContent className='-ml-3 md:-ml-6'>
+				<CarouselContent
+					className='-ml-3 md:-ml-6'
+					{...anim('stagger', { items: '[data-slot="carousel-item"]' })}
+				>
 					{projects.map(project => (
 						<CarouselItem
 							key={project.slug}

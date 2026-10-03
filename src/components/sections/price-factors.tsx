@@ -4,6 +4,7 @@ import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { Typography } from '@/components/ui/typography'
 import { serviceContent } from '@/data/service'
+import { anim } from '@/lib/animations/attributes'
 import type { Locale } from '@/site.config'
 
 /**
@@ -28,7 +29,10 @@ export function PriceFactors({ eyebrow }: { eyebrow: string }) {
 					titleId='price-factors-title'
 				/>
 
-				<ul className='grid gap-8 md:grid-cols-3 md:gap-6'>
+				<ul
+					className='grid gap-8 md:grid-cols-3 md:gap-6'
+					{...anim('stagger')}
+				>
 					{priceFactors.map(factor => (
 						<li
 							key={factor.title}

@@ -5,6 +5,7 @@ import { Section } from '@/components/ui/section'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { Separator } from '@/components/ui/separator'
 import { cityPath, localizedCities } from '@/data/cities'
+import { anim } from '@/lib/animations/attributes'
 import type { Locale } from '@/site.config'
 
 /**
@@ -32,8 +33,14 @@ export function ServiceArea({ className }: { className?: string }) {
 					titleId='service-area-title'
 					lead={t('areaLead')}
 				/>
-				<Separator variant='pipe' />
-				<ul className='grid grid-cols-2 gap-x-6 gap-y-4 md:grid-cols-4'>
+				<Separator
+					variant='pipe'
+					{...anim('line')}
+				/>
+				<ul
+					className='grid grid-cols-2 gap-x-6 gap-y-4 md:grid-cols-4'
+					{...anim('stagger')}
+				>
 					{cities.map(city => (
 						<li key={city.slug}>
 							<Button

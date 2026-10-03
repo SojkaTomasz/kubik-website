@@ -35,3 +35,98 @@
 		transform: none !important;
 	}
 }
+
+/*
+ * Wejście hero — CZYSTY CSS, bez czekania na JavaScript.
+ *
+ * Tytuł hero jest elementem LCP, więc jego animacja nie może zależeć od hydracji
+ * (AGENTS.md, „Nic nie pojawia się po hydracji"). Keyframes ruszają z pierwszym
+ * malowaniem, a tytuł startuje z `opacity: 0.15`, nie z zera: Chrome nie liczy do LCP
+ * elementu całkiem przezroczystego, więc start od zera przesuwałby LCP o całą animację.
+ *
+ * `animation-fill-mode: backwards`, nie `both`: po animacji nie zostaje żadna
+ * wartość z keyframes. Przy `both` końcowy `transform` blokowałby na zawsze inne
+ * transformacje tego elementu — animacja CSS wygrywa nawet ze stylem inline.
+ */
+@media (prefers-reduced-motion: no-preference) {
+	[data-hero-word] {
+		display: inline-block;
+		animation: hero-word 0.95s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+		animation-delay: calc(120ms + var(--word, 0) * 55ms);
+	}
+
+	[data-hero='pipe'] {
+		transform-origin: 0 50%;
+		animation: hero-pipe 0.9s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+	}
+
+	/* `group` to opakowanie z `display: contents` — animuje się jego dziecko, układ zostaje nietknięty. */
+	[data-hero='item'],
+	[data-hero='group'] > * {
+		animation: hero-rise 1s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+		animation-delay: calc(380ms + var(--hero-index, 0) * 120ms);
+	}
+
+	/* Zdjęcie dojeżdża ze zbliżenia — paralaksa GSAP-a siedzi na ramce, nie na `<img>`. */
+	[data-slot='page-hero'] > [data-slot='image'] img {
+		animation: hero-zoom 2.2s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+	}
+}
+
+@keyframes hero-word {
+	from {
+		opacity: 0.15;
+		transform: translateY(0.45em);
+		filter: blur(8px);
+	}
+}
+
+@keyframes hero-pipe {
+	from {
+		transform: scaleX(0);
+	}
+}
+
+@keyframes hero-rise {
+	from {
+		opacity: 0;
+		transform: translateY(24px);
+	}
+}
+
+@keyframes hero-zoom {
+	from {
+		transform: scale(1.12);
+	}
+}
+
+/*
+ * Pasek postępu przewijania (`ScrollProgress`). Napędza go samo przewijanie
+ * (`animation-timeline`), więc działa w kompozytorze, bez JavaScriptu. Bez wsparcia
+ * przeglądarki pasek znika — `animation` w skrócie zeruje `animation-timeline`,
+ * dlatego oś czasu stoi PO skrócie.
+ */
+[data-slot='scroll-progress'] {
+	display: none;
+}
+
+@supports (animation-timeline: scroll()) {
+	[data-slot='scroll-progress'] {
+		position: fixed;
+		inset: 0 0 auto;
+		z-index: 50;
+		display: block;
+		height: 3px;
+		pointer-events: none;
+		transform: scaleX(0);
+		transform-origin: 0 50%;
+		animation: scroll-progress linear both;
+		animation-timeline: scroll(root block);
+	}
+}
+
+@keyframes scroll-progress {
+	to {
+		transform: scaleX(1);
+	}
+}

@@ -2,6 +2,7 @@ import padStart from 'lodash/padStart'
 import type * as React from 'react'
 
 import { Typography } from '@/components/ui/typography'
+import { anim } from '@/lib/animations/attributes'
 import { cva, type VariantProps } from '@/lib/cva'
 import { cn } from '@/lib/utils'
 
@@ -85,6 +86,8 @@ export function Steps({
 			data-appearance={appearance}
 			className={cn(stepsVariants({ orientation, appearance }), className)}
 			style={{ '--steps-count': items.length, ...style } as React.CSSProperties}
+			// Rura napełnia się krok po kroku (`steps`), kolumny z kreską wchodzą kaskadą.
+			{...anim(appearance === 'rule' ? 'stagger' : 'steps')}
 			{...props}
 		>
 			{items.map((item, index) => {

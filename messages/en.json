@@ -36,6 +36,8 @@
 		"breadcrumb": "Breadcrumb",
 		"carousel": "Carousel",
 		"slide": "slide",
+		"pauseAutoplay": "Pause automatic scrolling",
+		"playAutoplay": "Resume automatic scrolling",
 		"rating": "Rated {value} out of {max}"
 	},
 	"home": {

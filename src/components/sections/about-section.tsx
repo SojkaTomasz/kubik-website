@@ -8,6 +8,7 @@ import { SectionHeading } from '@/components/ui/section-heading'
 import { Stat, StatGroup } from '@/components/ui/stat'
 import { Typography } from '@/components/ui/typography'
 import { serviceContent } from '@/data/service'
+import { anim } from '@/lib/animations/attributes'
 import type { Locale } from '@/site.config'
 
 /**
@@ -34,6 +35,7 @@ export function AboutSection({ eyebrow }: { eyebrow: string }) {
 					<Typography
 						variant='lead'
 						tone='muted'
+						{...anim('text')}
 					>
 						{t('aboutBody')}
 					</Typography>
@@ -56,10 +58,12 @@ export function AboutSection({ eyebrow }: { eyebrow: string }) {
 						sizes='(min-width: 1024px) 45vw, 100vw'
 						placeholder='blur'
 						className='lg:aspect-[4/5]'
+						{...anim('image')}
 					/>
 					<Badge
 						variant='pipe'
 						className='absolute bottom-4 left-4 px-3.5 py-2.5 text-[0.8125rem] md:bottom-6 md:left-6'
+						{...anim('badge')}
 					>
 						{t('busBadge')}
 					</Badge>
