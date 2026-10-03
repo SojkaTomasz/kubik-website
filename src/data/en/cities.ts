@@ -40,7 +40,7 @@ export const citiesEn: Record<string, CityText> = {
 		inCity: 'in Kraków',
 		region: 'Lesser Poland',
 		description:
-			'Underfloor heating milling in Kraków: in blocks of flats, tenement houses and family homes, without raising the floor. Free quote.',
+			'Floor milling for underfloor heating in Kraków: blocks of flats, tenement houses and family homes, without raising the floor. Free quote.',
 		lead: 'In Kraków we mostly fit underfloor heating in blocks of flats and tenement houses, where every centimetre of height counts. We mill into the existing screed, so the floor doesn’t rise.',
 		localTitle: 'Mostly apartments in blocks, tenement houses and homes outside the city.',
 		localBody:
@@ -126,7 +126,7 @@ export const citiesEn: Record<string, CityText> = {
 			{
 				question: 'Does underfloor heating suit a heat pump after a boiler replacement?',
 				answer:
-					'Yes, it’s a good match. Underfloor heating warms a large surface, so a low water temperature is enough — and a heat pump runs cheapest at low temperatures.',
+					'Yes, it’s a good match. Underfloor heating warms a large surface, so a low water temperature is enough, and a heat pump runs cheapest at low temperatures.',
 			},
 			{
 				question: 'Can an old, hard screed be milled?',

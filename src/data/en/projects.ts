@@ -90,7 +90,7 @@ export const projectsEn: Record<string, ProjectText> = {
 		story: [
 			'A heat pump runs best at a low flow temperature, and that takes a large heating surface.',
 			'We milled loops in the living room and the other ground-floor rooms, laid the pipes and filled the channels.',
-			'The whole ground floor is heated by the floor, and the heat pump runs at a low temperature — the cheapest way.',
+			'The whole ground floor is heated by the floor, and the heat pump runs at a low temperature, the cheapest way.',
 		],
 	},
 	'kalisz-60m2': {

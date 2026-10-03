@@ -41,9 +41,9 @@ const serviceContentPl: ServiceContent = {
 				'Rozplanowujemy pętle od rozdzielacza do każdego pokoju, żeby ciepło rozkładało się równo.',
 		},
 		{
-			title: 'Frezowanie',
+			title: 'Frezowanie wylewki',
 			description:
-				'Frezarka z odkurzaczem wycina w wylewce rowki na grubość rury, bez kurzu w domu.',
+				'Frezujemy posadzkę maszyną z odkurzaczem: rowek na grubość rury, bez kurzu w domu.',
 		},
 		{
 			title: 'Układanie rury',
@@ -112,6 +112,11 @@ const serviceContentPl: ServiceContent = {
 			question: 'Pompa ciepła i ogrzewanie podłogowe: czy to pasuje?',
 			answer:
 				'Tak, to najlepsze połączenie. Podłogówka grzeje dużą powierzchnią, więc wystarcza jej niska temperatura wody, a na niskiej temperaturze pompa ciepła pracuje najtaniej.',
+		},
+		{
+			question: 'Modernizacja ogrzewania w starym domu: od czego zacząć?',
+			answer:
+				'Od sprawdzenia wylewki, bo od niej zależy, czy rowki da się wyfrezować bez skuwania. Jeśli ma co najmniej 4 cm i leży na izolacji, podłogówkę robimy w niej i nie ruszamy reszty domu. Źródło ciepła, na przykład pompę ciepła, dobiera się później.',
 		},
 		{
 			question: 'Ile trwa, zanim położę panele?',

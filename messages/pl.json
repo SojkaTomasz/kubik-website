@@ -52,12 +52,12 @@
 			"mess": "bałaganu"
 		},
 		"aboutEyebrow": "Kim jesteśmy",
-		"aboutTitle": "Frezujemy tylko pod podłogówkę.",
-		"aboutBody": "Jesteśmy z Małopolski i od 6 lat jeździmy do klientów po całej Polsce. Robimy podłogówkę w starych domach, w mieszkaniach w blokach i na nowych budowach. Frezujemy z odkurzaczem przemysłowym, więc w czasie pracy możesz normalnie mieszkać w domu.",
+		"aboutTitle": "Podłogówka w starym domu albo w bloku. Bez skuwania.",
+		"aboutBody": "Jesteśmy z Małopolski i od 6 lat jeździmy do klientów po całej Polsce. Zakładamy ogrzewanie podłogowe w starym domu, w bloku i na nowej budowie, w której posadzka już wyschła. Frezujemy z odkurzaczem przemysłowym, więc w czasie pracy możesz normalnie mieszkać w domu.",
 		"busBadge": "Rozpoznasz nas po busie",
 		"busAlt": "Niebieski bus firmy Kubik z napisem „Ogrzewanie podłogowe frezowane”",
 		"serviceEyebrow": "Usługa",
-		"serviceTitle": "Jeden dzień dzieli Cię od ciepłej podłogi.",
+		"serviceTitle": "Frezowanie pod ogrzewanie podłogowe. Zwykle w jeden dzień.",
 		"serviceLink": "Zobacz, jak pracujemy"
 	},
 	"language": {
@@ -78,7 +78,7 @@
 	},
 	"error": {
 		"title": "Coś poszło nie tak",
-		"description": "Nie udało się wyświetlić tej strony. Spróbuj ponownie — jeśli to nie pomoże, wróć na stronę główną.",
+		"description": "Nie udało się wyświetlić tej strony. Spróbuj ponownie. Jeśli to nie pomoże, wróć na stronę główną.",
 		"retry": "Spróbuj ponownie",
 		"home": "Strona główna",
 		"digest": "Identyfikator błędu"
@@ -102,7 +102,7 @@
 			},
 			"analytics": {
 				"label": "Analityczne",
-				"description": "Pokazują nam, które podstrony są odwiedzane i gdzie użytkownicy się gubią. Dane są zbiorcze — nie służą do identyfikacji pojedynczej osoby."
+				"description": "Pokazują nam, które podstrony są odwiedzane i gdzie użytkownicy się gubią. Dane są zbiorcze, nie służą do identyfikacji pojedynczej osoby."
 			},
 			"marketing": {
 				"label": "Marketingowe",
@@ -126,7 +126,7 @@
 		"sections": {
 			"administrator": {
 				"title": "Kto przetwarza Twoje dane",
-				"body": "Administratorem danych jest firma, która przyjeżdża do Ciebie z frezarką. Jeśli masz pytanie o dane — piszesz albo dzwonisz do nas, nie do żadnego działu prawnego.",
+				"body": "Administratorem danych jest firma, która przyjeżdża do Ciebie z frezarką. Jeśli masz pytanie o dane, piszesz albo dzwonisz do nas, nie do żadnego działu prawnego.",
 				"companyLabel": "Administrator",
 				"contactLabel": "Kontakt w sprawie danych",
 				"taxId": "NIP {taxId}"
@@ -145,7 +145,7 @@
 					},
 					"technical": {
 						"label": "Dane techniczne",
-						"purpose": "Adres IP, przeglądarka, odwiedzone podstrony — tylko po zgodzie na cookie analityczne."
+						"purpose": "Adres IP, przeglądarka, odwiedzone podstrony. Tylko po zgodzie na cookie analityczne."
 					}
 				}
 			},
@@ -155,11 +155,11 @@
 			},
 			"retention": {
 				"title": "Jak długo",
-				"body": "Zapytania, z których nic nie wyszło, kasujemy po 12 miesiącach. Dokumenty księgowe trzymamy 5 lat od końca roku podatkowego. Dane z cookie — do czasu wycofania zgody, nie dłużej niż 13 miesięcy."
+				"body": "Zapytania, z których nic nie wyszło, kasujemy po 12 miesiącach. Dokumenty księgowe trzymamy 5 lat od końca roku podatkowego. Dane z cookie trzymamy do czasu wycofania zgody, nie dłużej niż 13 miesięcy."
 			},
 			"recipients": {
 				"title": "Komu je przekazujemy",
-				"body": "Nie sprzedajemy danych. Dostęp mają tylko firmy, które pomagają nam prowadzić stronę i biuro: hosting (Vercel), poczta (Google), biuro rachunkowe oraz — po Twojej zgodzie — dostawcy analityki i reklam (Google, Meta)."
+				"body": "Nie sprzedajemy danych. Dostęp mają tylko firmy, które pomagają nam prowadzić stronę i biuro: hosting (Vercel), poczta (Google), biuro rachunkowe oraz, po Twojej zgodzie, dostawcy analityki i reklam (Google, Meta)."
 			},
 			"cookies": {
 				"title": "Pliki cookie",
@@ -168,13 +168,13 @@
 			},
 			"rights": {
 				"title": "Twoje prawa",
-				"body": "Możesz poprosić o wgląd w swoje dane, ich poprawienie, usunięcie, ograniczenie albo przeniesienie, a także sprzeciwić się ich przetwarzaniu. Wystarczy mail na {email} — odpowiadamy w ciągu 30 dni. Jeśli uznasz, że łamiemy przepisy, możesz złożyć skargę do Prezesa UODO (ul. Stawki 2, 00-193 Warszawa)."
+				"body": "Możesz poprosić o wgląd w swoje dane, ich poprawienie, usunięcie, ograniczenie albo przeniesienie, a także sprzeciwić się ich przetwarzaniu. Wystarczy mail na {email}, odpowiadamy w ciągu 30 dni. Jeśli uznasz, że łamiemy przepisy, możesz złożyć skargę do Prezesa UODO (ul. Stawki 2, 00-193 Warszawa)."
 			}
 		}
 	},
 	"validation": {
 		"required": "To pole jest wymagane.",
-		"phone": "Podaj numer telefonu — cyfry, spacje i myślniki.",
+		"phone": "Podaj numer telefonu: cyfry, spacje i myślniki.",
 		"tooLong": "Ta wartość jest za długa.",
 		"area": "Podaj metraż w m², na przykład 80."
 	},
@@ -182,7 +182,7 @@
 		"tagline": "Małopolska · pracujemy w całej Polsce",
 		"pagesTitle": "Strona",
 		"citiesTitle": "Miasta",
-		"homeLabel": "{name} — strona główna"
+		"homeLabel": "{name}, strona główna"
 	},
 	"rating": {
 		"short": "{count}+ opinii",
@@ -256,12 +256,12 @@
 		"eyebrow": "Usługa · cała Polska",
 		"heading": "Frezowanie pod ogrzewanie podłogowe.",
 		"lead": "Masz już wylewkę i chcesz podłogówkę? Nie musisz jej skuwać. Ogrzewanie podłogowe w istniejącej wylewce: wyfrezujemy w niej rowki, ułożymy rury i zalejemy je, a podłoga nie podniesie się nawet o centymetr.",
-		"howTitle": "Zamiast skuwać podłogę, wycinamy w niej rowki pod rurki.",
-		"howBody": "Frezowanie wylewki robimy maszyną z podłączonym odkurzaczem przemysłowym. Frezarka wycina w posadzce rowki na grubość rury, a pył od razu trafia do worka. Dlatego klienci w opiniach najczęściej piszą o jednym: zero kurzu.",
+		"howTitle": "Frezowanie wylewki i posadzki: wycinamy rowki pod rurki zamiast skuwać podłogę.",
+		"howBody": "Frezowanie wylewki robimy maszyną z podłączonym odkurzaczem przemysłowym. Frezarka wycina w posadzce rowki na grubość rury, a pył od razu trafia do worka. Tak samo frezujemy posadzkę betonową i anhydrytową. Dlatego klienci w opiniach najczęściej piszą o jednym: zero kurzu.",
 		"howBadge": "Frezarka z odkurzaczem przemysłowym",
 		"howPhotoAlt": "Frezarka podłączona do odkurzacza przemysłowego w garderobie w trakcie frezowania",
 		"fitEyebrow": "Twoja wylewka",
-		"fitTitle": "Czy u mnie się da? Najczęściej tak.",
+		"fitTitle": "Ogrzewanie podłogowe frezowane: czy u mnie się da?",
 		"fitYes": "Nadaje się",
 		"fitNo": "Nie nadaje się",
 		"fitNote": "Nie wiesz, jaką masz wylewkę? Wyślij zdjęcie SMS-em na {phone}, ocenimy za darmo.",
@@ -299,7 +299,7 @@
 		"count": "{count, plural, one {# realizacja} few {# realizacje} other {# realizacji}}"
 	},
 	"project": {
-		"title": "Frezowanie pod podłogówkę, {city}, {area} m²",
+		"title": "Frezowanie pod ogrzewanie podłogowe, {city}, {area} m²",
 		"description": "Przebieg frezowania wylewki pod ogrzewanie podłogowe: {object}, {area} m², {time}.",
 		"heading": "{title}, {area} m².",
 		"photoCount": "{count} zdjęć z budowy",

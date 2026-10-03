@@ -58,7 +58,7 @@ export default function GlobalError({
 							</Typography>
 
 							<EmptyDescription>
-								Strona napotkała nieoczekiwany błąd. Spróbuj ponownie — jeśli to nie pomoże,
+								Strona napotkała nieoczekiwany błąd. Spróbuj ponownie. Jeśli to nie pomoże,
 								wróć na stronę główną.
 							</EmptyDescription>
 						</EmptyHeader>

@@ -568,6 +568,10 @@ nie dzieje i ma prawo sądzić, że strona zawisła.
 ## Konwencje
 
 - nazwy plików w kebab-case
+- **żadnego długiego myślnika (—) w treści widocznej dla użytkownika.** Dotyczy `messages/*.json`,
+  `src/data/*` i napisów wpisanych wprost w widok. Zamiast niego kropka, przecinek albo dwukropek —
+  wtrącenie w myślnikach to pierwszy sygnał, po którym czytelnik poznaje tekst pisany przez model.
+  Komentarze w kodzie i dokumentacja (ten plik, `docs/`) mogą go używać bez ograniczeń.
 - **kod po angielsku, treść po polsku.** Nazwy zmiennych, funkcji, typów, pól, identyfikatorów DOM i
   kotwic — wyłącznie angielskie. Po polsku zostają komentarze, opisy testów i teksty widoczne dla
   użytkownika. Mieszanka (`LIMITY.wiadomosc`, `const naruszenia`) zamyka projekt przed każdym, kto

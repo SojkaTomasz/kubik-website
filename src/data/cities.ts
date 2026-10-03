@@ -52,7 +52,7 @@ export const cities: City[] = [
 		region: 'mazowieckie',
 		description:
 			'Frezowanie pod ogrzewanie podłogowe w Warszawie: mieszkania, apartamenty i domy pod miastem, bez skuwania wylewki. Darmowa wycena.',
-		lead: 'W Warszawie najczęściej frezujemy nowe mieszkania od dewelopera, zanim właściciele położą podłogi. Robimy to w wylewce, która już jest, więc nie czekasz tygodniami na nową.',
+		lead: 'W Warszawie na frezowanie pod ogrzewanie podłogowe dzwonią do nas głównie właściciele nowych mieszkań od dewelopera, jeszcze przed położeniem podłóg. Pracujemy w wylewce, która już jest, więc nie czekasz tygodniami na nową.',
 		localTitle: 'Mieszkania w stanie deweloperskim i domy pod Warszawą.',
 		localBody:
 			'Kupujesz mieszkanie z gotową wylewką i grzejnikami, a chcesz podłogówkę? Nie musisz zrywać posadzki. Wyfrezujemy rowki, ułożymy rury i podłączymy je do rozdzielacza. W domach pod Warszawą często robimy to przy przejściu z kotła na pompę ciepła.',
@@ -78,8 +78,8 @@ export const cities: City[] = [
 		inCity: 'w Krakowie',
 		region: 'małopolskie',
 		description:
-			'Frezowanie pod podłogówkę w Krakowie: w blokach, kamienicach i domach, bez podnoszenia podłogi. Darmowa wycena.',
-		lead: 'W Krakowie najczęściej robimy podłogówkę w blokach i kamienicach, gdzie liczy się każdy centymetr wysokości. Frezujemy w obecnej wylewce, więc podłoga się nie podnosi.',
+			'Frezowanie pod ogrzewanie podłogowe w Krakowie: bloki, kamienice i domy, bez podnoszenia podłogi. Darmowa wycena.',
+		lead: 'Frezowanie pod ogrzewanie podłogowe w Krakowie robimy najczęściej w blokach i kamienicach, gdzie liczy się każdy centymetr wysokości. Rowki wycinamy w obecnej wylewce, więc podłoga się nie podnosi.',
 		localTitle: 'Najczęściej frezujemy tu mieszkania w blokach, kamienice i domy pod miastem.',
 		localBody:
 			'W bloku czy kamienicy nie ma miejsca na nową, grubszą wylewkę, a frezowanie nie podnosi podłogi nawet o centymetr. Pod Krakowem robimy domy, które przechodzą z pieca na pompę ciepła.',
@@ -106,7 +106,7 @@ export const cities: City[] = [
 		region: 'dolnośląskie',
 		description:
 			'Frezowanie pod ogrzewanie podłogowe we Wrocławiu: poddasza, domy i mieszkania, bez skuwania posadzki. Darmowa wycena.',
-		lead: 'We Wrocławiu i okolicach często frezujemy poddasza adaptowane na pokoje. Rury układamy w wylewce, która już jest, więc nie znosimy gruzu po schodach.',
+		lead: 'We Wrocławiu i okolicach po frezowanie pod ogrzewanie podłogowe sięgają najczęściej właściciele poddaszy adaptowanych na pokoje. Rury układamy w wylewce, która już jest, więc nie znosimy gruzu po schodach.',
 		localTitle: 'Poddasza, domy na przedmieściach i mieszkania w nowych osiedlach.',
 		localBody:
 			'Na poddaszu każdy worek gruzu trzeba znieść na dół, a nowa wylewka obciąża strop. Frezowanie omija oba problemy. W domach pod Wrocławiem robimy podłogówkę przy modernizacji ogrzewania, zanim wejdą podłogi.',
@@ -133,7 +133,7 @@ export const cities: City[] = [
 		region: 'łódzkie',
 		description:
 			'Frezowanie pod ogrzewanie podłogowe w Łodzi: domy, mieszkania i lofty, bez skuwania wylewki. Darmowa wycena.',
-		lead: 'W Łodzi robimy podłogówkę w domach jednorodzinnych i mieszkaniach po remoncie. Grzejniki znikają ze ścian, a wylewka zostaje na miejscu.',
+		lead: 'W Łodzi frezowanie pod ogrzewanie podłogowe robimy w domach jednorodzinnych i w mieszkaniach po remoncie. Grzejniki znikają ze ścian, a wylewka zostaje na miejscu.',
 		localTitle: 'Domy jednorodzinne i mieszkania, w których grzejniki mają zniknąć.',
 		localBody:
 			'Najczęściej przychodzą do nas osoby, które mają dość grzejników pod oknami i chcą równego ciepła w całym domu. Nie trzeba do tego nowej wylewki. Frezujemy rowki w obecnej i układamy w nich rury.',
@@ -160,7 +160,7 @@ export const cities: City[] = [
 		region: 'śląskie',
 		description:
 			'Frezowanie pod ogrzewanie podłogowe w Katowicach i na Śląsku: domy, poddasza i mieszkania, bez skuwania. Darmowa wycena.',
-		lead: 'Na Śląsku często frezujemy w domach, które przechodzą z kotła na węgiel na pompę ciepła. Podłogówka w istniejącej wylewce to najprostsza droga do niskiej temperatury zasilania.',
+		lead: 'W Katowicach i na całym Śląsku frezowanie pod ogrzewanie podłogowe najczęściej wiąże się z przejściem z kotła na węgiel na pompę ciepła. Podłogówka w istniejącej wylewce to najprostsza droga do niskiej temperatury zasilania.',
 		localTitle: 'Domy po wymianie kotła i poddasza w zabudowie śląskiej.',
 		localBody:
 			'Pompa ciepła najlepiej pracuje z ogrzewaniem podłogowym. W starszych domach na Śląsku wylewka zwykle jest wystarczająco gruba, żeby wyfrezować w niej rowki bez skuwania i bez podnoszenia podłogi.',
@@ -187,7 +187,7 @@ export const cities: City[] = [
 		region: 'podkarpackie',
 		description:
 			'Frezowanie pod ogrzewanie podłogowe w Rzeszowie: nowe mieszkania i domy, bez podnoszenia podłogi. Darmowa wycena.',
-		lead: 'W Rzeszowie najczęściej robimy podłogówkę w nowych mieszkaniach, zanim właściciele położą podłogi. Frezujemy w wylewce dewelopera, więc poziom przy drzwiach zostaje ten sam.',
+		lead: 'Rzeszów to u nas przede wszystkim frezowanie pod ogrzewanie podłogowe w nowych mieszkaniach, jeszcze przed podłogami. Pracujemy w wylewce dewelopera, więc poziom przy drzwiach zostaje ten sam.',
 		localTitle: 'Nowe mieszkania na osiedlach i domy wokół Rzeszowa.',
 		localBody:
 			'W mieszkaniu od dewelopera nie da się dołożyć grubej warstwy pod rury, bo drzwi wejściowe stoją już na swoim miejscu. Frezowanie rozwiązuje to w jeden dzień. Pod miastem robimy domy w budowie i po remoncie.',
@@ -214,7 +214,7 @@ export const cities: City[] = [
 		region: 'świętokrzyskie',
 		description:
 			'Frezowanie pod ogrzewanie podłogowe w Kielcach: nowe domy i remonty, bez skuwania posadzki. Darmowa wycena.',
-		lead: 'W Kielcach i okolicy frezujemy głównie nowe domy, w których decyzja o podłogówce zapadła już po wylaniu posadzki. Nie trzeba wylewać jej drugi raz.',
+		lead: 'W Kielcach i okolicy frezowanie pod ogrzewanie podłogowe trafia głównie na nowe domy, w których decyzja o podłogówce zapadła już po wylaniu posadzki. Nie trzeba wylewać jej drugi raz.',
 		localTitle: 'Nowe domy, w których posadzka była gotowa przed decyzją o podłogówce.',
 		localBody:
 			'Wylewka wyschła, a Ty dopiero zdecydowałeś się na ogrzewanie podłogowe? To częsta sytuacja. Wyfrezujemy rowki od rozdzielacza do każdego pokoju i ułożymy rury, a budowa przesunie się tylko o czas schnięcia masy.',
@@ -241,7 +241,7 @@ export const cities: City[] = [
 		region: 'opolskie',
 		description:
 			'Frezowanie pod ogrzewanie podłogowe w Opolu: domy z pompą ciepła i duże salony, bez skuwania. Darmowa wycena.',
-		lead: 'W Opolu często robimy podłogówkę w nowych domach z pompą ciepła. Frezujemy w gotowej wylewce, więc nie trzeba wylewać jej ponownie.',
+		lead: 'W Opolu frezowanie pod ogrzewanie podłogowe robimy najczęściej w nowych domach z pompą ciepła. Rowki wycinamy w gotowej wylewce, więc nie trzeba wylewać jej ponownie.',
 		localTitle: 'Domy z pompą ciepła i duże salony z przeszkleniami.',
 		localBody:
 			'Pompa ciepła potrzebuje dużej powierzchni grzewczej, a duży salon z oknami do podłogi nie ma miejsca na grzejniki. Podłogówka w istniejącej wylewce rozwiązuje oba problemy naraz.',
@@ -268,7 +268,7 @@ export const cities: City[] = [
 		region: 'kujawsko-pomorskie',
 		description:
 			'Frezowanie pod ogrzewanie podłogowe w Toruniu: mieszkania w blokach i wieżowcach, bez skuwania i bez kurzu. Darmowa wycena.',
-		lead: 'W Toruniu robimy podłogówkę w mieszkaniach w blokach i wieżowcach. Frezujemy z odkurzaczem, więc kurz nie trafia na klatkę ani do sąsiadów.',
+		lead: 'W Toruniu po frezowanie pod ogrzewanie podłogowe dzwonią głównie właściciele mieszkań w blokach i wieżowcach. Frezujemy z odkurzaczem, więc kurz nie trafia na klatkę ani do sąsiadów.',
 		localTitle: 'Mieszkania w blokach i wieżowcach, gdzie nie ma miejsca na grubszą podłogę.',
 		localBody:
 			'W bloku z wielkiej płyty podłoga nie może urosnąć, a każdy worek gruzu trzeba znieść windą. Frezowanie nie podnosi podłogi i nie zostawia gruzu, a pył od razu trafia do odkurzacza przemysłowego.',
@@ -295,7 +295,7 @@ export const cities: City[] = [
 		region: 'wielkopolskie',
 		description:
 			'Frezowanie pod ogrzewanie podłogowe w Kaliszu: domy jednorodzinne i remonty, bez skuwania wylewki. Darmowa wycena.',
-		lead: 'W Kaliszu i okolicy robimy podłogówkę w domach jednorodzinnych, często tam, gdzie duże drzwi balkonowe nie zostawiają miejsca na grzejnik.',
+		lead: 'W Kaliszu i okolicy frezowanie pod ogrzewanie podłogowe robimy w domach jednorodzinnych, często tam, gdzie duże drzwi balkonowe nie zostawiają miejsca na grzejnik.',
 		localTitle: 'Domy jednorodzinne z dużymi przeszkleniami i wyjściami na taras.',
 		localBody:
 			'Przy drzwiach balkonowych do podłogi grzejnik zasłania wyjście albo wcale się nie mieści. Podłogówka grzeje od spodu, a przy przeszkleniu układamy pętle gęściej, żeby nie było tam chłodniej.',
@@ -322,7 +322,7 @@ export const cities: City[] = [
 		region: 'pomorskie',
 		description:
 			'Frezowanie pod ogrzewanie podłogowe w Gdańsku i Trójmieście: remonty domów i mieszkań, bez skuwania. Darmowa wycena.',
-		lead: 'W Gdańsku i całym Trójmieście frezujemy przy remontach domów i mieszkań. Stare grzejniki znikają, a wylewka zostaje na miejscu.',
+		lead: 'W Gdańsku i całym Trójmieście frezowanie pod ogrzewanie podłogowe robimy przy remontach domów i mieszkań na Pomorzu. Stare grzejniki znikają, a wylewka zostaje na miejscu.',
 		localTitle: 'Remonty domów i mieszkań w Trójmieście.',
 		localBody:
 			'Przy remoncie skuwanie posadzki to najbrudniejszy i najdłuższy etap. Frezowanie go omija: w jeden dzień wycinamy rowki, układamy rury i zalewamy je masą, a remont idzie dalej.',
@@ -349,7 +349,7 @@ export const cities: City[] = [
 		region: 'lubelskie',
 		description:
 			'Frezowanie pod ogrzewanie podłogowe w Lublinie: poddasza i domy w remoncie, bez skuwania posadzki. Darmowa wycena.',
-		lead: 'W Lublinie często frezujemy poddasza w trakcie remontu. Robimy to w istniejącej posadzce, więc nie wnosimy wilgoci świeżej wylewki do wykończonych ścian.',
+		lead: 'W Lublinie frezowanie pod ogrzewanie podłogowe robimy głównie na poddaszach w trakcie remontu. Pracujemy w istniejącej posadzce, więc nie wnosimy wilgoci świeżej wylewki do wykończonych ścian.',
 		localTitle: 'Poddasza w remoncie i domy, w których ściany są już gotowe.',
 		localBody:
 			'Nowa wylewka to woda, która wsiąka w świeże płyty gipsowo-kartonowe, i tygodnie schnięcia. Frezowanie wymaga tylko zalania wąskich rowków, więc remont może iść dalej niemal od razu.',

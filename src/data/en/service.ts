@@ -12,9 +12,9 @@ export const serviceContentEn: ServiceContent = {
 				'We plan the loops from the manifold to every room, so the heat spreads evenly.',
 		},
 		{
-			title: 'Milling',
+			title: 'Milling the screed',
 			description:
-				'A milling machine with a vacuum cuts pipe-sized channels into the screed, with no dust in the house.',
+				'We mill the floor with a vacuum-fed machine: a pipe-sized channel, with no dust in the house.',
 		},
 		{
 			title: 'Laying the pipe',
@@ -78,12 +78,17 @@ export const serviceContentEn: ServiceContent = {
 		{
 			question: 'Can underfloor heating run off a radiator system?',
 			answer:
-				'It can be connected to the system your radiators use today, but you need a manifold with a mixing valve to lower the water temperature. The connection is best discussed with a heating engineer — we prepare the floor.',
+				'It can be connected to the system your radiators use today, but you need a manifold with a mixing valve to lower the water temperature. The connection is best discussed with a heating engineer, and we prepare the floor.',
 		},
 		{
 			question: 'Heat pump and underfloor heating: a good match?',
 			answer:
-				"Yes, it's the best combination. Underfloor heating warms a large surface, so a low water temperature is enough — and a heat pump runs cheapest at low temperatures.",
+				"Yes, it's the best combination. Underfloor heating warms a large surface, so a low water temperature is enough, and a heat pump runs cheapest at low temperatures.",
+		},
+		{
+			question: 'Modernising the heating in an old house: where do you start?',
+			answer:
+				'With the screed, because it decides whether the channels can be milled without breaking anything up. If it is at least 4 cm thick and sits on insulation, the underfloor heating goes into it and the rest of the house stays untouched. The heat source, a heat pump for example, comes later.',
 		},
 		{
 			question: 'How long before I can lay panels?',

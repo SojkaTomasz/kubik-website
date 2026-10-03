@@ -52,12 +52,12 @@
 			"mess": "mess"
 		},
 		"aboutEyebrow": "Who we are",
-		"aboutTitle": "Underfloor heating milling is all we do.",
-		"aboutBody": "We are based in Lesser Poland and for 6 years we have been travelling to clients all over the country. We fit underfloor heating in old houses, in apartment blocks and on new builds. We mill with an industrial vacuum attached, so you can carry on living at home while we work.",
+		"aboutTitle": "Underfloor heating in an old house or a block. No breaking up.",
+		"aboutBody": "We are based in Lesser Poland and for 6 years we have been travelling to clients all over the country. We fit underfloor heating in an old house, in an apartment block and on a new build where the screed has already dried. We mill with an industrial vacuum attached, so you can carry on living at home while we work.",
 		"busBadge": "Look out for our van",
 		"busAlt": "Kubik's blue van with the lettering “Milled underfloor heating”",
 		"serviceEyebrow": "Service",
-		"serviceTitle": "One day between you and a warm floor.",
+		"serviceTitle": "Floor milling for underfloor heating. Usually in one day.",
 		"serviceLink": "See how we work"
 	},
 	"language": {
@@ -78,7 +78,7 @@
 	},
 	"error": {
 		"title": "Something went wrong",
-		"description": "We couldn't display this page. Please try again — if that doesn't help, go back to the home page.",
+		"description": "We couldn't display this page. Please try again. If that doesn't help, go back to the home page.",
 		"retry": "Try again",
 		"home": "Home page",
 		"digest": "Error ID"
@@ -102,7 +102,7 @@
 			},
 			"analytics": {
 				"label": "Analytics",
-				"description": "They show us which pages get visited and where people get lost. The data is aggregated — it isn't used to identify individuals."
+				"description": "They show us which pages get visited and where people get lost. The data is aggregated, it isn't used to identify individuals."
 			},
 			"marketing": {
 				"label": "Marketing",
@@ -126,7 +126,7 @@
 		"sections": {
 			"administrator": {
 				"title": "Who processes your data",
-				"body": "The data controller is the company that comes to you with the milling machine. If you have a question about your data, you write to or call us — not a legal department.",
+				"body": "The data controller is the company that comes to you with the milling machine. If you have a question about your data, you write to or call us, not a legal department.",
 				"companyLabel": "Data controller",
 				"contactLabel": "Data protection contact",
 				"taxId": "Tax ID (NIP) {taxId}"
@@ -145,7 +145,7 @@
 					},
 					"technical": {
 						"label": "Technical data",
-						"purpose": "IP address, browser, pages visited — only if you consent to analytics cookies."
+						"purpose": "IP address, browser, pages visited. Only if you consent to analytics cookies."
 					}
 				}
 			},
@@ -159,7 +159,7 @@
 			},
 			"recipients": {
 				"title": "Who we share it with",
-				"body": "We don't sell data. Access is limited to companies that help us run the website and the office: hosting (Vercel), email (Google), our accounting firm and — with your consent — analytics and advertising providers (Google, Meta)."
+				"body": "We don't sell data. Access is limited to companies that help us run the website and the office: hosting (Vercel), email (Google), our accounting firm and, with your consent, analytics and advertising providers (Google, Meta)."
 			},
 			"cookies": {
 				"title": "Cookies",
@@ -168,13 +168,13 @@
 			},
 			"rights": {
 				"title": "Your rights",
-				"body": "You can ask to access, correct, delete, restrict or transfer your data, and you can object to its processing. Just email {email} — we reply within 30 days. If you believe we are breaking the law, you can lodge a complaint with the President of the Personal Data Protection Office (UODO, ul. Stawki 2, 00-193 Warsaw)."
+				"body": "You can ask to access, correct, delete, restrict or transfer your data, and you can object to its processing. Just email {email}, we reply within 30 days. If you believe we are breaking the law, you can lodge a complaint with the President of the Personal Data Protection Office (UODO, ul. Stawki 2, 00-193 Warsaw)."
 			}
 		}
 	},
 	"validation": {
 		"required": "This field is required.",
-		"phone": "Enter a phone number — digits, spaces and hyphens.",
+		"phone": "Enter a phone number: digits, spaces and hyphens.",
 		"tooLong": "This value is too long.",
 		"area": "Enter the floor area in m², for example 80."
 	},
@@ -182,7 +182,7 @@
 		"tagline": "Lesser Poland · we work all over Poland",
 		"pagesTitle": "Site",
 		"citiesTitle": "Cities",
-		"homeLabel": "{name} — home page"
+		"homeLabel": "{name}, home page"
 	},
 	"rating": {
 		"short": "{count}+ reviews",
@@ -256,12 +256,12 @@
 		"eyebrow": "Service · all of Poland",
 		"heading": "Floor milling for underfloor heating.",
 		"lead": "Already have a screed and want underfloor heating? No need to break it up. Underfloor heating in your existing screed: we mill channels into it, lay the pipes and fill them in, and the floor doesn't rise by even a centimetre.",
-		"howTitle": "Instead of breaking up the floor, we cut channels for the pipes.",
-		"howBody": "We mill the screed with a machine connected to an industrial vacuum. The milling machine cuts channels as deep as the pipe, and the dust goes straight into the bag. That's why reviews mostly mention one thing: zero dust.",
+		"howTitle": "Screed and floor milling: we cut channels for the pipes instead of breaking up the floor.",
+		"howBody": "We mill the screed with a machine connected to an industrial vacuum. The milling machine cuts channels as deep as the pipe, and the dust goes straight into the bag. We work the same way in concrete and anhydrite floors. That's why reviews mostly mention one thing: zero dust.",
 		"howBadge": "Milling machine with an industrial vacuum",
 		"howPhotoAlt": "Milling machine connected to an industrial vacuum in a walk-in wardrobe during milling",
 		"fitEyebrow": "Your screed",
-		"fitTitle": "Will it work in my home? Usually, yes.",
+		"fitTitle": "Milled underfloor heating: will it work in my home?",
 		"fitYes": "Suitable",
 		"fitNo": "Not suitable",
 		"fitNote": "Not sure what screed you have? Text a photo to {phone} and we'll assess it for free.",
@@ -299,7 +299,7 @@
 		"count": "{count, plural, one {# project} other {# projects}}"
 	},
 	"project": {
-		"title": "Underfloor heating milling, {city}, {area} m²",
+		"title": "Floor milling for underfloor heating, {city}, {area} m²",
 		"description": "How we milled a screed for underfloor heating: {object}, {area} m², {time}.",
 		"heading": "{title}, {area} m².",
 		"photoCount": "{count} photos from the site",
@@ -336,7 +336,7 @@
 		"busBadge": "Look out for our van",
 		"areaEyebrow": "Where we work",
 		"areaTitle": "We'll come anywhere in Poland.",
-		"areaLead": "These are the cities where we work most often. Yours isn't listed? Call us — we'll get there.",
+		"areaLead": "These are the cities where we work most often. Yours isn't listed? Call us, we'll get there.",
 		"busAlt": "Kubik's blue van with the lettering “Milled underfloor heating”"
 	}
 }
