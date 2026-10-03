@@ -265,6 +265,24 @@
 		color-scheme: dark;
 	}
 
+	/*
+	 * Okno modalne (menu, okienko wyceny, polityka) blokuje przewijanie, a Base UI
+	 * robi to, zostawiając pasek przewijania WIDOCZNY, tylko martwy
+	 * (`overflow-y: scroll` na `<html>`, `<body>` zwężone o jego szerokość).
+	 * Przyciemnienie i panel menu kończyły się przed nim i przy prawej krawędzi
+	 * stał pusty pas. Pod zasłoną nic nie trzeba trzymać w miejscu, więc pasek
+	 * chowamy. Style Base UI siedzą w atrybucie `style` — stąd `!important`.
+	 * Pozycja przewinięcia zostaje: `overflow: hidden` jej nie zeruje.
+	 */
+	html:has([data-slot='dialog-overlay'], [data-slot='sheet-overlay']) {
+		overflow: hidden !important;
+		scrollbar-gutter: auto !important;
+	}
+
+	body:has([data-slot='dialog-overlay'], [data-slot='sheet-overlay']) {
+		width: auto !important;
+	}
+
 	body {
 		@apply bg-background text-foreground;
 		font-family: var(--font-body);

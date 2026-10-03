@@ -83,6 +83,25 @@ describe('Section', () => {
 		expect(document.querySelector('[data-slot="section-background"]')).not.toBeNull()
 	})
 
+	it('sąsiad z tym samym tłem nie dubluje odstępu, kreska i zdjęcie tak', () => {
+		/*
+		 * Sam selektor `+` sprawdza przeglądarka (jsdom nie liczy Tailwinda), tu
+		 * pilnujemy klucza, po którym sąsiad się rozpoznaje. Kreska i zdjęcie
+		 * dostają klucz spoza tonów tła — po nich odstęp ma zostać.
+		 */
+		const sectionBg = (element: React.ReactElement) => {
+			const { container, unmount } = render(element)
+			const value = container.querySelector('section')?.dataset.sectionBg
+			unmount()
+			return value
+		}
+
+		expect(sectionBg(<Section>Treść</Section>)).toBe('none')
+		expect(sectionBg(<Section background='card'>Treść</Section>)).toBe('card')
+		expect(sectionBg(<Section divider>Treść</Section>)).toBe('divided')
+		expect(sectionBg(<Section backgroundImage='/tlo.jpg'>Treść</Section>)).toBe('image')
+	})
+
 	it('przyciemnienie pojawia się tylko wtedy, gdy je zamówiono', () => {
 		// Nakładka bez klasy nie miałaby koloru, więc renderowanie jej „na wszelki
 		// wypadek" dokładałoby pustą warstwę nad zdjęciem.

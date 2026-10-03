@@ -1,8 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-
 import { SectionSearch } from '@/app/(dev)/dev/_components/section-search'
+import { useActiveSection } from '@/hooks/use-active-section'
 import { cn } from '@/lib/utils'
 
 /**
@@ -13,52 +12,6 @@ import { cn } from '@/lib/utils'
 
 export interface AnchorNavProps {
 	items: readonly (readonly [string, string])[]
-}
-
-/** Pas obserwacji: między 20% a 30% wysokości okna, licząc od góry. */
-const OBSERVER_BAND = '-20% 0px -70% 0px'
-
-/** Sekcja widoczna na ekranie. IntersectionObserver, nie nasłuch przewijania. */
-function useActiveSection(ids: readonly string[]): string | undefined {
-	const [active, setActive] = useState<string>()
-
-	// Zależnością jest ZŁĄCZONA lista, nie tablica: `items.map(...)` daje przy
-	// każdym renderze nową tożsamość, więc `[ids]` wpychało efekt w pętlę
-	// i zostawiało podświetloną poprzednią sekcję.
-	const key = ids.join('|')
-
-	useEffect(() => {
-		const sections = key
-			.split('|')
-			.map(id => document.getElementById(id))
-			.filter((element): element is HTMLElement => element !== null)
-
-		// Pusta lista nie jest błędem — sekcje mogą jeszcze nie istnieć w drzewie.
-		if (sections.length === 0) return () => {}
-
-		const order = key.split('|')
-		const visible = new Set<string>()
-
-		const observer = new IntersectionObserver(
-			entries => {
-				for (const entry of entries) {
-					if (entry.isIntersecting) visible.add(entry.target.id)
-					else visible.delete(entry.target.id)
-				}
-
-				// Widocznych sekcji bywa kilka naraz. Bierzemy pierwszą w kolejności
-				// dokumentu, żeby podświetlenie nie skakało przy przewijaniu.
-				setActive(order.find(id => visible.has(id)))
-			},
-			{ rootMargin: OBSERVER_BAND }
-		)
-
-		for (const section of sections) observer.observe(section)
-
-		return () => observer.disconnect()
-	}, [key])
-
-	return active
 }
 
 export function AnchorNav({ items }: AnchorNavProps) {

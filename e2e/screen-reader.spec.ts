@@ -306,3 +306,20 @@ test.describe('ustawienia zgód', () => {
 		)
 	})
 })
+
+test.describe('spis treści polityki prywatności', () => {
+	test.use({ viewport: { width: 1440, height: 900 } })
+
+	test('bieżąca sekcja ma aria-current, a kliknięcie przewija do niej', async ({ page }) => {
+		await page.goto('/polityka-prywatnosci')
+
+		const toc = page.getByRole('navigation', { name: 'Na tej stronie' })
+		const cookies = toc.getByRole('link', { name: /Pliki cookie/ })
+		await cookies.click()
+
+		// Podświetlenie widać okiem — czytnik dostaje tę samą informację z ARIA.
+		await expect(cookies).toHaveAttribute('aria-current', 'true')
+		await expect(toc.locator('[aria-current]')).toHaveCount(1)
+		await expect(page.locator('#privacy-cookies')).toBeInViewport()
+	})
+})

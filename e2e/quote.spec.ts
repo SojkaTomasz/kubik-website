@@ -209,7 +209,8 @@ test.describe('okienko wyceny', () => {
 
 		const dialog = page.getByRole('dialog', { name: DIALOG_NAME })
 		await expect(dialog).toBeVisible()
-		await expect(dialog.getByLabel('Miejscowość', { exact: true })).toHaveCount(0)
+		// Poza stroną miasta okienko pyta o miejscowość.
+		await expect(dialog.getByLabel('Miejscowość', { exact: true })).toBeVisible()
 
 		await dialog.getByRole('button', { name: 'Nie teraz' }).click()
 		await expect(dialog).toBeHidden()
@@ -220,13 +221,59 @@ test.describe('okienko wyceny', () => {
 		await expect(page.getByRole('dialog', { name: DIALOG_NAME })).toHaveCount(0)
 	})
 
-	test('nie otwiera się na stronie kontaktu', async ({ page }) => {
+	test('na stronie miasta nie pyta o miejscowość', async ({ page }) => {
+		await page.goto('/frezowanie-pod-ogrzewanie-podlogowe/krakow')
+		await waitForHydration(page)
+		await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight * 0.62))
+
+		const dialog = page.getByRole('dialog', { name: DIALOG_NAME })
+		await expect(dialog).toBeVisible()
+		await expect(dialog.getByLabel('Metraż', { exact: true })).toBeVisible()
+		await expect(dialog.getByLabel('Miejscowość', { exact: true })).toHaveCount(0)
+	})
+
+	test('polityka prywatności otwiera się na okienku, które zostaje pod spodem', async ({
+		page,
+	}) => {
+		await page.goto('/frezowanie-pod-ogrzewanie-podlogowe')
+		await waitForHydration(page)
+		await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight * 0.62))
+
+		const dialog = page.getByRole('dialog', { name: DIALOG_NAME })
+		await expect(dialog).toBeVisible()
+
+		await dialog.getByRole('button', { name: 'Polityka prywatności' }).click()
+		await expect(page.getByRole('dialog', { name: /polityka prywatności/i })).toBeVisible()
+		await expect(page).toHaveURL(/\/frezowanie-pod-ogrzewanie-podlogowe$/)
+
+		await page.keyboard.press('Escape')
+		await expect(page.getByRole('dialog', { name: /polityka prywatności/i })).toHaveCount(0)
+		await expect(dialog).toBeVisible()
+	})
+
+	test('na stronie kontaktu nie otwiera się przy przewijaniu', async ({ page }) => {
 		await page.goto('/kontakt')
+		await waitForHydration(page)
 
 		await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight))
 		await page.waitForTimeout(500)
 
 		await expect(page.getByRole('dialog')).toHaveCount(0)
+	})
+
+	test('na stronie kontaktu otwiera się przy zamiarze wyjścia', async ({ page }) => {
+		await page.goto('/kontakt')
+		await waitForHydration(page)
+
+		// Kursor wyjeżdża górą okna — przeglądarka zgłasza to z ostatniej pozycji
+		// w oknie, kilkanaście pikseli od krawędzi, nie z zera.
+		await page.evaluate(() =>
+			document.body.dispatchEvent(
+				new MouseEvent('mouseout', { bubbles: true, clientY: 12, relatedTarget: null })
+			)
+		)
+
+		await expect(page.getByRole('dialog', { name: DIALOG_NAME })).toBeVisible()
 	})
 })
 

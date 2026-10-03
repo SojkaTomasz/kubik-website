@@ -21,8 +21,22 @@ const SHOWN_KEY = 'quote-popup-shown'
 /** Okienko po przewinięciu dwóch trzecich strony. */
 const SCROLL_SHARE = 2 / 3
 
-/** Strony, na których formularz jest głównym tematem albo okienko by przeszkadzało. */
-const SKIPPED_PATHS = ['/kontakt', '/polityka-prywatnosci']
+/** Strony, na których okienko by przeszkadzało — zawsze. */
+const SKIPPED_PATHS = ['/polityka-prywatnosci']
+
+/**
+ * Strony, na których formularz jest głównym tematem: przewijanie okienka nie
+ * otwiera (czytający i tak ma formularz przed sobą), zamiar wyjścia — tak.
+ */
+const EXIT_ONLY_PATHS = ['/kontakt']
+
+/**
+ * Pas przy górnej krawędzi, w którym wyjazd kursora liczy się jako zamiar
+ * wyjścia. Warunek `clientY <= 0` prawie nie łapał: przy szybkim ruchu ku kartom
+ * przeglądarka zgłasza `mouseout` z ostatniej pozycji w oknie, kilkanaście
+ * pikseli niżej.
+ */
+const EXIT_EDGE = 40
 
 function wasShown(): boolean {
 	try {
@@ -44,11 +58,13 @@ function markShown() {
 /**
  * Czy da się teraz pokazać okienko, nie wchodząc nikomu w drogę: baner zgód
  * czeka na decyzję, inne okno jest otwarte albo formularz wyceny jest już
- * w polu widzenia.
+ * w polu widzenia. Ten ostatni warunek nie dotyczy zamiaru wyjścia — kto
+ * wychodzi, formularza na ekranie i tak nie wypełni.
  */
-function canInterrupt(): boolean {
+function canInterrupt(isLeaving: boolean): boolean {
 	if (document.documentElement.classList.contains('consent-pending')) return false
 	if (document.querySelector('[data-slot="dialog-content"]')) return false
+	if (isLeaving) return true
 
 	const form = document.getElementById('wycena')?.getBoundingClientRect()
 	if (form && form.top < window.innerHeight && form.bottom > 0) return false
@@ -65,7 +81,8 @@ function canInterrupt(): boolean {
  *   na stronach bez sekcji formularza.
  * - **okienko wyceny** — samo otwiera się raz na wizytę, po przewinięciu dwóch
  *   trzecich strony albo gdy kursor wyjeżdża ku górze okna (zamiar wyjścia).
- *   Otwarcie wynika z ruchu użytkownika, nie ze startu Reacta.
+ *   Na stronie kontaktu wyłącznie przy zamiarze wyjścia. Otwarcie wynika
+ *   z ruchu użytkownika, nie ze startu Reacta.
  */
 export function QuoteLayer() {
 	const t = useTranslations('nav')
@@ -73,13 +90,14 @@ export function QuoteLayer() {
 	const phone = companyConfig.phone ? phoneLinks(companyConfig.phone) : undefined
 	const pathname = usePathname()
 	const isSkipped = SKIPPED_PATHS.includes(pathname)
+	const isExitOnly = EXIT_ONLY_PATHS.includes(pathname)
 	const { handleOpen } = popup
 
 	useEffect(() => {
 		if (isSkipped || wasShown()) return undefined
 
-		const open = () => {
-			if (wasShown() || !canInterrupt()) return
+		const open = (isLeaving: boolean) => {
+			if (wasShown() || !canInterrupt(isLeaving)) return
 			markShown()
 			handleOpen()
 			cleanup()
@@ -87,11 +105,11 @@ export function QuoteLayer() {
 
 		const handleScroll = () => {
 			const { scrollHeight } = document.documentElement
-			if (window.scrollY + window.innerHeight >= scrollHeight * SCROLL_SHARE) open()
+			if (window.scrollY + window.innerHeight >= scrollHeight * SCROLL_SHARE) open(false)
 		}
 
 		const handleMouseOut = (event: MouseEvent) => {
-			if (!event.relatedTarget && event.clientY <= 0) open()
+			if (!event.relatedTarget && event.clientY <= EXIT_EDGE) open(true)
 		}
 
 		function cleanup() {
@@ -99,11 +117,11 @@ export function QuoteLayer() {
 			document.removeEventListener('mouseout', handleMouseOut)
 		}
 
-		window.addEventListener('scroll', handleScroll, { passive: true })
+		if (!isExitOnly) window.addEventListener('scroll', handleScroll, { passive: true })
 		document.addEventListener('mouseout', handleMouseOut)
 
 		return cleanup
-	}, [isSkipped, handleOpen])
+	}, [isSkipped, isExitOnly, handleOpen])
 
 	const openFromBar = () => {
 		markShown()

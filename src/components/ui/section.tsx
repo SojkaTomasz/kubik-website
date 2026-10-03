@@ -7,7 +7,23 @@ import { cn } from '@/lib/utils'
 /**
  * Sekcja strony. Odstępy z tokenów `--section-py` / `--section-py-lg`, więc
  * „strona ma oddychać bardziej" to dwie wartości w theme/components.css.
+ *
+ * **Sąsiad z tym samym tłem nie dubluje odstępu.** Dwie sekcje na jednym tle
+ * stykały się dolnym i górnym odstępem naraz — wizualnie dwa razy dalej od
+ * siebie niż sekcje rozdzielone zmianą koloru, gdzie każdy odstęp należy do
+ * swojego tła. Sekcja stojąca zaraz po sekcji z tym samym `data-section-bg`
+ * traci więc górny odstęp. Czysty CSS (selektor `+`), bez JS-a.
+ *
+ * Granicą jest też kreska (`divider`) i zdjęcie w tle — po nich odstęp zostaje.
  */
+
+/** Sekcja zaraz po sekcji z tym samym tłem — górny odstęp ma już od sąsiada. */
+const SAME_BACKGROUND_ABOVE = {
+	none: '[[data-section-bg=none]+&]:pt-0',
+	muted: '[[data-section-bg=muted]+&]:pt-0',
+	card: '[[data-section-bg=card]+&]:pt-0',
+	inverted: '[[data-section-bg=inverted]+&]:pt-0',
+} as const
 const sectionVariants = cva('w-full', {
 	variants: {
 		spacing: {
@@ -42,6 +58,8 @@ export interface SectionProps
 	backgroundImage?: string
 	/** Przyciemnienie nad zdjęciem, np. `bg-black/50`. Bez niego zdjęcie zjada kontrast tekstu. */
 	overlayClassName?: string
+	/** Kreska na dole sekcji. Następna sekcja zachowuje wtedy pełny górny odstęp. */
+	divider?: boolean
 	/**
 	 * `content-visibility: auto` — **załóż na każdą sekcję POZA pierwszym
 	 * ekranem**, bez tego pierwsze malowanie czeka na ułożenie całej strony
@@ -62,15 +80,23 @@ export function Section({
 	fullHeight = false,
 	backgroundImage,
 	overlayClassName,
+	divider = false,
 	deferLayout = false,
 	children,
 	...props
 }: SectionProps) {
+	const tone = background ?? 'none'
+	// Zdjęcie i kreska to granica, której sąsiad nie ma — klucz spoza listy tonów.
+	const sectionBg = backgroundImage ? 'image' : divider ? 'divided' : tone
+
 	return (
 		<section
 			data-slot='section'
+			data-section-bg={sectionBg}
 			className={cn(
 				sectionVariants({ spacing, background }),
+				!backgroundImage && SAME_BACKGROUND_ABOVE[tone],
+				divider && 'border-b',
 				// `svh`, nie `vh`: na telefonie `100vh` liczy okno BEZ paska adresu,
 				// więc hero zaczyna się przewijać, choć miał wypełniać ekran.
 				fullHeight && 'flex min-h-svh items-center',

@@ -1,8 +1,9 @@
 'use client'
 
-import { Languages } from 'lucide-react'
+import toUpper from 'lodash/toUpper'
+import { ChevronDown } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
-import { useTransition } from 'react'
+import { type ReactNode, useTransition } from 'react'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -16,7 +17,83 @@ import { usePathname, useRouter } from '@/i18n/navigation'
 import { isMultilingual, type Locale, locales } from '@/site.config'
 
 /**
+ * Flagi jako SVG, nie emoji: Windows nie ma glifów flag i zamiast nich pokazuje
+ * same litery „PL", „GB". Angielski to flaga brytyjska — umowny znak języka,
+ * nie kraju. Dekoracyjne (`aria-hidden`): nazwę języka niesie tekst obok.
+ */
+const FLAGS: Record<Locale, ReactNode> = {
+	pl: (
+		<svg
+			viewBox='0 0 16 10'
+			className='block size-full'
+			preserveAspectRatio='none'
+		>
+			<rect
+				width='16'
+				height='5'
+				fill='#fff'
+			/>
+			<rect
+				y='5'
+				width='16'
+				height='5'
+				fill='#dc143c'
+			/>
+		</svg>
+	),
+	en: (
+		<svg
+			viewBox='0 0 60 30'
+			className='block size-full'
+			preserveAspectRatio='xMidYMid slice'
+		>
+			<rect
+				width='60'
+				height='30'
+				fill='#012169'
+			/>
+			<path
+				d='M0,0 L60,30 M60,0 L0,30'
+				stroke='#fff'
+				strokeWidth='6'
+			/>
+			<path
+				d='M0,0 L60,30 M60,0 L0,30'
+				stroke='#c8102e'
+				strokeWidth='2'
+			/>
+			<path
+				d='M30,0 v30 M0,15 h60'
+				stroke='#fff'
+				strokeWidth='10'
+			/>
+			<path
+				d='M30,0 v30 M0,15 h60'
+				stroke='#c8102e'
+				strokeWidth='6'
+			/>
+		</svg>
+	),
+}
+
+function Flag({ locale }: { locale: Locale }) {
+	return (
+		<span
+			aria-hidden
+			className='inline-flex h-3.5 w-5 shrink-0 overflow-hidden ring-1 ring-white/10'
+		>
+			{FLAGS[locale]}
+		</span>
+	)
+}
+
+/**
  * Przełącznik języka zachowujący bieżącą ścieżkę.
+ *
+ * Przycisk pokazuje flagę i kod bieżącego języka („PL") zamiast ikony
+ * `Languages` — ta była za mała i nieczytelna. Nazwa dostępna zawiera widoczny
+ * kod (WCAG 2.5.3, „etykieta w nazwie"): „Zmień język: PL". Menu i flagi są
+ * kanciaste jak nagłówek i reszta serwisu.
  *
  * Na stronie jednojęzycznej nie renderuje niczego — menu z jedną pozycją,
  * na dodatek zablokowaną, jest dla użytkownika myleniem, a nie funkcją.
@@ -60,15 +137,21 @@ export function LanguageSwitcher() {
 				render={
 					<Button
 						variant='ghost'
-						size='icon'
 						disabled={isPending}
-						aria-label={t('label')}
+						className='gap-2 px-2.5 font-heading font-extrabold'
 					>
-						<Languages className='size-5' />
+						<Flag locale={activeLocale as Locale} />
+						<span className='sr-only'>{t('label')}: </span>
+						{/* Na najwęższych telefonach sama flaga — kod zostaje dla czytnika. */}
+						<span className='max-[23.75rem]:sr-only'>{toUpper(activeLocale)}</span>
+						<ChevronDown className='hidden size-4 text-muted-foreground sm:block' />
 					</Button>
 				}
 			/>
-			<DropdownMenuContent align='end'>
+			<DropdownMenuContent
+				align='end'
+				className='rounded-none'
+			>
 				<DropdownMenuRadioGroup
 					value={activeLocale}
 					aria-label={t('group')}
@@ -88,8 +171,10 @@ export function LanguageSwitcher() {
 							// ZOSTAWIAJĄ menu otwarte, bo służą zwykle do przestawiania
 							// kilku opcji naraz. Tu wybór jest jeden i kończy sprawę.
 							closeOnClick
+							className='gap-2.5 rounded-none'
 						>
-							{t(locale as Locale)}
+							<Flag locale={locale} />
+							{t(locale)}
 						</DropdownMenuRadioItem>
 					))}
 				</DropdownMenuRadioGroup>

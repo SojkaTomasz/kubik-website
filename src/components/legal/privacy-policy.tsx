@@ -1,10 +1,14 @@
-import padStart from 'lodash/padStart'
 import { useTranslations } from 'next-intl'
 
 import { companyConfig } from '@/company.config'
 import { CookieSettingsButton } from '@/components/cookie/cookie-settings-button'
+import {
+	sectionAnchor,
+	type SectionKey,
+	sectionNumber,
+	SECTIONS,
+} from '@/components/legal/privacy-policy-outline'
 import { Card, CardContent } from '@/components/ui/card'
-import { Item } from '@/components/ui/item'
 import { SpecList, SpecListItem } from '@/components/ui/spec-list'
 import { Typography } from '@/components/ui/typography'
 import { formatTaxId } from '@/lib/tax-id'
@@ -21,26 +25,7 @@ import { cn } from '@/lib/utils'
  * danych, które trzeba zestawić z faktycznie używanymi narzędziami.
  */
 
-/** Kolejność sekcji — wspólna dla treści i spisu treści, który do nich prowadzi. */
-const SECTIONS = [
-	'administrator',
-	'data',
-	'purposes',
-	'retention',
-	'recipients',
-	'cookies',
-	'rights',
-] as const
-
-type SectionKey = (typeof SECTIONS)[number]
-
 const DATA_ITEMS = ['phone', 'area', 'technical'] as const
-
-/** Kotwica sekcji — `polityka-prywatnosci#cookies` da się podlinkować z banera czy maila. */
-const sectionAnchor = (key: SectionKey) => `privacy-${key}`
-
-/** „01", „02"… — numer sekcji w nagłówku i w spisie treści. */
-const sectionNumber = (index: number) => padStart(String(index + 1), 2, '0')
 
 export interface PrivacyPolicyHeaderProps {
 	/** `h1` na stronie, `h2` w oknie — strona pod spodem ma już własny `h1`. */
@@ -101,47 +86,6 @@ export function PrivacyPolicyHeader({
 				</Typography>
 			</div>
 		</div>
-	)
-}
-
-/** Spis treści — lista odnośników do sekcji, z numerami jak w nagłówkach. */
-export function PrivacyPolicyToc({ className }: { className?: string }) {
-	const t = useTranslations('privacy')
-
-	return (
-		<nav
-			aria-label={t('tocTitle')}
-			className={cn('flex flex-col gap-4', className)}
-		>
-			<Typography
-				as='p'
-				variant='overline'
-				tone='muted'
-			>
-				{t('tocTitle')}
-			</Typography>
-			<ul className='flex flex-col'>
-				{SECTIONS.map((key, index) => (
-					<li key={key}>
-						<Item
-							variant='rail'
-							size='sm'
-							render={<a href={`#${sectionAnchor(key)}`} />}
-						>
-							<Typography
-								as='span'
-								variant='meta'
-								tone='primary'
-								aria-hidden
-							>
-								{sectionNumber(index)}
-							</Typography>
-							<span className='text-[0.9375rem]'>{t(`sections.${key}.title`)}</span>
-						</Item>
-					</li>
-				))}
-			</ul>
-		</nav>
 	)
 }
 

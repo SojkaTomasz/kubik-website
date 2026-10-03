@@ -35,12 +35,19 @@ export function FaqSection({ eyebrow, title, items }: FaqSectionProps) {
 		>
 			<JsonLd data={faqJsonLd(items)} />
 
-			<div className='grid gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20'>
+			<div className='relative grid gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20'>
 				<SectionHeading
 					eyebrow={eyebrow}
 					title={title ?? t('faqTitle')}
 					titleId='faq-title'
 					lead={t('faqLead')}
+					// `self-start` jest warunkiem działania: bez niego kolumna rozciąga
+					// się na wysokość wiersza siatki, czyli całego akordeonu, i
+					// przyklejenie nie ma gdzie się przesunąć. Odstęp od góry jak w
+					// spisie treści polityki prywatności. NIE `top-navbar`: ten token
+					// ma 4rem, a zadokowany pasek mierzy na desktopie 4,5rem (`pt-5`
+					// plus karta `h-18`), więc nagłówek wjechałby pod jego kreskę.
+					className='lg:sticky lg:top-28 lg:self-start'
 				/>
 
 				<Accordion defaultValue={[items[0]?.question]}>

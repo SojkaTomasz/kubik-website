@@ -18,14 +18,56 @@ function getNavHeight(): number {
 	return Number.parseFloat(raw) || 0
 }
 
-/** Respektuje `prefers-reduced-motion` — przy tym ustawieniu skaczemy od razu. */
+/** Ile razy wolno dociągnąć przewijanie, gdy cel przesunął się w trakcie. */
+const MAX_CORRECTIONS = 3
+
+/**
+ * Respektuje `prefers-reduced-motion` — przy tym ustawieniu skaczemy od razu.
+ *
+ * Cel liczony jest na starcie, a sekcje z `deferLayout` (`content-visibility:
+ * auto`) mają do pierwszego narysowania szacunkową wysokość. Przewijanie przez
+ * nie zmienia układu pod spodem i kończyło się kilkaset pikseli za celem. Po
+ * `scrollend` liczymy więc jeszcze raz i dociągamy. Przeglądarka bez
+ * `scrollend` zostaje przy pierwszym przewinięciu.
+ */
 export function scrollToElement(element: HTMLElement, extraOffset = 20): void {
-	const offset = getNavHeight() + extraOffset
-	const top = element.getBoundingClientRect().top + window.scrollY - offset
+	const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+		? 'auto'
+		: 'smooth'
+	let corrections = 0
 
-	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+	// Ruch użytkownika w trakcie przerywa dociąganie — nie szarpiemy stroną,
+	// którą ktoś właśnie sam przewija.
+	const USER_INPUT = ['wheel', 'touchstart', 'keydown', 'pointerdown'] as const
 
-	window.scrollTo({ top, behavior: prefersReducedMotion ? 'auto' : 'smooth' })
+	const stop = () => {
+		window.removeEventListener('scrollend', step)
+		for (const type of USER_INPUT) window.removeEventListener(type, stop)
+	}
+
+	/**
+	 * Przewija do bieżącej pozycji celu. Nasłuch `scrollend` tylko wtedy, gdy
+	 * przewijanie faktycznie rusza — inaczej zdarzenie nie przyjdzie, a nasłuch
+	 * odpaliłby się dopiero przy następnym przewinięciu użytkownika.
+	 */
+	function step() {
+		const top =
+			element.getBoundingClientRect().top + window.scrollY - getNavHeight() - extraOffset
+		const maxScroll = document.documentElement.scrollHeight - window.innerHeight
+		const reachable = Math.min(Math.max(top, 0), maxScroll)
+
+		if (Math.abs(reachable - window.scrollY) < 2 || corrections > MAX_CORRECTIONS) {
+			stop()
+			return
+		}
+
+		corrections += 1
+		window.addEventListener('scrollend', step, { once: true })
+		window.scrollTo({ top: reachable, behavior })
+	}
+
+	for (const type of USER_INPUT) window.addEventListener(type, stop, { once: true, passive: true })
+	step()
 }
 
 /** Przewija do elementu wskazanego selektorem kotwicy, np. `#kontakt`. */

@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 import logo from '@/assets/logo-kubik.png'
 import { companyConfig } from '@/company.config'
 import { LanguageSwitcher } from '@/components/language-switcher'
+import { HeaderDock } from '@/components/layout/header-dock'
 import { NavLink } from '@/components/layout/nav-link'
 import { SiteMenuButton } from '@/components/layout/site-menu-button'
 import { SITE_NAV_LINKS } from '@/components/layout/site-nav'
@@ -15,6 +16,7 @@ import { Rating } from '@/components/ui/rating'
 import { Separator } from '@/components/ui/separator'
 import { Link } from '@/i18n/navigation'
 import { phoneLinks } from '@/lib/phone'
+import { cn } from '@/lib/utils'
 import { siteConfig } from '@/site.config'
 
 /**
@@ -27,9 +29,33 @@ import { siteConfig } from '@/site.config'
  *
  * Adresy podstron biorą się z `site-nav.ts`, a nie z ręcznie sklejanych
  * stringów — `Link` z `@/i18n/navigation` sam dokłada prefiks bieżącego języka.
- * Pigułki nawigacji i przyciski mają 4 px (`radius='lg'`) jak pływający pasek;
- * reszta przycisków w serwisie jest kanciasta.
+ * Nagłówek, pigułki nawigacji i przyciski są kanciaste jak reszta serwisu —
+ * bez wyjątków z promieniem (`--button-radius: 0`).
+ *
+ * **Dokowanie przy przewijaniu.** Na górze strony pływająca karta nad hero.
+ * Po pierwszych pikselach przewinięcia TO SAMO tło karty rozciąga się do
+ * krawędzi ekranu i przykleja do góry: rogi się prostują, z ramki zostaje
+ * dolna kreska, a treść podjeżdża o górny odstęp i siada w pasku. Nad
+ * nawigacją nie prześwituje już pas strony.
+ *
+ * Tło to osobna warstwa za treścią (`header-surface`), której krawędzie
+ * przechodzą z prostokąta karty na pełną szerokość. Treść zostaje wyrównana
+ * do strony. Animowana jest wyłącznie ta pusta warstwa i `translate` treści —
+ * wysokość nagłówka w układzie się nie zmienia, więc strona pod nim nie skacze.
+ * Stan ustawia `HeaderDock`, wygląd — klasy `in-data-[header-docked]:`.
  */
+
+/** Wspólny rytm tła i treści — miękkie wyhamowanie, bez sprężyny. */
+const DOCK_EASE = 'duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none'
+
+/**
+ * Krawędź karty liczona jak w `Container`: margines strony plus połowa
+ * nadwyżki ponad `--container-max-w`. Procenty w `left`/`right` odnoszą się
+ * do szerokości nagłówka, czyli okna.
+ */
+const CARD_EDGE =
+	'[--dock-x:calc(max(0px,(100%_-_var(--container-max-w))_/_2)_+_var(--container-px))] md:[--dock-x:calc(max(0px,(100%_-_var(--container-max-w))_/_2)_+_var(--container-px-md))] lg:[--dock-x:calc(max(0px,(100%_-_var(--container-max-w))_/_2)_+_var(--container-px-lg))]'
+
 export function SiteHeader() {
 	const t = useTranslations('nav')
 	const footer = useTranslations('footer')
@@ -37,15 +63,41 @@ export function SiteHeader() {
 	const phone = companyConfig.phone ? phoneLinks(companyConfig.phone) : undefined
 
 	return (
-		<header className='sticky top-0 z-40 pt-3 lg:pt-5'>
+		<header className={cn('sticky top-0 z-40 pt-3 lg:pt-5', CARD_EDGE)}>
+			<HeaderDock />
+			{/*
+				Tło karty, które przy przewinięciu rozciąga się w pasek. Na górze:
+				prostokąt karty z ramką i cieniem. Zadokowane: pełna szerokość od
+				samej góry, wysokość karty (dół cofnięty o górny odstęp nagłówka),
+				z ramki tylko dolna kreska.
+			*/}
+			<div
+				aria-hidden
+				data-slot='header-surface'
+				className={cn(
+					'pointer-events-none absolute -z-10 border bg-card/95 shadow-[0_20px_50px_rgb(0_0_0/40%)] backdrop-blur-sm',
+					'inset-x-(--dock-x) top-3 bottom-0 lg:top-5',
+					'transition-[left,right,top,bottom,border-color,box-shadow]',
+					DOCK_EASE,
+					'in-data-[header-docked]:inset-x-0 in-data-[header-docked]:top-0 in-data-[header-docked]:bottom-3 in-data-[header-docked]:border-x-transparent in-data-[header-docked]:border-t-transparent in-data-[header-docked]:shadow-[0_12px_32px_rgb(0_0_0/35%)]',
+					'lg:in-data-[header-docked]:top-0 lg:in-data-[header-docked]:bottom-5'
+				)}
+			/>
 			<Container>
-				<Card className='h-16 flex-row items-center justify-between gap-3 rounded-lg border bg-card/95 py-0 pr-2 pl-4 shadow-[0_20px_50px_rgb(0_0_0/40%)] backdrop-blur-sm lg:h-18 lg:pl-6'>
-					<div className='flex items-center gap-6 xl:gap-10'>
+				<Card
+					className={cn(
+						'h-16 flex-row items-center justify-between gap-3 rounded-none bg-transparent py-0 pr-3 pl-4 lg:h-18 lg:pl-6',
+						'transition-[translate]',
+						DOCK_EASE,
+						'in-data-[header-docked]:-translate-y-3 lg:in-data-[header-docked]:-translate-y-5'
+					)}
+				>
+					<div className='flex items-center gap-4 xl:gap-6'>
 						{/* Pierwszy odnośnik nagłówka — prowadzi na stronę główną. */}
 						<Link
 							href='/'
 							aria-label={footer('homeLabel', { name: siteConfig.name })}
-							className='shrink-0 rounded-lg outline-none focus-visible:ring-3 focus-visible:ring-ring/50'
+							className='shrink-0 outline-none focus-visible:ring-3 focus-visible:ring-ring/50'
 						>
 							<Image
 								src={logo}
@@ -78,7 +130,6 @@ export function SiteHeader() {
 											href={href}
 											matchNested={matchNested}
 											variant='ghost'
-											radius='lg'
 										>
 											{t(key)}
 										</NavLink>
@@ -88,7 +139,7 @@ export function SiteHeader() {
 						</nav>
 					</div>
 
-					<div className='flex items-center gap-2'>
+					<div className='flex items-center gap-1 min-[23.75rem]:gap-2'>
 						{companyConfig.rating && (
 							<Rating
 								size='sm'
@@ -105,7 +156,6 @@ export function SiteHeader() {
 								href={phone.href}
 								variant='secondary'
 								size='lg'
-								radius='lg'
 								icon={<Phone className='text-cold-text' />}
 								className='hidden font-heading font-extrabold md:inline-flex'
 							>
@@ -116,7 +166,6 @@ export function SiteHeader() {
 						<Button
 							href='/kontakt'
 							size='lg'
-							radius='lg'
 							icon={<ArrowRight />}
 							iconPosition='right'
 							iconEffect='shiftRight'

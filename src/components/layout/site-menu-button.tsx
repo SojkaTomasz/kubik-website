@@ -26,7 +26,6 @@ export function SiteMenuButton({ className }: { className?: string }) {
 			<Button
 				variant='secondary'
 				size='icon-lg'
-				radius='lg'
 				aria-label={t('openMenu')}
 				aria-haspopup='dialog'
 				className={className}

@@ -28,9 +28,10 @@ import { quoteDefaults, type QuoteInput, quoteSchema } from '@/lib/validation/qu
  * Układy z projektu:
  *   stack    — pola jedno pod drugim, przycisk na całą szerokość (Kontakt)
  *   wide     — metraż i telefon obok siebie, notka i przycisk w jednym rzędzie
- *   compact  — okienko wyceny: tylko metraż i telefon (docs/teksty.md)
+ *   compact  — okienko wyceny: metraż i telefon w rzędzie, miejscowość pod nimi
  *
  * `city` — na stronie miasta pole miejscowości znika, a wartość idzie ukryta.
+ * Dotyczy każdego układu, także okienka.
  */
 
 export interface QuoteFormProps {
@@ -39,6 +40,12 @@ export interface QuoteFormProps {
 	city?: string
 	/** Po udanej wysyłce — okienko wyceny się zamyka. */
 	onSuccess?: () => void
+	/**
+	 * Polityka prywatności w oknie zamiast przejścia na stronę. W okienku wyceny
+	 * strona polityki otwierała się POD okienkiem, a po jego zamknięciu nie było
+	 * do czego wrócić.
+	 */
+	onPrivacyClick?: () => void
 	className?: string
 }
 
@@ -52,7 +59,13 @@ function describedBy(...ids: (string | false | undefined)[]): string | undefined
 	return present.length > 0 ? present.join(' ') : undefined
 }
 
-export function QuoteForm({ layout = 'wide', city, onSuccess, className }: QuoteFormProps) {
+export function QuoteForm({
+	layout = 'wide',
+	city,
+	onSuccess,
+	onPrivacyClick,
+	className,
+}: QuoteFormProps) {
 	const t = useTranslations('quote')
 	const tv = useTranslations('validation')
 	const pathname = usePathname()
@@ -65,7 +78,7 @@ export function QuoteForm({ layout = 'wide', city, onSuccess, className }: Quote
 	const summaryRef = useRef<HTMLDivElement>(null)
 	const errorRef = useRef<HTMLDivElement>(null)
 
-	const askForCity = layout !== 'compact' && !city
+	const askForCity = !city
 
 	const {
 		register,
@@ -186,7 +199,7 @@ export function QuoteForm({ layout = 'wide', city, onSuccess, className }: Quote
 		>
 			{t('privacy')}{' '}
 			<Button
-				href='/polityka-prywatnosci'
+				{...(onPrivacyClick ? { onClick: onPrivacyClick } : { href: '/polityka-prywatnosci' })}
 				variant='link'
 				size='none'
 			>

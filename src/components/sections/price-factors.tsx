@@ -21,7 +21,7 @@ export function PriceFactors({ eyebrow }: { eyebrow: string }) {
 			deferLayout
 			aria-labelledby='price-factors-title'
 		>
-			<div className='grid gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20'>
+			<div className='grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.2fr)] lg:gap-20'>
 				<SectionHeading
 					eyebrow={eyebrow}
 					title={t('priceTitle')}

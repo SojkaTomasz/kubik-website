@@ -51,9 +51,9 @@ const itemVariants = cva(
 				line: 'rounded-none border-0 border-t border-border last:border-b [&_[data-slot=item-title]]:text-body [&_[data-slot=item-title]]:font-semibold [a]:hover:bg-transparent [a]:hover:text-hot-text',
 				/**
 				 * Pozycja spisu treści — pionowa szyna z lewej, czerwienieje pod
-				 * kursorem. Z `size='sm'`.
+				 * kursorem i przy bieżącej sekcji (`aria-current`). Z `size='sm'`.
 				 */
-				rail: 'rounded-none border-0 border-l-2 border-border text-muted-foreground [a]:hover:border-hot [a]:hover:bg-transparent [a]:hover:text-foreground',
+				rail: 'rounded-none border-0 border-l-2 border-border text-muted-foreground transition-colors aria-[current=true]:border-hot aria-[current=true]:text-foreground [a]:hover:border-hot [a]:hover:bg-transparent [a]:hover:text-foreground',
 			},
 			size: {
 				default: 'gap-2.5 px-3 py-2.5',

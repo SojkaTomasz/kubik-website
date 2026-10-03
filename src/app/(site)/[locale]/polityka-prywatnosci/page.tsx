@@ -1,11 +1,8 @@
 import { getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
 
-import {
-	PrivacyPolicyHeader,
-	PrivacyPolicySections,
-	PrivacyPolicyToc,
-} from '@/components/legal/privacy-policy'
+import { PrivacyPolicyHeader, PrivacyPolicySections } from '@/components/legal/privacy-policy'
+import { PrivacyPolicyToc } from '@/components/legal/privacy-policy-toc'
 import { Section } from '@/components/ui/section'
 import { breadcrumbJsonLd, webPageJsonLd } from '@/lib/seo/json-ld'
 import { jsonLdGraph } from '@/lib/seo/json-ld'
@@ -60,7 +57,7 @@ export default async function PrivacyPolicyPage({
 			    strona pod spodem ma już własny nagłówek pierwszego poziomu. */}
 			<Section
 				spacing='lg'
-				className='border-b'
+				divider
 			>
 				<PrivacyPolicyHeader
 					titleAs='h1'

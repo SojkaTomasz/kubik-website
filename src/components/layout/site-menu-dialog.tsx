@@ -4,14 +4,18 @@ import padStart from 'lodash/padStart'
 import { ArrowRight, Phone } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
+import logo from '@/assets/logo-kubik.png'
 import { companyConfig } from '@/company.config'
 import { NavLink } from '@/components/layout/nav-link'
 import { SITE_NAV_LINKS } from '@/components/layout/site-nav'
 import { Button } from '@/components/ui/button'
+import { Image } from '@/components/ui/image'
 import { Rating } from '@/components/ui/rating'
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet'
 import { Typography } from '@/components/ui/typography'
+import { Link } from '@/i18n/navigation'
 import { phoneLinks } from '@/lib/phone'
+import { siteConfig } from '@/site.config'
 
 export interface SiteMenuDialogProps {
 	open: boolean
@@ -21,7 +25,8 @@ export interface SiteMenuDialogProps {
 /**
  * Menu na telefonie i tablecie — pełny ekran z projektu (Paper, „Menu — mobile"):
  * duże, numerowane pozycje, telefon „całą dobę" i para przycisków na dole, tam,
- * gdzie sięga kciuk.
+ * gdzie sięga kciuk. Logo w lewym górnym rogu, na wysokości krzyżyka — menu
+ * zasłania nagłówek strony, więc bez niego znika jedyny znak marki.
  *
  * Kliknięcie pozycji zamyka menu: nawigacja klientowa nie przeładowuje strony,
  * więc bez tego menu zostałoby otwarte nad nową podstroną.
@@ -29,6 +34,7 @@ export interface SiteMenuDialogProps {
 export function SiteMenuDialog({ open, onOpenChange }: SiteMenuDialogProps) {
 	const t = useTranslations('nav')
 	const rating = useTranslations('rating')
+	const footer = useTranslations('footer')
 	const phone = companyConfig.phone ? phoneLinks(companyConfig.phone) : undefined
 	const close = () => onOpenChange(false)
 
@@ -43,6 +49,22 @@ export function SiteMenuDialog({ open, onOpenChange }: SiteMenuDialogProps) {
 			>
 				{/* Nazwa okna dla czytnika ekranu — na ekranie menu mówi samo za siebie. */}
 				<SheetTitle className='sr-only'>{t('menu')}</SheetTitle>
+
+				{/* Ten sam odnośnik co w nagłówku. Zamyka menu jak pozycje listy. */}
+				<Link
+					href='/'
+					onClick={close}
+					aria-label={footer('homeLabel', { name: siteConfig.name })}
+					className='absolute top-4 left-5 rounded-lg outline-none focus-visible:ring-3 focus-visible:ring-ring/50'
+				>
+					<Image
+						src={logo}
+						alt=''
+						sizes='66px'
+						rounded='none'
+						className='aspect-[400/271] h-11'
+					/>
+				</Link>
 
 				<nav aria-label={t('menu')}>
 					<ul className='flex flex-col'>
