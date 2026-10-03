@@ -224,6 +224,13 @@ const nextConfig: NextConfig = {
 	images: {
 		/** AVIF przed WebP — mniejsze pliki, gdy przeglądarka go obsługuje. */
 		formats: ['image/avif', 'image/webp'],
+		/**
+		 * Dozwolone `quality` — Next 16 odrzuca każdą spoza listy. 75 to domyślna dla
+		 * wszystkich obrazów, 90 dostają zdjęcia realizacji oglądane z bliska (okładka
+		 * i galeria). AVIF dzieli tę wartość przez 1,6, więc 75 to w praktyce AVIF 47 —
+		 * na cienkich rowkach w wylewce widać już wtedy rozmycie.
+		 */
+		qualities: [75, 90],
 		remotePatterns: [
 			// Dopisz tu domeny zewnętrznych obrazów, np. CDN-a lub CMS-a:
 			// { protocol: 'https', hostname: 'cdn.example.com' },

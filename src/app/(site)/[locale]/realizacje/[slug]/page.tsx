@@ -142,6 +142,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 								ratio='video'
 								eager
 								sizes='(min-width: 1440px) 1280px, 100vw'
+								quality={90}
 								placeholder='blur'
 								className='lg:aspect-[2/1]'
 							/>

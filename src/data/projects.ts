@@ -1,15 +1,11 @@
 import p20240814_111442 from '@/assets/photos/20240814_111442.jpg'
 import p20240814_111452 from '@/assets/photos/20240814_111452.jpg'
-import p20240814_140722 from '@/assets/photos/20240814_140722.jpg'
 import p20240814_140723 from '@/assets/photos/20240814_140723.jpg'
-import p20240814_140724 from '@/assets/photos/20240814_140724.jpg'
-import p20241210_075601 from '@/assets/photos/20241210_075601.jpg'
 import p20241210_075605 from '@/assets/photos/20241210_075605.jpg'
 import p20241210_091315 from '@/assets/photos/20241210_091315.jpg'
 import p20241210_092126 from '@/assets/photos/20241210_092126.jpg'
 import p20241210_143129 from '@/assets/photos/20241210_143129.jpg'
 import p20250718_134833 from '@/assets/photos/20250718_134833.jpg'
-import p20250718_134836 from '@/assets/photos/20250718_134836.jpg'
 import p20250721_134637 from '@/assets/photos/20250721_134637.jpg'
 import p20250825_112007 from '@/assets/photos/20250825_112007.jpg'
 import p20250825_123139 from '@/assets/photos/20250825_123139.jpg'
@@ -21,7 +17,6 @@ import p20251015_144855 from '@/assets/photos/20251015_144855.jpg'
 import p20251017_081801 from '@/assets/photos/20251017_081801.jpg'
 import p20260127_121901 from '@/assets/photos/20260127_121901.jpg'
 import p20260127_121910 from '@/assets/photos/20260127_121910.jpg'
-import p20260127_121912 from '@/assets/photos/20260127_121912.jpg'
 import p20260520_134312 from '@/assets/photos/20260520_134312.jpg'
 import p20260520_145932 from '@/assets/photos/20260520_145932.jpg'
 import p20260520_150406 from '@/assets/photos/20260520_150406.jpg'
@@ -43,7 +38,6 @@ import p20260904_094737 from '@/assets/photos/20260904_094737.jpg'
 import p20260904_111903 from '@/assets/photos/20260904_111903.jpg'
 import p20260904_111905 from '@/assets/photos/20260904_111905.jpg'
 import p20260904_144337 from '@/assets/photos/20260904_144337.jpg'
-import p20260904_144339 from '@/assets/photos/20260904_144339.jpg'
 import p20260907_104642 from '@/assets/photos/20260907_104642.jpg'
 import p20260907_120108 from '@/assets/photos/20260907_120108.jpg'
 import p20260907_143047 from '@/assets/photos/20260907_143047.jpg'
@@ -51,7 +45,6 @@ import p20260907_143055 from '@/assets/photos/20260907_143055.jpg'
 import p20260907_143113 from '@/assets/photos/20260907_143113.jpg'
 import p20260908_104613 from '@/assets/photos/20260908_104613.jpg'
 import p20260908_110123 from '@/assets/photos/20260908_110123.jpg'
-import p20260908_110134 from '@/assets/photos/20260908_110134.jpg'
 import { projectsEn } from '@/data/en/projects'
 import type { ImageSource } from '@/components/ui/image'
 import type { Locale } from '@/site.config'
@@ -65,8 +58,9 @@ import type { Locale } from '@/site.config'
  * zdjęć; trzy akapity opisu trzeba napisać od nowa po rozmowie z klientem.
  * Pewny jest wyłącznie wzór z Wrocławia (docs/teksty.md).
  *
- * Zdjęcia: wersje webowe z `../image/` (1400 px, JPEG 74) w `assets/photos`.
- * Pierwsze zdjęcie listy jest okładką.
+ * Zdjęcia: wersje webowe z `../image/` w `assets/photos` (`scripts/optimize-photos.mjs`).
+ * Pierwsze zdjęcie listy jest okładką — kadr podłogi, nie bus ani rozdzielacz. Galeria pokazuje
+ * wyłącznie zdjęcia z TEJ SAMEJ roboty (data i GPS oryginału), bez prawie identycznych ujęć.
  *
  * Wersja angielska opisów: `data/en/projects.ts`, kluczowana slugiem. Widoki
  * biorą realizacje przez `localizedProjects` / `findProject` z językiem strony.
@@ -127,7 +121,6 @@ export const projects: Project[] = [
 			p20260907_143113,
 			p20260908_104613,
 			p20260908_110123,
-			p20260908_110134,
 		],
 	},
 	{
@@ -169,7 +162,7 @@ export const projects: Project[] = [
 			'Rozplanowaliśmy gęstsze pętle przy oknach, wyfrezowaliśmy rowki w całej otwartej przestrzeni i ułożyliśmy rury.',
 			'Ciepło rozkłada się równo także przy szybie. Salon nie potrzebuje ani jednego grzejnika.',
 		],
-		photos: [p20260819_124347, p20260820_101133, p20260820_101137],
+		photos: [p20260820_101133, p20260819_124347, p20260820_101137],
 	},
 	{
 		slug: 'kielce-50m2',
@@ -187,11 +180,11 @@ export const projects: Project[] = [
 			'W jeden dzień dom dostał podłogówkę, a harmonogram budowy przesunął się tylko o czas schnięcia masy.',
 		],
 		photos: [
-			p20250825_112007,
 			p20250825_123139,
 			p20250825_123153,
 			p20250825_134859,
 			p20250825_142557,
+			p20250825_112007,
 		],
 	},
 	{
@@ -209,13 +202,7 @@ export const projects: Project[] = [
 			'Wyfrezowaliśmy rowki w istniejącej wylewce, ułożyliśmy rury we wszystkich pomieszczeniach i zalaliśmy je masą.',
 			'Poziom podłogi został ten sam, a mieszkanie grzeje się od spodu. Można kłaść panele i płytki.',
 		],
-		photos: [
-			p20241210_075605,
-			p20241210_075601,
-			p20241210_091315,
-			p20241210_092126,
-			p20241210_143129,
-		],
+		photos: [p20241210_092126, p20241210_091315, p20241210_143129, p20241210_075605],
 	},
 	{
 		slug: 'torun-60m2',
@@ -232,13 +219,7 @@ export const projects: Project[] = [
 			'Frezowaliśmy z odkurzaczem przemysłowym, pomieszczenie po pomieszczeniu, a potem ułożyliśmy rury i zalaliśmy rowki.',
 			'Bez gruzu na klatce i bez kurzu u sąsiadów. Po jednym dniu mieszkanie ma ogrzewanie podłogowe.',
 		],
-		photos: [
-			p20240814_111442,
-			p20240814_111452,
-			p20240814_140722,
-			p20240814_140723,
-			p20240814_140724,
-		],
+		photos: [p20240814_111442, p20240814_111452, p20240814_140723],
 	},
 	{
 		slug: 'katowice-70m2',
@@ -255,7 +236,7 @@ export const projects: Project[] = [
 			'Rozplanowaliśmy osiem pętli od jednego rozdzielacza, wyfrezowaliśmy rowki i ułożyliśmy rury bez łączeń pod podłogą.',
 			'Każde pomieszczenie ma swój obieg i swoją temperaturę, a ściany zostały nietknięte.',
 		],
-		photos: [p20260127_121910, p20260127_121901, p20260127_121912],
+		photos: [p20260127_121910, p20260127_121901],
 	},
 	{
 		slug: 'opole-80m2',
@@ -295,7 +276,6 @@ export const projects: Project[] = [
 			p20260904_111903,
 			p20260904_111905,
 			p20260904_144337,
-			p20260904_144339,
 		],
 	},
 	{
@@ -330,7 +310,7 @@ export const projects: Project[] = [
 			'Wyfrezowaliśmy rowki w całej otwartej przestrzeni, ułożyliśmy rury i zalaliśmy je masą.',
 			'Strefa dzienna grzeje się równo, a ściany są wolne od grzejników.',
 		],
-		photos: [p20250718_134833, p20250718_134836, p20250721_134637],
+		photos: [p20250718_134833, p20250721_134637],
 	},
 	{
 		slug: 'warszawa-50m2',
@@ -347,7 +327,7 @@ export const projects: Project[] = [
 			'Rozplanowaliśmy pętle z dwóch rozdzielaczy, wyfrezowaliśmy rowki i ułożyliśmy rury w całym poddaszu.',
 			'Poddasze grzeje się od podłogi, a pod skosami zostało miejsce na meble.',
 		],
-		photos: [p20251015_144844, p20251015_144855, p20251017_081801],
+		photos: [p20251015_144855, p20251015_144844, p20251017_081801],
 	},
 ]
 

@@ -94,22 +94,42 @@ Zdjęcia w `../image/`. Miasta przypisane decyzją projektu, nie według faktycz
 **Do sprawdzenia z klientem:** gdzie faktycznie była każda robota, żeby podpis miasta był prawdziwy.
 **Metraż, wylewka i czas to szacunki ze zdjęć, do potwierdzenia z klientem.**
 
-| #   | Miasto   | Adres                       | Obiekt                                     | Metraż (szac.) | Zdjęcia                                     |
-| --- | -------- | --------------------------- | ------------------------------------------ | -------------- | ------------------------------------------- |
-| 1   | Wrocław  | `/realizacje/wroclaw-50m2`  | poddasze, laser, rowki, rury               | ~50            | `20260907_*`, `20260908_*` (8)              |
-| 2   | Łódź     | `/realizacje/lodz-60m2`     | dom, etap zalewania                        | ~60            | `20260901_*` (6)                            |
-| 3   | Kraków   | `/realizacje/krakow-90m2`   | budynek z przeszkleniem, open space        | ~90            | `20260819_124347`, `20260820_*` (3 + wideo) |
-| 4   | Kielce   | `/realizacje/kielce-50m2`   | nowy dom, 3 pokoje, rozdzielacz            | ~50            | `20250825_*` (5)                            |
-| 5   | Rzeszów  | `/realizacje/rzeszow-60m2`  | nowe mieszkanie, para przed/po             | ~60            | `20241210_*` (5)                            |
-| 6   | Toruń    | `/realizacje/torun-60m2`    | mieszkanie w wieżowcu, frezarka przy oknie | ~60            | `20240814_*` (5)                            |
-| 7   | Katowice | `/realizacje/katowice-70m2` | wykończone poddasze, rozdzielacz 8 pętli   | ~70            | `20260127_*` (3)                            |
-| 8   | Opole    | `/realizacje/opole-80m2`    | nowy dom, duży salon                       | ~80            | `20260528_*`, `20260530_082538` (4)         |
-| 9   | Kalisz   | `/realizacje/kalisz-60m2`   | dom z kutymi drzwiami balkonowymi          | ~60            | `20260904_*` (6)                            |
-| 10  | Lublin   | `/realizacje/lublin-45m2`   | poddasze w remoncie, g-k                   | ~45            | `20260520_*` (3)                            |
-| 11  | Gdańsk   | `/realizacje/gdansk-90m2`   | remont domu z tarasem, open space          | ~90            | `20250718_*`, `20250721_134637` (3)         |
-| 12  | Warszawa | `/realizacje/warszawa-50m2` | poddasze pod skosem, rozdzielacze          | ~50            | `20251015_*`, `20251017_081801` (3)         |
+| #   | Miasto   | Adres                       | Obiekt                                     | Metraż (szac.) | Zdjęcia                                                             |
+| --- | -------- | --------------------------- | ------------------------------------------ | -------------- | ------------------------------------------------------------------- |
+| 1   | Wrocław  | `/realizacje/wroclaw-50m2`  | poddasze, laser, rowki, rury               | ~50            | `20260907_*`, `20260908_*` (7)                                      |
+| 2   | Łódź     | `/realizacje/lodz-60m2`     | dom, etap zalewania                        | ~60            | `20260901_*` (6)                                                    |
+| 3   | Kraków   | `/realizacje/krakow-90m2`   | budynek z przeszkleniem, open space        | ~90            | `20260820_101133`, `20260819_124347`, `20260820_101137` (3 + wideo) |
+| 4   | Kielce   | `/realizacje/kielce-50m2`   | nowy dom, 3 pokoje, rozdzielacz            | ~50            | `20250825_*` (5)                                                    |
+| 5   | Rzeszów  | `/realizacje/rzeszow-60m2`  | nowe mieszkanie, para przed/po             | ~60            | `20241210_*` (4)                                                    |
+| 6   | Toruń    | `/realizacje/torun-60m2`    | mieszkanie w wieżowcu, frezarka przy oknie | ~60            | `20240814_*` (3)                                                    |
+| 7   | Katowice | `/realizacje/katowice-70m2` | wykończone poddasze, rozdzielacz 8 pętli   | ~70            | `20260127_*` (2)                                                    |
+| 8   | Opole    | `/realizacje/opole-80m2`    | nowy dom, duży salon                       | ~80            | `20260528_*`, `20260530_082538` (4)                                 |
+| 9   | Kalisz   | `/realizacje/kalisz-60m2`   | dom z kutymi drzwiami balkonowymi          | ~60            | `20260904_*` (5)                                                    |
+| 10  | Lublin   | `/realizacje/lublin-45m2`   | poddasze w remoncie, g-k                   | ~45            | `20260520_*` (3)                                                    |
+| 11  | Gdańsk   | `/realizacje/gdansk-90m2`   | remont domu z tarasem, open space          | ~90            | `20250718_134833`, `20250721_134637` (2)                            |
+| 12  | Warszawa | `/realizacje/warszawa-50m2` | poddasze pod skosem, rozdzielacze          | ~50            | `20251015_*`, `20251017_081801` (3)                                 |
 
 Wylewka na wszystkich: cementowa (szacunek). Czas: 1 dzień (do potwierdzenia).
+
+**Zasada galerii (październik 2026):** tylko zdjęcia z TEJ SAMEJ roboty (data, a gdzie jest, GPS z
+EXIF-u oryginału), bez prawie identycznych ujęć. Usunięte duplikaty: `20260908_110134`,
+`20241210_075601`, `20240814_140722`, `20240814_140724`, `20260127_121912`, `20250718_134836`,
+`20260904_144339`. Okładką jest kadr podłogi, nie bus ani rozdzielacz. Więcej zdjęć na realizację da
+się dołożyć wyłącznie nowymi zdjęciami od klienta.
+
+**GPS oryginałów a miasta** (do rozmowy z klientem; zdjęcia z lat 2024–2025 nie mają GPS):
+
+| Realizacja | Faktyczne miejsce wg GPS  |
+| ---------- | ------------------------- |
+| Wrocław    | okolice Warszawy (wschód) |
+| Łódź       | okolice Bochni            |
+| Kraków     | Kielce                    |
+| Opole      | Kraków                    |
+| Kalisz     | okolice Mszany Dolnej     |
+| Lublin     | okolice Tarnowa           |
+
+Zamiana miast między realizacjami (zdjęcia z Kielc pod Kielce, z Krakowa pod Kraków, spod Warszawy
+pod Warszawę) uczyniłaby trzy podpisy prawdziwymi.
 
 **Hero:** `20260908_110123` (spirala rur), `20240814_111442` (frezarka przy oknie),
 `20260318_143302` (poddasze w słońcu). **„Bez pyłu”:** `20240212_125915` (frezarka z odkurzaczem w
