@@ -314,6 +314,8 @@
 		"story": ["Punkt wyjścia", "Co zrobiliśmy", "Efekt"],
 		"galleryTitle": "Przebieg robót",
 		"photoAlt": "{title}, {city}: zdjęcie {number} z {count}",
+		"photoPrevious": "Poprzednie zdjęcie",
+		"photoNext": "Następne zdjęcie",
 		"cta": {
 			"dom": "Masz podobny dom?",
 			"mieszkanie": "Masz podobne mieszkanie?",

@@ -314,6 +314,8 @@
 		"story": ["Starting point", "What we did", "Result"],
 		"galleryTitle": "The work, step by step",
 		"photoAlt": "{title}, {city}: photo {number} of {count}",
+		"photoPrevious": "Previous photo",
+		"photoNext": "Next photo",
 		"cta": {
 			"dom": "Have a similar house?",
 			"mieszkanie": "Have a similar apartment?",
